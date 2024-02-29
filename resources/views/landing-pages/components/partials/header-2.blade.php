@@ -97,7 +97,7 @@
                         <button class="btn-close float-end px-3"></button>
                     </div>
                     <ul class="navbar-nav iq-nav-menu  list-unstyled" id="header-menu">
-                        <li class="nav-item ">
+                        <!-- <li class="nav-item ">
                             <a class="nav-link menu-arrow justify-content-start" data-bs-toggle="collapse"
                                 href="#homeData" role="button" aria-expanded="false" aria-controls="homeData">
                                 <span class="item-name">Home</span>
@@ -128,9 +128,9 @@
                         <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.blog')) }}"
                                 href="{{ route('landing-pages.blog') }}">Blog</a></li>
                         <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.faq')) }}"
-                                href="{{ route('landing-pages.faq') }}">Faq</a></li>
+                                href="{{ route('landing-pages.faq') }}">Faq</a></li> -->
                         <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.contact')) }}"
-                                href="{{ route('landing-pages.contact') }}">Contact Us</a></li>
+                                href="{{ route('login') }}">Login</a></li>
                     </ul>
                 </div>
                 <!-- container-fluid.// -->
