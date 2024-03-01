@@ -2,21 +2,12 @@
     <div class="container-fluid navbar-inner">
         <div class="d-flex align-items-center justify-content-between w-100 landing-header">
 
-            <a href="{{ route('landing-pages.index') }}" class="navbar-brand m-0 d-xl-flex d-none">
+            <a href="{{ route('uisheet') }}" class="navbar-brand m-0 d-xl-flex d-none">
                 <!--Logo start-->
-                <svg class="icon-30 text-primary" width="30" class="text-primary" viewBox="0 0 30 30" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                        transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"></rect>
-                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                        transform="rotate(-45 7.72803 27.728)" fill="currentColor"></rect>
-                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                        transform="rotate(45 10.5366 16.3945)" fill="currentColor"></rect>
-                    <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                        transform="rotate(45 10.5562 -0.556152)" fill="currentColor"></rect>
-                </svg>
-                <!--logo End-->
-                <h5 class="logo-title">Hope UI</h5>
+                <img src="{{asset('images/icons/logo-tes.png')}}" alt="story-img" class="rounded-pill avatar-40">
+ 
+                 <!--logo End-->
+                <h5 class="logo-title  text-secondary">Badan Amil Zakat DKM Al-hasanah</h5>
             </a>
             <div class="d-flex align-items-center d-xl-none">
                 <button class="d-xl-none btn btn-primary rounded-pill p-1 pt-0" data-bs-toggle="offcanvas"
@@ -27,59 +18,19 @@
                     </svg>
                 </button>
 
-                <a href="{{ route('landing-pages.index') }}" class="navbar-brand ms-3  d-xl-none">
+                <a href="{{ route('uisheet') }}" class="navbar-brand ms-3  d-xl-none">
                     <!--Logo start-->
-                    <svg class="icon-30 text-primary" width="30" viewBox="0 0 30 30" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                            transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"></rect>
-                        <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                            transform="rotate(-45 7.72803 27.728)" fill="currentColor"></rect>
-                        <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                            transform="rotate(45 10.5366 16.3945)" fill="currentColor"></rect>
-                        <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                            transform="rotate(45 10.5562 -0.556152)" fill="currentColor"></rect>
-                    </svg>
+                    <img src="{{asset('images/icons/logo-tes.png')}}" alt="story-img" class="rounded-pill avatar-40">
+
                     <!--logo End-->
-                    <h5 class="logo-title">Hope UI</h5>
+                    <h5 class="logo-title  text-secondary">Badan Amil Zakat DKM Al-hasanah</h5>
                 </a>
             </div>
-            <ul class="d-block d-xl-none list-unstyled m-0">
-                <li class="nav-item dropdown iq-responsive-menu ">
-                    <div class="btn btn-sm bg-body" id="navbarDropdown-search-11" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor"
-                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
-                            <path d="M18.0186 18.4851L21.5426 22" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </div>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown-search-11"
-                        style="width: 18rem;">
-                        <li class="px-3 py-0">
-                            <div class="form-group input-group mb-0">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-text">
-                                    <svg class="icon-20" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                        </circle>
-                                        <path d="M18.0186 18.4851L21.5426 22" stroke="currentColor"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+          
             <!-- Horizontal Menu Start -->
             <nav id="navbar_main" class="nav navbar navbar-expand-xl hover-nav horizontal-nav mobile-offcanvas ">
                 <div class="container-fluid p-lg-0">
-                    <div class="offcanvas-header px-0">
+                    <!-- <div class="offcanvas-header px-0">
                         <div class="navbar-brand ms-3">
                             <svg class="icon-30 text-primary" width="30" viewBox="0 0 30 30" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +46,7 @@
                             <h5 class="logo-title">{{ env('APP_NAME') }}</h5>
                         </div>
                         <button class="btn-close float-end px-3"></button>
-                    </div>
+                    </div> -->
                     <ul class="navbar-nav iq-nav-menu  list-unstyled" id="header-menu">
                         <!-- <li class="nav-item ">
                             <a class="nav-link menu-arrow justify-content-start" data-bs-toggle="collapse"
@@ -109,8 +60,8 @@
                             </a>
                             <ul class="iq-header-sub-menu list-unstyled collapse" id="homeData">
                                 <li class="nav-item">
-                                    <a class="nav-link {{ activeRoute(route('landing-pages.index')) }}"
-                                        href="{{ route('landing-pages.index') }}">
+                                    <a class="nav-link {{ activeRoute(route('uisheet')) }}"
+                                        href="{{ route('uisheet') }}">
                                         App Landing Page
                                     </a>
                                 </li>
@@ -129,8 +80,11 @@
                                 href="{{ route('landing-pages.blog') }}">Blog</a></li>
                         <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.faq')) }}"
                                 href="{{ route('landing-pages.faq') }}">Faq</a></li> -->
-                        <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.contact')) }}"
-                                href="{{ route('login') }}">Login</a></li>
+                        <li class="nav-item ">
+                            <a class="  btn btn-primary text-white"
+                                href="{{ route('login') }}">
+                                <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.08 22H7.91C4.38 22 2 19.729 2 16.34V7.67C2 4.28 4.38 2 7.91 2H16.08C19.62 2 22 4.28 22 7.67V16.34C22 19.729 19.62 22 16.08 22ZM14.27 11.25H7.92C7.5 11.25 7.17 11.59 7.17 12C7.17 12.42 7.5 12.75 7.92 12.75H14.27L11.79 15.22C11.65 15.36 11.57 15.56 11.57 15.75C11.57 15.939 11.65 16.13 11.79 16.28C12.08 16.57 12.56 16.57 12.85 16.28L16.62 12.53C16.9 12.25 16.9 11.75 16.62 11.47L12.85 7.72C12.56 7.43 12.08 7.43 11.79 7.72C11.5 8.02 11.5 8.49 11.79 8.79L14.27 11.25Z" fill="currentColor"></path></svg>
+                                Login</a></li>
                     </ul>
                 </div>
                 <!-- container-fluid.// -->

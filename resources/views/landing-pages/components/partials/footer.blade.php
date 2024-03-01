@@ -4,18 +4,9 @@
             <div class="row">
                 <div class="col-md-4">
                     <a href="{{ route('landing-pages.index') }}" class="navbar-brand  d-flex align-items-center">
-                        <svg class="icon-30 text-primary" width="30" viewBox="0 0 30 30" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                                transform="rotate(-45 -0.757324 19.2427)" fill="currentColor" />
-                            <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                                transform="rotate(-45 7.72803 27.728)" fill="currentColor" />
-                            <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                                transform="rotate(45 10.5366 16.3945)" fill="currentColor" />
-                            <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                                transform="rotate(45 10.5562 -0.556152)" fill="currentColor" />
-                        </svg>
-                        <h4 class="logo-title ms-3 text-white">{{ env('APP_NAME') }}</h4>
+                    <img src="{{asset('images/icons/logo-tes.png')}}" alt="story-img" class="rounded-pill avatar-40">
+
+                        <h4 class="logo-title ms-3 text-white">BAZ Alhasanah </h4>
                     </a>
                     <p class="text-white my-4">It is a long established fact that a reader will be distracted by the
                         readable content of a page when
@@ -43,31 +34,31 @@
                     </div>
                 </div>
                 <div class="col-md-2 mt-md-0 mt-4">
-                    <h5 class="mb-4 text-white">Links</h5>
-                    <ul class="m-0 p-0 list-unstyled text-white">
+                    <!-- <h5 class="mb-4 text-white">Links</h5> -->
+                    <!-- <ul class="m-0 p-0 list-unstyled text-white">
                         <li class="mb-3">About us</li>
                         <li class="mb-3">Features</li>
                         <li class="mb-3">Reviews</li>
                         <li>Team</li>
-                    </ul>
+                    </ul> -->
 
                 </div>
                 <div class="col-md-2 mt-md-0 mt-4">
-                    <h5 class="mb-4 text-white">Help</h5>
+                    <!-- <h5 class="mb-4 text-white">Help</h5>
                     <ul class="m-0 p-0 list-unstyled text-white">
                         <li class="mb-3" i>My Account</li>
                         <li class="mb-3">Returns & Refunds</li>
                         <li class="mb-3">Payment Policy</li>
                         <li>FAQ</li>
-                    </ul>
+                    </ul> -->
                 </div>
                 <div class="col-md-4 mt-md-0 mt-4">
-                    <h5 class="mb-4 text-white">Newsletter</h5>
-                    <div class="input-group mb-4">
+                    <h5 class="mb-4 text-white">Media Sosial</h5>
+                    <!-- <div class="input-group mb-4">
                         <input type="text" class="form-control input-email ps-0" placeholder="Username"
                             aria-label="Username" aria-describedby="basic-addon1">
                         <span class="input-group-text input-email-btn" id="basic-addon1"></span>
-                    </div>
+                    </div> -->
 
                     <ul class="list-unstyled p-0 m-0 d-flex mt-4">
                         <li>
@@ -95,11 +86,18 @@
         <div class="container border-top  py-4 border-primary">
             <div class="row">
                 <div class="col-md-12 text-center text-white">
-                    <p class="mb-0">©
+                <p class="mb-1">
+                    Powered by Badan Amil Zakat Al-hasanah
+                    </p>
+                    <!-- <p class="mb-2">
+                    Powered by Badan Amil Zakat Al-hasanah
+                    </p> -->
+                    <p class="mb-0">
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> Hope UI, All Rights Reserved.
+                        </script> 
                     </p>
+
                 </div>
             </div>
         </div>
