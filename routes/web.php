@@ -55,12 +55,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/role-permission',[RolePermission::class, 'index'])->name('role.permission.list');
     Route::resource('permission',PermissionController::class);
     Route::resource('role', RoleController::class);
-
+    
     // Dashboard Routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
+    
     // Users Module
     Route::resource('users', UserController::class);
+    Route::get('/kategori',[HomeController::class, 'kategori'])->name('kategori');
+    Route::get('/muzakki',[HomeController::class, 'muzakki'])->name('muzakki');
+    Route::get('/mustahiq',[HomeController::class, 'mustahiq'])->name('mustahiq');
 });
 
 //App Details Page => 'Dashboard'], function() {
