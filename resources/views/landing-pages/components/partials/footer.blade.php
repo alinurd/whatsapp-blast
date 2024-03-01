@@ -4,9 +4,9 @@
             <div class="row">
                 <div class="col-md-4">
                     <a href="{{ route('landing-pages.index') }}" class="navbar-brand  d-flex align-items-center">
-                    <img src="{{asset('images/icons/logo-tes.png')}}" alt="story-img" class="rounded-pill avatar-40">
+                    <img src="{{ asset(env('APP_LOGO')) }}" alt="story-img" class="rounded-pill avatar-40">
 
-                        <h4 class="logo-title ms-3 text-white">BAZ Alhasanah </h4>
+                        <h4 class="logo-title ms-3 text-white">{{ env('APP_INISIAL') }}</h4>
                     </a>
                     <p class="text-white my-4">It is a long established fact that a reader will be distracted by the
                         readable content of a page when
@@ -87,7 +87,7 @@
             <div class="row">
                 <div class="col-md-12 text-center text-white">
                 <p class="mb-1">
-                    Powered by Badan Amil Zakat Al-hasanah
+                    Powered by {{ env('APP_NAME') }} {{ env('APP_SUBNAME') }}
                     </p>
                     <!-- <p class="mb-2">
                     Powered by Badan Amil Zakat Al-hasanah

@@ -4,10 +4,10 @@
 
             <a href="{{ route('uisheet') }}" class="navbar-brand m-0 d-xl-flex d-none">
                 <!--Logo start-->
-                <img src="{{asset('images/icons/logo-tes.png')}}" alt="story-img" class="rounded-pill avatar-40">
+                <img src="{{ asset(env('APP_LOGO')) }}" alt="story-img" class="rounded-pill avatar-40">
  
                  <!--logo End-->
-                <h5 class="logo-title  text-secondary">Badan Amil Zakat DKM Al-hasanah</h5>
+                <h5 class="logo-title  text-secondary">{{ env('APP_NAME') }} {{ env('APP_SUBNAME') }}</h5>
             </a>
             <div class="d-flex align-items-center d-xl-none">
                 <button class="d-xl-none btn btn-primary rounded-pill p-1 pt-0" data-bs-toggle="offcanvas"
@@ -20,7 +20,7 @@
 
                 <a href="{{ route('uisheet') }}" class="navbar-brand ms-3  d-xl-none">
                     <!--Logo start-->
-                    <img src="{{asset('images/icons/logo-tes.png')}}" alt="story-img" class="rounded-pill avatar-40">
+                    <img src="{{ asset(env('APP_LOGO')) }}" alt="story-img" class="rounded-pill avatar-40">
 
                     <!--logo End-->
                     <h5 class="logo-title  text-secondary">Badan Amil Zakat DKM Al-hasanah</h5>

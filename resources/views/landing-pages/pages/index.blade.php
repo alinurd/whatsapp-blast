@@ -9,7 +9,7 @@
                     <p class="mb-2 text-secondary text-uppercase">
                         about us
                     </p>
-                    <h2 class="text-secondary mb-4">BADAN AMIL ZAKAT<br> <span class="text-primary">Masjid Alhasanah</span></h2>
+                    <h2 class="text-secondary mb-4">{{ env('APP_NAME') }}<br> <span class="text-primary">{{ env('APP_SUBNAME') }}</span></h2>
                     <p class="mb-5">Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan
                         untuk mendemostrasikan elemen grafis atau presentasi visual seperti font,
                         tipografi, dan tata letak.Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan
@@ -28,7 +28,7 @@
             <img src="{{ asset('images/landing-pages/images/masjid.jpg') }}" alt="" class="img-fluid mb-4">
 
                 <div class="col-md-12 text-center">
-                    <h2 class="text-secondary mb-4">DKM <span class="text-primary">Al-Hassanah</span></h2>
+                    <h2 class="text-secondary mb-4">DKM <span class="text-primary">{{ env('APP_SUBNAME') }}</span></h2>
                 </div>
                 <div class="col-md-3 col-sm-2">
                     <div class="card team-image">
