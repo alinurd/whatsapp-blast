@@ -1,8 +1,9 @@
 
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
-<link rel="stylesheet" href="{{asset('css/libs.min.css')}}">
+
+<link rel="shortcut icon" href="{{ asset(env('APP_LOGO')) }}"/>
+ <link rel="stylesheet" href="{{asset('css/libs.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/hope-ui.css?v=1.1.0')}}">
 <link rel="stylesheet" href="{{asset('css/custom.css?v=1.1.0')}}">
 <link rel="stylesheet" href="{{asset('css/dark.css?v=1.1.0')}}">
