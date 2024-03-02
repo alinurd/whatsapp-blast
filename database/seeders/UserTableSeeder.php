@@ -17,35 +17,35 @@ class UserTableSeeder extends Seeder
     {
         $users = [
             [
-                'first_name' => 'System',
-                'last_name' => 'Admin',
+                'nama' => 'Admin',
                 'username' => 'systemadmin',
                 'email' => 'admin@example.com',
                 'password' => bcrypt('password'),
-                'phone_number' => '+12398190255',
+                'nomor_telp' => '+12398190255',
+                'alamat' => 'pamulang',
                 'email_verified_at' => now(),
                 'user_type' => 'admin',
                 'status' => 'active',
             ],
             [
-                'first_name' => 'Demo',
-                'last_name' => 'Admin',
+                'nama' => 'Admin',
                 'username' => 'demoadmin',
                 'email' => 'demo@example.com',
                 'password' => bcrypt('password'),
-                'phone_number' => '+12398190255',
+                'nomor_telp' => '+12398190255',
+                'alamat' => 'pamulang',
                 'email_verified_at' => now(),
-                'user_type' => 'demo_admin',
+                'user_type' => 'admin',
             ],
             [
-                'first_name' => 'John',
-                'last_name' => 'User',
+                'nama' => 'User',
                 'username' => 'user',
-                'email' => 'user@example.com',
+                'email' => 'user@example.com', 
                 'password' => bcrypt('password'),
-                'phone_number' => '+12398190255',
+                'nomor_telp' => '+12398190255',
+                'alamat' => 'pamulang',
                 'email_verified_at' => now(),
-                'user_type' => 'user',
+                'user_type' => 'admin',
                 'status' => 'inactive'
             ]
         ];

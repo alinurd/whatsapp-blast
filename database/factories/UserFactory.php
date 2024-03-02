@@ -28,7 +28,7 @@ class UserFactory extends Factory
         $status = $this->faker->numberBetween(0,2);
         switch ($status) {
             case 1:
-                $status = 'active';
+                $status = 'active'; 
                 break;
 
             case 2:
@@ -41,14 +41,14 @@ class UserFactory extends Factory
         }
         return [
             'username' => $fullname,
-            'first_name' => $fname,
-            'last_name' => $lname,
-            'phone_number' => $this->faker->phoneNumber,
+            'nama' => $fname,
+            'nomor_telp' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
-            'phone_number' => $this->faker->phoneNumber,
-            'user_type' => 'user',
+            'nomor_telp' => $this->faker->phoneNumber,
+            'alamat' => 'pamulang',
+            'user_type' => 'admin',
             'status' => $status
         ];
     }
