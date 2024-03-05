@@ -10,7 +10,7 @@
                            <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
                               <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
                                  <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                              </svg>
+                              </svg> 
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Sales</p>

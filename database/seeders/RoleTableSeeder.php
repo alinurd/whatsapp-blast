@@ -12,7 +12,7 @@ class RoleTableSeeder extends Seeder
      * Auto generated seed file
      *
      * @return void
-     */
+     */ 
     public function run()
     {
         $roles = [

@@ -6,11 +6,14 @@ use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MuzakkiController;
+use App\Http\Controllers\MustahikController; 
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
 
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -21,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-require __DIR__.'/auth.php';
+require __DIR__.'/auth.php'; 
 
 Route::get('/storage', function () {
     Artisan::call('storage:link');
@@ -58,15 +61,15 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Dashboard Routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-    
-    // Users Module
-    Route::resource('users', UserController::class);
-    Route::get('/kategori',[HomeController::class, 'kategori'])->name('kategori');
-    Route::get('/muzakki',[HomeController::class, 'muzakki'])->name('muzakki');
-    Route::get('/mustahiq',[HomeController::class, 'mustahiq'])->name('mustahiq');
+     
+    // Users Module 
+    Route::resource('users', UserController::class);   
+    Route::resource('kategori', KategoriController::class); 
+    Route::resource('muzakki', MuzakkiController::class);  
+    Route::resource('mustahik', MustahikController::class);  
 });
-
-//App Details Page => 'Dashboard'], function() {
+   
+//App Details Page => 'Dashboard'], function() { 
 Route::group(['prefix' => 'menu-style'], function() {
     //MenuStyle Page Routs
     Route::get('horizontal', [HomeController::class, 'horizontal'])->name('menu-style.horizontal');

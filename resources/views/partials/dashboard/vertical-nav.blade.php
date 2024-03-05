@@ -41,7 +41,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('kategori')}}" target="_blank">
+        <a class="nav-link {{activeRoute(route('kategori.index'))}}" href="{{route('kategori.index')}}">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M18.8088 9.021C18.3573 9.021 17.7592 9.011 17.0146 9.011C15.1987 9.011 13.7055 7.508 13.7055 5.675V2.459C13.7055 2.206 13.5036 2 13.253 2H7.96363C5.49517 2 3.5 4.026 3.5 6.509V17.284C3.5 19.889 5.59022 22 8.16958 22H16.0463C18.5058 22 20.5 19.987 20.5 17.502V9.471C20.5 9.217 20.299 9.012 20.0475 9.013C19.6247 9.016 19.1177 9.021 18.8088 9.021Z" fill="currentColor"></path>
@@ -55,14 +55,14 @@
     <li>
         <hr class="hr-horizontal">
     </li>
-    <li class="nav-item static-item">
+    <li class="nav-item static-item"> 
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Transaksi</span>
             <span class="mini-icon">-</span>
         </a>
-    </li>
+    </li> 
     <li class="nav-item">
-        <a class="nav-link {{activeRoute(route('muzakki'))}}" href="{{route('muzakki')}}">
+        <a class="nav-link {{activeRoute(route('muzakki.index'))}}" href="{{route('muzakki.index')}}">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M21.6389 14.3957H17.5906C16.1042 14.3948 14.8993 13.1909 14.8984 11.7045C14.8984 10.218 16.1042 9.01409 17.5906 9.01318H21.6389" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -75,17 +75,17 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{activeRoute(route('mustahiq'))}}" href="{{route('mustahiq')}}">
+        <a class="nav-link {{activeRoute(route('mustahik.index'))}}" href="{{route('mustahik.index')}}">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M21.9964 8.37513H17.7618C15.7911 8.37859 14.1947 9.93514 14.1911 11.8566C14.1884 13.7823 15.7867 15.3458 17.7618 15.3484H22V15.6543C22 19.0136 19.9636 21 16.5173 21H7.48356C4.03644 21 2 19.0136 2 15.6543V8.33786C2 4.97862 4.03644 3 7.48356 3H16.5138C19.96 3 21.9964 4.97862 21.9964 8.33786V8.37513ZM6.73956 8.36733H12.3796H12.3831H12.3902C12.8124 8.36559 13.1538 8.03019 13.152 7.61765C13.1502 7.20598 12.8053 6.87318 12.3831 6.87491H6.73956C6.32 6.87664 5.97956 7.20858 5.97778 7.61852C5.976 8.03019 6.31733 8.36559 6.73956 8.36733Z" fill="currentColor"></path>
                     <path opacity="0.4" d="M16.0374 12.2966C16.2465 13.2478 17.0805 13.917 18.0326 13.8996H21.2825C21.6787 13.8996 22 13.5715 22 13.166V10.6344C21.9991 10.2297 21.6787 9.90077 21.2825 9.8999H17.9561C16.8731 9.90338 15.9983 10.8024 16 11.9102C16 12.0398 16.0128 12.1695 16.0374 12.2966Z" fill="currentColor"></path>
                     <circle cx="18" cy="11.8999" r="1" fill="currentColor"></circle>
-                </svg>
+                </svg>    
             </i>
-            <span class="item-name">Input Mustahiq</span>
+            <span class="item-name">Input Mustahik</span>
         </a>
-    </li>
+    </li> 
     <li>
         <hr class="hr-horizontal">
     </li>
@@ -94,9 +94,9 @@
             <span class="default-icon">Reporting</span>
             <span class="mini-icon">-</span>
         </a>
-    </li>
+    </li> 
     <li class="nav-item">
-        <a class="nav-link {{activeRoute(route('muzakki'))}}" href="{{route('muzakki')}}">
+        <a class="nav-link {{activeRoute(route('muzakki.index'))}}" href="{{route('muzakki.index')}}">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M18.8088 9.021C18.3573 9.021 17.7592 9.011 17.0146 9.011C15.1987 9.011 13.7055 7.508 13.7055 5.675V2.459C13.7055 2.206 13.5036 2 13.253 2H7.96363C5.49517 2 3.5 4.026 3.5 6.509V17.284C3.5 19.889 5.59022 22 8.16958 22H16.0463C18.5058 22 20.5 19.987 20.5 17.502V9.471C20.5 9.217 20.299 9.012 20.0475 9.013C19.6247 9.016 19.1177 9.021 18.8088 9.021Z" fill="currentColor"></path>
@@ -108,7 +108,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{activeRoute(route('mustahiq'))}}" href="{{route('mustahiq')}}">
+        <a class="nav-link {{activeRoute(route('mustahik.index'))}}" href="{{route('mustahik.index')}}">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M18.8088 9.021C18.3573 9.021 17.7592 9.011 17.0146 9.011C15.1987 9.011 13.7055 7.508 13.7055 5.675V2.459C13.7055 2.206 13.5036 2 13.253 2H7.96363C5.49517 2 3.5 4.026 3.5 6.509V17.284C3.5 19.889 5.59022 22 8.16958 22H16.0463C18.5058 22 20.5 19.987 20.5 17.502V9.471C20.5 9.217 20.299 9.012 20.0475 9.013C19.6247 9.016 19.1177 9.021 18.8088 9.021Z" fill="currentColor"></path>

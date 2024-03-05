@@ -40,9 +40,8 @@ class UserFactory extends Factory
                 break;
         }
         return [
+            'nama_lengkap' => $fname,
             'username' => $fullname,
-            'nama' => $fname,
-            'nomor_telp' => $this->faker->phoneNumber,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => bcrypt('password'),

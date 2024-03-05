@@ -14,7 +14,7 @@ class UserProfileFactory extends Factory
      */
     protected $model = UserProfile::class;
     /**
-     * Define the model's default state.
+     * Define the model's default state. 
      *
      * @return array
      */
@@ -22,7 +22,7 @@ class UserProfileFactory extends Factory
     {
         static $user_id = 1;
         return [
-            'company_name' => $this->faker->words(2,true),
+            'company_name' => $this->faker->words(2,true), 
             'country' => $this->faker->country,
             'user_id' => $user_id++
         ];
