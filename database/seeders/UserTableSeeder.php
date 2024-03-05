@@ -11,13 +11,13 @@ class UserTableSeeder extends Seeder
     /**
      * Auto generated seed file
      *
-     * @return void
+     * @return void 
      */
     public function run()
     {
         $users = [
             [
-                'nama' => 'Admin',
+                'nama_lengkap' => 'Admin',
                 'username' => 'systemadmin',
                 'email' => 'admin@example.com',
                 'password' => bcrypt('password'),
@@ -28,8 +28,8 @@ class UserTableSeeder extends Seeder
                 'status' => 'active',
             ],
             [
-                'nama' => 'Admin',
-                'username' => 'demoadmin',
+                'nama_lengkap' => 'Admin',
+                'username' => 'demoadmin', 
                 'email' => 'demo@example.com',
                 'password' => bcrypt('password'),
                 'nomor_telp' => '+12398190255',
@@ -38,7 +38,7 @@ class UserTableSeeder extends Seeder
                 'user_type' => 'admin',
             ],
             [
-                'nama' => 'User',
+                'nama_lengkap' => 'User',
                 'username' => 'user',
                 'email' => 'user@example.com', 
                 'password' => bcrypt('password'),

@@ -101,13 +101,13 @@ class UsersDataTable extends DataTable
     {
         return [
             ['data' => 'id', 'name' => 'id', 'title' => 'id'],
-            ['data' => 'full_name', 'name' => 'full_name', 'title' => 'FULL NAME', 'orderable' => false],
-            ['data' => 'phone_number', 'name' => 'phone_number', 'title' => 'Phone Number'],
+            ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Nama Lengkap'],
+            ['data' => 'username', 'name' => 'username', 'title' => 'Username'],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
-            ['data' => 'userProfile.country', 'name' => 'userProfile.country', 'title' => 'Country'],
-            ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
-            ['data' => 'userProfile.company_name', 'name' => 'userProfile.company_name', 'title' => 'Company'],
-            ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Join Date'],
+            ['data' => 'jenis_kelamin', 'name' => 'jenis_kelamin', 'title' => 'Jenis Kelamin'],
+            ['data' => 'nomor_telp', 'name' => 'nomor_telp', 'title' => 'Nomor Telp'],
+            ['data' => 'alamat', 'name' => 'alamat', 'title' => 'Alamat'],
+            ['data' => 'user_type', 'name' => 'user_type', 'title' => 'Tipe User'],
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -116,5 +116,5 @@ class UsersDataTable extends DataTable
                   ->addClass('text-center hide-search'),
         ];
     }
-
+ 
 }
