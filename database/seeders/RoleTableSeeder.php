@@ -18,19 +18,19 @@ class RoleTableSeeder extends Seeder
         $roles = [
             [
                 'name' => 'admin',
-                'title' => 'Admin',
+                'title' => 'Administrator',
                 'status' => 1,
                 'permissions' => ['role','role-add', 'role-list', 'permission', 'permission-add', 'permission-list']
             ],
             [
-                'name' => 'demo_admin',
-                'title' => 'Demo Admin',
+                'name' => 'muzakki',
+                'title' => 'Admin Input Muzakki',
                 'status' => 1,
                 'permissions' => []
             ],
             [
-                'name' => 'user',
-                'title' => 'User',
+                'name' => 'mustahiq',
+                'title' => 'Admin Input Mustahiq',
                 'status' => 1,
                 'permissions' => []
             ]
