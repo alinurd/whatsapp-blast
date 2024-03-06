@@ -25,7 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('alamat');
             $table->enum('user_type', ['admin', 'pemberi', 'penerima']);
             $table->string('status')->default('pending');
-            $table->rememberToken();
+            $table->integer('role');
+            $table->rememberToken()->default('0');
             $table->timestamps();
         });
     }
