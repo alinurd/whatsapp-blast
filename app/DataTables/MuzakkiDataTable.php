@@ -17,7 +17,7 @@ class MuzakkiDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables()
+         return datatables()
         ->eloquent($query)
         ->editColumn('userProfile.country', function($query) {
             return $query->userProfile->country ?? '-';
@@ -69,9 +69,18 @@ class MuzakkiDataTable extends DataTable
      */
     public function query()
     {
-        $model = Muzakki::query();
+        $model = Muzakki::query()
+        ->join('users as muzakki_user', 'muzakki.user_id', '=', 'muzakki_user.id')
+        ->join('kategori', 'muzakki.kategori_id', '=', 'kategori.id')
+        ->join('muzakki_header', 'muzakki.code', '=', 'muzakki_header.code')
+        ->join('users as header_user', 'muzakki_header.user_id', '=', 'header_user.id')
+        ->select('muzakki.*', 'muzakki_user.nama_lengkap as user_name', 'kategori.nama_kategori as kategori_name', 'header_user.nama_lengkap As dibayarkan');
+    
+    
+
         return $this->applyScopes($model);
     }
+    
 
     /**
      * Optional method if you want to use html builder.
@@ -84,7 +93,7 @@ class MuzakkiDataTable extends DataTable
                     ->setTableId('dataTable')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
+                    ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-left" <"col-md-6" i><"col-md-6" p>><"clear">')
 
                     ->parameters([
                         "processing" => true,
@@ -100,17 +109,18 @@ class MuzakkiDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ['data' => 'id', 'name' => 'id', 'title' => 'id'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Nama Lengkap'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Tanggal Transaksi'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Total Bayar Zakat'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Keterangan'],
+            ['data' => 'code', 'name' => 'id', 'title' => 'code', ], 
+            ['data' => 'dibayarkan', 'name' => 'dibayarkan', 'title' => 'Di Bayarkan'], 
+            ['data' => 'user_name', 'name' => 'user_name', 'title' => 'User'], 
+            ['data' => 'kategori_name', 'name' => 'kategori_name', 'title' => 'Kategori'], 
+            ['data' => 'type', 'name' => 'type', 'title' => 'Type Pembayaran'], 
+            ['data' => 'jumlah_bayar', 'name' => 'jumlah_bayar', 'title' => 'Jumlah'], 
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->searchable(false)
                   ->width(60)
-                  ->addClass('text-center hide-search'),
+                  ->addClass('text-center '),
         ];
     }
  

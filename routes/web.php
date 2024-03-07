@@ -65,7 +65,12 @@ Route::group(['middleware' => 'auth'], function () {
     // Users Module 
     Route::resource('users', UserController::class);   
     Route::resource('kategori', KategoriController::class); 
+
+    Route::post('muzakkiUserStore', [MuzakkiController::class, 'muzakkiUserStore'])->name('muzakkiUserStore');
+    Route::get('muzakkiCreate', [MuzakkiController::class, 'muzakkiCreate'])->name('muzakkiCreate');
     Route::resource('muzakki', MuzakkiController::class);  
+
+
     Route::resource('mustahik', MustahikController::class);  
 });
    
