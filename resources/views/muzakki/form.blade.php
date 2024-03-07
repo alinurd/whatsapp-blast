@@ -66,7 +66,7 @@
                                  <label for="Uang0">Uang</label>
                               </td>
                               <td>
-                                 <input type="number"  name="jumlah[]" id="jumlah" class="form-control" required>
+                                 <input type="number"  name="jumlah[]" id="jumlah0" class="form-control" disabled required>
                               </td>
                               <td id="satuan0"></td>
                            </tr>
@@ -143,12 +143,17 @@
          newCell.appendChild(label2);
       } else if (i == 4) {
          var input = document.createElement('input');
-         input.type = 'number';
-         input.name = 'jumlah[]';
-         input.className = 'form-control';
-         input.required = true;
-         input.addEventListener('input', calculateTotal); // Tambahkan event listener
-         newCell.appendChild(input);
+      input.type = 'number';
+      input.name = 'jumlah[]';
+      input.className = 'form-control';
+      input.required = true;
+      input.disabled = true; // Nonaktifkan input field
+      input.id = 'jumlah' + rowCount; // Nonaktifkan input field
+      input.addEventListener('input', function() {
+         input.disabled = false; // Aktifkan kembali input field ketika user mulai mengetik
+         calculateTotal();
+      });
+      newCell.appendChild(input);
       } else if (i == 5) {
          newCell.textContent = '';
          newCell.id = 'satuan' + rowCount;
@@ -163,26 +168,31 @@
    }
 
    document.getElementById('Beras' + rowCount).addEventListener('change', function() {
+
       if (this.checked) {
          document.getElementById('satuan' + rowCount).textContent = 'Liter';
+         document.getElementById('jumlah' + rowCount).disabled = false;
       }
    });
-
+   
    document.getElementById('Uang' + rowCount).addEventListener('change', function() {
       if (this.checked) {
+         document.getElementById('jumlah' + rowCount).disabled = false;
          document.getElementById('satuan' + rowCount).textContent = 'Rupiah';
       }
    });
 });
 
 document.getElementById('Beras0').addEventListener('change', function() {
-      if (this.checked) {
+   if (this.checked) {
+         document.getElementById('jumlah0').disabled = false;
          document.getElementById('satuan0').textContent = 'Liter';
       }
    });
-
+   
    document.getElementById('Uang0').addEventListener('change', function() {
       if (this.checked) {
+         document.getElementById('jumlah0').disabled = false;
          document.getElementById('satuan0').textContent = 'Rupiah';
       }
    });
@@ -190,6 +200,9 @@ document.getElementById('Beras0').addEventListener('change', function() {
 // Event listener untuk menghitung total ketika halaman dimuat
 document.addEventListener('DOMContentLoaded', function() {
    calculateTotal();
+});
+document.getElementById('jumlah0').addEventListener('change', function() {
+    calculateTotal();
 });
 
 // Fungsi untuk menghitung total
