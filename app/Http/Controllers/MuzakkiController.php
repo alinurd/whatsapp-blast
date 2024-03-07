@@ -8,6 +8,8 @@ use App\Models\Muzakki;
 use App\Helpers\AuthHelper;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
+use App\Models\Kategori;
+use App\Models\User;
 
 class MuzakkiController extends Controller
 {
@@ -32,8 +34,46 @@ class MuzakkiController extends Controller
      */
     public function create()
     {
-        $roles = Role::where('status',1)->get()->pluck('title', 'id');
+        $agt = User::where("user_type", "pemberi")->where("status", "active")->get()->pluck('nama_lengkap', 'id');
+        // $agt = Role::where('status',1)->get()->pluck('title', 'id');
 
-        return view('muzakki.form', compact('roles'));
+        return view('muzakki.form', compact('agt'));
     }
+ 
+    public function muzakkiCreate()
+    {
+        
+         $view = view('muzakki.form-user')->render();
+        return response()->json(['data' =>  $view, 'status'=> true]);
+    }
+    public function muzakkiUserStore(Request $request)
+    {
+        $request['user_type']="pemberi";
+        
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'required|string',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'nomor_telp' => 'nullable|string',
+            'alamat' => 'required|string',
+            'user_type' => 'required|in:admin,pemberi,penerima',
+        ]);
+    
+        $user = User::create([
+            'nama_lengkap' => $validatedData['nama_lengkap'],
+            'email' => uniqid().'@example.com', // Kolom email harus unik, kita buat random untuk sementara
+            'jenis_kelamin' => $validatedData['jenis_kelamin'],
+            'nomor_telp' => $validatedData['nomor_telp'],
+            'alamat' => $validatedData['alamat'],
+            'user_type' => $validatedData['user_type'],
+            'status' => 'active', // Mengisi status default
+            'role' => null, // Kolom role bisa diisi dengan null sesuai permintaan
+        ]);
+        
+        $agt = User::where("user_type", "pemberi")->where("status", "active")->get()->pluck('nama_lengkap', 'id');
+        // $agt = Role::where('status',1)->get()->pluck('title', 'id');
+
+        return view('muzakki.form', compact('agt'));
+            }
+    
+    
 }
