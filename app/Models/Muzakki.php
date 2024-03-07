@@ -17,10 +17,19 @@ class Muzakki extends Model
     protected $table = 'muzakki';
 
     protected $fillable = [
-        'nama_lengkap',
-        'tanggal_transaksi',
+        'code',
+        'user_id',
         'jumlah_bayar',
-        'keterangan',
         'kategori_id',
+        'type',
     ];
+    public function muzakkiHeader()
+    {
+        return $this->belongsTo(MuzakkiHeader::class, 'code');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }  

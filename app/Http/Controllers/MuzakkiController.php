@@ -9,8 +9,8 @@ use App\Helpers\AuthHelper;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
 use App\Models\Kategori;
+use App\Models\MuzakkiHeader;
 use App\Models\User;
-
 class MuzakkiController extends Controller
 {
     /**
@@ -35,11 +35,41 @@ class MuzakkiController extends Controller
     public function create()
     {
         $agt = User::where("user_type", "pemberi")->where("status", "active")->get()->pluck('nama_lengkap', 'id');
-        // $agt = Role::where('status',1)->get()->pluck('title', 'id');
-
-        return view('muzakki.form', compact('agt'));
-    }
+        $ktg = Kategori::pluck('nama_kategori', 'id');
  
+        return view('muzakki.form', compact('agt','ktg'));
+    }
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'dibayarkan' => 'required',
+            'user' => 'required|array',
+            'user.*' => 'exists:users,id',
+            'kategori' => 'required|array',
+            'kategori.*' => 'exists:kategori,id',
+            'type' => 'required|array',
+            'type.*' => 'in:Beras,Uang',
+            'jumlah' => 'required|array',
+            'jumlah.*' => 'numeric',
+         ]);
+    
+         
+         $MuzakkiHeader = MuzakkiHeader::create([
+            'user_id' => $validatedData['dibayarkan'],
+            'code' => $this->generateCode("MZK"), 
+        ]);
+    
+        foreach ($validatedData['user'] as $key => $user) {
+            Muzakki::create([
+                'code' =>  $MuzakkiHeader->code, 
+                'user_id' => $user,
+                'jumlah_bayar' => $validatedData['jumlah'][$key],
+                'kategori_id' => $validatedData['kategori'][$key],
+                'type' => $validatedData['type'][$key],
+            ]);
+        }
+    }
+    
     public function muzakkiCreate()
     {
         
@@ -69,10 +99,10 @@ class MuzakkiController extends Controller
             'role' => null, // Kolom role bisa diisi dengan null sesuai permintaan
         ]);
         
-        $agt = User::where("user_type", "pemberi")->where("status", "active")->get()->pluck('nama_lengkap', 'id');
-        // $agt = Role::where('status',1)->get()->pluck('title', 'id');
+        // $agt = User::where("user_type", "pemberi")->where("status", "active")->get()->pluck('nama_lengkap', 'id');
+        // // $agt = Role::where('status',1)->get()->pluck('title', 'id');
 
-        return view('muzakki.form', compact('agt'));
+        // return view('muzakki.form', compact('agt'));
             }
     
     
