@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\DataTables\KategoriDataTable;
 use App\Models\Kategori;
-use App\Models\User;
 use App\Helpers\AuthHelper;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
@@ -18,8 +17,8 @@ class KategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(KategoriDataTable $dataTable)
-    {
-        $pageTitle = trans('global-message.list_form_title',['form' => trans('Kategori')] );
+    { 
+        $pageTitle = trans('global-message.list_form_title',['form' => trans('kategori')] );
         $auth_user = AuthHelper::authSession();
         $assets = ['data-table'];
         $headerAction = '<a href="'.route('kategori.create').'" class="btn btn-sm btn-primary" role="button">Add Kategori</a>';
@@ -28,14 +27,14 @@ class KategoriController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
         $roles = Role::where('status',1)->get()->pluck('title', 'id');
 
-        return view('kategori.form', compact('roles'));
+        return view('kategori.form_tambah', compact('roles'));
     }
 
     /**
@@ -44,37 +43,26 @@ class KategoriController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        // dd($request->all());
-        $user = User::with('userProfile')->findOrFail($id);
+        // Validate the request data
+        $request->validate([
+            'nama_kategori' => 'required|string|max:255',
+        ], [
+            'nama_kategori.required' => 'The nama kategori field is required.',
+        ]);
+  
+        // Create a new category instance
+        $kategori = new Kategori();
+  
+        // Fill the category data from the request
+        $kategori->nama_kategori = $request->nama_kategori;
+ 
+        // Save the category
+        $kategori->save();
 
-        $role = Role::find($request->user_role);
-        if(env('IS_DEMO')) {
-            if($role->name === 'admin'&& $user->user_type === 'admin') {
-                return redirect()->back()->with('error', 'Permission denied');
-            }
-        }
-        $user->assignRole($role->name);
-
-        $request['password'] = $request->password != '' ? bcrypt($request->password) : $user->password;
-
-        // User user data...
-        $user->fill($request->all())->update();
-
-        // Save user image...
-        if (isset($request->profile_image) && $request->profile_image != null) {
-            $user->clearMediaCollection('profile_image');
-            $user->addMediaFromRequest('profile_image')->toMediaCollection('profile_image');
-        }
-
-        // user profile data....
-        $user->userProfile->fill($request->userProfile)->update();
-
-        if(auth()->check()){
-            return redirect()->route('users.index')->withSuccess(__('message.msg_updated',['name' => __('message.user')]));
-        }
-        return redirect()->back()->withSuccess(__('message.msg_updated',['name' => 'My Profile']));
+        // Redirect back to the index page of categories with a success message
+        return redirect()->route('kategori.index')->withSuccess(__('Kategori added successfully.'));
     }
 
     /**
@@ -85,7 +73,9 @@ class KategoriController extends Controller
      */
     public function show($id)
     {
-        
+         $kategori = Kategori::findOrFail($id);
+
+        return view('kategori.show', compact('kategori'));
     }
 
     /**
@@ -95,16 +85,12 @@ class KategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $data = User::with('userProfile','roles')->findOrFail($id);
+    {  
+       // Find the category data by ID
+       $kategori = Kategori::findOrFail($id);
 
-        $data['user_type'] = $data->roles->pluck('id')[0] ?? null;
-
-        $roles = Role::where('status',1)->get()->pluck('title', 'id');
-
-        $profileImage = getSingleMedia($data, 'profile_image');
-
-        return view('kategori.form', compact('data','id', 'roles', 'profileImage'));  
+       // Pass the category data to the form view
+       return view('kategori.form_edit', compact('kategori'));
     }
 
     /**
@@ -114,11 +100,23 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-       
+        // Temukan kategori yang akan diperbarui
+        $kategori = Kategori::findOrFail($id);
 
-    }
+        // Validasi input kategori jika diperlukan
+        $request->validate([
+            'nama_kategori' => 'required|string|max:255', // Contoh aturan validasi untuk nama_kategori
+            // Tambahkan aturan validasi lainnya jika diperlukan
+        ]); 
+
+        // Lakukan pemrosesan update kategori
+        $kategori->update($request->all()); // Gunakan metode update() untuk melakukan pembaruan
+
+        // Redirect ke halaman yang sesuai setelah update
+        return redirect()->route('kategori.index')->withSuccess(__('Kategori successfully updated.'));
+    }  
 
     /**
      * Remove the specified resource from storage.
@@ -128,7 +126,21 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        
+        $kategori = Kategori::findOrFail($id);
+        $status = 'errors';
+        $message = __('global-message.delete_form', ['form' => __('kategori.title')]);
+
+        if ($kategori != '') {
+            $kategori->delete();
+            $status = 'success';
+            $message = __('global-message.delete_form', ['form' => __('kategori.title')]);
+        }
+
+        if (request()->ajax()) {
+            return response()->json(['status' => true, 'message' => $message, 'datatable_reload' => 'dataTable_wrapper']);
+        }
+
+        return redirect()->back()->with($status, $message);
 
     }
 }

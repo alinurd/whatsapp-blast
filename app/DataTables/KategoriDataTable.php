@@ -10,7 +10,7 @@ use Yajra\DataTables\Services\DataTable;
 class KategoriDataTable extends DataTable
 {
     /**
-     * Build DataTable class.
+     * Build DataTable class. 
      *
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
@@ -19,46 +19,12 @@ class KategoriDataTable extends DataTable
     {
         return datatables()
         ->eloquent($query)
-        ->editColumn('userProfile.country', function($query) {
-            return $query->userProfile->country ?? '-';
-        })
-        ->editColumn('userProfile.company_name', function($query) {
-            return $query->userProfile->company_name ?? '-';
-        })
-        ->editColumn('status', function($query) {
-            $status = 'warning';
-            switch ($query->status) {
-                case 'active':
-                    $status = 'primary';
-                    break;
-                case 'inactive':
-                    $status = 'danger';
-                    break;
-                case 'banned':
-                    $status = 'dark';
-                    break;
-            }
-            return '<span class="text-capitalize badge bg-'.$status.'">'.$query->status.'</span>';
-        })
-        ->editColumn('created_at', function($query) {
-            return date('Y/m/d',strtotime($query->created_at));
-        })
-        ->filterColumn('full_name', function($query, $keyword) {
-            $sql = "CONCAT(users.first_name,' ',users.last_name)  like ?";
-            return $query->whereRaw($sql, ["%{$keyword}%"]);
-        })
-        ->filterColumn('userProfile.company_name', function($query, $keyword) {
-            return $query->orWhereHas('userProfile', function($q) use($keyword) {
-                $q->where('company_name', 'like', "%{$keyword}%");
-            });
-        })
-        ->filterColumn('userProfile.country', function($query, $keyword) {
-            return $query->orWhereHas('userProfile', function($q) use($keyword) {
-                $q->where('country', 'like', "%{$keyword}%");
-            });
+        ->addColumn('DT_RowIndex', function ($row) {
+            static $index = 0;
+            return ++$index;
         })
         ->addColumn('action', 'kategori.action')
-        ->rawColumns(['action','status']);
+        ->rawColumns(['action']);
     }
 
     /**
@@ -100,8 +66,8 @@ class KategoriDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ['data' => 'id', 'name' => 'id', 'title' => 'id'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Nama Ketegori'],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
+            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Nama Kategori', 'class' => 'text-center'],
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
