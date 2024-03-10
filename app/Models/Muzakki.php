@@ -27,6 +27,10 @@ class Muzakki extends Model
     {
         return $this->belongsTo(MuzakkiHeader::class, 'code');
     }
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

@@ -61,11 +61,12 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Dashboard Routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-     
+    
     // Users Module 
     Route::resource('users', UserController::class);   
     Route::resource('kategori', KategoriController::class); 
-
+    
+    Route::get('invoice/{code}', [MuzakkiController::class, 'invoice'])->name('invoice');
     Route::post('muzakkiUserStore', [MuzakkiController::class, 'muzakkiUserStore'])->name('muzakkiUserStore');
     Route::get('muzakkiCreate', [MuzakkiController::class, 'muzakkiCreate'])->name('muzakkiCreate');
     Route::resource('muzakki', MuzakkiController::class);  

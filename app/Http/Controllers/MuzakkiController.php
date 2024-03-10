@@ -68,8 +68,14 @@ class MuzakkiController extends Controller
                 'type' => $validatedData['type'][$key],
             ]);
         }
+        return redirect()->route('invoice', ['code' => $MuzakkiHeader->code]);
     }
-    
+    public function invoice($code){
+        $data['detail'] = Muzakki::where('code', $code)->with('user','kategori' )->get();
+        $data['header'] = MuzakkiHeader::where('code', $code)->with('user' )->get();
+        return view('muzakki.print', compact('data'));
+    }
+
     public function muzakkiCreate()
     {
         
