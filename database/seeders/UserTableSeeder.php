@@ -77,7 +77,7 @@ class UserTableSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $user = User::create([
                 'nama_lengkap' => $faker->name,
-                   'nomor_telp' => $faker->phoneNumber,
+                'nomor_telp' => $faker->phoneNumber,
                 'alamat' => $faker->address,
                  'user_type' => 'pemberi',
                 'status' => 'active',

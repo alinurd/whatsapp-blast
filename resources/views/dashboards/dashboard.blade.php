@@ -120,7 +120,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-md-12 col-lg-6">
+            <!-- <div class="col-md-12 col-lg-6">
                <div class="card" data-aos="fade-up" data-aos-delay="1000">
                   <div class="card-header d-flex justify-content-between flex-wrap">
                      <div class="header-title">
@@ -370,7 +370,7 @@
                      </div>
                   </div>
                </div>
-            </div>
+            </div> -->
          </div>
       </div>
       <div class="col-md-12 col-lg-4">
@@ -455,7 +455,7 @@
                      </div>
                   </div>
                </div>
-               <div class="card" data-aos="fade-up" data-aos-delay="300">
+               <!-- <div class="card" data-aos="fade-up" data-aos-delay="300">
                   <div class="card-body d-flex justify-content-around text-center">
                      <div>
                         <h2 class="mb-2">750<small>K</small></h2>
@@ -467,9 +467,9 @@
                         <p class="mb-0 text-gray">New Customers</p>
                      </div>
                   </div>
-               </div>
+               </div> -->
             </div>
-            <div class="col-md-12 col-lg-12">
+            <!-- <div class="col-md-12 col-lg-12">
                <div class="card" data-aos="fade-up" data-aos-delay="400">
                   <div class="card-header d-flex justify-content-between flex-wrap">
                      <div class="header-title">
@@ -520,7 +520,7 @@
                      </div>
                   </div>
                </div>
-            </div>
+            </div> -->
          </div>
       </div>
    </div>

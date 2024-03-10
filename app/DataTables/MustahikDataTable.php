@@ -19,6 +19,10 @@ class MustahikDataTable extends DataTable
     {
         return datatables()
         ->eloquent($query)
+        ->addColumn('DT_RowIndex', function ($row) {
+            static $index = 0;
+            return ++$index;
+        })
         ->editColumn('userProfile.country', function($query) {
             return $query->userProfile->country ?? '-';
         })
@@ -57,7 +61,7 @@ class MustahikDataTable extends DataTable
                 $q->where('country', 'like', "%{$keyword}%");
             });
         })
-        ->addColumn('action', 'kategori.action')
+        ->addColumn('action', 'mustahik.action')
         ->rawColumns(['action','status']);
     }
 
@@ -83,7 +87,7 @@ class MustahikDataTable extends DataTable
         return $this->builder()
                     ->setTableId('dataTable')
                     ->columns($this->getColumns())
-                    ->minifiedAjax()
+                    ->minifiedAjax() 
                     ->dom('<"row align-items-center"<"col-md-2" l><"col-md-6" B><"col-md-4"f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">')
 
                     ->parameters([
@@ -100,12 +104,12 @@ class MustahikDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ['data' => 'id', 'name' => 'id', 'title' => 'id'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Tanggal'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Nama Lengkap'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Kategori Mustahik'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Zakat diterima'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Keterangan'],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
+            ['data' => 'tanggal', 'name' => 'tanggal', 'title' => 'Tanggal'],
+            ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Nama Lengkap'],
+            ['data' => 'kategori_mustahik', 'name' => 'kategori_mustahik', 'title' => 'Kategori Mustahik'],
+            ['data' => 'kategori_menerima_zakat', 'name' => 'kategori_menerima_zakat', 'title' => 'Zakat diterima'],
+            ['data' => 'keterangan', 'name' => 'keterangan', 'title' => 'Keterangan'],
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

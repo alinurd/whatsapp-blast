@@ -68,27 +68,11 @@
                      </div>
                      <div class="form-group">
                         <label class="form-label">User Role: <span class="text-danger">*</span></label>
-                        {{Form::select('user_role', $roles , old('user_role') ? old('user_role') : $data->user_type ?? 'user', ['class' => 'form-control', 'placeholder' => 'Select User Role'])}}
+                        {{Form::select('user_role', $roles , old('user_role'), ['class' => 'form-control', 'placeholder' => 'Select User Role']); }}
                      </div>
-                     <!-- <div class="form-group">
-                        <label class="form-label" for="furl">Facebook Url:</label>
-                        {{ Form::text('userProfile[facebook_url]', old('userProfile[facebook_url]'), ['class' => 'form-control', 'id' => 'furl', 'placeholder' => 'Facebook Url']) }}
-                     </div>
-                     <div class="form-group">
-                        <label class="form-label" for="turl">Twitter Url:</label>
-                        {{ Form::text('userProfile[twitter_url]', old('userProfile[twitter_url]'), ['class' => 'form-control', 'id' => 'turl', 'placeholder' => 'Twitter Url']) }}
-                     </div>
-                     <div class="form-group">
-                        <label class="form-label" for="instaurl">Instagram Url:</label>
-                        {{ Form::text('userProfile[instagram_url]', old('userProfile[instagram_url]'), ['class' => 'form-control', 'id' => 'instaurl', 'placeholder' => 'Instagram Url']) }}
-                     </div>
-                     <div class="form-group mb-0">
-                        <label class="form-label" for="lurl">Linkedin Url:</label>
-                        {{ Form::text('userProfile[linkdin_url]', old('userProfile[linkdin_url]'), ['class' => 'form-control', 'id' => 'lurl', 'placeholder' => 'Linkedin Url']) }}
-                     </div> -->
                </div>
             </div>
-         </div>
+         </div> 
          <div class="col-xl-9 col-lg-8">
             <div class="card">
                <div class="card-header d-flex justify-content-between">
@@ -103,56 +87,39 @@
                   <div class="new-user-info">
                         <div class="row">
                            <div class="form-group col-md-6">
-                              <label class="form-label" for="fname">First Name: <span class="text-danger">*</span></label>
-                              {{ Form::text('first_name', old('first_name'), ['class' => 'form-control', 'placeholder' => 'First Name', 'required']) }}
+                              <label class="form-label" for="fname">Nama Lengkap: <span class="text-danger">*</span></label>
+                              {{ Form::text('nama_lengkap', old('nama_lengkap'), ['class' => 'form-control', 'placeholder' => 'Nama Lengkap', 'required']) }}
                            </div>
-                           <div class="form-group col-md-6">
-                              <label class="form-label" for="lname">Last Name: <span class="text-danger">*</span></label>
-                              {{ Form::text('last_name', old('last_name'), ['class' => 'form-control', 'placeholder' => 'Last Name' ,'required']) }}
-                           </div>
-                           <div class="form-group col-md-6">
-                              <label class="form-label" for="add1">Street Address 1:</label>
-                              {{ Form::text('userProfile[street_addr_1]', old('userProfile[street_addr_1]'), ['class' => 'form-control', 'id' => 'add1', 'placeholder' => 'Enter Street Address 1']) }}
-                           </div>
-                           <div class="form-group col-md-6">
-                              <label class="form-label" for="add2">Street Address 2:</label>
-                              {{ Form::text('userProfile[street_addr_2]', old('userProfile[street_addr_2]'), ['class' => 'form-control', 'id' => 'add2', 'placeholder' => 'Enter Street Address 2']) }}
-                           </div>
-                           <div class="form-group col-md-12">
-                              <label class="form-label" for="cname">Company Name: <span class="text-danger">*</span></label>
-                              {{ Form::text('userProfile[company_name]', old('userProfile[company_name]'), ['class' => 'form-control', 'required', 'placeholder' => 'Company Name']) }}
-                           </div>
-                           <div class="form-group col-sm-12">
-                              <label class="form-label" id="country">Country:</label>
-                              {{ Form::text('userProfile[country]', old('userProfile[country]'), ['class' => 'form-control', 'id' => 'country']) }}
 
-                           </div>
                            <div class="form-group col-md-6">
-                              <label class="form-label" for="mobno">Mobile Number:</label>
-                              {{ Form::text('userProfile[phone_number]', old('userProfile[phone_number]'), ['class' => 'form-control', 'id' => 'mobno', 'placeholder' => 'Mobile Number']) }}
-                           </div>
+                                 <label class="form-label" for="jenis_kelamin">Jenis Kelamin: <span class="text-danger">*</span></label>
+                                 <select name="jenis_kelamin" class="form-control" required>
+                                    <option value="">Pilih Jenis Kelamin</option>
+                                    <option value="Laki-Laki" {{ (isset($data) && $data->jenis_kelamin == 'Laki-Laki') || old('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                                    <option value="Perempuan" {{ (isset($data) && $data->jenis_kelamin == 'Perempuan') || old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                 </select>
+                           </div> 
+                  
                            <div class="form-group col-md-6">
-                              <label class="form-label" for="altconno">Alternate Contact:</label>
-                              {{ Form::text('userProfile[alt_phone_number]', old('userProfile[alt_phone_number]'), ['class' => 'form-control', 'id' => 'altconno', 'placeholder' => 'Alternate Contact']) }}
+                              <label class="form-label" for="lname">No Telp: <span class="text-danger">*</span></label>
+                              {{ Form::text('nomor_telp', old('nomor_telp'), ['class' => 'form-control', 'placeholder' => 'Nomor Telp' ,'required']) }}
                            </div>
+                          
                            <div class="form-group col-md-6">
                               <label class="form-label" for="email">Email: <span class="text-danger">*</span></label>
                               {{ Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Enter e-mail', 'required']) }}
                            </div>
-                           <div class="form-group col-md-6">
-                              <label class="form-label" for="pno">Pin Code:</label>
-                              {{ Form::number('userProfile[pin_code]', old('userProfile[pin_code]'), ['class' => 'form-control', 'id' => 'pin_code','step' => 'any']) }}
-                           </div>
+
                            <div class="form-group col-md-12">
-                              <label class="form-label" for="city">Town/City:</label>
-                              {{ Form::text('userProfile[city]', old('city'), ['class' => 'form-control', 'id' => 'city', 'placeholder' => 'Enter City Name' ]) }}
+                              <label class="form-label" for="lname">Alamat: <span class="text-danger">*</span></label>
+                              {{ Form::text('alamat', old('alamat'), ['class' => 'form-control', 'placeholder' => 'Alamat' ,'required']) }}
                            </div>
                         </div>
                         <hr>
                         <h5 class="mb-3">Security</h5>
                         <div class="row">
                            <div class="form-group col-md-12">
-                              <label class="form-label" for="uname">User Name: <span class="text-danger">*</span></label>
+                              <label class="form-label" for="uname">Username: <span class="text-danger">*</span></label>
                               {{ Form::text('username', old('username'), ['class' => 'form-control', 'required', 'placeholder' => 'Enter Username']) }}
                            </div>
                            <div class="form-group col-md-6">

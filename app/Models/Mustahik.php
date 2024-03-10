@@ -23,7 +23,7 @@ class Mustahik extends Model
         'jenis_kelamin', 
         'nomor_telp',
         'alamat',
-        'kategori_mustahik',
+        'kategori_mustahik', 
         'status_perkawinan',
         'pekerjaan',
         'jumlah_pendapatan',
