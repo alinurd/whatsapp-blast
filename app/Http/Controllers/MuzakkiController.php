@@ -111,5 +111,24 @@ class MuzakkiController extends Controller
         // return view('muzakki.form', compact('agt'));
             }
     
-    
+            public function destroy($id)
+            {
+                // dd($id);
+                $kategori = Muzakki::findOrFail($id);
+                $status = 'errors';
+                $message = __('global-message.delete_form', ['form' => __('muzakki')]);
+        
+                if ($kategori != '') {
+                    $kategori->delete();
+                    $status = 'success';
+                    $message = __('global-message.delete_form', ['form' => __('muzakki')]);
+                }
+        
+                if (request()->ajax()) {
+                    return response()->json(['status' => true, 'message' => $message, 'datatable_reload' => 'dataTable_wrapper']);
+                }
+        
+                return redirect()->back()->with($status, $message);
+        
+            }
 }
