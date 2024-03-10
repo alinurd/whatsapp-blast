@@ -97,15 +97,15 @@
     <li>
         <hr class="hr-horizontal">
     </li>
-    <li class="nav-item static-item">
+    <!-- <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Reporting</span>
             <span class="mini-icon">-</span>
         </a>
-    </li> 
+    </li>  -->
     @if(Auth::user()->role ==2 || Auth::user()->role ==1 )
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{activeRoute(route('muzakki.index'))}}" href="{{route('muzakki.index')}}">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,10 +116,10 @@
             </i>
             <span class="item-name">Report Muzakki</span>
         </a>
-    </li>
+    </li> -->
     @endif
     @if(Auth::user()->role ==3 || Auth::user()->role ==1 )
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{activeRoute(route('mustahik.index'))}}" href="{{route('mustahik.index')}}">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,7 +130,7 @@
             </i>
             <span class="item-name">Report Mustahiq</span>
         </a>
-    </li>
+    </li> -->
     @endif
     <li>
         <hr class="hr-horizontal">
