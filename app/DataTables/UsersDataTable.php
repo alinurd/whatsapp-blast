@@ -19,6 +19,10 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addColumn('DT_RowIndex', function ($row) {
+                static $index = 0;
+                return ++$index;
+            })
             ->editColumn('userProfile.country', function($query) {
                 return $query->userProfile->country ?? '-';
             })
@@ -100,13 +104,11 @@ class UsersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ['data' => 'id', 'name' => 'id', 'title' => 'id'],
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
             ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Nama Lengkap'],
-            ['data' => 'username', 'name' => 'username', 'title' => 'Username'],
-            ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'jenis_kelamin', 'name' => 'jenis_kelamin', 'title' => 'Jenis Kelamin'],
+            ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'nomor_telp', 'name' => 'nomor_telp', 'title' => 'Nomor Telp'],
-            ['data' => 'alamat', 'name' => 'alamat', 'title' => 'Alamat'],
             ['data' => 'user_type', 'name' => 'user_type', 'title' => 'Tipe User'],
             Column::computed('action')
                   ->exportable(false)

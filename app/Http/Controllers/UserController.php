@@ -53,10 +53,10 @@ class UserController extends Controller
 
         storeMediaFile($user,$request->profile_image, 'profile_image');
 
-        $user->assignRole('user');
+        // $user->assignRole('1');
 
         // Save user Profile data...
-        $user->userProfile()->create($request->userProfile);
+        // $user->userProfile()->create($request->userProfile);
 
         return redirect()->route('users.index')->withSuccess(__('message.msg_added',['name' => __('users.store')]));
     }
@@ -113,7 +113,7 @@ class UserController extends Controller
                 return redirect()->back()->with('error', 'Permission denied');
             }
         }
-        $user->assignRole($role->name);
+        // $user->assignRole($role->name);
 
         $request['password'] = $request->password != '' ? bcrypt($request->password) : $user->password;
 
@@ -127,7 +127,7 @@ class UserController extends Controller
         }
 
         // user profile data....
-        $user->userProfile->fill($request->userProfile)->update();
+        // $user->userProfile->fill($request->userProfile)->update();
 
         if(auth()->check()){
             return redirect()->route('users.index')->withSuccess(__('message.msg_updated',['name' => __('message.user')]));

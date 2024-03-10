@@ -17,8 +17,12 @@ class MuzakkiDataTable extends DataTable
      */
     public function dataTable($query)
     {
-         return datatables()
+        return datatables()
         ->eloquent($query)
+        ->addColumn('DT_RowIndex', function ($row) {
+            static $index = 0;
+            return ++$index;
+        })
         ->editColumn('userProfile.country', function($query) {
             return $query->userProfile->country ?? '-';
         })
@@ -109,6 +113,7 @@ class MuzakkiDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
             ['data' => 'code', 'name' => 'id', 'title' => 'code', ], 
             ['data' => 'dibayarkan', 'name' => 'dibayarkan', 'title' => 'Di Bayarkan'], 
             ['data' => 'user_name', 'name' => 'user_name', 'title' => 'User'], 
