@@ -22,6 +22,7 @@ class Muzakki extends Model
         'jumlah_bayar',
         'kategori_id',
         'type',
+        'satuan',
     ];
     public function muzakkiHeader()
     {

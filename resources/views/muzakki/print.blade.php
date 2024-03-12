@@ -23,6 +23,7 @@
                                  <th class="text-center" scope="col">Kategori</th>
                                  <th class="text-center" scope="col">Type</th>
                                  <th class="text-center" scope="col">Jumlah</th>
+                                 <th class="text-center" scope="col">Satuan</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -36,17 +37,18 @@
                                  <td class="text-center">{{$item['kategori']['nama_kategori']}}</td>
                                  <td class="text-center">{{$item['type']}}</td>
                                  <td class="text-center">{{$item['jumlah_bayar']}}</td>
+                                 <td class="text-center">{{$item['satuan']}}</td>
                               </tr>
                               @endforeach
                               <tr>
-                                 <td colspan="4" rowspan="2">
-                                    <h6 class="mb-0 float-end"><strong>Total:</strong></h6>
-                                 </td>
-                                 <td class="text-center"> <span id="ttlBeras">0</span> <i>Liter</i></td>
-                              </tr>
-                              <tr>
-                                 <td class="text-center"> <span id="ttlUang">0</span> <i>Rupiah</i></td>
-                              </tr>
+                           <td colspan="4" rowspan="3" class="text-end"><strong>Total:</strong></td>
+                           <td class="text-star" colspan="2"><span id="ttlLiter">0</span> <i>Liter</i></td>
+                        </tr>
+                        <td class="text-star" colspan="2"><span id="ttlKg">0</span> <i>Kilo Gram</i></td>
+                        </tr>
+                        </tr>
+                        <td class="text-star" colspan="2"><span id="ttlRupiah">0</span> <i>Rupiah</i></td>
+                        </tr>
                            </tbody>
                         </table>
                      </div>
@@ -78,17 +80,21 @@
    document.addEventListener('DOMContentLoaded', function() {
       var totalBeras = 0;
       var totalUang = 0;
+      var totalKg = 0;
 
       @foreach($data['detail'] as $item)
-      @if($item['type'] === 'Beras')
+      @if($item['satuan'] === 'Liter')
       totalBeras += parseFloat({{ $item['jumlah_bayar'] }});
-      @elseif($item['type'] === 'Uang')
+      @elseif($item['satuan'] === 'Rupiah')
       totalUang += parseFloat({{ $item['jumlah_bayar'] }});
+      @elseif($item['satuan'] === 'Kg')
+      totalKg += parseFloat({{ $item['jumlah_bayar'] }});
       @endif
       @endforeach
 
-      document.getElementById('ttlBeras').textContent = totalBeras.toLocaleString();
-      document.getElementById('ttlUang').textContent = formatRupiah(totalUang);
+      document.getElementById('ttlLiter').textContent = totalBeras.toLocaleString();
+      document.getElementById('ttlRupiah').textContent = formatRupiah(totalUang);
+      document.getElementById('ttlKg').textContent = formatRupiah(totalKg);
    });
 
    function formatRupiah(angka) {

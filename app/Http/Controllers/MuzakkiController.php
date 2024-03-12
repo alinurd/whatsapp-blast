@@ -48,15 +48,14 @@ class MuzakkiController extends Controller
             'kategori' => 'required|array',
             'kategori.*' => 'exists:kategori,id',
             'type' => 'required|array',
-            'type.*' => 'in:Beras,Uang',
+            'satuan' => 'required|array',
             'jumlah' => 'required|array',
-            'jumlah.*' => 'numeric',
-         ]);
+          ]);
     
-         
-         $MuzakkiHeader = MuzakkiHeader::create([
+          $lastId = MuzakkiHeader::orderByDesc('id')->first();
+          $MuzakkiHeader = MuzakkiHeader::create([
             'user_id' => $validatedData['dibayarkan'],
-            'code' => $this->generateCode("MZK"), 
+            'code' => $this->generateCodeById("MZK", $lastId->id+1), 
         ]);
     
         foreach ($validatedData['user'] as $key => $user) {
@@ -66,6 +65,7 @@ class MuzakkiController extends Controller
                 'jumlah_bayar' => $validatedData['jumlah'][$key],
                 'kategori_id' => $validatedData['kategori'][$key],
                 'type' => $validatedData['type'][$key],
+                'satuan' => $validatedData['satuan'][$key],
             ]);
         }
         return redirect()->route('invoice', ['code' => $MuzakkiHeader->code]);
