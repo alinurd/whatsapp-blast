@@ -53,7 +53,7 @@ class MuzakkiController extends Controller
           ]);
     
           $lastId = MuzakkiHeader::orderByDesc('id')->first();
-          if(!$lastId->id){
+          if(!$lastId){
             $lastId->id=0;
           }
           $MuzakkiHeader = MuzakkiHeader::create([
