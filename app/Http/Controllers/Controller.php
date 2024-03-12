@@ -17,5 +17,11 @@ class Controller extends BaseController
         $ran = Str::random(6);
         $code = $param . "-" . $ran . "-" . date("Y");
         return $code;
+    } 
+    public function generateCodeById($param, $id)
+    {
+        $ran = Str::random(6);
+        $code = $param . "-" . $ran . "-". date("Y") ."-000".$id;
+        return $code;
     }
 }

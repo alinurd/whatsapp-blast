@@ -80,7 +80,7 @@
                               </div>
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="no_phone">No Handphone <span class="text-danger">*</span></label>
-                                 {!! Form::text('no_phone', old('no_phone'), ['class' => 'form-control', 'required', 'placeholder' => 'No Handphone']) !!}
+                                 {!! Form::number('no_phone', old('no_phone'), ['class' => 'form-control', 'required', 'placeholder' => 'No Handphone']) !!}
                               </div>  
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="status_kawin">Status Perkawinan: <span class="text-danger">*</span></label>
@@ -113,32 +113,32 @@
                            <div class="row">
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="perkerjaan">Pekerjaan: <span class="text-danger">*</span></label>
-                                 {!! Form::text('perkerjaan', old('perkerjaan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pekerjaan']) !!}
+                                 {!! Form::number('perkerjaan', old('perkerjaan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pekerjaan']) !!}
                               </div>   
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="jml_pendapatan">Jumlah Pendapatan: <span class="text-danger">*</span></label>
-                                 {!! Form::text('jml_pendapatan', old('jml_pendapatan'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Pendapatan']) !!}
+                                 {!! Form::number('jml_pendapatan', old('jml_pendapatan'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Pendapatan']) !!}
                               </div>  
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: <span class="text-danger">*</span></label>
-                                 {!! Form::text('jml_bansos', old('jml_bansos'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Bansos Diterima']) !!}
+                                 {!! Form::number('jml_bansos', old('jml_bansos'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Bansos Diterima']) !!}
                               </div>  
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="jml_anak">Jml Anak dlm Tanggungan: <span class="text-danger">*</span></label>
-                                 {!! Form::text('jml_anak', old('jml_anak'), ['class' => 'form-control', 'required', 'placeholder' => 'Jml Anak dlm Tanggungan']) !!}
+                                 {!! Form::number('jml_anak', old('jml_anak'), ['class' => 'form-control', 'required', 'placeholder' => 'Jml Anak dlm Tanggungan']) !!}
                               </div>   
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="status_tinggal">Status Tempat Tinggal: <span class="text-danger">*</span></label>
                                  <select name="status_tinggal" class="form-control" required>
                                     <option value="">Pilih Status Tinggal</option>
-                                    <option value="Kontrakan" {{ old('status_tinggal') == 'Kontrakan' ? 'selected' : '' }}>Kontrakan</option>
+                                    <option value="kontrakan" {{ old('status_tinggal') == 'kontrakan' ? 'selected' : '' }}>Kontrakan</option>
                                     <option value="Menumpang" {{ old('status_tinggal') == 'Menumpang' ? 'selected' : '' }}>Menumpang</option>
                                     <option value="Milik Sendiri" {{ old('status_tinggal') == 'Milik Sendiri' ? 'selected' : '' }}>Milik Sendiri</option>
                                  </select>
                               </div>
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran Kontrakan: <span class="text-danger">*</span></label>
-                                 {!! Form::text('pengeluaran_kontrakan', old('pengeluaran_kontrakan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pengeluaran Kontrakan']) !!}
+                                 {!! Form::number('pengeluaran_kontrakan', old('pengeluaran_kontrakan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pengeluaran Kontrakan']) !!}
                               </div>  
                              
                            </div> 
@@ -159,7 +159,7 @@
                            <div class="row">
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="jml_hutang">Jumlah Hutang: <span class="text-danger">*</span></label>
-                                 {!! Form::text('jml_hutang', old('jml_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Hutang']) !!}
+                                 {!! Form::number('jml_hutang', old('jml_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Hutang']) !!}
                               </div>   
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="keperluan_hutang">Keperluan Hutang: <span class="text-danger">*</span></label>

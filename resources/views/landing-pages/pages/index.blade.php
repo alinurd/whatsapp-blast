@@ -1,92 +1,128 @@
 <x-app-layout layout="landing">
-    <div class="section-padding bg-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4">
-                    <img src="{{ asset('images/landing-pages/images/masjid.jpg') }}" alt="" class="img-fluid ">
+    <div class="container mt-3">
+        <div class="iq-navbar-header" style="height: 215px;">
+            <div class="container-fluid iq-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div>
+                                <h3>Selamat datang di {{ env('APP_INISIAL') }}</h3>
+                                <p>sebagai media transfaransi pengelolaan zakat {{ env('APP_SUBNAME') }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <p class="mb-2 text-secondary text-uppercase">
-                        about us
-                    </p>
-                    <h2 class="text-secondary mb-4">{{ env('APP_NAME') }}<br> <span class="text-primary">{{ env('APP_SUBNAME') }}</span></h2>
-                    <p class="mb-5">Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan
-                        untuk mendemostrasikan elemen grafis atau presentasi visual seperti font,
-                        tipografi, dan tata letak.Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan
-                        untuk mendemostrasikan elemen grafis atau presentasi visual seperti font,
-                        tipografi, dan tata letak.Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan
-                        untuk mendemostrasikan elemen grafis atau presentasi visual seperti font,
-                        tipografi, dan tata letak.</p>
-                    <a href="{{ route('login') }}" class="btn btn-primary">Login Admin</a>
-                </div>
+            </div>
+            <div class="iq-header-img">
+                <img src="{{asset('images/dashboard/top-header.png')}}" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header1.png')}}" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header2.png')}}" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header3.png')}}" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header4.png')}}" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header5.png')}}" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
             </div>
         </div>
-    </div>
-
-         <div class="container mt-3">
-            <div class="row align-items-center">
-            <img src="{{ asset('images/landing-pages/images/masjid.jpg') }}" alt="" class="img-fluid mb-4">
-
-                <div class="col-md-12 text-center">
-                    <h2 class="text-secondary mb-4">DKM <span class="text-primary">{{ env('APP_SUBNAME') }}</span></h2>
-                </div>
-                <div class="col-md-3 col-sm-2">
-                    <div class="card team-image">
-                        <x-landing-pages.widgets.team teamImage="team1.webp" teamTitle="Darlene Robertson" teamText="Ketua" />
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-2">
-                    <div class="card team-image">
-                        <x-landing-pages.widgets.team teamImage="team2.webp" teamTitle="Floyd Miles" teamText="Wakil Ketua" />
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-2">
-                    <div class="card team-image">
-                        <x-landing-pages.widgets.team teamImage="team-3.webp" teamTitle="Arlene McCoy" teamText="Bendahara" />
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-2">
-                    <div class="card team-image">
-                        <x-landing-pages.widgets.team teamImage="team-4.webp" teamTitle="Darlene Robertson" teamText="Sekertaris" />
+        <div class="card m-2">
+            <div class="card-header">
+                <center>
+                    <h6 for="thn">tampilkan berdasarkan Tahun</h6>
+                </center>
+                <div class="d-flex justify-content-between">
+                    <select name="thn" class="form-control">
+                        <center>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </center>
+                    </select>
+                    <div class="d-flex align-items-center">
+                        <div class="btn btn-info" style="width: 200px;">Tampilkan data</div>
                     </div>
                 </div>
             </div>
-        </div>
- 
-    <div class="section-padding bg-white">
-        <div class="container">
-            <div class="row align-items-center text-center">
-                <div class="col-lg-12">
-                    <!-- <p class="mb-4 text-uppercase text-secondary">Kutipan</p> -->
-                    <!-- <h2 class="text-secondary customer-txt">What our <span class="text-primary">Customer’s <br> are -->
-                            <!-- saying</span></h2> -->
-                </div>
-                <div class="overflow-hidden slider-circle-btn" id="testimonial-slider">
-                    <ul class="p-0 m-0 swiper-wrapper list-inline">
-                        <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal testText="Dan jadikanlah hartamu sebagai zakat untuk membersihkan dan mensucikan dirimu, dan berdoalah untuk dirinya (orang yang engkau berikan zakat)" testOwner="Al-Baqarah (2:110)" testSubtitle="Al-Qur'an" />
-                        </li>
-                        <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal testText="Sesungguhnya orang-orang yang mendapat bala (azab) dari Tuhanmu adalah orang-orang yang kafir. Mereka itu adalah orang-orang yang menahan (menyekat) zakat." testOwner="Al-Ma'arij (70:25-27)" testSubtitle="Al-Qur'an" />
-                        </li>
-                        <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal testText="Hai orang-orang yang beriman, tunaikanlah (bayarlah) zakat dari sebagian hasil bumi yang kamu peroleh, dari buah-buahan (tanaman) yang kamu keluarkan, supaya kamu tidak disiksakan di hari kiamat." testOwner="Al-Baqarah (2:267)" testSubtitle="Al-Qur'an" />
-                        </li>
-                        <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal testText="Tidaklah seseorang yang mempunyai harta, lalu dia menyembunyikannya dari zakatnya kecuali pada hari kiamat hartanya itu akan dijadikan sebagai ular yang panjang dan gemuk yang dibelitkan di lehernya, kemudian ular itu akan berbicara kepada dirinya pada hari kiamat: 'Aku adalah harta yang telah kamu simpan." testOwner="HR. Bukhari (Hadis no. 1401)" testSubtitle="" />
-                        </li>
-                        <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal testText="Harta yang paling dicintai oleh Allah adalah harta yang paling banyak bermanfaat bagi pemiliknya, dan harta yang paling dicintai oleh Allah adalah zakat dari harta." testOwner="HR. Tirmidzi (Hadis no. 3357)" testSubtitle="" />
-                        </li>
-                        <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal testText="Seseorang berkata kepada Nabi shallallahu 'alaihi wa sallam: 'Wahai Rasulullah, berilah aku nasehat.' Beliau bersabda: 'Janganlah engkau melarang orang memberi sedekah, meskipun dengan setengah kurma. Dan hendaklah engkau takut kepada api neraka, walaupun dengan memberi setengah biji kurma. Dan jika engkau tidak mempunyai sesuatu, maka dengan perkataan yang baik." testOwner="HR. Bukhari (Hadis no. 1417)" testSubtitle="" />
-                        </li>
-                        
-                    </ul>
-                    <div class="swiper-button swiper-button-next"></div>
-                    <div class="swiper-button swiper-button-prev"></div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="progress-widget">
+                                    <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                                        <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                        </svg>
+                                    </div>
+                                    <div class="progress-detail">
+                                        <a href="#" title="Lihat Muzakki Detail">
+                                            <p class="mb-2">Total Transaksi Muzakki</p>
+                                        </a>
+                                        <h4 class="counter" style="visibility: visible;">20</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="progress-widget">
+                                    <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                                        <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                        </svg>
+                                    </div>
+                                    <div class="progress-detail">
+                                        <a href="#" title="Lihat Muzakki Detail">
+                                            <p class="mb-2">Total Transaksi Mustahik</p>
+                                        </a>
+                                        <h4 class="counter" style="visibility: visible;">20</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="progress-widget">
+                                    <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                                        <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                        </svg>
+                                    </div>
+                                    <div class="progress-detail">
+                                        <a href="#" title="Lihat Muzakki Detail">
+                                            <p class="mb-2">Total Transaksi Muzakki</p>
+                                        </a>
+                                        <h4 class="counter" style="visibility: visible;">20</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="progress-widget">
+                                    <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                                        <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                        </svg>
+                                    </div>
+                                    <div class="progress-detail">
+                                        <a href="#" title="Lihat Muzakki Detail">
+                                            <p class="mb-2">Total Transaksi Muzakki</p>
+                                        </a>
+                                        <h4 class="counter" style="visibility: visible;">20</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        
+            
         </div>
     </div>
 </x-app-layout>

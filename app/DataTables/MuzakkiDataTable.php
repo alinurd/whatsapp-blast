@@ -61,7 +61,7 @@ class MuzakkiDataTable extends DataTable
                 $q->where('country', 'like', "%{$keyword}%");
             });
         })
-        ->addColumn('action', 'kategori.action')
+        ->addColumn('action', 'muzakki.action')
         ->rawColumns(['action','status']);
     }
 
