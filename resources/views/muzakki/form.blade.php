@@ -44,8 +44,8 @@
                            <th>Nama</th>
                            <th>Kategori</th>
                            <th>Type Pembayaran</th>
-                           <th>Jumlah</th>
                            <th>Satuan</th>
+                           <th>Jumlah</th>
                         </thead>
                         <tbody>
                            <tr>
