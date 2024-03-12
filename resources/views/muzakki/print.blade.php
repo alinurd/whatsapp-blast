@@ -83,18 +83,19 @@
       var totalKg = 0;
 
       @foreach($data['detail'] as $item)
-      @if($item['satuan'] === 'Liter')
-      totalBeras += parseFloat({{ $item['jumlah_bayar'] }});
-      @elseif($item['satuan'] === 'Rupiah')
-      totalUang += parseFloat({{ $item['jumlah_bayar'] }});
-      @elseif($item['satuan'] === 'Kg')
-      totalKg += parseFloat({{ $item['jumlah_bayar'] }});
-      @endif
-      @endforeach
+    @if($item['satuan'] === 'Liter')
+        totalBeras += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
+    @elseif($item['satuan'] === 'Rupiah')
+        totalUang += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
+    @elseif($item['satuan'] === 'Kg')
+        totalKg += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
+    @endif
+@endforeach
+
 
       document.getElementById('ttlLiter').textContent = totalBeras.toLocaleString();
       document.getElementById('ttlRupiah').textContent = formatRupiah(totalUang);
-      document.getElementById('ttlKg').textContent = formatRupiah(totalKg);
+      document.getElementById('ttlKg').textContent = totalKg.toLocaleString();
    });
 
    function formatRupiah(angka) {
