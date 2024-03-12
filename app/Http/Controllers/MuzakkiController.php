@@ -53,9 +53,11 @@ class MuzakkiController extends Controller
           ]);
     
           $lastId = MuzakkiHeader::orderByDesc('id')->first();
-          $x=$lastId->id;
           if(!$lastId){
-            $x=0;
+              $x=0;
+            }else{
+              $x=$lastId->id;
+
           }
           $MuzakkiHeader = MuzakkiHeader::create([
             'user_id' => $validatedData['dibayarkan'],
