@@ -106,7 +106,7 @@
     @if(Auth::user()->role ==2 || Auth::user()->role ==1 )
 
     <li class="nav-item">
-        <a class="nav-link {{activeRoute(route('muzakki.index'))}}" href="{{route('muzakki.index')}}">
+        <a class="nav-link {{activeRoute(route('muzakkireport.index'))}}" href="{{route('muzakkireport.index')}}">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M18.8088 9.021C18.3573 9.021 17.7592 9.011 17.0146 9.011C15.1987 9.011 13.7055 7.508 13.7055 5.675V2.459C13.7055 2.206 13.5036 2 13.253 2H7.96363C5.49517 2 3.5 4.026 3.5 6.509V17.284C3.5 19.889 5.59022 22 8.16958 22H16.0463C18.5058 22 20.5 19.987 20.5 17.502V9.471C20.5 9.217 20.299 9.012 20.0475 9.013C19.6247 9.016 19.1177 9.021 18.8088 9.021Z" fill="currentColor"></path>

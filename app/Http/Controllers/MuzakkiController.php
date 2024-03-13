@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DataTables\MuzakkiDataTable;
+use App\Exports\Report;
 use App\Models\Muzakki;
 use App\Helpers\AuthHelper;
 use Spatie\Permission\Models\Role;
@@ -11,6 +12,8 @@ use App\Http\Requests\UserRequest;
 use App\Models\Kategori;
 use App\Models\MuzakkiHeader;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
+
 class MuzakkiController extends Controller
 {
     /**
@@ -39,14 +42,8 @@ class MuzakkiController extends Controller
  
         return view('muzakki.form', compact('agt','ktg'));
     }
-    public function muzakkireport()
-    {
-        
-        $data['detail'] = Muzakki::with('user','kategori' )->get();
-        $data['header'] = MuzakkiHeader::with('user' )->get();
  
-        return view('muzakki.report', compact('data'));
-    }
+ 
     public function store(Request $request)
     {
         $validatedData = $request->validate([

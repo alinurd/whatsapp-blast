@@ -15,9 +15,10 @@
                   </a>
                </div>
                <div class="table-responsive">
-                  <table class="table">
+               <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
                      <thead>
                         <tr>
+                            <th>No</th>
                             <th>Code Invoice</th>
                            <th>dibayarkan oleh</th>
                            <th>Nama</th>
@@ -28,10 +29,12 @@
                         </tr>
                      </thead>
                      <tbody> 
+                        <?php $no=1?>
                         @foreach($data['detail'] as $detail)
                         @foreach($data['header'] as $header)
                         @if($header->code == $detail->code)
                          <tr>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $detail->code }}</td>
                            <td>{{ $header->user->nama_lengkap }}</td>
                            <td>{{ $detail->user->nama_lengkap }}</td>
@@ -51,4 +54,4 @@
       </div>
    </div>
 </x-app-layout>  
-
+ 

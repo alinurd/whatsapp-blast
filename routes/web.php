@@ -1,6 +1,10 @@
 <?php
 
 // Controllers
+
+use App\Exports\ExportMuzakki;
+use App\Exports\MustahikReport;
+use App\Exports\Report;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
@@ -68,12 +72,16 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('invoice/{code}', [MuzakkiController::class, 'invoice'])->name('invoice');
     Route::post('muzakkiUserStore', [MuzakkiController::class, 'muzakkiUserStore'])->name('muzakkiUserStore');
-    Route::get('muzakkireport', [MuzakkiController::class, 'muzakkireport'])->name('muzakkireport');
+    // Route::get('muzakkireport', [MuzakkiController::class, 'muzakkireport'])->name('muzakkireport');
     Route::get('muzakkiCreate', [MuzakkiController::class, 'muzakkiCreate'])->name('muzakkiCreate');
     Route::resource('muzakki', MuzakkiController::class);  
 
 
     Route::resource('mustahik', MustahikController::class);  
+
+    Route::get('report/muzakkireport', [MustahikReport::class, 'muzakkireport'])->name('muzakkireport');
+    Route::get('report/muzakki', [MustahikReport::class, 'index'])->name('muzakkireport.index');
+
 });
    
 //App Details Page => 'Dashboard'], function() { 
