@@ -12,7 +12,7 @@
       <div class="card">
          <div class="card-header d-flex justify-content-between">
             <div class="header-title">
-               <h4 class="card-title">{{$id !== null ? 'Update' : 'New' }} Muzakki</h4>
+               <h4 class="card-title">{{$id !== null ? 'Update' : 'New' }} Muzakki</h4> 
             </div>
             <div class="card-action">
                <a href="#" class="mt-lg-0 mt-md-0 mt-3 btn btn-secondary btn-icon" data-bs-toggle="tooltip" data-modal-form="form" data-icon="person_add" data-size="small" data--href="{{ route('muzakkiCreate') }}" data-app-title="Add user muzakki" data-placement="top" title="New Muzakki">
@@ -57,7 +57,6 @@
                               </td>
                               <td>
                                  {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Select Kategri', 'id' => 'dibayarkan']) }}
-
                               </td>
                               <td>
                                  <input type="radio" name="type[0]" value="Beras" id="Beras0">
@@ -75,11 +74,10 @@
                         <hr>
                         <tr>
                         <td colspan="4" rowspan="2" class="text-end"><strong>Total:</strong></td>
-<td class="text-star" colspan="2"><span id="ttlLiter">0</span> <i>Liter</i></td>
-</tr>
-<td class="text-star" colspan="2"><span id="ttlRupiah">0</span> <i>Rupiah</i></td>
-</tr>
-
+                        <td class="text-star" colspan="2"><span id="ttlLiter">0</span> <i>Liter</i></td>
+                        </tr>
+                        <td class="text-star" colspan="2"><span id="ttlRupiah">0</span> <i>Rupiah</i></td>
+                        </tr>
                      </table>
                   </div>
                   <button type="submit" class="btn btn-primary">{{$id !== null ? 'Update' : 'Add' }} Muzakki</button>
