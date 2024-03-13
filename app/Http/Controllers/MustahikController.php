@@ -68,7 +68,9 @@ class MustahikController extends Controller
         // Create a new mustahik instance
         $mustahik = new Mustahik();
 
+
         $kategoriId = $request->input('kategori')[0]; // Menggunakan [0] karena name "kategori" di set sebagai array
+
 
         // Fill the mustahik data from the request
         $mustahik->nama_lengkap = $request->nama_lengkap;
@@ -81,7 +83,12 @@ class MustahikController extends Controller
         $mustahik->jumlah_pendapatan = $request->jml_pendapatan;
         $mustahik->jumlah_bansos_diterima = $request->jml_bansos;
         $mustahik->jumlah_anak_dalam_tanggungan = $request->jml_anak;
-        $mustahik->status_tempat_tinggal = $request->status_tinggal;
+        // $mustahik->status_tempat_tinggal = $request->status_tinggal;
+        $status_tempat_tinggal = $request->status_tempat_tinggal;
+if (strlen($status_tempat_tinggal) > 255) {
+    $status_tempat_tinggal = substr($status_tempat_tinggal, 0, 255);
+}
+
         $mustahik->pengeluaran_kontrakan = $request->pengeluaran_kontrakan;
         $mustahik->jumlah_hutang = $request->jml_hutang;
         $mustahik->keperluan_hutang = $request->keperluan_hutang;

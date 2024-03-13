@@ -7,7 +7,7 @@
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <div>
                      <h1>Hello {{ auth()->user()->nama_lengkap}}!</h1>
-                         <p>We are on a mission to help developers like you build successful projects for FREE.</p>
+                         <p>We are on a mission to help developers like you build successful projects</p>
                     </div>
                     <!-- <div>
                         <a href="" class="btn btn-link btn-soft-light">

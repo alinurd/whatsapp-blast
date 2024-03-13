@@ -33,11 +33,10 @@
                      <label class="form-label" for="fname">Di bayarkan oleh <span class="text-danger">*</span></label>
                      {{ Form::select('dibayarkan', $agt, "", ['class' => 'form-control', 'placeholder' => 'Select User Role', 'id' => 'dibayarkan']) }}
                   </div>
-                  <div cs="form-group col-md-2">
+                  <div class="form-group col-md-2">
                   </div>
                </div>
                <div class="row">
-                  <span class="btn btn-info btn-sm float-right" id="addRow">Tambah Row</span>
                   <div class="form-group col-md-12">
                      <table class="table" id="muzakkiTable">
                         <thead>
@@ -45,40 +44,53 @@
                            <th>Nama</th>
                            <th>Kategori</th>
                            <th>Type Pembayaran</th>
-                           <th>Jumlah</th>
                            <th>Satuan</th>
+                           <th>Jumlah</th>
                         </thead>
                         <tbody>
                            <tr>
                               <td>1</td>
                               <td>
-                                 {{ Form::select('user[]', $agt, "", ['class' => 'form-control', 'placeholder' => 'Select User ', 'id' => 'dibayarkan']) }}
-
+                                 {{ Form::select('user[]', $agt, "", ['class' => 'form-control',  'id' => 'user0']) }}
                               </td>
                               <td>
+
                                  {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Select Kategri', 'id' => 'dibayarkan']) }}
+
                               </td>
                               <td>
                                  <input type="radio" name="type[0]" value="Beras" id="Beras0">
                                  <label for="Beras0">Beras</label>
                                  <input type="radio" name="type[0]" value="Uang" id="Uang0">
                                  <label for="Uang0">Uang</label>
+                                 <input type="radio" name="type[0]" value="Transfer" id="Transfer0">
+                                 <label for="Transfer0">Transfer</label>
                               </td>
                               <td>
-                                 <input type="number"  name="jumlah[]" id="jumlah0" class="form-control" disabled required>
+                                 <select name="satuan[0]" id="satuan0" class="form-control">
+                                    <option value="Kg">Kg</option>
+                                    <option value="Liter">Liter</option>
+                                    <option value="Rupiah">Rupiah</option>
+                                 </select>
                               </td>
-                              <td id="satuan0"></td>
+                              <td>
+                                 <input type="text" name="jumlah[]" id="jumlah0" class="form-control">
+                              </td>
                            </tr>
-
                         </tbody>
-                        <hr>
                         <tr>
-                        <td colspan="4" rowspan="2" class="text-end"><strong>Total:</strong></td>
-                        <td class="text-star" colspan="2"><span id="ttlLiter">0</span> <i>Liter</i></td>
+
+                           <td colspan="4" rowspan="3" class="text-end"><strong>Total:</strong></td>
+                           <td class="text-star" colspan="2"><span id="ttlLiter">0</span> <i>Liter</i></td>
+                        </tr>
+                        <td class="text-star" colspan="2"><span id="ttlKg">0</span> <i>Kilo Gram</i></td>
+                        </tr>
+
                         </tr>
                         <td class="text-star" colspan="2"><span id="ttlRupiah">0</span> <i>Rupiah</i></td>
                         </tr>
                      </table>
+                     <span class="btn btn-info btn-sm float-end" id="addRow">Tambah Row</span>
                   </div>
                   <button type="submit" class="btn btn-primary">{{$id !== null ? 'Update' : 'Add' }} Muzakki</button>
                </div>
@@ -89,146 +101,75 @@
       {!! Form::close() !!}
    </div>
 </x-app-layout>
+
+
 <script>
-   var agt = <?php echo json_encode($agt); ?>;
-   var ktg = <?php echo json_encode($ktg); ?>;
-
-   function generateOptions(data) {
-      let options = '';
-      Object.entries(data).forEach(([key, value]) => {
-         options += `<option value="${key}">${value}</option>`;
-      });
-      return options;
-   }
-
    document.getElementById('addRow').addEventListener('click', function() {
-   var tableBody = document.querySelector('#muzakkiTable tbody');
-   var rowCount = tableBody.rows.length;
-   var newRow = tableBody.insertRow(rowCount);
+      var tableBody = document.querySelector('#muzakkiTable tbody');
+      var rowCount = tableBody.rows.length;
+      var newRow = tableBody.insertRow(rowCount);
 
-   var cellCount = tableBody.rows[0].cells.length;
-   for (var i = 0; i < cellCount; i++) {
-      var newCell = newRow.insertCell(i);
-      if (i == 0) {
-         newCell.textContent = rowCount + 1;
-      } else if (i == 2) {
-         var select = document.createElement('select');
-         select.name = 'kategori[]';
-         select.className = 'form-control';
-         select.placeholder = 'Select User Role';
-         select.innerHTML = generateOptions(ktg);
-         newCell.appendChild(select);
-      } else if (i == 3) {
-         var radio1 = document.createElement('input');
-         radio1.type = 'radio';
-         radio1.name = 'type[' + rowCount + ']';
-         radio1.value = 'Beras';
-         radio1.id = 'Beras' + rowCount;
-         var label1 = document.createElement('label');
-         label1.setAttribute('for', 'Beras' + rowCount);
-         label1.textContent = 'Beras';
-         var radio2 = document.createElement('input');
-         radio2.type = 'radio';
-         radio2.name = 'type[' + rowCount + ']';
-         radio2.value = 'Uang';
-         radio2.id = 'Uang' + rowCount;
-         var label2 = document.createElement('label');
-         label2.setAttribute('for', 'Uang' + rowCount);
-         label2.textContent = 'Uang';
-         newCell.appendChild(radio1);
-         newCell.appendChild(label1);
-         newCell.appendChild(radio2);
-         newCell.appendChild(label2);
-      } else if (i == 4) {
-         var input = document.createElement('input');
-      input.type = 'number';
-      input.name = 'jumlah[]';
-      input.className = 'form-control';
-      input.required = true;
-      input.disabled = true; // Nonaktifkan input field
-      input.id = 'jumlah' + rowCount; // Nonaktifkan input field
-      input.addEventListener('input', function() {
-         input.disabled = false; // Aktifkan kembali input field ketika user mulai mengetik
+      var cellCount = tableBody.rows[0].cells.length;
+      for (var i = 0; i < cellCount; i++) {
+         var newCell = newRow.insertCell(i);
+         if (i == 0) {
+            newCell.textContent = rowCount + 1;
+         } else if (i == 2) {
+            newCell.innerHTML = '{!! Form::select('kategori[]', $ktg, "", ['class' => 'form-control']) !!}';
+         } else if (i == 3) {
+            newCell.innerHTML = '<input type="radio" name="type[' + rowCount + ']" value="Beras" id="Beras' + rowCount + '"><label for="Beras' + rowCount + '">Beras</label><input type="radio" name="type[' + rowCount + ']" value="Uang" id="Uang' + rowCount + '"><label for="Uang' + rowCount + '">Uang</label><input type="radio" name="type[' + rowCount + ']" value="Transfer" id="Transfer' + rowCount + '"><label for="Transfer' + rowCount + '">Transfer</label>';
+         } else if (i == 4) {
+            newCell.innerHTML = '<select name="satuan[' + rowCount + ']" id="satuan' + rowCount + '" class="form-control"><option value="Kg">Kg</option><option value="Liter">Liter</option><option value="Rupiah">Rupiah</option></select>';
+         } else if (i == 5) {
+            newCell.innerHTML = '<input type="text" name="jumlah[]" id="jumlah' + rowCount + '" class="form-control">';
+         } else {
+            newCell.innerHTML = '{!! Form::select('user[]', $agt, "", ['class' => 'form-control']) !!}';
+         }
+      }
+
+      // Tambahkan event listener untuk input jumlah pada baris yang baru ditambahkan
+      newRow.querySelector('input[name^="jumlah"]').addEventListener('input', function() {
          calculateTotal();
       });
-      newCell.appendChild(input);
-      } else if (i == 5) {
-         newCell.textContent = '';
-         newCell.id = 'satuan' + rowCount;
-      } else {
-         var selectUser = document.createElement('select');
-         selectUser.name = 'user[]';
-         selectUser.className = 'form-control';
-         selectUser.placeholder = 'Select User Role';
-         selectUser.innerHTML = generateOptions(agt);
-         newCell.appendChild(selectUser);
-      }
-   }
-
-   document.getElementById('Beras' + rowCount).addEventListener('change', function() {
-
-      if (this.checked) {
-         document.getElementById('satuan' + rowCount).textContent = 'Liter';
-         document.getElementById('jumlah' + rowCount).disabled = false;
-      }
-   });
-   
-   document.getElementById('Uang' + rowCount).addEventListener('change', function() {
-      if (this.checked) {
-         document.getElementById('jumlah' + rowCount).disabled = false;
-         document.getElementById('satuan' + rowCount).textContent = 'Rupiah';
-      }
-   });
-});
-
-document.getElementById('Beras0').addEventListener('change', function() {
-   if (this.checked) {
-         document.getElementById('jumlah0').disabled = false;
-         document.getElementById('satuan0').textContent = 'Liter';
-      }
-   });
-   
-   document.getElementById('Uang0').addEventListener('change', function() {
-      if (this.checked) {
-         document.getElementById('jumlah0').disabled = false;
-         document.getElementById('satuan0').textContent = 'Rupiah';
-      }
    });
 
-// Event listener untuk menghitung total ketika halaman dimuat
-document.addEventListener('DOMContentLoaded', function() {
-   calculateTotal();
-});
-document.getElementById('jumlah0').addEventListener('change', function() {
-    calculateTotal();
-});
+   // Event listener untuk menghitung total ketika halaman dimuat
+   document.addEventListener('DOMContentLoaded', function() {
+      calculateTotal();
+   });
 
-// Fungsi untuk menghitung total
-function calculateTotal() {
-   var totalLiter = 0;
-   var totalRupiah = 0;
+   // Fungsi untuk menghitung total
+   function calculateTotal() {
+    var totalLiter = 0;
+    var totalRupiah = 0;
+    var totalKg = 0;
 
-   var tableBody = document.querySelector('#muzakkiTable tbody');
-   var rows = tableBody.rows;
-   for (var i = 0; i < rows.length; i++) {
-      var type = document.querySelector('input[name="type[' + i + ']"]:checked');
-      if (type) {
-         type = type.value;
-      } else {
-         continue; // Skip jika tidak ada radio button yang terpilih
-      }
-      var jumlah = parseInt(rows[i].querySelector('input[name="jumlah[]"]').value);
+    var tableBody = document.querySelector('#muzakkiTable tbody');
+    var rows = tableBody.rows;
+    for (var i = 0; i < rows.length; i++) {
+      var satuanSelect = rows[i].querySelector('select[name="satuan['+i+']"]');
+        var jumlahInput = rows[i].querySelector('input[name="jumlah[]"]');
+        var type = satuanSelect.value;
+        var jumlah = parseFloat(jumlahInput.value.replace(',', '.')); // Replace koma dengan titik
 
-      if (type === 'Beras') {
-         totalLiter += jumlah;
-      } else if (type === 'Uang') {
-         totalRupiah += jumlah;
-      }
-   }
+        if (isNaN(jumlah)) {
+            jumlah = 0;
+        }
 
-   // Update total liter dan total rupiah di tabel
-   document.getElementById('ttlLiter').textContent = totalLiter;
-   document.getElementById('ttlRupiah').textContent = totalRupiah;
+        if (type === 'Liter') {
+            totalLiter += jumlah;
+        } else if (type === 'Rupiah') {
+            totalRupiah += jumlah;
+        } else if (type === 'Kg') {
+            totalKg += jumlah;
+        }
+    }
+
+    // Update total liter dan total rupiah di tabel
+    document.getElementById('ttlLiter').textContent = totalLiter.toLocaleString();
+    document.getElementById('ttlKg').textContent = totalKg.toLocaleString();
+    document.getElementById('ttlRupiah').textContent = totalRupiah.toLocaleString();
 }
 
 </script>
+

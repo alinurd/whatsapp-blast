@@ -10,6 +10,7 @@ return [
     'update_form' => ':form has been updated successfully',
     'delete_form' => ':form has been deleted successfully',
     'delete_alert' => 'Are you sure you want to delete this :form?',
+    'invoice_alert' => 'Are you sure you want to print invoice this :form?',
     'add_button_form' => 'Add New :form',
     'select_name' => 'Select :select',
     'status' => 'Status',

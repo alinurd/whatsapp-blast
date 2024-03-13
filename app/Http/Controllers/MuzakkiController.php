@@ -48,15 +48,20 @@ class MuzakkiController extends Controller
             'kategori' => 'required|array',
             'kategori.*' => 'exists:kategori,id',
             'type' => 'required|array',
-            'type.*' => 'in:Beras,Uang',
+            'satuan' => 'required|array',
             'jumlah' => 'required|array',
-            'jumlah.*' => 'numeric',
-         ]);
+          ]);
     
-         
-         $MuzakkiHeader = MuzakkiHeader::create([
+          $lastId = MuzakkiHeader::orderByDesc('id')->first();
+          if(!$lastId){
+              $x=0;
+            }else{
+              $x=$lastId->id;
+
+          }
+          $MuzakkiHeader = MuzakkiHeader::create([
             'user_id' => $validatedData['dibayarkan'],
-            'code' => $this->generateCode("MZK"), 
+            'code' => $this->generateCodeById("MZK", $x+1), 
         ]);
     
         foreach ($validatedData['user'] as $key => $user) {
@@ -66,10 +71,17 @@ class MuzakkiController extends Controller
                 'jumlah_bayar' => $validatedData['jumlah'][$key],
                 'kategori_id' => $validatedData['kategori'][$key],
                 'type' => $validatedData['type'][$key],
+                'satuan' => $validatedData['satuan'][$key],
             ]);
         }
+        return redirect()->route('invoice', ['code' => $MuzakkiHeader->code]);
     }
-    
+    public function invoice($code){
+        $data['detail'] = Muzakki::where('code', $code)->with('user','kategori' )->get();
+        $data['header'] = MuzakkiHeader::where('code', $code)->with('user' )->get();
+        return view('muzakki.print', compact('data'));
+    }
+
     public function muzakkiCreate()
     {
         
@@ -105,5 +117,24 @@ class MuzakkiController extends Controller
         // return view('muzakki.form', compact('agt'));
             }
     
-    
+            public function destroy($id)
+            {
+                // dd($id);
+                $kategori = Muzakki::findOrFail($id);
+                $status = 'errors';
+                $message = __('global-message.delete_form', ['form' => __('muzakki')]);
+        
+                if ($kategori != '') {
+                    $kategori->delete();
+                    $status = 'success';
+                    $message = __('global-message.delete_form', ['form' => __('muzakki')]);
+                }
+        
+                if (request()->ajax()) {
+                    return response()->json(['status' => true, 'message' => $message, 'datatable_reload' => 'dataTable_wrapper']);
+                }
+        
+                return redirect()->back()->with($status, $message);
+        
+            }
 }

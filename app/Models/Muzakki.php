@@ -22,10 +22,15 @@ class Muzakki extends Model
         'jumlah_bayar',
         'kategori_id',
         'type',
+        'satuan',
     ];
     public function muzakkiHeader()
     {
         return $this->belongsTo(MuzakkiHeader::class, 'code');
+    }
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
     public function user()
     {
