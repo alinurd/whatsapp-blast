@@ -39,6 +39,14 @@ class MuzakkiController extends Controller
  
         return view('muzakki.form', compact('agt','ktg'));
     }
+    public function muzakkireport()
+    {
+        
+        $data['detail'] = Muzakki::with('user','kategori' )->get();
+        $data['header'] = MuzakkiHeader::with('user' )->get();
+ 
+        return view('muzakki.report', compact('data'));
+    }
     public function store(Request $request)
     {
         $validatedData = $request->validate([
