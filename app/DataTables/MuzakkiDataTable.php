@@ -79,8 +79,6 @@ class MuzakkiDataTable extends DataTable
         ->join('muzakki_header', 'muzakki.code', '=', 'muzakki_header.code')
         ->join('users as header_user', 'muzakki_header.user_id', '=', 'header_user.id')
         ->select('muzakki.*', 'muzakki_user.nama_lengkap as user_name', 'kategori.nama_kategori as kategori_name', 'header_user.nama_lengkap As dibayarkan');
-    
-    
 
         return $this->applyScopes($model);
     }

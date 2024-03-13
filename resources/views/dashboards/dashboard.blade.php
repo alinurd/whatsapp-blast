@@ -75,7 +75,7 @@
       </div>
       <div class="col-md-12 col-lg-8">
          <div class="row">
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                <div class="card" data-aos="fade-up" data-aos-delay="800">
                   <div class="card-header d-flex justify-content-between flex-wrap">
                      <div class="header-title">
@@ -119,7 +119,7 @@
                      <div id="d-main" class="d-main"></div>
                   </div>
                </div>
-            </div>
+            </div> -->
             <!-- <div class="col-md-12 col-lg-6">
                <div class="card" data-aos="fade-up" data-aos-delay="1000">
                   <div class="card-header d-flex justify-content-between flex-wrap">
@@ -375,7 +375,7 @@
       </div>
       <div class="col-md-12 col-lg-4">
          <div class="row">
-            <div class="col-md-6 col-lg-12">
+            <!-- <div class="col-md-6 col-lg-12">
                <div class="card credit-card-widget" data-aos="fade-up" data-aos-delay="900">
                   <div class="card-header pb-4 border-0">
                      <div class="p-4 primary-gradient-card rounded border border-white">
@@ -468,7 +468,7 @@
                      </div>
                   </div>
                </div> -->
-            </div>
+            </div> -->
             <!-- <div class="col-md-12 col-lg-12">
                <div class="card" data-aos="fade-up" data-aos-delay="400">
                   <div class="card-header d-flex justify-content-between flex-wrap">
