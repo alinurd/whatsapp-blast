@@ -20,10 +20,10 @@
                 <img src="{{asset('images/dashboard/top-header3.png')}}" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
                 <img src="{{asset('images/dashboard/top-header4.png')}}" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
                 <img src="{{asset('images/dashboard/top-header5.png')}}" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
-            </div>
+            </div> 
         </div>
         <div class="card m-2">
-            <div class="card-header">
+            <!-- <div class="card-header">
                 <center>
                     <h6 for="thn">tampilkan berdasarkan Tahun</h6>
                 </center>
@@ -40,7 +40,7 @@
                         <div class="btn btn-info" style="width: 200px;">Tampilkan data</div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3">
