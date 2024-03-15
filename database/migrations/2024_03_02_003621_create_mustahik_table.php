@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('mustahik', function (Blueprint $table) {
             $table->id(); 
+            $table->string('code')->unique(); 
             $table->date('tanggal');
             $table->foreignId('kategori_id')->constrained('kategori');
             $table->string('jumlah_uang_diterima')->nullable(); 
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->string('status_perkawinan')->nullable();
             $table->string('pekerjaan')->nullable();
             $table->string('jumlah_pendapatan')->nullable();
-            $table->string('jumlah_bansos_diterima'->nullable();
+            $table->string('jumlah_bansos_diterima')->nullable();
             $table->integer('jumlah_anak_dalam_tanggungan')->nullable();
             $table->string('status_tempat_tinggal')->nullable();
             $table->string('pengeluaran_kontrakan')->nullable();
