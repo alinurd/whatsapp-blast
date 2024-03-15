@@ -46,7 +46,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Saldo Uang</p>
-                              <h4 class="counter">{{ $totalSaldoUang }}</h4>
+                              <h4 class="counter" style="visibility: visible;">{{ number_format($totalSaldoUang) }} Rupiah</h4>
                            </div>
                         </div>
                      </div>

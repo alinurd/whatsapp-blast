@@ -94,7 +94,7 @@
                                         <a href="#" title="Lihat Muzakki Detail">
                                             <p class="mb-2">Total Saldo Uang</p>
                                         </a>
-                                        <h4 class="counter" style="visibility: visible;">{{ $totalSaldoUang }}</h4>
+                                        <h4 class="counter" style="visibility: visible;">{{ number_format($totalSaldoUang) }} Rupiah</h4>
                                     </div>
                                 </div>
                             </div>
