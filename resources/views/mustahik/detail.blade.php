@@ -6,22 +6,19 @@
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
                         <h4 class="card-title">Detail Mustahik</h4>
-                        <h5 class="mb-3">{{ $mustahik->nama_lengkap }}</h5>
+                        <h5>{{ $mustahik->nama_lengkap }} #MSQ-w1Sf1N-2024-0003</h5>
+                        <i style="font-size: 11px;">Jakarta, <?= $mustahik->tanggal; ?></i>
                     </div>
                     <div class="card-action">
-                            <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>
+                        <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>
                     </div> 
                 </div>  
                 <br>
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-md-4">
-                             <div class="mt-2">
-                                <h6 class="mb-1">Tanggal:</h6>
-                                <p>{{ $mustahik->tanggal }}</p>
-                            </div>
                             <div class="mt-2">
-                                <h6 class="mb-1">Nama Lengkap:</h6>
+                                <h6 class="mb-1">Nama:</h6>
                                 <p>{{ $mustahik->nama_lengkap }}</p>
                             </div>  
                             <div class="mt-2">
@@ -55,7 +52,7 @@
                                 <p>{{ $mustahik->jumlah_pendapatan }}</p>
                             </div>
                             <div class="mt-2">
-                                <h6 class="mb-1">Jml Anak dlm Tanggungan:</h6>
+                                <h6 class="mb-1">Jumlah Anak dalam Tanggungan:</h6>
                                 <p>{{ $mustahik->jumlah_anak_dalam_tanggungan }}</p>
                             </div>
                             <div class="mt-2">
@@ -67,9 +64,11 @@
                                 <p>{{ $mustahik->status_tempat_tinggal }}</p>
                             </div>
                             <div class="mt-2">
-                                <h6 class="mb-1">Pengeluaran Kontrakan:</h6>
+                                <h6 class="mb-1">Pengeluaran Listrik & Kontrakan:</h6>
                                 <p>{{ $mustahik->pengeluaran_kontrakan }}</p>
                             </div>
+                        </div>  
+                        <div class="form-group col-md-4">
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Hutang:</h6>
                                 <p>{{ $mustahik->jumlah_hutang }}</p>
@@ -78,19 +77,25 @@
                                 <h6 class="mb-1">Keperluan Hutang:</h6>
                                 <p>{{ $mustahik->keperluan_hutang }}</p>
                             </div>
-                        </div>  
-                        <div class="form-group col-md-4">
                             <div class="mt-2">
                                 <h6 class="mb-1">Kategori Mustahik:</h6>
                                 <p>{{ $mustahik->kategori_mustahik }}</p>
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Kategori Zakat Diterima:</h6>
-                                <p>{{ $mustahik->kategori_id }}</p>
+                                @if(isset($mustahik->kategori))
+                                    <p>{{ $mustahik->kategori->nama_kategori }}</p>
+                                @else
+                                    <p>N/A</p>
+                                @endif
                             </div>
                             <div class="mt-2">
-                                <h6 class="mb-1">Jumlah Diterima:</h6>
-                                <p>{{ $mustahik->jumlah_diterima }}</p>
+                                <h6 class="mb-1">Jumlah Uang Diterima:</h6>
+                                <p>{{ $mustahik->jumlah_uang_diterima }}</p>
+                            </div>
+                            <div class="mt-2">
+                                <h6 class="mb-1">Jumlah Beras Diterima:</h6>
+                                <p>{{ $mustahik->jumlah_beras_diterima }}</p>
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Keterangan:</h6>

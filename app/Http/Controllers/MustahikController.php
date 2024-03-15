@@ -42,7 +42,7 @@ class MustahikController extends Controller
     public function store(Request $request)
     { 
         // Validate the request data
-        $request->validate([ 
+        $request->validate([  
             'nama_lengkap' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
             'no_phone' => 'required|string|max:255',
@@ -61,8 +61,9 @@ class MustahikController extends Controller
             'tgl_terima_zakat' => 'required|date',
             'kategori' => 'required|array', // Tambahkan validasi untuk input 'kategori'
             'kategori.*' => 'exists:kategori,id', // Tambahkan validasi untuk setiap elemen array 'kategori'
-            'jml_diterima' => 'required|string|max:255',
-            'keterangan' => 'required|string|max:255',
+            'jml_uang' => 'required|string|max:255',
+            'jml_beras' => 'required|string|max:255', 
+            'keterangan' => 'max:255',
         ]); 
 
         // Create a new mustahik instance
@@ -83,11 +84,11 @@ class MustahikController extends Controller
         $mustahik->jumlah_pendapatan = $request->jml_pendapatan;
         $mustahik->jumlah_bansos_diterima = $request->jml_bansos;
         $mustahik->jumlah_anak_dalam_tanggungan = $request->jml_anak;
-        // $mustahik->status_tempat_tinggal = $request->status_tinggal;
-        $status_tempat_tinggal = $request->status_tempat_tinggal;
-if (strlen($status_tempat_tinggal) > 255) {
-    $status_tempat_tinggal = substr($status_tempat_tinggal, 0, 255);
-}
+        $mustahik->status_tempat_tinggal = $request->status_tinggal;
+        // $status_tempat_tinggal = $request->status_tempat_tinggal;
+        // if (strlen($status_tempat_tinggal) > 255) {
+        //     $status_tempat_tinggal = substr($status_tempat_tinggal, 0, 255);
+        // }
 
         $mustahik->pengeluaran_kontrakan = $request->pengeluaran_kontrakan;
         $mustahik->jumlah_hutang = $request->jml_hutang;
@@ -95,7 +96,8 @@ if (strlen($status_tempat_tinggal) > 255) {
         $mustahik->kategori_mustahik = $request->kategori_mustahik;
         $mustahik->tanggal = $request->tgl_terima_zakat;
         $mustahik->kategori_id = $kategoriId;
-        $mustahik->jumlah_diterima = $request->jml_diterima;
+        $mustahik->jumlah_uang_diterima = $request->jml_uang;
+        $mustahik->jumlah_beras_diterima = $request->jml_beras;
         $mustahik->keterangan = $request->keterangan; 
 
         // Save the mustahik

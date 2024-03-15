@@ -5,7 +5,6 @@
             <div class="d-slider1 overflow-hidden ">
                <ul  class="swiper-wrapper list-inline m-0 p-0 mb-2">
                   <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
-                     
                      <div class="card-body">
                         <div class="progress-widget">
                            <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
@@ -17,7 +16,7 @@
                               <a  href="{{route('muzakki.index')}}" title="Lihat Muzakki Detail">
                               <p  class="mb-2">Total Transaksi Muzakki</p>
                            </a>
-                              <h4 class="counter" style="visibility: visible;">20</h4>
+                           <h4 class="counter" style="visibility: visible;">{{ $Transactionsmuzakki }}</h4>
                            </div>
                         </div>
                      </div>
@@ -32,7 +31,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Transaksi Mustahik</p>
-                              <h4 class="counter">30</h4>
+                              <h4 class="counter">{{ $Transactionsmustahik }}</h4>
                            </div>
                         </div>
                      </div>
@@ -47,7 +46,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Saldo Uang</p>
-                              <h4 class="counter">$375K</h4>
+                              <h4 class="counter">{{ $totalSaldoUang }}</h4>
                            </div>
                         </div>
                      </div>
@@ -62,7 +61,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Saldo Beras</p>
-                              <h4 class="counter">200L</h4>
+                              <h4 class="counter">{{ $totalSaldoBeras }}</h4>
                            </div>
                         </div>
                      </div>
