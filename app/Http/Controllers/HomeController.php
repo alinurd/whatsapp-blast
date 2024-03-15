@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Muzakki;
 use App\Models\Mustahik;
+use App\Models\MuzakkiHeader;
 
 class HomeController extends Controller
 {
@@ -15,6 +16,7 @@ class HomeController extends Controller
     {
         // Menghitung jumlah transaksi muzakki dan mustahik dari database
         $Transactionsmuzakki = Muzakki::count();
+        $TransactionsmuzakkiH = MuzakkiHeader::count();
         $Transactionsmustahik = Mustahik::count();
 
         // Menghitung jumlah transaksi muzakki dan mustahik dari database
@@ -25,16 +27,35 @@ class HomeController extends Controller
         $totalSaldoUang = $totalTransactionsmuzakki - $totalTransactionsmustahik;
         
         // Menghitung total beras yang masuk dari model Muzakki
-        $totalBerasMuzakki = Muzakki::where('type', 'Beras')->sum('jumlah_bayar');
+        $getMuzakkiKg = Muzakki::where('type', 'Beras')->where('satuan', 'Kg')->get();
+        $totalBerasMuzakkiKg = 0;
+        foreach ($getMuzakkiKg as $q) {
+            $totalBerasMuzakkiKg += (float) str_replace(',', '.', $q->jumlah_bayar);
+        }
 
-        // Menghitung total beras yang diterima dari model Mustahik  
-        $totalBerasMustahik = Mustahik::sum('jumlah_beras_diterima');
+        $getMuzakkiLiter = Muzakki::where('type', 'Beras')->where('satuan', 'Liter')->get();
+        $totalBerasMuzakkiL = 0;
+        foreach ($getMuzakkiLiter as $q) {
+            $totalBerasMuzakkiL += (float) str_replace(',', '.', $q->jumlah_bayar);
+        }
 
-        // Menghitung total saldo beras
-        $totalSaldoBeras = $totalBerasMuzakki - $totalBerasMustahik;
+
+        $getMustahikKg = Mustahik::where('satuan_beras', 'Kg')->get();
+        $totalBerasMustahikKg = 0;
+        foreach ($getMustahikKg as $q) {
+            $totalBerasMustahikKg += (float) str_replace(',', '.', $q->jumlah_beras_diterima);
+        } 
+        $getMustahiL = Mustahik::where('satuan_beras', 'Liter')->get();
+        $totalBerasMustahikL = 0;
+        foreach ($getMustahiL as $q) {
+            $totalBerasMustahikL += (float) str_replace(',', '.', $q->jumlah_beras_diterima);
+        } 
+        
+         $totalSaldoBerasKg = $totalBerasMuzakkiKg - $totalBerasMustahikKg;
+         $totalSaldoBerasL = $totalBerasMuzakkiL - $totalBerasMustahikL;
 
         $assets = ['chart', 'animation'];
-        return view('dashboards.dashboard', compact('assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalSaldoUang', 'totalSaldoBeras'));
+        return view('dashboards.dashboard', compact('assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalSaldoUang', 'totalSaldoBerasKg','totalSaldoBerasL', 'TransactionsmuzakkiH'));
     }
 
     /*
@@ -259,28 +280,47 @@ class HomeController extends Controller
     {
          // Menghitung jumlah transaksi muzakki dan mustahik dari database
          $Transactionsmuzakki = Muzakki::count();
+         $TransactionsmuzakkiH = MuzakkiHeader::count();
          $Transactionsmustahik = Mustahik::count();
  
          // Menghitung jumlah transaksi muzakki dan mustahik dari database
-         $totalTransactionsmuzakki = Muzakki::where('type', 'Uang')->sum('jumlah_bayar');
+         $totalTransactionsmuzakki = Muzakki::where('type', 'Uang' | 'Transfer')->sum('jumlah_bayar');
          $totalTransactionsmustahik = Mustahik::sum('jumlah_uang_diterima');
   
          // Menghitung total saldo uang
          $totalSaldoUang = $totalTransactionsmuzakki - $totalTransactionsmustahik;
          
-         // Menghitung total beras yang masuk dari model Muzakki
-         $totalBerasMuzakki = Muzakki::where('type', 'Beras')->sum('jumlah_bayar');
+         $getMuzakkiKg = Muzakki::where('type', 'Beras')->where('satuan', 'Kg')->get();
+         $totalBerasMuzakkiKg = 0;
+         foreach ($getMuzakkiKg as $q) {
+             $totalBerasMuzakkiKg += (float) str_replace(',', '.', $q->jumlah_bayar);
+         }
  
-         // Menghitung total beras yang diterima dari model Mustahik  
-         $totalBerasMustahik = Mustahik::sum('jumlah_beras_diterima');
+         $getMuzakkiLiter = Muzakki::where('type', 'Beras')->where('satuan', 'Liter')->get();
+         $totalBerasMuzakkiL = 0;
+         foreach ($getMuzakkiLiter as $q) {
+             $totalBerasMuzakkiL += (float) str_replace(',', '.', $q->jumlah_bayar);
+         }
  
-         // Menghitung total saldo beras
-         $totalSaldoBeras = $totalBerasMuzakki - $totalBerasMustahik;
+ 
+         $getMustahikKg = Mustahik::where('satuan_beras', 'Kg')->get();
+         $totalBerasMustahikKg = 0;
+         foreach ($getMustahikKg as $q) {
+             $totalBerasMustahikKg += (float) str_replace(',', '.', $q->jumlah_beras_diterima);
+         } 
+         $getMustahiL = Mustahik::where('satuan_beras', 'Liter')->get();
+         $totalBerasMustahikL = 0;
+         foreach ($getMustahiL as $q) {
+             $totalBerasMustahikL += (float) str_replace(',', '.', $q->jumlah_beras_diterima);
+         } 
+         
+          $totalSaldoBerasKg = $totalBerasMuzakkiKg - $totalBerasMustahikKg;
+          $totalSaldoBerasL = $totalBerasMuzakkiL - $totalBerasMustahikL;
  
          $assets = ['chart', 'animation'];
+         return view('landing-pages.pages.index', compact('assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalSaldoUang', 'totalSaldoBerasKg','totalSaldoBerasL', 'TransactionsmuzakkiH'));
 
-        return view('landing-pages.pages.index', compact('assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalSaldoUang', 'totalSaldoBeras'));
-    }
+     }
     public function landing_blog(Request $request)
     {
         return view('landing-pages.pages.blog');

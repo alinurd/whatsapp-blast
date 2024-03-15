@@ -16,7 +16,7 @@
                               <a  href="{{route('muzakki.index')}}" title="Lihat Muzakki Detail">
                               <p  class="mb-2">Total Transaksi Muzakki</p>
                            </a>
-                           <h4 class="counter" style="visibility: visible;">{{ $Transactionsmuzakki }}</h4>
+                           <h4 class="counter" style="visibility: visible;" title="Invocie:{{ $TransactionsmuzakkiH }} | Muzakki:{{ $Transactionsmuzakki }}">{{ $TransactionsmuzakkiH }}/{{ $Transactionsmuzakki}}</h4>
                            </div>
                         </div>
                      </div>
@@ -61,7 +61,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Saldo Beras</p>
-                              <h4 class="counter">{{ $totalSaldoBeras }}</h4>
+                              <h4 class="counter">{{ $totalSaldoBerasKg }} KG | {{ $totalSaldoBerasL }} Liter</h4>
                            </div>
                         </div>
                      </div>
