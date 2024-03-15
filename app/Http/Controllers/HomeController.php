@@ -18,16 +18,16 @@ class HomeController extends Controller
         $Transactionsmustahik = Mustahik::count();
 
         // Menghitung jumlah transaksi muzakki dan mustahik dari database
-        $totalTransactionsmuzakki = Muzakki::sum('jumlah_bayar');
+        $totalTransactionsmuzakki = Muzakki::where('type', 'Uang')->sum('jumlah_bayar');
         $totalTransactionsmustahik = Mustahik::sum('jumlah_uang_diterima');
  
         // Menghitung total saldo uang
         $totalSaldoUang = $totalTransactionsmuzakki - $totalTransactionsmustahik;
         
         // Menghitung total beras yang masuk dari model Muzakki
-        $totalBerasMuzakki = Muzakki::where('type', 'beras')->sum('jumlah_bayar');
+        $totalBerasMuzakki = Muzakki::where('type', 'Beras')->sum('jumlah_bayar');
 
-        // Menghitung total beras yang diterima dari model Mustahik
+        // Menghitung total beras yang diterima dari model Mustahik  
         $totalBerasMustahik = Mustahik::sum('jumlah_beras_diterima');
 
         // Menghitung total saldo beras
@@ -262,16 +262,16 @@ class HomeController extends Controller
          $Transactionsmustahik = Mustahik::count();
  
          // Menghitung jumlah transaksi muzakki dan mustahik dari database
-         $totalTransactionsmuzakki = Muzakki::sum('jumlah_bayar');
+         $totalTransactionsmuzakki = Muzakki::where('type', 'Uang')->sum('jumlah_bayar');
          $totalTransactionsmustahik = Mustahik::sum('jumlah_uang_diterima');
   
          // Menghitung total saldo uang
          $totalSaldoUang = $totalTransactionsmuzakki - $totalTransactionsmustahik;
          
          // Menghitung total beras yang masuk dari model Muzakki
-         $totalBerasMuzakki = Muzakki::where('type', 'beras')->sum('jumlah_bayar');
+         $totalBerasMuzakki = Muzakki::where('type', 'Beras')->sum('jumlah_bayar');
  
-         // Menghitung total beras yang diterima dari model Mustahik
+         // Menghitung total beras yang diterima dari model Mustahik  
          $totalBerasMustahik = Mustahik::sum('jumlah_beras_diterima');
  
          // Menghitung total saldo beras
