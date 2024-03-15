@@ -64,7 +64,7 @@ class MuzakkiController extends Controller
             'code' => $this->generateCodeById("MZK", $x+1), 
         ]);
     
-        foreach ($validatedData['user'] as $key => $user) {
+        foreach ($validatedData['user'] as $key => $user) { 
             Muzakki::create([
                 'code' =>  $MuzakkiHeader->code, 
                 'user_id' => $user,
@@ -84,8 +84,7 @@ class MuzakkiController extends Controller
 
     public function muzakkiCreate()
     {
-        
-         $view = view('muzakki.form-user')->render();
+        $view = view('muzakki.form-user')->render();
         return response()->json(['data' =>  $view, 'status'=> true]);
     }
     public function muzakkiUserStore(Request $request)

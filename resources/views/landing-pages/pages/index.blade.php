@@ -56,7 +56,7 @@
                                         <a href="#" title="Lihat Muzakki Detail">
                                             <p class="mb-2">Total Transaksi Muzakki</p>
                                         </a>
-                                        <h4 class="counter" style="visibility: visible;">20</h4>
+                                        <h4 class="counter" style="visibility: visible;">{{ $Transactionsmuzakki }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                         <a href="#" title="Lihat Muzakki Detail">
                                             <p class="mb-2">Total Transaksi Mustahik</p>
                                         </a>
-                                        <h4 class="counter" style="visibility: visible;">20</h4>
+                                        <h4 class="counter" style="visibility: visible;">{{ $Transactionsmustahik }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +92,9 @@
                                     </div>
                                     <div class="progress-detail">
                                         <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Total Transaksi Muzakki</p>
+                                            <p class="mb-2">Total Saldo Uang</p>
                                         </a>
-                                        <h4 class="counter" style="visibility: visible;">20</h4>
+                                        <h4 class="counter" style="visibility: visible;">{{ $totalSaldoUang }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -111,9 +111,9 @@
                                     </div>
                                     <div class="progress-detail">
                                         <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Total Transaksi Muzakki</p>
+                                            <p class="mb-2">Total Saldo Beras</p>
                                         </a>
-                                        <h4 class="counter" style="visibility: visible;">20</h4>
+                                        <h4 class="counter" style="visibility: visible;">{{ $totalSaldoBeras }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -121,8 +121,6 @@
                     </div>
                 </div>
             </div>
-        
-            
         </div>
     </div>
 </x-app-layout>

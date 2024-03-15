@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Muzakki;
+use App\Models\Mustahik;
 
 class HomeController extends Controller
 {
@@ -11,8 +13,28 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // Menghitung jumlah transaksi muzakki dan mustahik dari database
+        $Transactionsmuzakki = Muzakki::count();
+        $Transactionsmustahik = Mustahik::count();
+
+        // Menghitung jumlah transaksi muzakki dan mustahik dari database
+        $totalTransactionsmuzakki = Muzakki::sum('jumlah_bayar');
+        $totalTransactionsmustahik = Mustahik::sum('jumlah_uang_diterima');
+ 
+        // Menghitung total saldo uang
+        $totalSaldoUang = $totalTransactionsmuzakki - $totalTransactionsmustahik;
+        
+        // Menghitung total beras yang masuk dari model Muzakki
+        $totalBerasMuzakki = Muzakki::where('type', 'beras')->sum('jumlah_bayar');
+
+        // Menghitung total beras yang diterima dari model Mustahik
+        $totalBerasMustahik = Mustahik::sum('jumlah_beras_diterima');
+
+        // Menghitung total saldo beras
+        $totalSaldoBeras = $totalBerasMuzakki - $totalBerasMustahik;
+
         $assets = ['chart', 'animation'];
-        return view('dashboards.dashboard', compact('assets'));
+        return view('dashboards.dashboard', compact('assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalSaldoUang', 'totalSaldoBeras'));
     }
 
     /*
@@ -235,7 +257,29 @@ class HomeController extends Controller
     */
     public function landing_index(Request $request)
     {
-        return view('landing-pages.pages.index');
+         // Menghitung jumlah transaksi muzakki dan mustahik dari database
+         $Transactionsmuzakki = Muzakki::count();
+         $Transactionsmustahik = Mustahik::count();
+ 
+         // Menghitung jumlah transaksi muzakki dan mustahik dari database
+         $totalTransactionsmuzakki = Muzakki::sum('jumlah_bayar');
+         $totalTransactionsmustahik = Mustahik::sum('jumlah_uang_diterima');
+  
+         // Menghitung total saldo uang
+         $totalSaldoUang = $totalTransactionsmuzakki - $totalTransactionsmustahik;
+         
+         // Menghitung total beras yang masuk dari model Muzakki
+         $totalBerasMuzakki = Muzakki::where('type', 'beras')->sum('jumlah_bayar');
+ 
+         // Menghitung total beras yang diterima dari model Mustahik
+         $totalBerasMustahik = Mustahik::sum('jumlah_beras_diterima');
+ 
+         // Menghitung total saldo beras
+         $totalSaldoBeras = $totalBerasMuzakki - $totalBerasMustahik;
+ 
+         $assets = ['chart', 'animation'];
+
+        return view('landing-pages.pages.index', compact('assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalSaldoUang', 'totalSaldoBeras'));
     }
     public function landing_blog(Request $request)
     {
