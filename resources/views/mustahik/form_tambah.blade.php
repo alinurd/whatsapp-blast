@@ -11,7 +11,7 @@
                         <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>
                   </div> 
                </div>  
-               <div class="card-body">
+               <div class="card-body"> 
                <form id="form-wizard1" class="text-center mt-3" method="POST" action="{{ route('mustahik.store') }}" enctype="multipart/form-data">
                      @csrf
                      <ul id="top-tab-list" class="p-0 row list-inline">
@@ -84,7 +84,8 @@
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="no_phone">No Handphone <span class="text-danger">*</span></label>
                                  {!! Form::number('no_phone', old('no_phone'), ['class' => 'form-control', 'required', 'placeholder' => 'No Handphone']) !!}
-                              </div>  
+                              </div>   
+
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="status_kawin">Status Perkawinan: <span class="text-danger">*</span></label>
                                  <select name="status_kawin" class="form-control" required>
@@ -93,12 +94,22 @@
                                     <option value="Menikah">Menikah</option>
                                     <option value="Janda Cerai">Janda Cerai</option>
                                     <option value="Janda Wafat">Janda Wafat</option>
+                                 </select> 
+                              </div>  
+                               
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="pilihan_rw">Apakah masuk ke RW 04?: <span class="text-danger">*</span></label>
+                                 <select name="pilihan_rw" id="pilihan_rw" class="form-control" required>
+                                    <option value="">Pilih</option>
+                                    <option value="Ya">Ya</option> 
+                                    <option value="Tidak">Tidak</option>
                                  </select>
                               </div>
-                              <div class="form-group col-md-12">
-                                 <label class="form-label" for="rt_rw">RT/RW: <span class="text-danger">*</span></label>
-                                 <select name="rt_rw" class="form-control" required>
-                                    <option value="">Pilih RT/RW</option> 
+
+                              <div id="rt_rw_dropdown" class="form-group col-md-4" style="display: none;">
+                                 <label class="form-label" for="rt_rw_select">RT/RW: <span class="text-danger">*</span></label>
+                                 <select name="rt_rw_select" id="rt_rw_select" class="form-control" required>
+                                    <option value="">Pilih RT/RW</option>
                                     <option value="RT.001/RW.001">RT.001/RW.001</option>
                                     <option value="RT.002/RW.002">RT.002/RW.002</option>
                                     <option value="RT.003/RW.003">RT.003/RW.003</option>
@@ -106,6 +117,12 @@
                                     <option value="RT.018/RW.006">RT.018/RW.006</option>
                                  </select>
                               </div>
+
+                              <div id="nama_wilayah_input" class="form-group col-md-4" style="display: none;">
+                                 <label class="form-label" for="nama_wilayah">Nama Wilayah: <span class="text-danger">*</span></label>
+                                 <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control" required placeholder="Nama Wilayah">
+                              </div>  
+
                               <div class="form-group col-md-12">
                                  <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
                                  {!! Form::text('alamat', old('alamat'), ['class' => 'form-control', 'required', 'placeholder' => 'Alamat']) !!}
@@ -217,7 +234,7 @@
                                  {!! Form::text('keterangan', old('keterangan'), ['class' => 'form-control', 'placeholder' => 'Keterangan']) !!}
                               </div>  
                              
-                           </div> 
+                           </div>  
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary next action-button float-end" value="Submit">Submit</button>
                         <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous" >Previous</button>
@@ -254,6 +271,28 @@
 </x-app-layout>
 
 <script>
+   document.addEventListener('DOMContentLoaded', function() {
+        const rtRwSelect = document.getElementById('pilihan_rw');
+        const rtRwDropdown = document.getElementById('rt_rw_dropdown');
+        const namaWilayahInput = document.getElementById('nama_wilayah_input');
+
+        rtRwSelect.addEventListener('change', function() {
+            if (this.value === 'Ya') {
+                rtRwDropdown.style.display = 'block';
+                namaWilayahInput.style.display = 'none';
+            } else if (this.value === 'Tidak') {
+                rtRwDropdown.style.display = 'none';
+                namaWilayahInput.style.display = 'block'; 
+            } else {
+                rtRwDropdown.style.display = 'block';
+                namaWilayahInput.style.display = 'none';
+            }
+        });   
+
+        // Set default display
+        rtRwDropdown.style.display = 'block';
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
         const nextButtons = document.querySelectorAll('.next');
         const submitButton = document.querySelector('button[name="submit"]');

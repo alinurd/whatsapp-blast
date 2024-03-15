@@ -9,7 +9,7 @@ use App\Models\Kategori;
 use App\Helpers\AuthHelper;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
- 
+  
 class MustahikController extends Controller
 {
     /** 
@@ -42,14 +42,13 @@ class MustahikController extends Controller
     public function store(Request $request)
     { 
         // Validate the request data
-        $request->validate([  
+        $validatedData = $request->validate([  
             'nama_lengkap' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
             'no_phone' => 'required|string|max:255',
             'status_kawin' => 'required|string|max:255',
-            'rt_rw' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'perkerjaan' => 'required|string|max:255',
+            'perkerjaan' => 'required|string|max:255', 
             'jml_pendapatan' => 'required|string|max:255',
             'jml_bansos' => 'required|string|max:255',
             'jml_anak' => 'required|string|max:255',
@@ -63,22 +62,23 @@ class MustahikController extends Controller
             'kategori.*' => 'exists:kategori,id', // Tambahkan validasi untuk setiap elemen array 'kategori'
             'jml_uang' => 'required|string|max:255',
             'jml_beras' => 'required|string|max:255', 
-            'keterangan' => 'max:255',
-        ]); 
-
+            'pilihan_rw' => 'required|string|max:255', // Tambahkan validasi untuk input 'rt_rw' 
+            'nama_wilayah' => 'required_if:pilihan_rw,Tidak|string|max:255', // Tambahkan validasi untuk input 'nama_wilayah' hanya jika 'rt_rw' adalah 'Tidak'
+            'rt_rw_select' => 'required_if:pilihan_rw,Ya|string|max:255', // Tambahkan validasi untuk input 'rt_rw_select' hanya jika 'rt_rw' adalah 'Ya'
+            'keterangan' => 'max:255', 
+        ]);  
+   
         // Create a new mustahik instance
-        $mustahik = new Mustahik();
-
-
+        $mustahik = Mustahik::create($validatedData); 
+  
         $kategoriId = $request->input('kategori')[0]; // Menggunakan [0] karena name "kategori" di set sebagai array
-
 
         // Fill the mustahik data from the request
         $lastId = Mustahik::orderByDesc('id')->first();
         if(!$lastId){
             $x=0;
-          }else{
-            $x=$lastId->id;
+          }else{ 
+            $x=$lastId->id; 
         }
 
         $mustahik->code = $this->generateCodeById("MSQ", $x+1);
@@ -86,8 +86,7 @@ class MustahikController extends Controller
         $mustahik->jenis_kelamin = $request->jenis_kelamin;
         $mustahik->nomor_telp = $request->no_phone;
         $mustahik->status_perkawinan = $request->status_kawin;
-        $mustahik->rt_rw = $request->rt_rw;
-        $mustahik->alamat = $request->alamat; 
+        $mustahik->alamat = $request->alamat;  
         $mustahik->pekerjaan = $request->perkerjaan;
         $mustahik->jumlah_pendapatan = $request->jml_pendapatan;
         $mustahik->jumlah_bansos_diterima = $request->jml_bansos;
@@ -95,19 +94,28 @@ class MustahikController extends Controller
         $mustahik->status_tempat_tinggal = $request->status_tinggal;
         // $status_tempat_tinggal = $request->status_tempat_tinggal;
         // if (strlen($status_tempat_tinggal) > 255) {
-        //     $status_tempat_tinggal = substr($status_tempat_tinggal, 0, 255);
+        //     $status_tempat_tinggal = substr($status_tempat_tinggal, 0, 255);   
         // }
 
         $mustahik->pengeluaran_kontrakan = $request->pengeluaran_kontrakan;
         $mustahik->jumlah_hutang = $request->jml_hutang;
         $mustahik->keperluan_hutang = $request->keperluan_hutang;
         $mustahik->kategori_mustahik = $request->kategori_mustahik;
-        $mustahik->tanggal = $request->tgl_terima_zakat;
+        $mustahik->tanggal = $request->tgl_terima_zakat; 
         $mustahik->kategori_id = $kategoriId;
         $mustahik->jumlah_uang_diterima = $request->jml_uang;
         $mustahik->jumlah_beras_diterima = $request->jml_beras;
-        $mustahik->keterangan = $request->keterangan; 
+        $mustahik->keterangan = $request->keterangan;    
 
+         // If "Apakah masuk ke RW 04?" is "Tidak", assign "Nama Wilayah"
+        // if ($request->rt_rw === 'Tidak') {  
+        //     $mustahik->rt_rw = $request->nama_wilayah;  
+        // } else {
+        //     $mustahik->rt_rw = $request->rt_rw_select; 
+        // }  
+
+        $mustahik->rt_rw = $request->pilihan_rw === 'Tidak' ? $request->nama_wilayah : $request->rt_rw_select;
+   
         // Save the mustahik
         $mustahik->save();
 

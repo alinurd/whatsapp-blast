@@ -130,7 +130,7 @@
             </i>
             <span class="item-name">Report Mustahiq</span>
         </a>
-    </li>
+    </li> 
     @endif
     <li>
         <hr class="hr-horizontal">
