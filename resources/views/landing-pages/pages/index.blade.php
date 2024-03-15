@@ -56,7 +56,7 @@
                                         <a href="#" title="Lihat Muzakki Detail">
                                             <p class="mb-2">Total Transaksi Muzakki</p>
                                         </a>
-                                        <h4 class="counter" style="visibility: visible;">{{ $Transactionsmuzakki }}</h4>
+                                        <h4 class="counter" style="visibility: visible;" title="Invocie:{{ $TransactionsmuzakkiH }} | Muzakki:{{ $Transactionsmuzakki }}">{{ $TransactionsmuzakkiH }}/{{ $Transactionsmuzakki}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                         <a href="#" title="Lihat Muzakki Detail">
                                             <p class="mb-2">Total Saldo Beras</p>
                                         </a>
-                                        <h4 class="counter" style="visibility: visible;">{{ $totalSaldoBeras }}</h4>
+                                        <h6 class="counter" style="visibility: visible;">{{ $totalSaldoBerasKg }} Kg | {{ $totalSaldoBerasL }} Liter</h6>
                                     </div>
                                 </div>
                             </div>
