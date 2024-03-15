@@ -6,8 +6,8 @@
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
                         <h4 class="card-title">Detail Mustahik</h4>
-                        <h5>{{ $mustahik->nama_lengkap }} #MSQ-w1Sf1N-2024-0003</h5>
-                        <i style="font-size: 11px;">Jakarta, <?= $mustahik->tanggal; ?></i>
+                        <h5>#{{ $mustahik->code }}</h5>
+                         <i style="font-size: 11px;">Jakarta, <?= $mustahik->tanggal; ?></i>
                     </div>
                     <div class="card-action">
                         <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>

@@ -74,6 +74,14 @@ class MustahikController extends Controller
 
 
         // Fill the mustahik data from the request
+        $lastId = Mustahik::orderByDesc('id')->first();
+        if(!$lastId){
+            $x=0;
+          }else{
+            $x=$lastId->id;
+        }
+
+        $mustahik->code = $this->generateCodeById("MSQ", $x+1);
         $mustahik->nama_lengkap = $request->nama_lengkap;
         $mustahik->jenis_kelamin = $request->jenis_kelamin;
         $mustahik->nomor_telp = $request->no_phone;
