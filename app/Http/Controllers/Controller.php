@@ -24,4 +24,10 @@ class Controller extends BaseController
         $code = $param . "-" . $ran . "-". date("Y") ."-000".$id;
         return $code;
     }
+    public function sendSms($param)
+    { 
+        
+        return $response;
+        
+    }
 }
