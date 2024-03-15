@@ -20,7 +20,7 @@ class HomeController extends Controller
         $Transactionsmustahik = Mustahik::count();
 
         // Menghitung jumlah transaksi muzakki dan mustahik dari database
-        $totalTransactionsmuzakki = Muzakki::where('type', 'Uang')->sum('jumlah_bayar');
+        $totalTransactionsmuzakki = Muzakki::where('type', 'Uang')->orWhere('type', 'Transfer')->sum('jumlah_bayar');
         $totalTransactionsmustahik = Mustahik::sum('jumlah_uang_diterima');
  
         // Menghitung total saldo uang
@@ -284,7 +284,7 @@ class HomeController extends Controller
          $Transactionsmustahik = Mustahik::count();
  
          // Menghitung jumlah transaksi muzakki dan mustahik dari database
-         $totalTransactionsmuzakki = Muzakki::where('type', 'Uang' | 'Transfer')->sum('jumlah_bayar');
+         $totalTransactionsmuzakki = Muzakki::where('type', 'Uang')->orWhere('type', 'Transfer')->sum('jumlah_bayar');
          $totalTransactionsmustahik = Mustahik::sum('jumlah_uang_diterima');
   
          // Menghitung total saldo uang
