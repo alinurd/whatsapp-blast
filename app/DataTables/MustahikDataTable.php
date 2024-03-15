@@ -73,7 +73,10 @@ class MustahikDataTable extends DataTable
      */
     public function query()
     {
-        $model = Mustahik::query();
+        $model = Mustahik::query()
+        ->join('kategori', 'mustahik.kategori_id', '=', 'kategori.id')
+        ->select('mustahik.*', 'kategori.nama_kategori as kategori_name');
+
         return $this->applyScopes($model);
     }
 
@@ -103,13 +106,14 @@ class MustahikDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
+        return [ 
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
             ['data' => 'tanggal', 'name' => 'tanggal', 'title' => 'Tanggal'],
-            ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Nama Lengkap'],
+            ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Nama'],
             ['data' => 'kategori_mustahik', 'name' => 'kategori_mustahik', 'title' => 'Kategori Mustahik'],
-            ['data' => 'kategori_menerima_zakat', 'name' => 'kategori_menerima_zakat', 'title' => 'Zakat diterima'],
-            ['data' => 'keterangan', 'name' => 'keterangan', 'title' => 'Keterangan'],
+            ['data' => 'kategori_name', 'name' => 'kategori_name', 'title' => 'Kategori Zakat diterima'], 
+            ['data' => 'jumlah_uang_diterima', 'name' => 'jumlah_uang_diterima', 'title' => 'Jumlah Uang'],
+            ['data' => 'jumlah_beras_diterima', 'name' => 'jumlah_beras_diterima', 'title' => 'Jumlah Beras'],
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

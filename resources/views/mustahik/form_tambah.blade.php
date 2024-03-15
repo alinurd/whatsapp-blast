@@ -32,7 +32,7 @@
                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                     </svg>
                                  </div>
-                                 <span>Income</span>
+                                 <span>Keuangan</span>
                            </a>
                         </li>
                         <li id="payment" class="col-lg-3 col-md-6 mb-2 text-start">
@@ -62,23 +62,26 @@
                         <div class="form-card text-start">
                            <div class="row">
                            <div class="col-7">
-                                 <h3 class="mb-4">Personal Information:</h3>
+                              <h4 class="mb-4">Biodata Mustahik:</h4>
                            </div>
+                           <!-- <div class="col-5">
+                              <h2 class="steps">Step 1 - 4</h2>
+                           </div> -->
                            </div>
                            <div class="row">
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="nama_lengkap">Nama Lengkap: <span class="text-danger">*</span></label>
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="nama_lengkap">Nama: <span class="text-danger">*</span></label>
                                  {!! Form::text('nama_lengkap', old('nama_lengkap'), ['class' => 'form-control', 'placeholder' => 'Nama Lengkap', 'required']) !!}
                               </div>   
-                              <div class="form-group col-md-4">
+                              <div class="form-group col-md-6"> 
                                  <label class="form-label" for="jenis_kelamin">Jenis Kelamin: <span class="text-danger">*</span></label>
                                  <select name="jenis_kelamin" class="form-control" required>
                                     <option value="">Pilih Jenis Kelamin</option>
-                                    <option value="Laki-Laki" {{ old('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
-                                    <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                    <option value="Laki-Laki">Laki-Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
                                  </select>
                               </div>
-                              <div class="form-group col-md-4">
+                              <div class="form-group col-md-6">
                                  <label class="form-label" for="no_phone">No Handphone <span class="text-danger">*</span></label>
                                  {!! Form::number('no_phone', old('no_phone'), ['class' => 'form-control', 'required', 'placeholder' => 'No Handphone']) !!}
                               </div>  
@@ -86,59 +89,82 @@
                                  <label class="form-label" for="status_kawin">Status Perkawinan: <span class="text-danger">*</span></label>
                                  <select name="status_kawin" class="form-control" required>
                                     <option value="">Pilih Status Perkawinan</option>
-                                    <option value="Belum Menikah" {{ old('status_kawin') == 'Belum Menikah' ? 'selected' : '' }}>Belum Menikah</option>
-                                    <option value="Menikah" {{ old('status_kawin') == 'Menikah' ? 'selected' : '' }}>Menikah</option>
-                                    <option value="Janda Cerai" {{ old('status_kawin') == 'Janda Cerai' ? 'selected' : '' }}>Janda Cerai</option>
-                                    <option value="Janda Wafat" {{ old('status_kawin') == 'Janda Wafat' ? 'selected' : '' }}>Janda Wafat</option>
+                                    <option value="Belum Menikah">Belum Menikah</option>
+                                    <option value="Menikah">Menikah</option>
+                                    <option value="Janda Cerai">Janda Cerai</option>
+                                    <option value="Janda Wafat">Janda Wafat</option>
                                  </select>
                               </div>
-                              <div class="form-group col-md-6">
+                              <div class="form-group col-md-12">
+                                 <label class="form-label" for="rt_rw">RT/RW: <span class="text-danger">*</span></label>
+                                 <select name="rt_rw" class="form-control" required>
+                                    <option value="">Pilih RT/RW</option> 
+                                    <option value="RT.001/RW.001">RT.001/RW.001</option>
+                                    <option value="RT.002/RW.002">RT.002/RW.002</option>
+                                    <option value="RT.003/RW.003">RT.003/RW.003</option>
+                                    <option value="RT.017/RW.005">RT.017/RW.005</option>
+                                    <option value="RT.018/RW.006">RT.018/RW.006</option>
+                                 </select>
+                              </div>
+                              <div class="form-group col-md-12">
                                  <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
                                  {!! Form::text('alamat', old('alamat'), ['class' => 'form-control', 'required', 'placeholder' => 'Alamat']) !!}
                               </div>  
                            </div>
                         </div>
-                        <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" >Next</button>
+                        <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
                      </fieldset>
                      <fieldset>
                         <div class="form-card text-start">
                            <div class="row">
                            <div class="col-7">
-                                 <h3 class="mb-4">Pendapatan:</h3>
+                              <h4 class="mb-4">Keuangan Mustahik:</h4>
                            </div>
-                           <div class="col-5">
+                           <!-- <div class="col-5">
                               <h2 class="steps">Step 2 - 4</h2>
-                           </div>
+                           </div> -->
                            </div>
                            <div class="row">
-                              <div class="form-group col-md-4">
+                              <div class="form-group col-md-6">
                                  <label class="form-label" for="perkerjaan">Pekerjaan: <span class="text-danger">*</span></label>
-                                 {!! Form::number('perkerjaan', old('perkerjaan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pekerjaan']) !!}
+                                 {!! Form::text('perkerjaan', old('perkerjaan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pekerjaan']) !!}
                               </div>   
-                              <div class="form-group col-md-4">
+                              <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_pendapatan">Jumlah Pendapatan: <span class="text-danger">*</span></label>
+ 
                                  {!! Form::number('jml_pendapatan', old('jml_pendapatan'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Pendapatan']) !!}
-                              </div>  
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: <span class="text-danger">*</span></label>
-                                 {!! Form::number('jml_bansos', old('jml_bansos'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Bansos Diterima']) !!}
-                              </div>  
-                              <div class="form-group col-md-4">
+                              </div>    
+
+                              <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_anak">Jml Anak dlm Tanggungan: <span class="text-danger">*</span></label>
                                  {!! Form::number('jml_anak', old('jml_anak'), ['class' => 'form-control', 'required', 'placeholder' => 'Jml Anak dlm Tanggungan']) !!}
                               </div>   
-                              <div class="form-group col-md-4">
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: <span class="text-danger">*</span></label>
+                                 {!! Form::number('jml_bansos', old('jml_bansos'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Bansos Diterima']) !!}
+                              </div>
+                              <div class="form-group col-md-6">
                                  <label class="form-label" for="status_tinggal">Status Tempat Tinggal: <span class="text-danger">*</span></label>
                                  <select name="status_tinggal" class="form-control" required>
                                     <option value="">Pilih Status Tinggal</option>
-                                    <option value="kontrakan" {{ old('status_tinggal') == 'kontrakan' ? 'selected' : '' }}>Kontrakan</option>
-                                    <option value="Menumpang" {{ old('status_tinggal') == 'Menumpang' ? 'selected' : '' }}>Menumpang</option>
-                                    <option value="Milik Sendiri" {{ old('status_tinggal') == 'Milik Sendiri' ? 'selected' : '' }}>Milik Sendiri</option>
+                                    <option value="Kontrakan">Kontrakan</option>
+                                    <option value="Menumpang">Menumpang</option>
+                                    <option value="Milik Sendiri">Milik Sendiri</option>
                                  </select>
                               </div>
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran Kontrakan: <span class="text-danger">*</span></label>
-                                 {!! Form::number('pengeluaran_kontrakan', old('pengeluaran_kontrakan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pengeluaran Kontrakan']) !!}
+
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran Listrik & Kontrakan: <span class="text-danger">*</span></label>
+                                 {!! Form::number('pengeluaran_kontrakan', old('pengeluaran_kontrakan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pengeluaran Listrik & Kontrakan']) !!}
+                              </div>
+
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="jml_hutang">Jumlah Hutang: <span class="text-danger">*</span></label>
+                                 {!! Form::number('jml_hutang', old('jml_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Hutang']) !!}
+                              </div>   
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="keperluan_hutang">Keperluan Hutang: <span class="text-danger">*</span></label>
+                                 {!! Form::text('keperluan_hutang', old('keperluan_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Keperluan Hutang']) !!}
                               </div>  
                              
                            </div> 
@@ -150,67 +176,62 @@
                         <div class="form-card text-start"> 
                            <div class="row">
                            <div class="col-7">
-                                 <h3 class="mb-4">Mustahik:</h3>
+                                 <h4 class="mb-4">Mustahik zakat:</h4>
                            </div>
-                           <div class="col-5">
+                           <!-- <div class="col-5">
                                  <h2 class="steps">Step 3 - 4</h2>
-                           </div>
+                           </div> -->
                            </div>
                            <div class="row">
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="jml_hutang">Jumlah Hutang: <span class="text-danger">*</span></label>
-                                 {!! Form::number('jml_hutang', old('jml_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Hutang']) !!}
-                              </div>   
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="keperluan_hutang">Keperluan Hutang: <span class="text-danger">*</span></label>
-                                 {!! Form::text('keperluan_hutang', old('keperluan_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Keperluan Hutang']) !!}
-                              </div>  
-                              <div class="form-group col-md-4">
+
+                              <div class="form-group col-md-6">
+
                                  <label class="form-label" for="kategori_mustahik">Kategori Mustahik: <span class="text-danger">*</span></label>
                                  <select name="kategori_mustahik" class="form-control" required>
                                     <option value="">Pilih Kategori Mustahik</option>
-                                    <option value="Fakir" {{ old('kategori_mustahik') == 'Fakir' ? 'selected' : '' }}>Fakir</option>
-                                    <option value="Miskin" {{ old('kategori_mustahik') == 'Miskin' ? 'selected' : '' }}>Miskin</option>
-                                    <option value="Gharim" {{ old('kategori_mustahik') == 'Gharim' ? 'selected' : '' }}>Gharim</option>
-                                    <option value="Ibnu Sabil" {{ old('kategori_mustahik') == 'Ibnu Sabil' ? 'selected' : '' }}>Ibnu Sabil</option>
-                                    <option value="Mualaf" {{ old('kategori_mustahik') == 'Mualaf' ? 'selected' : '' }}>Mualaf</option>
+                                    <option value="Fakir">Fakir</option>
+                                    <option value="Miskin">Miskin</option>
+                                    <option value="Gharim">Gharim</option>
+                                    <option value="Ibnu Sabil">Ibnu Sabil</option>
+                                    <option value="Mualaf">Mualaf</option>
                                  </select>
                               </div>  
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="tgl_terima_zakat">Tanggal Terima Zakat: <span class="text-danger">*</span></label>
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="tgl_terima_zakat">Tanggal: <span class="text-danger">*</span></label>
                                  {!! Form::date('tgl_terima_zakat', old('tgl_terima_zakat'), ['class' => 'form-control', 'required', 'placeholder' => 'Tanggal Terima Zakat']) !!}
                               </div>    
                               <div class="form-group col-md-4">
                                  <label class="form-label" for="kategori_zakat">Kategori Zakat Diterima: <span class="text-danger">*</span></label>
-                                 <select name="kategori_zakat" class="form-control" required>
-                                    <option value="">Pilih Kategori Mustahik</option>
-                                    <option value="Fitrah" {{ old('kategori_zakat') == 'Fitrah' ? 'selected' : '' }}>Fitrah</option>
-                                    <option value="Maal" {{ old('kategori_zakat') == 'Maal' ? 'selected' : '' }}>Maal</option>
-                                    <option value="Fidyah" {{ old('kategori_zakat') == 'Fidyah' ? 'selected' : '' }}>Fidyah</option>
-                                    <option value="Infaq" {{ old('kategori_zakat') == 'Infaq' ? 'selected' : '' }}>Infaq</option>
-                                 </select>
+                                 {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Pilih Kategori Zakat', 'id' => 'dibayarkan']) }}
+                              </div>   
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="jml_uang">Jumlah Uang: <span class="text-danger">*</span></label>
+                                 {!! Form::number('jml_uang', old('jml_uang'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Uang']) !!}
                               </div>  
                               <div class="form-group col-md-4">
-                                 <label class="form-label" for="keterangan">Keterangan: <span class="text-danger">*</span></label>
-                                 {!! Form::text('keterangan', old('keterangan'), ['class' => 'form-control', 'required', 'placeholder' => 'Keterangan']) !!}
+                                 <label class="form-label" for="jml_beras">Jumlah Beras: <span class="text-danger">*</span></label>
+                                 {!! Form::number('jml_beras', old('jml_beras'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Beras']) !!}
+                              </div> 
+                              <div class="form-group col-md-12">
+                                 <label class="form-label" for="keterangan">Keterangan:</label>
+                                 {!! Form::text('keterangan', old('keterangan'), ['class' => 'form-control', 'placeholder' => 'Keterangan']) !!}
                               </div>  
                              
                            </div> 
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary next action-button float-end" value="Submit" >Submit</button>
+                        <button type="submit" name="submit" class="btn btn-primary next action-button float-end" value="Submit">Submit</button>
                         <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous" >Previous</button>
                      </fieldset>
                      <fieldset>
                         <div class="form-card">
                            <div class="row">
-                           <div class="col-7">
-                                 <h3 class="mb-4 text-left">Finish:</h3>
+                           <!-- <div class="col-7">
+                                 <h4 class="mb-4 text-left">Finish:</h4>
                            </div>
                            <div class="col-5">
                                  <h2 class="steps">Step 4 - 4</h2>
+                           </div> -->
                            </div>
-                           </div>
-                           <br><br>
                            <h2 class="text-success text-center"><strong>SUCCESS !</strong></h2>
                            <br>
                            <div class="row justify-content-center">
@@ -231,4 +252,73 @@
    </div>
 </div>
 </x-app-layout>
- 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const nextButtons = document.querySelectorAll('.next');
+        const submitButton = document.querySelector('button[name="submit"]');
+        const formFieldsets = document.querySelectorAll('fieldset');
+
+        // Function to check if all fields in a fieldset are filled
+        function checkFieldsFilled(fieldset) {
+            const formInputs = fieldset.querySelectorAll('input, select');
+            for (const input of formInputs) {
+                if (input.name !== 'keterangan' && !input.value.trim()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Function to handle button click for moving to the next step
+        function handleNextButtonClick(button) {
+            const currentFieldset = button.closest('fieldset');
+            const isFieldsetFilled = checkFieldsFilled(currentFieldset);
+
+            if (!isFieldsetFilled) {
+                alert('Please fill in all fields before proceeding.');
+            } else {
+                const nextFieldset = currentFieldset.nextElementSibling;
+                if (nextFieldset) {
+                    currentFieldset.style.display = 'none';
+                    nextFieldset.style.display = 'block';
+                }
+            }
+        }
+
+        // Add click event listener to Next buttons
+        nextButtons.forEach(button => {
+            button.disabled = true; // Disable next buttons by default
+            button.addEventListener('click', function () {
+                handleNextButtonClick(button);
+            });
+        });
+
+        // Add change event listener to form inputs
+        formFieldsets.forEach(fieldset => {
+            const formInputs = fieldset.querySelectorAll('input, select');
+            formInputs.forEach(input => {
+                input.addEventListener('change', function () {
+                    const currentFieldset = input.closest('fieldset');
+                    const isFieldsetFilled = checkFieldsFilled(currentFieldset);
+                    currentFieldset.querySelector('.next').disabled = !isFieldsetFilled;
+                });
+            });
+        });
+
+        // Add change event listener to Keterangan input
+        const keteranganInput = document.querySelector('input[name="keterangan"]');
+        if (keteranganInput) {
+            keteranganInput.addEventListener('change', function () {
+                submitButton.disabled = false; // Enable submit button if Keterangan is filled
+            });
+        }
+
+        // Hide all fieldsets except the first one
+        formFieldsets.forEach((fieldset, index) => {
+            if (index !== 0) {
+                fieldset.style.display = 'none';
+            }
+        });
+    });
+</script>

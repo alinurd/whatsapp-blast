@@ -5,7 +5,6 @@
             <div class="d-slider1 overflow-hidden ">
                <ul  class="swiper-wrapper list-inline m-0 p-0 mb-2">
                   <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
-                     
                      <div class="card-body">
                         <div class="progress-widget">
                            <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
@@ -17,7 +16,7 @@
                               <a  href="{{route('muzakki.index')}}" title="Lihat Muzakki Detail">
                               <p  class="mb-2">Total Transaksi Muzakki</p>
                            </a>
-                              <h4 class="counter" style="visibility: visible;">20</h4>
+                           <h4 class="counter" style="visibility: visible;">{{ $Transactionsmuzakki }}</h4>
                            </div>
                         </div>
                      </div>
@@ -32,7 +31,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Transaksi Mustahik</p>
-                              <h4 class="counter">30</h4>
+                              <h4 class="counter">{{ $Transactionsmustahik }}</h4>
                            </div>
                         </div>
                      </div>
@@ -47,7 +46,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Saldo Uang</p>
-                              <h4 class="counter">$375K</h4>
+                              <h4 class="counter">{{ $totalSaldoUang }}</h4>
                            </div>
                         </div>
                      </div>
@@ -62,7 +61,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Saldo Beras</p>
-                              <h4 class="counter">200L</h4>
+                              <h4 class="counter">{{ $totalSaldoBeras }}</h4>
                            </div>
                         </div>
                      </div>
@@ -75,7 +74,7 @@
       </div>
       <div class="col-md-12 col-lg-8">
          <div class="row">
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                <div class="card" data-aos="fade-up" data-aos-delay="800">
                   <div class="card-header d-flex justify-content-between flex-wrap">
                      <div class="header-title">
@@ -119,7 +118,7 @@
                      <div id="d-main" class="d-main"></div>
                   </div>
                </div>
-            </div>
+            </div> -->
             <!-- <div class="col-md-12 col-lg-6">
                <div class="card" data-aos="fade-up" data-aos-delay="1000">
                   <div class="card-header d-flex justify-content-between flex-wrap">
@@ -375,7 +374,7 @@
       </div>
       <div class="col-md-12 col-lg-4">
          <div class="row">
-            <div class="col-md-6 col-lg-12">
+            <!-- <div class="col-md-6 col-lg-12">
                <div class="card credit-card-widget" data-aos="fade-up" data-aos-delay="900">
                   <div class="card-header pb-4 border-0">
                      <div class="p-4 primary-gradient-card rounded border border-white">
@@ -468,7 +467,7 @@
                      </div>
                   </div>
                </div> -->
-            </div>
+            </div> -->
             <!-- <div class="col-md-12 col-lg-12">
                <div class="card" data-aos="fade-up" data-aos-delay="400">
                   <div class="card-header d-flex justify-content-between flex-wrap">

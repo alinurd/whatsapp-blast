@@ -18,10 +18,13 @@ class Mustahik extends Model
 
     protected $fillable = [
         'tanggal', 
-        'kategori_menerima_zakat',
+        'kategori_id',
+        'jumlah_beras_diterima',
+        'jumlah_uang_diterima',
         'nama_lengkap', 
         'jenis_kelamin', 
         'nomor_telp',
+        'rt_rw',
         'alamat',
         'kategori_mustahik', 
         'status_perkawinan',
@@ -35,4 +38,9 @@ class Mustahik extends Model
         'keperluan_hutang',
         'keterangan',
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
 }
