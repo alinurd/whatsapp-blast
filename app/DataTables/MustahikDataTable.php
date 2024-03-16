@@ -108,7 +108,7 @@ class MustahikDataTable extends DataTable
     {
         return [ 
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
-            ['data' => 'tanggal', 'name' => 'tanggal', 'title' => 'Tanggal'],
+            ['data' => 'code', 'name' => 'code', 'title' => 'Code'],
             ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Nama'],
             ['data' => 'kategori_mustahik', 'name' => 'kategori_mustahik', 'title' => 'Kategori Mustahik'],
             ['data' => 'kategori_name', 'name' => 'kategori_name', 'title' => 'Kategori Zakat diterima'], 

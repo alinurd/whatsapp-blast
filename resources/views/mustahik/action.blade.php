@@ -11,7 +11,7 @@
     </a> -->
     
     <?php 
-    $message = __('global-message.delete_alert', ['form' => __('mustahik.title')])
+    $message = __('global-message.delete_alert', ['form' => __('mustahik')])
     ?>
     <a class="btn btn-sm btn-icon btn-danger" onclick="return confirm('{{$message}}') ? document.getElementById('mustahik-delete-{{$id}}').submit() : false" data-bs-toggle="tooltip" title="Delete mustahik" href="#">
         <span class="btn-inner">

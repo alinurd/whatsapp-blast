@@ -17,16 +17,19 @@ class Mustahik extends Model
     protected $table = 'mustahik';
 
     protected $fillable = [
+        'code', 
         'tanggal', 
         'kategori_id',
         'jumlah_beras_diterima',
         'jumlah_uang_diterima',
+        'satuan_beras',
         'nama_lengkap', 
         'jenis_kelamin', 
         'nomor_telp',
         'rt_rw',
+        'wilayah_lain',
         'alamat',
-        'kategori_mustahik', 
+        'kategori_mustahik',  
         'status_perkawinan',
         'pekerjaan',
         'jumlah_pendapatan',
@@ -34,6 +37,7 @@ class Mustahik extends Model
         'jumlah_anak_dalam_tanggungan',
         'status_tempat_tinggal',
         'pengeluaran_kontrakan',
+        'pengeluaran_listrik', 
         'jumlah_hutang',
         'keperluan_hutang',
         'keterangan',
