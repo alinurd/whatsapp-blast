@@ -5,13 +5,13 @@
             <div class="card">
                <div class="card-header d-flex justify-content-between">
                   <div class="header-title">
-                     <h4 class="card-title">Mustahik</h4>
+                     <h4 class="card-title">Mustahiq</h4>
                   </div>
                   <div class="card-action">
                         <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>
                   </div> 
                </div>  
-               <div class="card-body">
+               <div class="card-body"> 
                <form id="form-wizard1" class="text-center mt-3" method="POST" action="{{ route('mustahik.store') }}" enctype="multipart/form-data">
                      @csrf
                      <ul id="top-tab-list" class="p-0 row list-inline">
@@ -43,7 +43,7 @@
                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                  </div>
-                                 <span>Mustahik</span>
+                                 <span>Mustahiq</span>
                            </a>
                         </li>
                         <li id="confirm" class="col-lg-3 col-md-6 mb-2 text-start">
@@ -62,7 +62,7 @@
                         <div class="form-card text-start">
                            <div class="row">
                            <div class="col-7">
-                              <h4 class="mb-4">Biodata Mustahik:</h4>
+                              <h4 class="mb-4">Biodata Mustahiq:</h4>
                            </div>
                            <!-- <div class="col-5">
                               <h2 class="steps">Step 1 - 4</h2>
@@ -84,7 +84,8 @@
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="no_phone">No Handphone <span class="text-danger">*</span></label>
                                  {!! Form::number('no_phone', old('no_phone'), ['class' => 'form-control', 'required', 'placeholder' => 'No Handphone']) !!}
-                              </div>  
+                              </div>   
+
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="status_kawin">Status Perkawinan: <span class="text-danger">*</span></label>
                                  <select name="status_kawin" class="form-control" required>
@@ -93,24 +94,31 @@
                                     <option value="Menikah">Menikah</option>
                                     <option value="Janda Cerai">Janda Cerai</option>
                                     <option value="Janda Wafat">Janda Wafat</option>
-                                 </select>
-                              </div>
-                              <div class="form-group col-md-12">
-                                 <label class="form-label" for="rt_rw">RT/RW: <span class="text-danger">*</span></label>
-                                 <select name="rt_rw" class="form-control" required>
-                                    <option value="">Pilih RT/RW</option> 
+                                 </select> 
+                              </div>  
+
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="rt_rw">RT/RW:</label>
+                                 <select name="rt_rw" id="rt_rw" class="form-control">
+                                    <option value="">Pilih RT/RW</option>
                                     <option value="RT.001/RW.001">RT.001/RW.001</option>
                                     <option value="RT.002/RW.002">RT.002/RW.002</option>
                                     <option value="RT.003/RW.003">RT.003/RW.003</option>
                                     <option value="RT.017/RW.005">RT.017/RW.005</option>
                                     <option value="RT.018/RW.006">RT.018/RW.006</option>
-                                 </select>
+                                 </select> 
                               </div>
+
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="nama_wilayah">Wilayah lainnya: </label>
+                                 <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control" placeholder="Wilayah Lainnya">
+                              </div>   
+
                               <div class="form-group col-md-12">
-                                 <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
-                                 {!! Form::text('alamat', old('alamat'), ['class' => 'form-control', 'required', 'placeholder' => 'Alamat']) !!}
-                              </div>  
-                           </div>
+                                    <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
+                                    {!! Form::text('alamat', old('alamat'), ['class' => 'form-control', 'required', 'placeholder' => 'Alamat']) !!}
+                                 </div>  
+                              </div>
                         </div>
                         <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
                      </fieldset>
@@ -118,7 +126,7 @@
                         <div class="form-card text-start">
                            <div class="row">
                            <div class="col-7">
-                              <h4 class="mb-4">Keuangan Mustahik:</h4>
+                              <h4 class="mb-4">Keuangan Mustahiq:</h4>
                            </div>
                            <!-- <div class="col-5">
                               <h2 class="steps">Step 2 - 4</h2>
@@ -131,8 +139,7 @@
                               </div>   
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_pendapatan">Jumlah Pendapatan: <span class="text-danger">*</span></label>
- 
-                                 {!! Form::number('jml_pendapatan', old('jml_pendapatan'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Pendapatan']) !!}
+                                 <input type="text" name="jml_pendapatan[]" class="form-control" required placeholder="Jumlah pendapatan" value="{{ old('jml_pendapatan')[0] ?? '' }}">
                               </div>    
 
                               <div class="form-group col-md-6">
@@ -141,9 +148,9 @@
                               </div>   
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: <span class="text-danger">*</span></label>
-                                 {!! Form::number('jml_bansos', old('jml_bansos'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Bansos Diterima']) !!}
+                                 <input type="text" name="jml_bansos[]" class="form-control" placeholder="Jumlah Bansos" required value="{{ old('jml_bansos')[0] ?? '' }}">
                               </div>
-                              <div class="form-group col-md-6">
+                              <div class="form-group col-md-4">
                                  <label class="form-label" for="status_tinggal">Status Tempat Tinggal: <span class="text-danger">*</span></label>
                                  <select name="status_tinggal" class="form-control" required>
                                     <option value="">Pilih Status Tinggal</option>
@@ -153,21 +160,26 @@
                                  </select>
                               </div>
 
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran Listrik & Kontrakan: <span class="text-danger">*</span></label>
-                                 {!! Form::number('pengeluaran_kontrakan', old('pengeluaran_kontrakan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pengeluaran Listrik & Kontrakan']) !!}
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="pengeluaran_listrik">Pengeluaran Listrik: </label>
+                                 <input type="text" name="pengeluaran_listrik[]" class="form-control" placeholder="Pengeluaran Listrik" value="{{ old('pengeluaran_listrik')[0] ?? '' }}">
                               </div>
 
+                              <div class="form-group col-md-4">
+                                 <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran kontrakan: </label>
+                                 <input type="text" name="pengeluaran_kontrakan[]" class="form-control" placeholder="Pengeluaran kontrakan" value="{{ old('pengeluaran_kontrakan')[0] ?? '' }}">
+                              </div>
+ 
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_hutang">Jumlah Hutang: <span class="text-danger">*</span></label>
-                                 {!! Form::number('jml_hutang', old('jml_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Hutang']) !!}
+                                 <input type="text" name="jml_hutang[]" class="form-control" required placeholder="Jumlah Hutang" value="{{ old('jml_hutang')[0] ?? '' }}">
                               </div>   
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="keperluan_hutang">Keperluan Hutang: <span class="text-danger">*</span></label>
                                  {!! Form::text('keperluan_hutang', old('keperluan_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Keperluan Hutang']) !!}
                               </div>  
                              
-                           </div> 
+                           </div>  
                         </div>
                         <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" >Next</button>
                         <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous" >Previous</button>
@@ -176,7 +188,7 @@
                         <div class="form-card text-start"> 
                            <div class="row">
                            <div class="col-7">
-                                 <h4 class="mb-4">Mustahik zakat:</h4>
+                                 <h4 class="mb-4">Mustahiq zakat:</h4>
                            </div>
                            <!-- <div class="col-5">
                                  <h2 class="steps">Step 3 - 4</h2>
@@ -186,9 +198,9 @@
 
                               <div class="form-group col-md-6">
 
-                                 <label class="form-label" for="kategori_mustahik">Kategori Mustahik: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="kategori_mustahik">Kategori Mustahiq: <span class="text-danger">*</span></label>
                                  <select name="kategori_mustahik" class="form-control" required>
-                                    <option value="">Pilih Kategori Mustahik</option>
+                                    <option value="">Pilih Kategori Mustahiq</option>
                                     <option value="Fakir">Fakir</option>
                                     <option value="Miskin">Miskin</option>
                                     <option value="Gharim">Gharim</option>
@@ -200,24 +212,31 @@
                                  <label class="form-label" for="tgl_terima_zakat">Tanggal: <span class="text-danger">*</span></label>
                                  {!! Form::date('tgl_terima_zakat', old('tgl_terima_zakat'), ['class' => 'form-control', 'required', 'placeholder' => 'Tanggal Terima Zakat']) !!}
                               </div>    
-                              <div class="form-group col-md-4">
+                              <div class="form-group col-md-3">
                                  <label class="form-label" for="kategori_zakat">Kategori Zakat Diterima: <span class="text-danger">*</span></label>
                                  {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Pilih Kategori Zakat', 'id' => 'dibayarkan']) }}
                               </div>   
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="jml_uang">Jumlah Uang: <span class="text-danger">*</span></label>
-                                 {!! Form::number('jml_uang', old('jml_uang'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Uang']) !!}
+                              <div class="form-group col-md-3">
+                                 <label class="form-label" for="jml_uang">Jumlah Uang: </label>
+                                 <input type="text" name="jml_uang[]" class="form-control" placeholder="Jumlah uang" value="{{ old('jml_uang')[0] ?? '' }}">
                               </div>  
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="jml_beras">Jumlah Beras: <span class="text-danger">*</span></label>
-                                 {!! Form::number('jml_beras', old('jml_beras'), ['class' => 'form-control', 'required', 'placeholder' => 'Jumlah Beras']) !!}
+                              <div class="form-group col-md-3">
+                                 <label class="form-label" for="jml_beras">Jumlah Beras: </label>
+                                 <input type="text" name="jml_beras[]" class="form-control" placeholder="Jumlah Beras" value="{{ old('jml_beras')[0] ?? '' }}">
+                              </div>  
+                              <div class="form-group col-md-3">
+                                 <label class="form-label" for="satuan_beras">Satuan Beras: </label>
+                                 <select name="satuan_beras" class="form-control">
+                                    <option value="">Pilih Satuan Beras</option>
+                                    <option value="Kg">Kg</option> 
+                                    <option value="Liter">Liter</option>
+                                 </select>
                               </div> 
                               <div class="form-group col-md-12">
                                  <label class="form-label" for="keterangan">Keterangan:</label>
                                  {!! Form::text('keterangan', old('keterangan'), ['class' => 'form-control', 'placeholder' => 'Keterangan']) !!}
-                              </div>  
-                             
-                           </div> 
+                              </div>   
+                           </div>  
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary next action-button float-end" value="Submit">Submit</button>
                         <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous" >Previous</button>
@@ -253,8 +272,8 @@
 </div>
 </x-app-layout>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+<!-- <script>
+   document.addEventListener("DOMContentLoaded", function () {
         const nextButtons = document.querySelectorAll('.next');
         const submitButton = document.querySelector('button[name="submit"]');
         const formFieldsets = document.querySelectorAll('fieldset');
@@ -264,7 +283,7 @@
             const formInputs = fieldset.querySelectorAll('input, select');
             for (const input of formInputs) {
                 if (input.name !== 'keterangan' && !input.value.trim()) {
-                    return false;
+                    return false; 
                 }
             }
             return true;
@@ -314,11 +333,19 @@
             });
         }
 
+         // Add change event listener to nama_wilayah input
+         const namaWilayahInput = document.querySelector('input[name="nama_wilayah"]');
+         if (namaWilayahInput) {
+            namaWilayahInput.addEventListener('change', function () {  
+               formFieldsets.disabled = false; // Enable submit button if nama_wilayah is filled
+            });
+         }
+
         // Hide all fieldsets except the first one
         formFieldsets.forEach((fieldset, index) => {
             if (index !== 0) {
                 fieldset.style.display = 'none';
             }
         });
-    });
-</script>
+   });
+</script>  -->

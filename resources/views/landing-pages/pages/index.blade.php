@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="progress-detail">
                                         <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Total Transaksi Muzakki</p>
+                                            <p class="mb-2">Transaksi Muzakki</p>
                                         </a>
                                         <h4 class="counter" style="visibility: visible;" title="Invocie:{{ $TransactionsmuzakkiH }} | Muzakki:{{ $Transactionsmuzakki }}">{{ $TransactionsmuzakkiH }}/{{ $Transactionsmuzakki}}</h4>
                                     </div>
@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="progress-detail">
                                         <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Total Transaksi Mustahik</p>
+                                            <p class="mb-2">Transaksi Mustahiq</p>
                                         </a>
                                         <h4 class="counter" style="visibility: visible;">{{ $Transactionsmustahik }}</h4>
                                     </div>
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="progress-detail">
                                         <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Total Saldo Uang</p>
+                                            <p class="mb-2">Saldo Uang</p>
                                         </a>
                                         <h6 class="counter" style="visibility: visible;">{{ number_format($totalSaldoUang) }} Rupiah</h6>
                                     </div>
@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="progress-detail">
                                         <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Total Saldo Beras</p>
+                                            <p class="mb-2">Saldo Beras</p>
                                         </a>
                                         <h6 class="counter" style="visibility: visible;">{{ $totalSaldoBerasKg }} Kg | {{ $totalSaldoBerasL }} Liter</h6>
                                     </div>

@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Detail Mustahik</h4>
+                        <h4 class="card-title">Detail Mustahiq</h4>
                         <h5>#{{ $mustahik->code }}</h5>
                          <i style="font-size: 11px;">Jakarta, <?= $mustahik->tanggal; ?></i>
                     </div>
@@ -34,12 +34,28 @@
                                 <p>{{ $mustahik->status_perkawinan }}</p>
                             </div>
                             <div class="mt-2">
-                                <h6 class="mb-1">RT/RW:</h6>
-                                <p>{{ $mustahik->rt_rw }}</p>
+                            <h6 class="mb-1">Informasi Wilayah:</h6>
+                                @if($mustahik->rt_rw || $mustahik->wilayah_lain)
+                                    @if($mustahik->rt_rw) 
+                                        <p>{{ $mustahik->rt_rw }}</p>
+                                    @else
+                                        <p>{{ $mustahik->wilayah_lain }}</p>
+                                    @endif
+                                @else
+                                    <p>Tidak ada informasi</p>
+                                @endif
                             </div>
+                            <!-- <div class="mt-2">
+                                <h6 class="mb-1">Wilayah Lain:</h6>
+                                <p>{{ $mustahik->wilayah_lain }}</p>
+                            </div> -->
                             <div class="mt-2">
                                 <h6 class="mb-1">Alamat:</h6>
-                                <p>{{ $mustahik->alamat }}</p>
+                                @if($mustahik->alamat)
+                                    <p>{{ $mustahik->alamat }}</p>
+                                @else 
+                                    <p>-</p>
+                                @endif
                             </div>
                         </div>      
                         <div class="form-group col-md-4">
@@ -57,28 +73,47 @@
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Bansos Diterima:</h6>
-                                <p>{{ $mustahik->jumlah_bansos_diterima }}</p>
+                                @if($mustahik->jumlah_bansos_diterima)
+                                    <p>{{ $mustahik->jumlah_bansos_diterima }}</p>
+                                @else 
+                                    <p>-</p>
+                                @endif
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Status Tempat Tinggal:</h6>
                                 <p>{{ $mustahik->status_tempat_tinggal }}</p>
                             </div>
+                            @if($mustahik->status_tempat_tinggal === 'Kontrakan')
                             <div class="mt-2">
                                 <h6 class="mb-1">Pengeluaran Listrik & Kontrakan:</h6>
                                 <p>{{ $mustahik->pengeluaran_kontrakan }}</p>
                             </div>
+                            @else
+                            <div class="mt-2">
+                                <h6 class="mb-1">Pengeluaran Listrik</h6>
+                                <p>{{ $mustahik->pengeluaran_listrik }}</p>
+                            </div>
+                            @endif
                         </div>  
                         <div class="form-group col-md-4">
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Hutang:</h6>
-                                <p>{{ $mustahik->jumlah_hutang }}</p>
+                                @if($mustahik->jumlah_hutang)
+                                    <p>{{ $mustahik->jumlah_hutang }}</p>
+                                @else 
+                                    <p>-</p>
+                                @endif
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Keperluan Hutang:</h6>
-                                <p>{{ $mustahik->keperluan_hutang }}</p>
+                                @if($mustahik->keperluan_hutang)
+                                    <p>{{ $mustahik->keperluan_hutang }}</p>
+                                @else 
+                                    <p>-</p>
+                                @endif
                             </div>
                             <div class="mt-2">
-                                <h6 class="mb-1">Kategori Mustahik:</h6>
+                                <h6 class="mb-1">Kategori Mustahiq:</h6>
                                 <p>{{ $mustahik->kategori_mustahik }}</p>
                             </div>
                             <div class="mt-2">
@@ -91,16 +126,28 @@
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Uang Diterima:</h6>
-                                <p>{{ $mustahik->jumlah_uang_diterima }}</p>
+                                @if($mustahik->jumlah_uang_diterima)
+                                    <p>{{ $mustahik->jumlah_uang_diterima }}</p>
+                                @else 
+                                    <p>-</p>
+                                @endif
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Beras Diterima:</h6>
-                                <p>{{ $mustahik->jumlah_beras_diterima }}</p>
-                            </div>
+                                @if($mustahik->jumlah_beras_diterima)
+                                    <p>{{ $mustahik->jumlah_beras_diterima }} <span>{{ $mustahik->satuan_beras }}</span></p>
+                                @else 
+                                    <p>-</p>
+                                @endif
+                            </div> 
                             <div class="mt-2">
                                 <h6 class="mb-1">Keterangan:</h6>
-                                <p>{{ $mustahik->keterangan }}</p>
-                            </div>
+                                @if($mustahik->keterangan)
+                                    <p>{{ $mustahik->keterangan }} </p>
+                                @else 
+                                    <p>-</p>
+                                @endif
+                            </div> 
                         </div>  
                     </div> 
                 </div>
