@@ -19,10 +19,10 @@ class MustahikController extends Controller
      */
     public function index(MustahikDataTable $dataTable)
     {
-        $pageTitle = trans('global-message.list_form_title',['form' => trans('Mustahik')] );
+        $pageTitle = trans('global-message.list_form_title',['form' => trans('Mustahiq')] );
         $auth_user = AuthHelper::authSession();
         $assets = ['data-table'];
-        $headerAction = '<a href="'.route('mustahik.create').'" class="btn btn-sm btn-primary" role="button">Add Mustahik</a>';
+        $headerAction = '<a href="'.route('mustahik.create').'" class="btn btn-sm btn-primary" role="button">Add Mustahiq</a>';
         return $dataTable->render('global.datatable', compact('pageTitle','auth_user','assets', 'headerAction'));
     }
 

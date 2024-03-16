@@ -5,7 +5,7 @@
             <div class="card">
                <div class="card-header d-flex justify-content-between">
                   <div class="header-title">
-                     <h4 class="card-title">Mustahik</h4>
+                     <h4 class="card-title">Mustahiq</h4>
                   </div>
                   <div class="card-action">
                         <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>
@@ -43,7 +43,7 @@
                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                  </div>
-                                 <span>Mustahik</span>
+                                 <span>Mustahiq</span>
                            </a>
                         </li>
                         <li id="confirm" class="col-lg-3 col-md-6 mb-2 text-start">
@@ -62,7 +62,7 @@
                         <div class="form-card text-start">
                            <div class="row">
                            <div class="col-7">
-                              <h4 class="mb-4">Biodata Mustahik:</h4>
+                              <h4 class="mb-4">Biodata Mustahiq:</h4>
                            </div>
                            <!-- <div class="col-5">
                               <h2 class="steps">Step 1 - 4</h2>
@@ -126,7 +126,7 @@
                         <div class="form-card text-start">
                            <div class="row">
                            <div class="col-7">
-                              <h4 class="mb-4">Keuangan Mustahik:</h4>
+                              <h4 class="mb-4">Keuangan Mustahiq:</h4>
                            </div>
                            <!-- <div class="col-5">
                               <h2 class="steps">Step 2 - 4</h2>
@@ -188,7 +188,7 @@
                         <div class="form-card text-start"> 
                            <div class="row">
                            <div class="col-7">
-                                 <h4 class="mb-4">Mustahik zakat:</h4>
+                                 <h4 class="mb-4">Mustahiq zakat:</h4>
                            </div>
                            <!-- <div class="col-5">
                                  <h2 class="steps">Step 3 - 4</h2>
@@ -198,9 +198,9 @@
 
                               <div class="form-group col-md-6">
 
-                                 <label class="form-label" for="kategori_mustahik">Kategori Mustahik: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="kategori_mustahik">Kategori Mustahiq: <span class="text-danger">*</span></label>
                                  <select name="kategori_mustahik" class="form-control" required>
-                                    <option value="">Pilih Kategori Mustahik</option>
+                                    <option value="">Pilih Kategori Mustahiq</option>
                                     <option value="Fakir">Fakir</option>
                                     <option value="Miskin">Miskin</option>
                                     <option value="Gharim">Gharim</option>

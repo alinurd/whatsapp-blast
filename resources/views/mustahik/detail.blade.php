@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Detail Mustahik</h4>
+                        <h4 class="card-title">Detail Mustahiq</h4>
                         <h5>#{{ $mustahik->code }}</h5>
                          <i style="font-size: 11px;">Jakarta, <?= $mustahik->tanggal; ?></i>
                     </div>
@@ -113,7 +113,7 @@
                                 @endif
                             </div>
                             <div class="mt-2">
-                                <h6 class="mb-1">Kategori Mustahik:</h6>
+                                <h6 class="mb-1">Kategori Mustahiq:</h6>
                                 <p>{{ $mustahik->kategori_mustahik }}</p>
                             </div>
                             <div class="mt-2">

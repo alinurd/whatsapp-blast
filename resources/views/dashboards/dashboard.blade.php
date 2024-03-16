@@ -30,7 +30,7 @@
                               </svg>
                            </div>
                            <div class="progress-detail">
-                              <p  class="mb-2">Total Transaksi Mustahik</p>
+                              <p  class="mb-2">Total Transaksi Mustahiq</p>
                               <h4 class="counter">{{ $Transactionsmustahik }}</h4>
                            </div>
                         </div>
