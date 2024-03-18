@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class MustahikReport implements FromCollection, WithHeadings{
-    /**
+    /** 
     * @return \Illuminate\Support\Collection
-    */ 
+    */  
 
     public function collection()
     {
@@ -86,16 +86,46 @@ class MustahikReport implements FromCollection, WithHeadings{
         ];  
     }
  
-    public function mustahikreport(){
-        return Excel::download(New MustahikReport, "mustahik-Report-".date("Y").".xlsx");
+    public function mustahikreport(Request $request){
+        // Filter berdasarkan wilayah jika dipilih
+        $query = Mustahik::query();
+        if ($request->filled('rt_rw')) {
+            $rt_rw = $request->input('rt_rw');
+            if ($rt_rw == 'lainnya') {
+                $query->whereNotNull('wilayah_lain');
+            } else {
+                $query->where('rt_rw', $rt_rw);
+            }
+        }
 
+        // Ambil data sesuai filter
+        $data['detail'] = $query->get();
+
+        return Excel::download(new MustahikReport($data['detail']), "mustahik-Report-".date("Y").".xlsx");
     }
     
-    public function index() 
+    public function index(Request $request) 
     {
-        
-        $data['detail'] = Mustahik::all();
+        // $data['detail'] = Mustahik::all();
  
+        // return view('mustahik.report', compact('data'));
+
+        $query = Mustahik::query();
+
+        // Filter berdasarkan wilayah jika dipilih
+        if ($request->has('rt_rw')) { 
+            $rt_rw = $request->input('rt_rw');
+
+            // Jika "lainnya" dipilih, atur kondisi sesuai kebutuhan Anda
+            if ($rt_rw == 'lainnya') { 
+                $query->whereNotNull('wilayah_lain');
+            } else {
+                $query->where('rt_rw', $rt_rw);
+            }
+        }
+
+        $data['detail'] = $query->get();
+
         return view('mustahik.report', compact('data'));
     }
 
