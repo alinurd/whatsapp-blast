@@ -55,7 +55,7 @@
                               </td>
                               <td>
 
-                                 {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Select Kategri', 'id' => 'dibayarkan']) }}
+                                 {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Select Kategri', 'id' => 'kateg0']) }}
 
                               </td>
                               <td>
@@ -123,6 +123,7 @@
          } else if (i == 5) {
             newCell.innerHTML = '<input type="text" name="jumlah[]" id="jumlah' + rowCount + '" class="form-control">';
          } else {
+            
             newCell.innerHTML = '{!! Form::select('user[]', $agt, "", ['class' => 'form-control']) !!}';
          }
       }
@@ -173,3 +174,40 @@
 
 </script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+ 
+
+
+<script>
+    $(document).ready(function() {
+        // Initialize Select2 for the initial select dropdown
+        $('#dibayarkan').select2({
+            placeholder: '-- Select --',
+            allowClear: true // Optional: This will allow clearing the selected option
+        });
+        $('#user0').select2({
+            placeholder: '-- Select --',
+            allowClear: true // Optional: This will allow clearing the selected option
+        });
+        $('#kateg0').select2({
+            placeholder: '-- Select --',
+            allowClear: true // Optional: This will allow clearing the selected option
+        });
+        $('#satuan0').select2({
+            placeholder: '-- Select --',
+            allowClear: true // Optional: This will allow clearing the selected option
+        });
+
+        // Initialize Select2 for dynamically added select dropdowns
+        $(document).on('DOMNodeInserted', function(e) {
+            if ($(e.target).is('select.form-control')) {
+                $(e.target).select2({
+                    placeholder: 'Select User',
+                    allowClear: true
+                });
+            }
+        });
+    });
+</script>
