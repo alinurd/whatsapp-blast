@@ -21,7 +21,7 @@ class Controller extends BaseController
     public function generateCodeById($param, $id)
     {
         $ran = Str::random(6);
-        $code = $param . "-" . $ran . "-". date("d-M-Y") ."-000".$id;
+        $code = $param . "-" . $ran . "-". date("dmy") ."-000".$id;
         return $code;
     }
     public function sendSms($param)
