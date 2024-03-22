@@ -8,7 +8,7 @@
             </svg>
         </span>
     </a>
-    
+<!--     
     <?php 
     $message = __('global-message.delete_alert', ['form' => __('kategori')])
     ?>
@@ -24,5 +24,5 @@
     <form action="{{route('kategori.destroy',$id)}}" id="kategori-delete-{{$id}}" method="post">
         @method('delete')
         @csrf()
-    </form> 
+    </form>  -->
 </div>
