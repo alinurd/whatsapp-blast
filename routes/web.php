@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MuzakkiController;
 use App\Http\Controllers\MustahikController; 
+use App\Http\Controllers\MustahikuserController; 
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,8 @@ Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-
 //UI Pages Routs
 // Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
 Route::get('/',[HomeController::class, 'landing_index'])->name('uisheet');
+ 
+Route::get('mustahikuser/create', [MustahikuserController::class, 'create'])->name('mustahikuser.create');
 
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module
@@ -85,7 +88,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('report/mustahik', [MustahikReport::class, 'index'])->name('mustahikreport.index');
 
     Route::resource('mustahik', MustahikController::class);   
-
 });
    
 //App Details Page => 'Dashboard'], function() { 

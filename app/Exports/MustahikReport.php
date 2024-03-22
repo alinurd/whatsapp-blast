@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Exports;
 
 use App\Models\Mustahik;
@@ -8,51 +9,26 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request; 
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Illuminate\Support\Collection;
 
-class MustahikReport implements FromCollection, WithHeadings{
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+class MustahikReport implements FromCollection, WithHeadings, WithMapping{
     /** 
     * @return \Illuminate\Support\Collection
     */  
 
+    protected $data;
+
+    public function __construct(Collection $data)
+    {
+        $this->data = $data;
+    }
+
     public function collection()
     {
-        $mustahiks = Mustahik::all();
-        $ktg = Kategori::pluck('nama_kategori', 'id');
-
-        $data = [];
-        $no = 1;
-    
-        foreach ($mustahiks as $mustahik) {
-            $data[] = [
-                'No' => $no++,
-                'Code' => $mustahik->code,
-                'Tanggal' => $mustahik->tanggal,
-                'Nama' => $mustahik->nama_lengkap,
-                'Jenis Kelamin' => $mustahik->jenis_kelamin,
-                'Nomor Telepon' => $mustahik->nomor_telp,
-                'Status Perkawinan' => $mustahik->status_perkawinan,
-                'RT/RW' => $mustahik->rt_rw,
-                'Wilayah Lain' => $mustahik->wilayah_lain,
-                'Alamat' => $mustahik->alamat,
-                'Pekerjaan' => $mustahik->pekerjaan,
-                'Jumlah Pendapatan' => $mustahik->jumlah_pendapatan,
-                'Jumlah Anak Dalam Tanggungan' => $mustahik->jumlah_anak_dalam_tanggungan,
-                'Jumlah Bansos Diterima' => $mustahik->jumlah_bansos_diterima,
-                'Status Tempat Tinggal' => $mustahik->status_tempat_tinggal,
-                'Pengeluaran Listrik' => $mustahik->pengeluaran_listrik,
-                'Pengeluaran Kontrakan' => $mustahik->pengeluaran_kontrakan,
-                'Jumlah Hutang' => $mustahik->jumlah_hutang,
-                'Keperluan Hutang' => $mustahik->keperluan_hutang,
-                'Kategori Mustahiq' => $mustahik->kategori_mustahik,
-                'Kategori ID' => $mustahik->kategori->nama_kategori,
-                'Jumlah Uang Diterima' => $mustahik->jumlah_uang_diterima,
-                'Jumlah Beras Diterima' => $mustahik->jumlah_beras_diterima,
-                'Satuan Beras' => $mustahik->satuan_beras,
-                'Keterangan' => $mustahik->keterangan,
-            ];
-        }    
-
-        return collect($data);
+        return $this->data;
     }
 
     public function headings(): array
@@ -85,6 +61,37 @@ class MustahikReport implements FromCollection, WithHeadings{
             'Keterangan',
         ];  
     }
+
+    public function map($mustahik): array
+    {
+        return [
+            $mustahik->id,
+            $mustahik->code,
+            $mustahik->tanggal,
+            $mustahik->nama_lengkap,
+            $mustahik->jenis_kelamin,
+            $mustahik->nomor_telp,
+            $mustahik->status_perkawinan,
+            $mustahik->rt_rw,
+            $mustahik->wilayah_lain,
+            $mustahik->alamat,
+            $mustahik->pekerjaan,
+            $mustahik->jumlah_pendapatan,
+            $mustahik->jumlah_anak_dalam_tanggungan,
+            $mustahik->jumlah_bansos_diterima,
+            $mustahik->status_tempat_tinggal,
+            $mustahik->pengeluaran_listrik,
+            $mustahik->pengeluaran_kontrakan,
+            $mustahik->jumlah_hutang,
+            $mustahik->keperluan_hutang,
+            $mustahik->kategori_mustahik,
+            $mustahik->kategori->nama_kategori,
+            $mustahik->jumlah_uang_diterima,
+            $mustahik->jumlah_beras_diterima,
+            $mustahik->satuan_beras,
+            $mustahik->keterangan,
+        ];
+    }
  
     public function mustahikreport(Request $request){
         // Filter berdasarkan wilayah jika dipilih
@@ -99,9 +106,13 @@ class MustahikReport implements FromCollection, WithHeadings{
         }
 
         // Ambil data sesuai filter
-        $data['detail'] = $query->get();
+        $filteredData = $query->get();
 
-        return Excel::download(new MustahikReport($data['detail']), "mustahik-Report-".date("Y").".xlsx");
+        // Buat objek MustahikReport dengan data yang difilter
+        $mustahikReport = new MustahikReport($filteredData);
+
+        // Ekspor ke Excel
+        return Excel::download($mustahikReport, "mustahik-Report-" . date("Y") . ".xlsx");
     }
     
     public function index(Request $request) 
@@ -130,5 +141,3 @@ class MustahikReport implements FromCollection, WithHeadings{
     }
 
 }
-
-

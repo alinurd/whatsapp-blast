@@ -36,11 +36,18 @@
                   <div class="header-title">
                      <h4 class="card-title">Report Mustahiq</h4>
                   </div>
-                  <div class="card-action">
+                  <!-- <div class="card-action">
                      <a href="{{route('mustahikreport')}}">
                         <span class="btn btn-primary float-end" id="export">Export to Excel</span>
                      </a> 
-                  </div> 
+                  </div>  -->
+                  @if($data['detail']->isNotEmpty()) <!-- Tambahkan kondisi untuk memeriksa apakah ada data yang sesuai dengan filter -->
+                  <div class="card-action">
+                     <a href="{{ route('mustahikreport', ['rt_rw' => request('rt_rw')]) }}"> <!-- Tambahkan rute untuk mengekspor data sesuai dengan filter yang dipilih -->
+                           <span class="btn btn-primary float-end" id="export">Export to Excel</span>
+                     </a>
+                  </div>
+                  @endif
             </div>   
             <div class="card-body">
                <div class="table-responsive">

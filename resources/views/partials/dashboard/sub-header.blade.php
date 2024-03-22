@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <div>
-                     <h1>Salam {{ auth()->user()->nama_lengkap}}!</h1>
+                     <h1>Salam, {{ auth()->user()->nama_lengkap}}!</h1>
                          <p>Awali dengan basmalah, semoga Allah mudahkan menunaikan amanah.</p>
                     </div>
                     <!-- <div>
