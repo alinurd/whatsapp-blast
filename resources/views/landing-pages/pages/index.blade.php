@@ -20,107 +20,208 @@
                 <img src="{{asset('images/dashboard/top-header3.png')}}" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
                 <img src="{{asset('images/dashboard/top-header4.png')}}" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
                 <img src="{{asset('images/dashboard/top-header5.png')}}" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
-            </div> 
+            </div>
         </div>
         <div class="card m-2">
-            <!-- <div class="card-header">
-                <center>
-                    <h6 for="thn">tampilkan berdasarkan Tahun</h6>
-                </center>
-                <div class="d-flex justify-content-between">
-                    <select name="thn" class="form-control">
-                        <center>
-                            <option value="2025">2025</option>
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                        </center>
-                    </select>
-                    <div class="d-flex align-items-center">
-                        <div class="btn btn-info" style="width: 200px;">Tampilkan data</div>
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="card border-bottom border-4 border-0 border-info">
+                        <div class="card bg-success mb-1">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="h3 p-3 rounded bg-soft-light text-white">
+                                            Fitrah
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="badge m-3">
+                                            <span class="h4 text-white">Uang Rp:</span>
+                                            <span class="badge bg-primary"><b class="h4 text-white">{{ number_format(100000, 0) }}.-</b></span>
+                                        </div>
+                                        <h6 class="text-white">Beras : 8,6 Liter & 75,Kg</h6>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div> -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card">
+                <div class="col-md-6">
+                    <div class="card border-bottom border-4 border-0 border-info">
+                        <div class="card bg-success mb-1">
                             <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                                        </svg>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="h3 p-3 rounded bg-soft-light text-white">
+                                            Fitrah
+                                        </div>
                                     </div>
-                                    <div class="progress-detail">
-                                        <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Transaksi Muzakki</p>
-                                        </a>
-                                        <h4 class="counter" style="visibility: visible;" title="Invocie:{{ $TransactionsmuzakkiH }} | Muzakki:{{ $Transactionsmuzakki }}">{{ $TransactionsmuzakkiH }}/{{ $Transactionsmuzakki}}</h4>
+                                    <div>
+                                        <div class="badge m-3">
+                                            <span class="h4 text-white">Uang Rp:</span>
+                                            <span class="badge bg-primary"><b class="h4 text-white">{{ number_format(100000, 0) }}.-</b></span>
+                                        </div>
+                                        <h6 class="text-white">Beras : 8,6 Liter & 75,Kg</h6>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Transaksi Mustahiq</p>
-                                        </a>
-                                        <h4 class="counter" style="visibility: visible;">{{ $Transactionsmustahik }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Saldo Uang</p>
-                                        </a>
-                                        <h6 class="counter" style="visibility: visible;">{{ number_format($totalSaldoUang) }} Rupiah</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="progress-widget">
-                                    <div id="circle-progress-01" class="circle-progress-01 circle-progress circle-progress-primary text-center" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
-                                        <svg class="card-slie-arrow " width="24" height="24px" viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="progress-detail">
-                                        <a href="#" title="Lihat Muzakki Detail">
-                                            <p class="mb-2">Saldo Beras</p>
-                                        </a>
-                                        <h6 class="counter" style="visibility: visible;">{{ $totalSaldoBerasKg }} Kg | {{ $totalSaldoBerasL }} Liter</h6>
-                                    </div>
+                                    <div></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card border-bottom border-4 border-0 border-info">
+                        <div class="card bg-success mb-1">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="h3 p-3 rounded bg-soft-light text-white">
+                                            Maal
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="badge m-3">
+                                            <span class="h4 text-white">Uang Rp:</span>
+                                            <span class="badge bg-primary"><b class="h4 text-white">{{ number_format(100000, 0) }}.-</b></span>
+                                        </div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-bottom border-4 border-0 border-info">
+                        <div class="card bg-success mb-1">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="h3 p-3 rounded bg-soft-light text-white">
+                                            Infaq
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="badge m-3">
+                                            <span class="h4 text-white">Uang Rp:</span>
+                                            <span class="badge bg-primary"><b class="h4 text-white">{{ number_format(100000, 0) }}.-</b></span>
+                                        </div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column">
+                            <div class="mb-3">
+                                <h4>Area Distribusi dan Jumlah Mustahiq</h4>
+                            </div>
+                            <div class="border rounded">
+                                <div id="extrachart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <h3>
+            <span class="badge rounded-pill bg-success text-start"> Masjid Alhasanah <span class="badge rounded-pill bg-light text-dark m-3"> Taman Meruya III, Blok B13 No.1, Kembangan, Jakarta Barat | +6221 256 844 72</span></span>
+            </h3>
         </div>
     </div>
+    </div>
+
+
+    </div>
+    </div>
+
 </x-app-layout>
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- ApexCharts -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+    $(document).ready(function() {
+    let seriesData = [];
+    const greenColors = [
+        '#5cb85c', '#4cae4c', '#449d44', '#398439', '#2e732e',
+        '#256625', '#1b541b', '#104410', '#0a330a', '#032203',
+        '#0a330a', '#104410', '#1b541b', '#256625', '#2e732e',
+        '#398439', '#449d44', '#5cb85c' 
+    ];
+    for (let i = 1; i <= 17; i++) {
+        let rtNumber = i.toString().padStart(3, '0');
+        seriesData.push({
+            name: 'RT' + rtNumber,
+            data: [Math.floor(Math.random() * 100)],
+            color: greenColors[i - 1]
+        });
+    }
+    
+    seriesData.push({
+        name: 'Wilayah Lainnya',
+        data: [Math.floor(Math.random() * 100)],
+        color: greenColors[greenColors.length - 1] 
+    });
+
+    const options = {
+        series: seriesData,
+        chart: {
+            type: 'bar',
+            height: 500,
+            sparkline: {
+                enabled: false
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '58%',
+                borderRadius: 6,
+            },
+        },
+        dataLabels: {
+            enabled: true
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            curve: 'smooth',
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: ['JUMLAH MUSTAHIQ BERDASARKAN AREA '],
+
+        },
+        yaxis: {
+            title: {
+                text: ''
+            }
+        },
+        fill: {
+            opacity: 1,
+            colors: greenColors
+        },
+        tooltip: {
+            y: {
+                formatter: function(val) {
+                    return "" + val + " Jiwa"
+                }
+            }
+        }
+    };
+    const chart = new ApexCharts(document.querySelector("#extrachart"), options);
+    chart.render();
+});
+
+</script>
