@@ -128,12 +128,12 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::findOrFail($id);
         $status = 'errors';
-        $message = __('global-message.delete_form', ['form' => __('kategori.title')]);
+        $message = __('global-message.delete_form', ['form' => __('kategori')]);
 
         if ($kategori != '') {
             $kategori->delete();
             $status = 'success';
-            $message = __('global-message.delete_form', ['form' => __('kategori.title')]);
+            $message = __('global-message.delete_form', ['form' => __('kategori')]);
         }
 
         if (request()->ajax()) {
@@ -142,5 +142,5 @@ class KategoriController extends Controller
 
         return redirect()->back()->with($status, $message);
 
-    }
+    } 
 }
