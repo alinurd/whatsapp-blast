@@ -23,7 +23,7 @@
                     <img src="{{ asset(env('APP_LOGO')) }}" alt="story-img" class="rounded-pill avatar-40">
 
                     <!--logo End-->
-                    <h5 class="logo-title  text-secondary">Badan Amil Zakat DKM Al-hasanah</h5>
+                    <h5 class="logo-title text-secondary">Badan Amil Zakat DKM Al-hasanah</h5>
                 </a>
             </div>
           

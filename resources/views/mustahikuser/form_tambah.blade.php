@@ -1,4 +1,4 @@
-<x-app-layout layout="landing">
+<x-app-layout layout="simple">
     <div class="container mt-3">
         <div class="card m-2">
             <div class="card-body">
@@ -7,13 +7,13 @@
                <div class="card-header d-flex justify-content-between">
                   <div class="header-title">
                      <h4 class="card-title">Mustahiq</h4>
-                  </div>
-                  <div class="card-action">
-                        <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>
                   </div> 
+                  <div class="card-action">
+                        <a href="{{route('uisheet')}}" class="btn btn-sm btn-primary" role="button">Back</a>
+                  </div>   
                </div>  
                <div class="card-body"> 
-               <form id="form-wizard1" class="text-center mt-3" method="POST" action="{{ route('mustahik.store') }}" enctype="multipart/form-data">
+               <form id="form-wizard1" class="text-center mt-3" method="POST" action="{{ route('mustahikuser.store') }}" enctype="multipart/form-data">
                      @csrf
                      <ul id="top-tab-list" class="p-0 row list-inline">
                         <li class="col-lg-3 col-md-6 text-start mb-2 active" id="account">

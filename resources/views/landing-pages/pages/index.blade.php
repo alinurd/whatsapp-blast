@@ -25,7 +25,6 @@
         <div class="card m-2">
             <div class="row">
                 <div class="col-md-6">
-
                     <div class="card border-bottom border-4 border-0 border-info">
                         <div class="card bg-success mb-1">
                             <div class="card-body">
@@ -37,10 +36,10 @@
                                     </div>
                                     <div>
                                         <div class="badge m-3">
-                                            <span class="h4 text-white">Uang Rp:</span>
-                                            <span class="badge bg-primary"><b class="h4 text-white">{{ number_format(100000, 0) }}.-</b></span>
+                                            <span class="h4 text-white">Uang:</span>
+                                            <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanFitrah, 0) }}.-</b></span>
                                         </div>
-                                        <h6 class="text-white">Beras : 8,6 Liter & 75,Kg</h6>
+                                        <h6 class="text-white">Beras: {{ number_format($totalSaldoBerasLFitrah, 1) }} Liter &amp; {{ number_format($totalSaldoBerasKgFitrah, 0) }} Kg</h6>
                                     </div>
                                     <div></div>
                                 </div>
@@ -55,15 +54,14 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <div class="h3 p-3 rounded bg-soft-light text-white">
-                                            Fitrah
+                                            Infaq
                                         </div>
                                     </div>
                                     <div>
                                         <div class="badge m-3">
-                                            <span class="h4 text-white">Uang Rp:</span>
-                                            <span class="badge bg-primary"><b class="h4 text-white">{{ number_format(100000, 0) }}.-</b></span>
+                                            <span class="h4 text-white">Uang:</span>
                                         </div>
-                                        <h6 class="text-white">Beras : 8,6 Liter & 75,Kg</h6>
+                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanInfaq, 0) }}.-</b></span>
                                     </div>
                                     <div></div>
                                 </div>
@@ -85,9 +83,9 @@
                                     </div>
                                     <div>
                                         <div class="badge m-3">
-                                            <span class="h4 text-white">Uang Rp:</span>
-                                            <span class="badge bg-primary"><b class="h4 text-white">{{ number_format(100000, 0) }}.-</b></span>
+                                            <span class="h4 text-white">Uang:</span>
                                         </div>
+                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanMaal, 0) }}.-</b></span>
                                     </div>
                                     <div></div>
                                 </div>
@@ -102,14 +100,15 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <div class="h3 p-3 rounded bg-soft-light text-white">
-                                            Infaq
+                                            Fidyah
                                         </div>
                                     </div>
                                     <div>
                                         <div class="badge m-3">
-                                            <span class="h4 text-white">Uang Rp:</span>
-                                            <span class="badge bg-primary"><b class="h4 text-white">{{ number_format(100000, 0) }}.-</b></span>
+                                            <span class="h4 text-white">Uang:</span>
                                         </div>
+                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanFidyah, 0) }}.-</b></span>
+                                        <h6 class="text-white">Beras: {{ number_format($totalSaldoBerasKgFidyah, 1) }} Liter &amp; {{ number_format($totalSaldoBerasLFidyah, 0) }} Kg</h6>
                                     </div>
                                     <div></div>
                                 </div>
@@ -129,7 +128,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <h3>
             <span class="badge rounded-pill bg-success text-start"> Masjid Alhasanah <span class="badge rounded-pill bg-light text-dark m-3"> Taman Meruya III, Blok B13 No.1, Kembangan, Jakarta Barat | +6221 256 844 72</span></span>
@@ -137,7 +135,6 @@
         </div>
     </div>
     </div>
-
 
     </div>
     </div>
