@@ -23,6 +23,15 @@ class MustahikDataTable extends DataTable
             static $index = 0;
             return ++$index;
         })
+        ->editColumn('rw_id', function($query) {
+            if (!empty($query->rw_id)) {
+                return $query->rw->rt . "/RW004";
+            } elseif (!empty($query->wilayah_lain)) {
+                return $query->wilayah_lain;
+            } else {
+                return 'Tidak ada informasi';
+            }
+        })
         ->editColumn('userProfile.country', function($query) {
             return $query->userProfile->country ?? '-';
         })
@@ -108,6 +117,7 @@ class MustahikDataTable extends DataTable
     {
         return [ 
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
+            ['data' => 'rw_id', 'name' => 'rw_id', 'title' => 'Informasi Wilayah'], // Menambahkan kolom wilayah
             ['data' => 'code', 'name' => 'code', 'title' => 'Code'],
             ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Nama'],
             ['data' => 'kategori_mustahik', 'name' => 'kategori_mustahik', 'title' => 'Kategori Mustahiq'],

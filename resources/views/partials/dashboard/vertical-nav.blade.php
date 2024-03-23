@@ -19,7 +19,7 @@
     <li>
         <hr class="hr-horizontal">
     </li>
-    @if(Auth::user()->role ==2 || Auth::user()->role ==1 )
+    @if(Auth::user()->role ==1 || Auth::user()->role ==1 )
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Data</span>

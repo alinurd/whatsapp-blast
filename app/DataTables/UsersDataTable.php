@@ -73,8 +73,9 @@ class UsersDataTable extends DataTable
      */
     public function query()
     {
-        $model = User::query()->with('userProfile');
-        return $this->applyScopes($model);
+        return User::query()
+        ->where('user_type', '!=', 'pemberi')
+        ->with('userProfile');
     }
 
     /**
@@ -109,7 +110,6 @@ class UsersDataTable extends DataTable
             ['data' => 'jenis_kelamin', 'name' => 'jenis_kelamin', 'title' => 'Jenis Kelamin'],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'nomor_telp', 'name' => 'nomor_telp', 'title' => 'Nomor Telp'],
-            ['data' => 'user_type', 'name' => 'user_type', 'title' => 'Tipe User'],
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
