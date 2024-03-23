@@ -14,6 +14,7 @@ use App\Models\MuzakkiHeader;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MuzakkiController extends Controller
 {
@@ -122,6 +123,7 @@ $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
         $response = curl_exec($curl);
          curl_close($curl);
     }
+ 
 // dd($response);
     return redirect()->route('invoice', ['code' => $MuzakkiHeader->code]);
 }
@@ -131,8 +133,16 @@ $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
         $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
         $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
         return view('muzakki.print', compact('data'));
+        // return view('invoice', compact('data'));
     }
-
+    public function cetakinvoice($code)
+    {
+        $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+        $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
+        $pdf = Pdf::loadView('invoice', $data);
+         return $pdf->download('invoice.pdf');
+    }
+    
     public function muzakkiCreate()
     {
         $view = view('muzakki.form-user')->render();
