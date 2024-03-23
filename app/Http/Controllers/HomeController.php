@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Muzakki;
 use App\Models\Mustahik;
+use App\Models\Rw;
 use App\Models\MuzakkiHeader;
 
 class HomeController extends Controller
@@ -15,7 +16,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         // Menghitung jumlah transaksi muzakki dan mustahik dari database
-        $Transactionsmuzakki = Muzakki::count();
+        $Transactionsmuzakki = Muzakki::count(); 
         $TransactionsmuzakkiH = MuzakkiHeader::count();
         $Transactionsmustahik = Mustahik::count();
 
@@ -52,12 +53,12 @@ class HomeController extends Controller
         
         $totalSaldoBerasKg = $totalBerasMuzakkiKg - $totalBerasMustahikKg;
         $totalSaldoBerasL = $totalBerasMuzakkiL - $totalBerasMustahikL;
-
+     
         $assets = ['chart', 'animation'];
         return view('dashboards.dashboard', compact('assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalSaldoUang', 'totalSaldoBerasKg','totalSaldoBerasL', 'TransactionsmuzakkiH'));
     }
 
-    /*
+    /* 
      * Menu Style Routs
      */
     public function horizontal(Request $request)
@@ -379,11 +380,39 @@ class HomeController extends Controller
         // Menghitung total saldo beras (dalam kilogram dan liter) untuk kategori Fidyah
         $totalSaldoBerasKgFidyah = $totalBerasMuzakkiKgFidyah - $totalBerasMustahikKgFidyah;
         $totalSaldoBerasLFidyah = $totalBerasMuzakkiLFidyah - $totalBerasMustahikLFidyah;
- 
-        $assets = ['chart', 'animation'];
-        return view('landing-pages.pages.index', compact('assets', 'sisaPemasukanFitrah', 'sisaPemasukanMaal', 'sisaPemasukanInfaq', 'sisaPemasukanFidyah', 'totalSaldoBerasKgFitrah', 'totalSaldoBerasLFitrah', 'totalSaldoBerasKgFidyah', 'totalSaldoBerasLFidyah'));
-    } 
 
+        // Mendapatkan semua data RT dari tabel RW
+    $allRt = Rw::pluck('rt')->toArray();
+
+    // Inisialisasi array untuk menyimpan jumlah mustahiq untuk setiap RT
+    $rtData = [];
+
+    // Menghitung jumlah mustahiq untuk setiap RT
+    foreach ($allRt as $rt) {
+        // Hitung jumlah mustahiq berdasarkan RT dari model Mustahik
+        $jumlahMustahiq = Mustahik::whereHas('rw', function ($query) use ($rt) {
+            $query->where('rt', $rt);
+        })->count();
+        // Masukkan jumlah mustahiq ke dalam array $rtData
+        $rtData[] = $jumlahMustahiq;
+    }
+
+    // Mendapatkan label RT untuk digunakan dalam grafik
+    $rtLabels = $allRt;
+
+    // Menghitung jumlah mustahiq untuk wilayah lain dari tabel Mustahik
+    $jumlahMustahiqWilayahLain = Mustahik::whereNull('rw_id')->count();
+
+    // Menambahkan jumlah mustahiq wilayah lain ke dalam array $rtData
+    $rtData[] = $jumlahMustahiqWilayahLain;
+    
+    // Menambahkan label untuk wilayah lain
+    $rtLabels[] = 'Wilayah Lain';
+    
+        $assets = ['chart', 'animation'];
+        return view('landing-pages.pages.index', compact('rtLabels', 'rtData', 'assets', 'sisaPemasukanFitrah', 'sisaPemasukanMaal', 'sisaPemasukanInfaq', 'sisaPemasukanFidyah', 'totalSaldoBerasKgFitrah', 'totalSaldoBerasLFitrah', 'totalSaldoBerasKgFidyah', 'totalSaldoBerasLFidyah'));
+    } 
+    
     public function landing_blog(Request $request)
     {
         return view('landing-pages.pages.blog');

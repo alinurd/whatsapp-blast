@@ -54,14 +54,15 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <div class="h3 p-3 rounded bg-soft-light text-white">
-                                            Infaq
+                                            Fidyah
                                         </div>
                                     </div>
                                     <div>
                                         <div class="badge m-3">
                                             <span class="h4 text-white">Uang:</span>
                                         </div>
-                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanInfaq, 0) }}.-</b></span>
+                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanFidyah, 0) }}.-</b></span>
+                                        <h6 class="text-white">Beras: {{ number_format($totalSaldoBerasKgFidyah, 1) }} Liter &amp; {{ number_format($totalSaldoBerasLFidyah, 0) }} Kg</h6>
                                     </div>
                                     <div></div>
                                 </div>
@@ -100,15 +101,14 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <div class="h3 p-3 rounded bg-soft-light text-white">
-                                            Fidyah
+                                            Infaq
                                         </div>
                                     </div>
                                     <div>
                                         <div class="badge m-3">
                                             <span class="h4 text-white">Uang:</span>
                                         </div>
-                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanFidyah, 0) }}.-</b></span>
-                                        <h6 class="text-white">Beras: {{ number_format($totalSaldoBerasKgFidyah, 1) }} Liter &amp; {{ number_format($totalSaldoBerasLFidyah, 0) }} Kg</h6>
+                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanInfaq, 0) }}.-</b></span>
                                     </div>
                                     <div></div>
                                 </div>
@@ -141,84 +141,98 @@
 
 </x-app-layout>
 
-
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- ApexCharts -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-<script>
-    $(document).ready(function() {
-    let seriesData = [];
-    const greenColors = [
+<div id="extrachart"></div>
+
+@php
+    $greenColors = [
         '#5cb85c', '#4cae4c', '#449d44', '#398439', '#2e732e',
         '#256625', '#1b541b', '#104410', '#0a330a', '#032203',
         '#0a330a', '#104410', '#1b541b', '#256625', '#2e732e',
         '#398439', '#449d44', '#5cb85c' 
     ];
-    for (let i = 1; i <= 17; i++) {
-        let rtNumber = i.toString().padStart(3, '0');
+@endphp
+
+<script>
+    $(document).ready(function() {
+        let seriesData = [];
+
+        @php
+            $colorIndex = 0;
+        @endphp
+
+        @foreach($rtData as $index => $data)
+            @if($index < count($rtLabels) - 1)
+                seriesData.push({
+                    name: 'RT{{ str_pad($index + 1, 3, "0", STR_PAD_LEFT) }}',
+                    data: [{{ $data }}],
+                    color: '{{ $greenColors[$colorIndex++] }}'
+                });
+            @endif
+        @endforeach
+
         seriesData.push({
-            name: 'RT' + rtNumber,
-            data: [Math.floor(Math.random() * 100)],
-            color: greenColors[i - 1]
+            name: 'Wilayah Lainnya',
+            data: [{{ end($rtData) }}],
+            color: '{{ $greenColors[count($rtLabels) - 1] }}' 
         });
-    }
-    
-    seriesData.push({
-        name: 'Wilayah Lainnya',
-        data: [Math.floor(Math.random() * 100)],
-        color: greenColors[greenColors.length - 1] 
-    });
 
-    const options = {
-        series: seriesData,
-        chart: {
-            type: 'bar',
-            height: 500,
-            sparkline: {
-                enabled: false
-            }
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '58%',
-                borderRadius: 6,
+        const options = {
+            series: seriesData,
+            chart: {
+                type: 'bar',
+                height: 500,
+                sparkline: {
+                    enabled: false
+                }
             },
-        },
-        dataLabels: {
-            enabled: true
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            curve: 'smooth',
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ['JUMLAH MUSTAHIQ BERDASARKAN AREA '],
-
-        },
-        yaxis: {
-            title: {
-                text: ''
-            }
-        },
-        fill: {
-            opacity: 1,
-            colors: greenColors
-        },
-        tooltip: {
-            y: {
-                formatter: function(val) {
-                    return "" + val + " Jiwa"
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '58%',
+                    borderRadius: 6,
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                curve: 'smooth',
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: ['JUMLAH MUSTAHIQ BERDASARKAN AREA '],
+            },
+            yaxis: {
+                title: {
+                    text: ''
+                },
+                max: 100, // Batas tinggi grafik
+                tickAmount: 5 // Jumlah label pada sumbu y
+            },
+            fill: {
+                opacity: 1,
+                colors: @json($greenColors)
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return "" + val + " Jiwa"
+                    }
                 }
             }
-        }
-    };
-    const chart = new ApexCharts(document.querySelector("#extrachart"), options);
-    chart.render();
-});
-
+        };
+        
+        const chart = new ApexCharts(document.querySelector("#extrachart"), options);
+        chart.render();
+    }); 
 </script>
+
+
+

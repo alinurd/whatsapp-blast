@@ -16,7 +16,7 @@ class MustahikuserController extends Controller
 
         return view('mustahikuser.form_tambah', compact('ktg'));
     }
-
+ 
     public function store(Request $request)
     {  
         // Validate the request data 
@@ -45,7 +45,7 @@ class MustahikuserController extends Controller
             'rt_rw' => 'nullable|string|max:255',  
             'nama_wilayah' => 'nullable|max:255', 
             'keterangan' => 'nullable|max:255', 
-        ]);  
+        ]);   
         
         // Create a new mustahik instance
         $mustahik = new Mustahik();
@@ -104,7 +104,7 @@ class MustahikuserController extends Controller
         $mustahik->jumlah_beras_diterima = $jumlah_beras;
         $mustahik->satuan_beras = $request->satuan_beras;
         $mustahik->keterangan = $request->keterangan;    
-        $mustahik->rt_rw = $request->rt_rw;    
+        $mustahik->rw_id = $request->rt_rw;    
         $mustahik->wilayah_lain = $request->nama_wilayah;    
 
          // If "Apakah masuk ke RW 04?" is "Tidak", assign "Nama Wilayah"

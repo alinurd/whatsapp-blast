@@ -19,7 +19,8 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
     * @return \Illuminate\Support\Collection
     */  
 
-    protected $data;
+    protected $data; 
+    protected $row = 0;
 
     public function __construct(Collection $data)
     {
@@ -35,14 +36,13 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
     {
         return [
             'No',
+            'Informasi Wilayah',
             'Code Invoice',
             'Tanggal',
             'Nama',
             'Jenis Kelamin',
             'No Hp',
             'Status Perkawinan',
-            'RT/RW',
-            'Wilayah Lain',
             'Alamat',
             'Pekerjaan',
             'Jumlah Pendapatan',
@@ -64,16 +64,29 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
 
     public function map($mustahik): array
     {
+        $this->row++; // Increment nomor setiap kali memetakan data baru
+
+        // Tentukan nilai untuk kolom Informasi Wilayah berdasarkan filter
+        $informasi_wilayah = '';
+        if ($mustahik->rw_id || $mustahik->wilayah_lain) {
+            if ($mustahik->rw_id) {
+                $informasi_wilayah = $mustahik->rw->rt . '/RW004';
+            } else {
+                $informasi_wilayah = $mustahik->wilayah_lain;
+            }
+        } else {
+            $informasi_wilayah = 'Tidak ada informasi';
+        }
+
         return [
-            $mustahik->id,
+            $this->row, // Nomor berurutan
+            $informasi_wilayah,
             $mustahik->code,
             $mustahik->tanggal,
             $mustahik->nama_lengkap,
             $mustahik->jenis_kelamin,
             $mustahik->nomor_telp,
             $mustahik->status_perkawinan,
-            $mustahik->rt_rw,
-            $mustahik->wilayah_lain,
             $mustahik->alamat,
             $mustahik->pekerjaan,
             $mustahik->jumlah_pendapatan,
@@ -101,7 +114,7 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
             if ($rt_rw == 'lainnya') {
                 $query->whereNotNull('wilayah_lain');
             } else {
-                $query->where('rt_rw', $rt_rw);
+                $query->where('rw_id', $rt_rw);
             }
         }
 
@@ -131,7 +144,7 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
             if ($rt_rw == 'lainnya') { 
                 $query->whereNotNull('wilayah_lain');
             } else {
-                $query->where('rt_rw', $rt_rw);
+                $query->where('rw_id', $rt_rw);
             }
         }
 
@@ -140,4 +153,4 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
         return view('mustahik.report', compact('data'));
     }
 
-}
+} 

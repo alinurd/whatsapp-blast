@@ -40,7 +40,7 @@ class MustahikController extends Controller
     }
 
     public function store(Request $request)
-    {  
+    {   
         // Validate the request data 
         $validatedData = $request->validate([  
             'nama_lengkap' => 'required|string|max:255',
@@ -113,7 +113,7 @@ class MustahikController extends Controller
         // $status_tempat_tinggal = $request->status_tempat_tinggal;
         // if (strlen($status_tempat_tinggal) > 255) {
         //     $status_tempat_tinggal = substr($status_tempat_tinggal, 0, 255);   
-        // }
+        // } 
 
         $mustahik->pengeluaran_kontrakan = $jumlah_pengeluaran_kontrakan;
         $mustahik->pengeluaran_listrik = $jumlah_pengeluaran_listrik;
@@ -122,11 +122,11 @@ class MustahikController extends Controller
         $mustahik->kategori_mustahik = $request->kategori_mustahik;
         $mustahik->tanggal = $request->tgl_terima_zakat; 
         $mustahik->kategori_id = $kategoriId;
-        $mustahik->jumlah_uang_diterima = $jumlah_uang; 
+        $mustahik->jumlah_uang_diterima = $jumlah_uang;   
         $mustahik->jumlah_beras_diterima = $jumlah_beras;
         $mustahik->satuan_beras = $request->satuan_beras;
         $mustahik->keterangan = $request->keterangan;    
-        $mustahik->rt_rw = $request->rt_rw;    
+        $mustahik->rw_id = $request->rt_rw;    
         $mustahik->wilayah_lain = $request->nama_wilayah;    
 
          // If "Apakah masuk ke RW 04?" is "Tidak", assign "Nama Wilayah"
@@ -174,6 +174,8 @@ class MustahikController extends Controller
        // Pass the category data to the form view
        return view('mustahik.detail', compact('mustahik','ktg'));
     }
+
+    
 
 }
   

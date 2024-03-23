@@ -103,7 +103,7 @@ class MustahikDataTable extends DataTable
      * Get columns.
      *
      * @return array
-     */
+     */ 
     protected function getColumns()
     {
         return [ 
@@ -121,6 +121,9 @@ class MustahikDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center hide-search'),
         ];
+
+        return $columns;
+
     }
  
 }
