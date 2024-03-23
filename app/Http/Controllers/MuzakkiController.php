@@ -94,7 +94,8 @@ $payload = json_encode([
         ]
     ]
 ]);
-
+$n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
+ $this->sendWa($no,$n);
  
         $key = 'b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f';
         $base_url = 'qymz4m.api.infobip.com';
