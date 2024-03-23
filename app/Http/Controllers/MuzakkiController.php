@@ -137,6 +137,7 @@ $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
     }
     public function cetakinvoice($code)
     {
+        ini_set('memory_limit', '2G');
         $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
         $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
         $pdf = Pdf::loadView('invoice', $data);
