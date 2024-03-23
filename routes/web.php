@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
     
     Route::get('invoice/{code}', [MuzakkiController::class, 'invoice'])->name('invoice');
     Route::post('muzakkiUserStore', [MuzakkiController::class, 'muzakkiUserStore'])->name('muzakkiUserStore');
-    // Route::get('muzakkireport', [MuzakkiController::class, 'muzakkireport'])->name('muzakkireport');
+    Route::get('cetakinvoice/{code}', [MuzakkiController::class, 'cetakinvoice'])->name('cetakinvoice');
     Route::get('muzakkiCreate', [MuzakkiController::class, 'muzakkiCreate'])->name('muzakkiCreate');
     Route::resource('muzakki', MuzakkiController::class);  
         

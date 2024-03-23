@@ -2,8 +2,8 @@
    <div class="row">
       <div class="col-lg-12">
          <div class="card rounded">
-            <button type="button" class="btn btn-success float-end" id="print">Print</button>
-            <div class="card-body">
+         <a href="{{ route('cetakinvoice', ['code' => $data['header'][0]['code']]) }}" target="_blank" class="btn btn-success float-end">Print</a>
+             <div class="card-body">
                <div class="row">
                   <div class="col-sm-12">
                      <br><br><br>
