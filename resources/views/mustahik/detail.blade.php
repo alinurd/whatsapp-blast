@@ -35,9 +35,9 @@
                             </div>
                             <div class="mt-2">
                             <h6 class="mb-1">Informasi Wilayah:</h6>
-                                @if($mustahik->rt_rw || $mustahik->wilayah_lain)
-                                    @if($mustahik->rt_rw) 
-                                        <p>{{ $mustahik->rt_rw }}</p>
+                                @if($mustahik->rw_id || $mustahik->wilayah_lain)
+                                    @if($mustahik->rw_id) 
+                                        <p>{{ $mustahik->rw->rt }}/RW004</p>
                                     @else
                                         <p>{{ $mustahik->wilayah_lain }}</p>
                                     @endif

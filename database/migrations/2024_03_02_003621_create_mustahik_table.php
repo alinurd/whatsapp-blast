@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']); 
             $table->string('nomor_telp');
-            $table->string('rt_rw')->nullable(); 
+            $table->foreignId('rw_id')->constrained('rw'); 
             $table->string('wilayah_lain')->nullable(); 
-            $table->string('alamat'); 
+            $table->string('alamat');  
             $table->string('kategori_mustahik'); 
             $table->string('status_perkawinan');
             $table->string('pekerjaan'); 
