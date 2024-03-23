@@ -49,7 +49,7 @@ class MustahikController extends Controller
             'status_kawin' => 'required|string|max:255',
             'alamat' => 'required|string|max:255', 
             'perkerjaan' => 'required|string|max:255', 
-            'jml_pendapatan' => 'required|array', 
+            'jml_pendapatan' => 'required|array',  
             'jml_bansos' => 'required|array',
             'jml_anak' => 'required|string|max:255',
             'status_tinggal' => 'required|string|max:255',

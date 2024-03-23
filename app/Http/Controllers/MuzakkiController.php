@@ -141,7 +141,7 @@ $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
         $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
         $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
         $pdf = Pdf::loadView('invoice', $data);
-         return $pdf->download('invoice.pdf');
+        return $pdf->download('invoice.pdf');
     }
     
     public function muzakkiCreate()

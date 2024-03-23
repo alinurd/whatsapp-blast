@@ -127,12 +127,12 @@
                               </div>   
 
                               <div class="form-group col-md-12">
-                                    <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="alamat">Alamat: </label>
                                     {!! Form::text('alamat', old('alamat'), ['class' => 'form-control', 'required', 'placeholder' => 'Alamat']) !!}
                                  </div>  
                               </div>
                         </div>
-                        <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
+                        <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next" id="nextButton">Next</button>
                      </fieldset>
                      <fieldset>
                         <div class="form-card text-start">
