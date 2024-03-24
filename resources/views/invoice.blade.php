@@ -4,26 +4,33 @@
 <head>
   
 	<style>
-		.head {
-    max-width: 500px; 
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-	margin: auto;
+		@media print {
+    body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+    }
 
-    background-image: url("{{asset('images/icons/watermak.png')}}");
-    background-size: 37%;
-    background-repeat: repeat;
-    background-position: center; 
-}
-		.head .invoice-box {
-			margin: auto;
-    padding: 30px;
-    border: 1px solid #eee;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    font-size: 16px;
-    line-height: 24px;
-    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-    color: #555;
-}
+    .head {
+        max-width: 210mm;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        background-image: url("{{asset('images/icons/watermak.png')}}");
+        background-size: 37%;
+        background-repeat: repeat;
+        background-position: center; 
+    }
+
+    .invoice-box {
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
 
 
 		.invoice-box table {
@@ -104,6 +111,7 @@
 
 		.invoice-box.rtl table tr td:nth-child(2) {
 			text-align: left;
+		}
 		}
 	</style>
 </head>
