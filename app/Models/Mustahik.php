@@ -26,9 +26,9 @@ class Mustahik extends Model
         'nama_lengkap', 
         'jenis_kelamin', 
         'nomor_telp',
-        'rt_rw',
+        'rw_id',
         'wilayah_lain',
-        'alamat',
+        'alamat', 
         'kategori_mustahik',  
         'status_perkawinan',
         'pekerjaan',
@@ -46,5 +46,10 @@ class Mustahik extends Model
     public function kategori()
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
+
+    public function rw()
+    {
+        return $this->belongsTo(Rw::class, 'rw_id');
     }
 }

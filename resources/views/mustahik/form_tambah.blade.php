@@ -101,12 +101,24 @@
                                  <label class="form-label" for="rt_rw">RT/RW:</label>
                                  <select name="rt_rw" id="rt_rw" class="form-control">
                                     <option value="">Pilih RT/RW</option>
-                                    <option value="RT.001/RW.001">RT.001/RW.001</option>
-                                    <option value="RT.002/RW.002">RT.002/RW.002</option>
-                                    <option value="RT.003/RW.003">RT.003/RW.003</option>
-                                    <option value="RT.017/RW.005">RT.017/RW.005</option>
-                                    <option value="RT.018/RW.006">RT.018/RW.006</option>
-                                 </select>
+                                    <option value="1">RT.001/RW.004</option>
+                                    <option value="2">RT.002/RW.004</option>
+                                    <option value="3">RT.003/RW.004</option>
+                                    <option value="4">RT.004/RW.004</option>
+                                    <option value="5">RT.005/RW.004</option>
+                                    <option value="6">RT.006/RW.004</option>
+                                    <option value="7">RT.007/RW.004</option>
+                                    <option value="8">RT.008/RW.004</option>
+                                    <option value="9">RT.009/RW.004</option>
+                                    <option value="10">RT.010/RW.004</option> 
+                                    <option value="11">RT.011/RW.004</option>
+                                    <option value="12">RT.012/RW.004</option>
+                                    <option value="13">RT.013/RW.004</option>
+                                    <option value="14">RT.014/RW.004</option>
+                                    <option value="15">RT.015/RW.004</option> 
+                                    <option value="16">RT.016/RW.004</option>
+                                    <option value="17">RT.017/RW.004</option>
+                                 </select> 
                               </div>
 
                               <div class="form-group col-md-6">
@@ -117,10 +129,13 @@
                               <div class="form-group col-md-12">
                                  <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
                                  <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required>
+
                               </div>
                            </div>
                         </div>
+
                         <button type="button" name="next" class="btn next1 btn-primary next action-button float-end" value="Next">Next</button>
+
 
                      </fieldset>
                      <fieldset>
