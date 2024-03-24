@@ -110,7 +110,7 @@ class MustahikuserController extends Controller
          // If "Apakah masuk ke RW 04?" is "Tidak", assign "Nama Wilayah"
         // if ($request->rt_rw === 'Tidak') {   
         //     $mustahik->rt_rw = $request->nama_wilayah;   
-        // } else {
+        // } else { 
         //     $mustahik->rt_rw = $request->rt_rw_select; 
         // }  
 

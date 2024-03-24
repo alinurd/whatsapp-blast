@@ -55,7 +55,7 @@ class MustahikController extends Controller
             'status_tinggal' => 'required|string|max:255',
             'pengeluaran_kontrakan' => 'nullable|array',
             'pengeluaran_listrik' => 'nullable|array', 
-            'jml_hutang' => 'required|array',
+            'jml_hutang' => 'required|array', 
             'keperluan_hutang' => 'required|string|max:255',
             'kategori_mustahik' => 'required|string|max:255',
             'tgl_terima_zakat' => 'required|date',
