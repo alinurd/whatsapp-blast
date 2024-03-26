@@ -146,13 +146,13 @@ class MustahikuserController extends Controller
         'alamat' => 'nullable|string|max:255', 
         'pekerjaan' => 'required|string|max:255', 
         'jml_pendapatan' => 'required|array',  
-        'jml_bansos' => 'required|array',
+        'jml_bansos' => 'nullable|array',
         'jml_anak' => 'required|string|max:255',
         'status_tinggal' => 'required|string|max:255',
         'pengeluaran_kontrakan' => 'nullable|array',
         'pengeluaran_listrik' => 'nullable|array', 
-        'jml_hutang' => 'required|array', 
-        'keperluan_hutang' => 'required|string|max:255',
+        'jml_hutang' => 'nullable|array', 
+        'keperluan_hutang' => 'nullable|string|max:255',
         'kategori_mustahik' => 'required|string|max:255',
         'tgl_terima_zakat' => 'required|date',
         'kategori' => 'required|array', // Tambahkan validasi untuk input 'kategori'
@@ -166,7 +166,7 @@ class MustahikuserController extends Controller
         'status' => 'string|max:255',  
     ]);  
 
-    // Find the mustahik instance by id
+    // Find the mustahik instance by id 
     $mustahik = Mustahik::findOrFail($id);
 
     $kategoriId = $request->input('kategori')[0]; // Menggunakan [0] karena name "kategori" di set sebagai array
