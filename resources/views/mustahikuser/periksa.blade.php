@@ -199,7 +199,7 @@
                               </div>
                               <div class="form-group col-md-3">
                                  <label class="form-label" for="jml_uang">Jumlah Uang: </label>
-                                 <input type="text" name="jml_uang[]" class="form-control" placeholder="Jumlah uang" value="{{ old('jml_uang')[0] ?? '' }}">
+                                 <input type="number" name="jml_uang[]" class="form-control" placeholder="Jumlah uang" value="{{ old('jml_uang')[0] ?? '' }}">
                               </div>
                               <div class="form-group col-md-3">
                                  <label class="form-label" for="jml_beras">Jumlah Beras: </label>
