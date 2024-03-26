@@ -133,7 +133,7 @@
                               </div>
                                
                               <div class="form-group col-md-12">
-                                 <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="alamat">Alamat: </label>
                                  <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required>
                               </div>
                            </div>
@@ -161,7 +161,7 @@
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_pendapatan">Jumlah Pendapatan: <span class="text-danger">*</span></label>
-                                 <input type="text" name="jml_pendapatan[]" id="jml_pendapatan" class="form-control" required placeholder="Jumlah pendapatan" value="{{ old('jml_pendapatan')[0] ?? '' }}">
+                                 <input type="number" name="jml_pendapatan[]" id="jml_pendapatan" class="form-control" required placeholder="Jumlah pendapatan" value="{{ old('jml_pendapatan')[0] ?? '' }}">
                               </div>
 
                               <div class="form-group col-md-6">
@@ -170,7 +170,7 @@
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: <span class="text-danger">*</span></label>
-                                 <input type="text" name="jml_bansos[]" id="jml_bansos" class="form-control" placeholder="Jumlah Bansos" required value="{{ old('jml_bansos')[0] ?? '' }}">
+                                 <input type="number" name="jml_bansos[]" id="jml_bansos" class="form-control" placeholder="Jumlah Bansos" required value="{{ old('jml_bansos')[0] ?? '' }}">
                               </div>
                               
                               <div class="form-group col-md-6">
@@ -185,17 +185,17 @@
 
                               <div class="form-group col-md-6" id="pengeluaran_listrik_section">
                                  <label class="form-label" for="pengeluaran_listrik">Pengeluaran Listrik: </label>
-                                 <input type="text" name="pengeluaran_listrik[]" id="pengeluaran_listrik" class="form-control" placeholder="Pengeluaran Listrik" value="{{ old('pengeluaran_listrik')[0] ?? '' }}">
+                                 <input type="number" name="pengeluaran_listrik[]" id="pengeluaran_listrik" class="form-control" placeholder="Pengeluaran Listrik" value="{{ old('pengeluaran_listrik')[0] ?? '' }}">
                               </div>
 
                               <div class="form-group col-md-6" id="pengeluaran_kontrakan_section" style="display: none;">
                                  <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran Listrik & Kontrakan: </label>
-                                 <input type="text" name="pengeluaran_kontrakan[]" id="pengeluaran_kontrakan" class="form-control" placeholder="Pengeluaran Kontrakan" value="{{ old('pengeluaran_kontrakan')[0] ?? '' }}">
+                                 <input type="number" name="pengeluaran_kontrakan[]" id="pengeluaran_kontrakan" class="form-control" placeholder="Pengeluaran Kontrakan" value="{{ old('pengeluaran_kontrakan')[0] ?? '' }}">
                               </div>
 
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_hutang">Jumlah Hutang: <span class="text-danger">*</span></label>
-                                 <input type="text" name="jml_hutang[]" id="jml_hutang" class="form-control" required placeholder="Jumlah Hutang" value="{{ old('jml_hutang')[0] ?? '' }}">
+                                 <input type="number" name="jml_hutang[]" id="jml_hutang" class="form-control" required placeholder="Jumlah Hutang" value="{{ old('jml_hutang')[0] ?? '' }}">
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="keperluan_hutang">Keperluan Hutang: <span class="text-danger">*</span></label>
@@ -297,7 +297,6 @@
             jenisKelamin !== '' &&
             noPhone !== '' &&
             statusKawin !== '' &&
-            alamat !== '' &&
             (rtRw !== '' || namaWilayah !== '')) {
             $('.next1').prop('disabled', false);
          } else {
@@ -327,4 +326,4 @@
       });
 
    });
-</script> 
+</script>  
