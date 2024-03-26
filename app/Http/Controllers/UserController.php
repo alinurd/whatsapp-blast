@@ -53,8 +53,8 @@ class UserController extends Controller
 
         storeMediaFile($user,$request->profile_image, 'profile_image');
 
-        $user->assignRole('1');
-
+        // $user->assignRole('1');
+ 
         // Save user Profile data...
         // $user->userProfile()->create($request->userProfile);
 

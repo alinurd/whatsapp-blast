@@ -18,7 +18,7 @@ class HomeController extends Controller
         // Menghitung jumlah transaksi muzakki dan mustahik dari database
         $Transactionsmuzakki = Muzakki::count(); 
         $TransactionsmuzakkiH = MuzakkiHeader::count();
-        $Transactionsmustahik = Mustahik::count();
+        $Transactionsmustahik = Mustahik::where('status', '2')->count();
 
         // Menghitung jumlah transaksi muzakki dan mustahik dari database
         $totalTransactionsmuzakki = Muzakki::where('type', 'Uang')->orWhere('type', 'Transfer')->sum('jumlah_bayar');
@@ -392,7 +392,7 @@ class HomeController extends Controller
         // Hitung jumlah mustahiq berdasarkan RT dari model Mustahik
         $jumlahMustahiq = Mustahik::whereHas('rw', function ($query) use ($rt) {
             $query->where('rt', $rt);
-        })->count();
+        })->where('status', '2')->count();
         // Masukkan jumlah mustahiq ke dalam array $rtData
         $rtData[] = $jumlahMustahiq;
     }
@@ -401,7 +401,7 @@ class HomeController extends Controller
     $rtLabels = $allRt;
 
     // Menghitung jumlah mustahiq untuk wilayah lain dari tabel Mustahik
-    $jumlahMustahiqWilayahLain = Mustahik::whereNull('rw_id')->count();
+    $jumlahMustahiqWilayahLain = Mustahik::whereNull('rw_id')->where('status', '2')->count();
 
     // Menambahkan jumlah mustahiq wilayah lain ke dalam array $rtData
     $rtData[] = $jumlahMustahiqWilayahLain;

@@ -40,7 +40,8 @@ class Mustahik extends Model
         'pengeluaran_listrik', 
         'jumlah_hutang',
         'keperluan_hutang',
-        'keterangan',
+        'keterangan', 
+        'status', 
     ];
 
     public function kategori()

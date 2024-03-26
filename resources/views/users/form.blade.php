@@ -68,7 +68,7 @@
                      </div>
                      <div class="form-group">
                         <label class="form-label">User Role: <span class="text-danger">*</span></label>
-                        {{Form::select('user_role', $roles , old('user_role'), ['class' => 'form-control', 'placeholder' => 'Select User Role']); }}
+                        {{Form::select('role', $roles , old('role'), ['class' => 'form-control', 'placeholder' => 'Select User Role']); }}
                      </div>
                </div>
             </div>
