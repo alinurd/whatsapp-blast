@@ -42,7 +42,7 @@
                               <span>Keuangan</span>
                            </a>
                         </li>
-                        <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
+                        <!-- <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,7 +51,7 @@
                               </div>
                               <span>Finish</span>
                            </a>
-                        </li>
+                        </li> -->
                      </ul>
                       <!-- fieldsets 1-->
                       <fieldset>
@@ -211,29 +211,7 @@
                         <button type="submit" name="submit" class="btn btn-primary next action-button float-end next2" value="Submit">Submit</button>
                         <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous">Previous</button>
                      </fieldset>
-                     <fieldset>
-                        <div class="form-card">
-                           <div class="row">
-                              <!-- <div class="col-7">
-                                 <h4 class="mb-4 text-left">Finish:</h4>
-                           </div>
-                           <div class="col-5">
-                                 <h2 class="steps">Step 4 - 4</h2>
-                           </div> -->
-                           </div>
-                           <h2 class="text-success text-center"><strong>SUCCESS !</strong></h2>
-                           <br>
-                           <div class="row justify-content-center">
-                              <div class="col-3"> <img src="{{asset('images/pages/img-success.png')}}" class="img-fluid" alt="fit-image"> </div>
-                           </div>
-                           <br><br>
-                           <div class="row justify-content-center">
-                              <div class="col-7 text-center">
-                                 <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                              </div>
-                           </div>
-                        </div>
-                     </fieldset>
+                     
                </form> 
                </div>
             </div>
