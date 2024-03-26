@@ -88,6 +88,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('report/mustahikreport', [MustahikReport::class, 'mustahikreport'])->name('mustahikreport');
     Route::get('report/mustahik', [MustahikReport::class, 'index'])->name('mustahikreport.index');
 
+    Route::get('mustahikuser/index', [MustahikuserController::class, 'index'])->name('mustahikuser.index');
+    Route::delete('mustahikuser/destroy/{id}', [MustahikuserController::class, 'destroy'])->name('mustahikuser.destroy');
+    Route::get('mustahikuser/periksa/{id}', [MustahikuserController::class, 'periksa'])->name('mustahikuser.periksa');
+    Route::put('mustahikuser/update/{id}', [MustahikuserController::class, 'update'])->name('mustahikuser.update');
+
     Route::resource('mustahik', MustahikController::class);   
 });
    

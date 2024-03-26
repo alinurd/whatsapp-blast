@@ -1,12 +1,18 @@
 <x-app-layout layout="simple">
     <div class="container mt-3">
+         @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+               {{ session('success') }}
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         @endif
         <div class="card m-2">
             <div class="card-body">
                 <div class="row">
                 <div class="card">
                <div class="card-header d-flex justify-content-between">
                   <div class="header-title">
-                     <h4 class="card-title">Mustahiq</h4>
+                     <h3 class="card-title">Pengajuan Mustahiq</h3>
                   </div> 
                   <div class="card-action">
                         <a href="{{route('uisheet')}}" class="btn btn-sm btn-primary" role="button">Back</a>
@@ -16,7 +22,7 @@
                <form id="form-wizard1" class="text-center mt-3" method="POST" action="{{ route('mustahikuser.store') }}" enctype="multipart/form-data">
                      @csrf
                      <ul id="top-tab-list" class="p-0 row list-inline">
-                        <li class="col-lg-3 col-md-6 text-start mb-2 active" id="account">
+                        <li class="col-lg-4 col-md-6 text-start mb-2 active" id="account">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,7 +32,7 @@
                               <span>Biodata</span>
                            </a>
                         </li>
-                        <li id="personal" class="col-lg-3 col-md-6 mb-2 text-start">
+                        <li id="personal" class="col-lg-4 col-md-6 mb-2 text-start">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                            
@@ -36,19 +42,7 @@
                               <span>Keuangan</span>
                            </a>
                         </li>
-                        <li id="payment" class="col-lg-3 col-md-6 mb-2 text-start">
-                           <a href="javascript:void();">
-                              <div class="iq-icon me-3">
-                                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M21.9964 8.37513H17.7618C15.7911 8.37859 14.1947 9.93514 14.1911 11.8566C14.1884 13.7823 15.7867 15.3458 17.7618 15.3484H22V15.6543C22 19.0136 19.9636 21 16.5173 21H7.48356C4.03644 21 2 19.0136 2 15.6543V8.33786C2 4.97862 4.03644 3 7.48356 3H16.5138C19.96 3 21.9964 4.97862 21.9964 8.33786V8.37513ZM6.73956 8.36733H12.3796H12.3831H12.3902C12.8124 8.36559 13.1538 8.03019 13.152 7.61765C13.1502 7.20598 12.8053 6.87318 12.3831 6.87491H6.73956C6.32 6.87664 5.97956 7.20858 5.97778 7.61852C5.976 8.03019 6.31733 8.36559 6.73956 8.36733Z" fill="currentColor"></path>
-                                    <path opacity="0.4" d="M16.0374 12.2966C16.2465 13.2478 17.0805 13.917 18.0326 13.8996H21.2825C21.6787 13.8996 22 13.5715 22 13.166V10.6344C21.9991 10.2297 21.6787 9.90077 21.2825 9.8999H17.9561C16.8731 9.90338 15.9983 10.8024 16 11.9102C16 12.0398 16.0128 12.1695 16.0374 12.2966Z" fill="currentColor"></path>
-                                    <circle cx="18" cy="11.8999" r="1" fill="currentColor"></circle>
-                                 </svg> 
-                              </div>
-                              <span>Mustahiq</span>
-                           </a>
-                        </li>
-                        <li id="confirm" class="col-lg-3 col-md-6 mb-2 text-start">
+                        <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,8 +53,8 @@
                            </a>
                         </li>
                      </ul>
-                     <!-- fieldsets 1-->
-                     <fieldset>
+                      <!-- fieldsets 1-->
+                      <fieldset>
                         <div class="form-card text-start">
                            <div class="row">
                               <div class="col-7">
@@ -100,44 +94,52 @@
                               </div>
 
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="rt_rw">RT/RW:</label>
-                                 <select name="rt_rw" id="rt_rw" class="form-control">
-                                    <option value="">Pilih RT/RW</option>
-                                    <option value="1">RT.001/RW.004</option>
-                                    <option value="2">RT.002/RW.004</option>
-                                    <option value="3">RT.003/RW.004</option>
-                                    <option value="4">RT.004/RW.004</option>
-                                    <option value="5">RT.005/RW.004</option>
-                                    <option value="6">RT.006/RW.004</option>
-                                    <option value="7">RT.007/RW.004</option>
-                                    <option value="8">RT.008/RW.004</option>
-                                    <option value="9">RT.009/RW.004</option>
-                                    <option value="10">RT.010/RW.004</option> 
-                                    <option value="11">RT.011/RW.004</option>
-                                    <option value="12">RT.012/RW.004</option>
-                                    <option value="13">RT.013/RW.004</option>
-                                    <option value="14">RT.014/RW.004</option> 
-                                    <option value="15">RT.015/RW.004</option> 
-                                    <option value="16">RT.016/RW.004</option>
-                                    <option value="17">RT.017/RW.004</option>
-                                 </select> 
+                                 <label class="form-label" for="rt_rw_selection">Apakah merupakan warga RW04?:</label>
+                                 <select name="rt_rw_selection" id="rt_rw_selection" class="form-control">
+                                    <option value="">Pilih</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                 </select>
                               </div>
 
-                              <div class="form-group col-md-6">
+                              <div id="rt_rw_dropdown" class="form-group col-md-6" style="display: none;">
+                                 <label class="form-label" for="rt_rw">RT/RW:</label>
+                                 <select name="rt_rw" id="rt_rw" class="form-control">
+                                 <option value="">Pilih RT/RW</option>
+                                 <option value="1">RT.001/RW.004</option>
+                                 <option value="2">RT.002/RW.004</option>
+                                 <option value="3">RT.003/RW.004</option>
+                                 <option value="4">RT.004/RW.004</option>
+                                 <option value="5">RT.005/RW.004</option>
+                                 <option value="6">RT.006/RW.004</option>
+                                 <option value="7">RT.007/RW.004</option>
+                                 <option value="8">RT.008/RW.004</option>
+                                 <option value="9">RT.009/RW.004</option>
+                                 <option value="10">RT.010/RW.004</option> 
+                                 <option value="11">RT.011/RW.004</option>
+                                 <option value="12">RT.012/RW.004</option>
+                                 <option value="13">RT.013/RW.004</option>
+                                 <option value="14">RT.014/RW.004</option> 
+                                 <option value="15">RT.015/RW.004</option> 
+                                 <option value="16">RT.016/RW.004</option>
+                                 <option value="17">RT.017/RW.004</option>
+                                 <!-- Daftar RT/RW lainnya -->
+                                 </select>
+                              </div>
+
+                              <div id="wilayah_lainnya" class="form-group col-md-6" style="display: none;">
                                  <label class="form-label" for="nama_wilayah">Wilayah lainnya: </label>
                                  <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control" placeholder="Wilayah Lainnya">
                               </div>
-
+                               
                               <div class="form-group col-md-12">
                                  <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
                                  <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required>
-
                               </div>
                            </div>
                         </div>
 
                         <button type="button" name="next" class="btn next1 btn-primary next action-button float-end" value="Next">Next</button>
-
 
                      </fieldset>
                      <fieldset>
@@ -170,7 +172,8 @@
                                  <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: <span class="text-danger">*</span></label>
                                  <input type="text" name="jml_bansos[]" id="jml_bansos" class="form-control" placeholder="Jumlah Bansos" required value="{{ old('jml_bansos')[0] ?? '' }}">
                               </div>
-                              <div class="form-group col-md-4">
+                              
+                              <div class="form-group col-md-6">
                                  <label class="form-label" for="status_tinggal">Status Tempat Tinggal: <span class="text-danger">*</span></label>
                                  <select name="status_tinggal" id="status_tinggal" class="form-control" required>
                                     <option value="">Pilih Status Tinggal</option>
@@ -180,14 +183,14 @@
                                  </select>
                               </div>
 
-                              <div class="form-group col-md-4">
+                              <div class="form-group col-md-6" id="pengeluaran_listrik_section">
                                  <label class="form-label" for="pengeluaran_listrik">Pengeluaran Listrik: </label>
                                  <input type="text" name="pengeluaran_listrik[]" id="pengeluaran_listrik" class="form-control" placeholder="Pengeluaran Listrik" value="{{ old('pengeluaran_listrik')[0] ?? '' }}">
                               </div>
 
-                              <div class="form-group col-md-4">
-                                 <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran kontrakan: </label>
-                                 <input type="text" name="pengeluaran_kontrakan[]" id="pengeluaran_kontrakan" class="form-control" placeholder="Pengeluaran kontrakan" value="{{ old('pengeluaran_kontrakan')[0] ?? '' }}">
+                              <div class="form-group col-md-6" id="pengeluaran_kontrakan_section" style="display: none;">
+                                 <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran Listrik & Kontrakan: </label>
+                                 <input type="text" name="pengeluaran_kontrakan[]" id="pengeluaran_kontrakan" class="form-control" placeholder="Pengeluaran Kontrakan" value="{{ old('pengeluaran_kontrakan')[0] ?? '' }}">
                               </div>
 
                               <div class="form-group col-md-6">
@@ -201,67 +204,12 @@
                                  <!-- {!! Form::text('keperluan_hutang', old('keperluan_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Keperluan Hutang']) !!} -->
                               </div>
 
+                              <input type="hidden" name="status" id="status" value="1">
+
                            </div>
                         </div>
-                        <button type="button" name="next" class="btn btn-primary next action-button float-end next2" value="Next">Next</button>
+                        <button type="submit" name="submit" class="btn btn-primary next action-button float-end next2" value="Submit">Submit</button>
                         <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous">Previous</button>
-                     </fieldset>
-                     <fieldset>
-                        <div class="form-card text-start">
-                           <div class="row">
-                              <div class="col-7">
-                                 <h4 class="mb-4">Mustahiq zakat:</h4>
-                              </div>
-                              <!-- <div class="col-5">
-                                 <h2 class="steps">Step 3 - 4</h2>
-                           </div> -->
-                           </div>
-                           <div class="row">
-
-                              <div class="form-group col-md-6">
-
-                                 <label class="form-label" for="kategori_mustahik">Kategori Mustahiq: <span class="text-danger">*</span></label>
-                                 <select name="kategori_mustahik" id="kategori_mustahik" class="form-control" required>
-                                    <option value="">Pilih Kategori Mustahiq</option>
-                                    <option value="Fakir">Fakir</option>
-                                    <option value="Miskin">Miskin</option>
-                                    <option value="Gharim">Gharim</option>
-                                    <option value="Ibnu Sabil">Ibnu Sabil</option>
-                                    <option value="Mualaf">Mualaf</option>
-                                 </select>
-                              </div>
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="tgl_terima_zakat">Tanggal: <span class="text-danger">*</span></label>
-                                 {!! Form::date('tgl_terima_zakat', old('tgl_terima_zakat'), ['class' => 'form-control', 'required', 'placeholder' => 'Tanggal Terima Zakat', 'id' => 'tgl_terima_zakat']) !!}
-                              </div>
-                              <div class="form-group col-md-3">
-                                 <label class="form-label" for="kategori_zakat">Kategori Zakat Diterima: <span class="text-danger">*</span></label>
-                                 {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Pilih Kategori Zakat', 'id' => 'kategorix']) }}
-                              </div>
-                              <div class="form-group col-md-3">
-                                 <label class="form-label" for="jml_uang">Jumlah Uang: </label>
-                                 <input type="text" name="jml_uang[]" class="form-control" placeholder="Jumlah uang" value="{{ old('jml_uang')[0] ?? '' }}">
-                              </div>
-                              <div class="form-group col-md-3">
-                                 <label class="form-label" for="jml_beras">Jumlah Beras: </label>
-                                 <input type="text" name="jml_beras[]" class="form-control" placeholder="Jumlah Beras" value="{{ old('jml_beras')[0] ?? '' }}">
-                              </div>
-                              <div class="form-group col-md-3">
-                                 <label class="form-label" for="satuan_beras">Satuan Beras: </label>
-                                 <select name="satuan_beras" class="form-control">
-                                    <option value="">Pilih Satuan Beras</option>
-                                    <option value="Kg">Kg</option>
-                                    <option value="Liter">Liter</option>
-                                 </select>
-                              </div>
-                              <div class="form-group col-md-12">
-                                 <label class="form-label" for="keterangan">Keterangan:</label>
-                                 {!! Form::text('keterangan', old('keterangan'), ['class' => 'form-control', 'placeholder' => 'Keterangan']) !!}
-                              </div>
-                           </div>
-                        </div>
-                        <button type="submit" name="submit" class="btn btn-primary next action-button float-end next3" value="Submit">Submit</button>
-                        <button type="button" name="previous" class="btn  btn-dark previous action-button-previous float-end me-1" value="Previous">Previous</button>
                      </fieldset>
                      <fieldset>
                         <div class="form-card">
@@ -300,10 +248,64 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
 <script>
-   $(document).ready(function() {  
+    $(document).ready(function() {
+        // Ketika nilai dropdown "Apakah merupakan warga RW04?" berubah
+        $('#rt_rw_selection').on('change', function() {
+            var selectedOption = $(this).val();
+            // Jika dipilih "Ya"
+            if (selectedOption === 'Ya') {
+                $('#rt_rw_dropdown').show(); // Tampilkan dropdown RT/RW
+                $('#wilayah_lainnya').hide(); // Sembunyikan form wilayah lainnya
+            }
+            // Jika dipilih "Tidak"
+            else if (selectedOption === 'Tidak') {
+                $('#rt_rw_dropdown').hide(); // Sembunyikan dropdown RT/RW
+                $('#wilayah_lainnya').show(); // Tampilkan form wilayah lainnya
+            }
+            // Jika belum dipilih
+            else {
+                $('#rt_rw_dropdown').show(); // Tampilkan dropdown RT/RW
+                $('#wilayah_lainnya').hide(); // Sembunyikan form wilayah lainnya
+            }
+        });
+
+        // Tampilkan dropdown RT/RW jika belum ada pilihan yang dipilih
+        if ($('#rt_rw_selection').val() === '') {
+            $('#rt_rw_dropdown').show();
+        }
+    });
+
+    $(document).ready(function() {
+        // Ketika nilai dropdown "Status Tempat Tinggal" berubah
+        $('#status_tinggal').on('change', function() {
+            var selectedOption = $(this).val();
+            // Sembunyikan semua section terlebih dahulu
+            $('#pengeluaran_listrik_section').hide();
+            $('#pengeluaran_kontrakan_section').hide();
+            
+            // Jika dipilih "Kontrakan"
+            if (selectedOption === 'Kontrakan') {
+                $('#pengeluaran_kontrakan_section').show(); // Tampilkan form Pengeluaran Listrik & Kontrakan
+            }
+            // Jika dipilih "Menumpang" atau "Milik Sendiri"
+            else if (selectedOption === 'Menumpang' || selectedOption === 'Milik Sendiri') {
+                $('#pengeluaran_listrik_section').show(); // Tampilkan form Pengeluaran Listrik
+            }
+            // Jika belum dipilih
+            else {
+                $('#pengeluaran_listrik_section').show(); // Tampilkan form Pengeluaran Listrik
+            }
+        });
+
+        // Tampilkan form Pengeluaran Listrik jika belum ada pilihan yang dipilih
+        if ($('#status_tinggal').val() === '') {
+            $('#pengeluaran_listrik_section').show();
+        }
+    });
+
+    $(document).ready(function() {
       $('.next1').prop('disabled', true);
       $('.next2').prop('disabled', true);
-      $('.next3').prop('disabled', true);
 
       $('input, select').on('input change', function() {
          var namaLengkap = $('#nama_lengkap').val();
@@ -324,7 +326,6 @@
             $('.next1').prop('disabled', true);
          }
       });
-
 
       $('input, select').on('input change', function() {
          var perkerjaan = $('#perkerjaan').val();
@@ -347,18 +348,5 @@
          }
       });
 
-      $('input, select').on('input change', function() {
-         var kategori_mustahik = $('#kategori_mustahik').val();
-         var tgl_terima_zakat = $('#tgl_terima_zakat').val();
-         var kategorix = $('#kategorix').val();
-         if (kategori_mustahik !== '' &&
-            tgl_terima_zakat !== '' &&
-            kategorix !== '' ) {
-            $('.next3').prop('disabled', false);
-         } else {
-            $('.next3').prop('disabled', true);
-         }
-      });
-
    });
-</script>
+</script> 

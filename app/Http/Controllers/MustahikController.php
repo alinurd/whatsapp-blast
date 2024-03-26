@@ -47,7 +47,7 @@ class MustahikController extends Controller
             'jenis_kelamin' => 'required|string|max:255',
             'no_phone' => 'required|string|max:255',
             'status_kawin' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255', 
+            'alamat' => 'nullable|string|max:255', 
             'perkerjaan' => 'required|string|max:255', 
             'jml_pendapatan' => 'required|array',  
             'jml_bansos' => 'required|array',
@@ -67,6 +67,7 @@ class MustahikController extends Controller
             'rt_rw' => 'nullable|string|max:255',  
             'nama_wilayah' => 'nullable|max:255', 
             'keterangan' => 'nullable|max:255', 
+            'status' => 'string|max:255',  
         ]);  
         
         // Create a new mustahik instance
@@ -128,6 +129,7 @@ class MustahikController extends Controller
         $mustahik->keterangan = $request->keterangan;    
         $mustahik->rw_id = $request->rt_rw;    
         $mustahik->wilayah_lain = $request->nama_wilayah;    
+        $mustahik->status = $request->status;    
 
          // If "Apakah masuk ke RW 04?" is "Tidak", assign "Nama Wilayah"
         // if ($request->rt_rw === 'Tidak') {   

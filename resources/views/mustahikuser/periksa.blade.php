@@ -1,21 +1,22 @@
 <x-app-layout :assets="$assets ?? []">
    <div>
-      <div class="row">
-         <div class="col-sm-12 col-lg-12">
-            <div class="card">
+      <div class="row">   
+         <div class="col-xl-12 col-lg-12"> 
+            <div class="card">  
                <div class="card-header d-flex justify-content-between">
-                  <div class="header-title">
-                     <h4 class="card-title">Mustahiq</h4>
-                  </div>
-                  <div class="card-action">
-                     <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>
-                  </div>
-               </div>
-               <div class="card-body">
-                  <form id="form-wizard1" class="text-center mt-3" method="POST" action="{{ route('mustahik.store') }}" enctype="multipart/form-data">
-                     @csrf
+                  <div class="header-title"> 
+                     <h4 class="card-title">Periksa pengajuan mustahik - {{ $mustahik->nama_lengkap }}</h4>
+                  </div> 
+                  <div class="card-action"> 
+                        <a href="{{ route('mustahikuser.index') }}" class="btn btn-sm btn-primary" role="button">Back</a>
+                  </div> 
+               </div>    
+               <div class="card-body">    
+                  <form id="form-wizard1" class="text-center mt-3" method="POST" action="{{ route('mustahikuser.update', ['id' => $mustahik->id]) }}" enctype="multipart/form-data">
+                     @method('PUT') 
+                     @csrf  
                      <ul id="top-tab-list" class="p-0 row list-inline">
-                        <li class="col-lg-3 col-md-6 text-start mb-2 active" id="account">
+                        <li class="col-lg-4 col-md-6 text-start mb-2 active" id="account">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -25,7 +26,7 @@
                               <span>Biodata</span>
                            </a>
                         </li>
-                        <li id="personal" class="col-lg-3 col-md-6 mb-2 text-start">
+                        <li id="personal" class="col-lg-4 col-md-6 mb-2 text-start">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                            
@@ -35,7 +36,7 @@
                               <span>Keuangan</span>
                            </a>
                         </li>
-                        <li id="payment" class="col-lg-3 col-md-6 mb-2 text-start">
+                        <li id="payment" class="col-lg-4 col-md-6 mb-2 text-start">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,17 +45,7 @@
                                     <circle cx="18" cy="11.8999" r="1" fill="currentColor"></circle>
                                  </svg> 
                               </div>
-                              <span>Mustahiq</span>
-                           </a>
-                        </li>
-                        <li id="confirm" class="col-lg-3 col-md-6 mb-2 text-start">
-                           <a href="javascript:void();">
-                              <div class="iq-icon me-3">
-                                 <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                 </svg>
-                              </div>
-                              <span>Finish</span>
+                              <span>Approval Mustahiq</span>
                            </a>
                         </li>
                      </ul>
@@ -72,81 +63,47 @@
                            <div class="row">
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="nama_lengkap">Nama: <span class="text-danger">*</span></label>
-                                 {!! Form::text('nama_lengkap', old('nama_lengkap'), ['class' => 'form-control', 'placeholder' => 'Nama Lengkap', 'required']) !!}
+                                 <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control bg-light text-black" required readonly value="{{ old('nama_lengkap', $mustahik->nama_lengkap) }}">
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jenis_kelamin">Jenis Kelamin: <span class="text-danger">*</span></label>
-                                 <select name="jenis_kelamin" class="form-control" required>
-                                    <option value="">Pilih Jenis Kelamin</option>
-                                    <option value="Laki-Laki">Laki-Laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                 </select>
-                              </div>
+                                 <input type="text" name="jenis_kelamin" id="jenis_kelamin" class="form-control bg-light text-black" required readonly value="{{ old('jenis_kelamin', $mustahik->jenis_kelamin) }}">
+                              </div> 
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="no_phone">No Handphone <span class="text-danger">*</span></label>
-                                 {!! Form::number('no_phone', old('no_phone'), ['class' => 'form-control', 'required', 'placeholder' => 'No Handphone']) !!}
+                                 <input type="text" name="no_phone" id="no_phone" class="form-control bg-light text-black" required readonly value="{{ old('no_phone', $mustahik->nomor_telp) }}">
                               </div>
 
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="status_kawin">Status Perkawinan: <span class="text-danger">*</span></label>
-                                 <select name="status_kawin" class="form-control" required>
-                                    <option value="">Pilih Status Perkawinan</option>
-                                    <option value="Belum Menikah">Belum Menikah</option>
-                                    <option value="Menikah">Menikah</option>
-                                    <option value="Janda Cerai">Janda Cerai</option>
-                                    <option value="Janda Wafat">Janda Wafat</option>
-                                 </select>
+                                 <input type="text" name="status_kawin" id="status_kawin" class="form-control bg-light text-black" required readonly value="{{ old('status_kawin', $mustahik->status_perkawinan) }}">
                               </div>
 
-                              <div class="form-group col-md-6">
-                                 <label class="form-label" for="rt_rw_selection">Apakah merupakan warga RW04?:</label>
-                                 <select name="rt_rw_selection" id="rt_rw_selection" class="form-control">
-                                    <option value="">Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                 </select>
-                              </div>
-
-                              <div id="rt_rw_dropdown" class="form-group col-md-6" style="display: none;">
-                                 <label class="form-label" for="rt_rw">RT/RW:</label>
-                                 <select name="rt_rw" id="rt_rw" class="form-control">
-                                 <option value="">Pilih RT/RW</option>
-                                 <option value="1">RT.001/RW.004</option>
-                                 <option value="2">RT.002/RW.004</option>
-                                 <option value="3">RT.003/RW.004</option>
-                                 <option value="4">RT.004/RW.004</option>
-                                 <option value="5">RT.005/RW.004</option>
-                                 <option value="6">RT.006/RW.004</option>
-                                 <option value="7">RT.007/RW.004</option>
-                                 <option value="8">RT.008/RW.004</option>
-                                 <option value="9">RT.009/RW.004</option>
-                                 <option value="10">RT.010/RW.004</option> 
-                                 <option value="11">RT.011/RW.004</option>
-                                 <option value="12">RT.012/RW.004</option>
-                                 <option value="13">RT.013/RW.004</option>
-                                 <option value="14">RT.014/RW.004</option> 
-                                 <option value="15">RT.015/RW.004</option> 
-                                 <option value="16">RT.016/RW.004</option>
-                                 <option value="17">RT.017/RW.004</option>
-                                 <!-- Daftar RT/RW lainnya -->
-                                 </select>
-                              </div>
-
-                              <div id="wilayah_lainnya" class="form-group col-md-6" style="display: none;">
-                                 <label class="form-label" for="nama_wilayah">Wilayah lainnya: </label>
-                                 <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control" placeholder="Wilayah Lainnya">
-                              </div>
+                              @if($mustahik->rw_id || $mustahik->wilayah_lain)
+                                    @if($mustahik->rw_id) 
+                                    <div class="form-group col-md-6">
+                                       <label class="form-label" for="rt_rw">RT/RW:</label>
+                                       <input type="text" name="rt_rw" id="rt_rw" class="form-control bg-light text-black" required readonly value="{{ old('rt_rw', $mustahik->rw_id) }}">
+                                    </div>
+                                    @else
+                                    <div class="form-group col-md-6">
+                                       <label class="form-label" for="nama_wilayah">Wilayah lainnya: </label>
+                                       <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control bg-light text-black" placeholder="Wilayah Lainnya">
+                                    </div>
+                                    @endif
+                              @else
+                                    <p>Tidak ada informasi</p>
+                              @endif
                                
-                              <div class="form-group col-md-12">
+                              <div class="form-group col-md-6">
                                  <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
-                                 <input type="text" name="alamat" id="alamat" class="form-control" placeholder="Alamat" required>
+                                 <input type="text" name="alamat" id="alamat" class="form-control bg-light text-black" required readonly value="{{ old('alamat', $mustahik->alamat) }}">
                               </div>
                            </div>
                         </div>
-
                         <button type="button" name="next" class="btn next1 btn-primary next action-button float-end" value="Next">Next</button>
-
                      </fieldset>
+
                      <fieldset>
                         <div class="form-card text-start">
                            <div class="row">
@@ -157,68 +114,62 @@
                               <h2 class="steps">Step 2 - 4</h2>
                            </div> -->
                            </div>
-                           <div class="row">
+                           <div class="row"> 
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="perkerjaan">Pekerjaan: <span class="text-danger">*</span></label>
-                                 <input type="text" name="perkerjaan" id="perkerjaan" class="form-control" placeholder="Pekerjaan" required value="{{ old('perkerjaan')[0] ?? '' }}">
-
-                                 <!-- {!! Form::text('perkerjaan', old('perkerjaan'), ['class' => 'form-control', 'required', 'placeholder' => 'Pekerjaan']) !!} -->
+                                 <input type="text" name="pekerjaan" id="pekerjaan" class="form-control bg-light text-black" required readonly value="{{ old('pekerjaan', $mustahik->pekerjaan) }}">
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_pendapatan">Jumlah Pendapatan: <span class="text-danger">*</span></label>
-                                 <input type="text" name="jml_pendapatan[]" id="jml_pendapatan" class="form-control" required placeholder="Jumlah pendapatan" value="{{ old('jml_pendapatan')[0] ?? '' }}">
+                                 <input type="text" name="jml_pendapatan[]" id="jml_pendapatan" class="form-control bg-light text-black" value="{{ $mustahik->jumlah_pendapatan }}" required readonly>
                               </div>
 
-                              <div class="form-group col-md-6">
+                              <div class="form-group col-md-6"> 
                                  <label class="form-label" for="jml_anak">Jml Anak dlm Tanggungan: <span class="text-danger">*</span></label>
-                                 {!! Form::number('jml_anak', old('jml_anak'), ['class' => 'form-control', 'required', 'placeholder' => 'Jml Anak dlm Tanggungan']) !!}
-                              </div>
+                                 <input type="text" name="jml_anak" id="jml_anak" class="form-control bg-light text-black" value="{{ $mustahik->jumlah_anak_dalam_tanggungan }}" required readonly>
+                              </div> 
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: <span class="text-danger">*</span></label>
-                                 <input type="text" name="jml_bansos[]" id="jml_bansos" class="form-control" placeholder="Jumlah Bansos" required value="{{ old('jml_bansos')[0] ?? '' }}">
+                                 <input type="text" name="jml_bansos[]" id="jml_bansos" class="form-control bg-light text-black" value="{{ $mustahik->jumlah_bansos_diterima }}" required readonly>
                               </div>
                               
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="status_tinggal">Status Tempat Tinggal: <span class="text-danger">*</span></label>
-                                 <select name="status_tinggal" id="status_tinggal" class="form-control" required>
-                                    <option value="">Pilih Status Tinggal</option>
-                                    <option value="Kontrakan">Kontrakan</option>
-                                    <option value="Menumpang">Menumpang</option>
-                                    <option value="Milik Sendiri">Milik Sendiri</option>
-                                 </select>
+                                 <input type="text" name="status_tinggal" id="status_tinggal" class="form-control bg-light text-black" required readonly value="{{ $mustahik->status_tempat_tinggal }}">
                               </div>
 
+                              @if($mustahik->status_tempat_tinggal === 'Kontrakan')
+                              <div class="form-group col-md-6" id="pengeluaran_kontrakan_section">
+                                 <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran Listrik & Kontrakan: </label>
+                                 <input type="text" name="pengeluaran_kontrakan[]" id="pengeluaran_kontrakan" class="form-control bg-light text-black" value="{{ $mustahik->pengeluaran_kontrakan }}" required readonly>
+                              </div>
+                              @else
                               <div class="form-group col-md-6" id="pengeluaran_listrik_section">
                                  <label class="form-label" for="pengeluaran_listrik">Pengeluaran Listrik: </label>
-                                 <input type="text" name="pengeluaran_listrik[]" id="pengeluaran_listrik" class="form-control" placeholder="Pengeluaran Listrik" value="{{ old('pengeluaran_listrik')[0] ?? '' }}">
-                              </div>
-
-                              <div class="form-group col-md-6" id="pengeluaran_kontrakan_section" style="display: none;">
-                                 <label class="form-label" for="pengeluaran_kontrakan">Pengeluaran Listrik & Kontrakan: </label>
-                                 <input type="text" name="pengeluaran_kontrakan[]" id="pengeluaran_kontrakan" class="form-control" placeholder="Pengeluaran Kontrakan" value="{{ old('pengeluaran_kontrakan')[0] ?? '' }}">
-                              </div>
+                                 <input type="text" name="pengeluaran_listrik[]" id="pengeluaran_listrik" class="form-control bg-light text-black" value="{{ $mustahik->pengeluaran_listrik }}" required readonly>
+                              </div> 
+                              @endif
 
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="jml_hutang">Jumlah Hutang: <span class="text-danger">*</span></label>
-                                 <input type="text" name="jml_hutang[]" id="jml_hutang" class="form-control" required placeholder="Jumlah Hutang" value="{{ old('jml_hutang')[0] ?? '' }}">
+                                 <input type="text" name="jml_hutang[]" id="jml_hutang" class="form-control  bg-light text-black" value="{{ $mustahik->jumlah_hutang }}" required readonly>
                               </div>
                               <div class="form-group col-md-6">
                                  <label class="form-label" for="keperluan_hutang">Keperluan Hutang: <span class="text-danger">*</span></label>
-                                 <input type="text" name="keperluan_hutang" id="keperluan_hutang" class="form-control" required placeholder="Keperluan Hutang">
-
-                                 <!-- {!! Form::text('keperluan_hutang', old('keperluan_hutang'), ['class' => 'form-control', 'required', 'placeholder' => 'Keperluan Hutang']) !!} -->
+                                 <input type="text" name="keperluan_hutang" id="keperluan_hutang" class="form-control bg-light text-black" required readonly value="{{ old('keperluan_hutang', $mustahik->keperluan_hutang) }}">
                               </div>
 
-                           </div>
+                           </div> 
                         </div>
                         <button type="button" name="next" class="btn btn-primary next action-button float-end next2" value="Next">Next</button>
                         <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous">Previous</button>
                      </fieldset>
+
                      <fieldset>
                         <div class="form-card text-start">
                            <div class="row">
                               <div class="col-7">
-                                 <h4 class="mb-4">Mustahiq zakat:</h4>
+                                 <h4 class="mb-4">Approval Mustahiq:</h4>
                               </div>
                               <!-- <div class="col-5">
                                  <h2 class="steps">Step 3 - 4</h2>
@@ -262,7 +213,15 @@
                                     <option value="Liter">Liter</option>
                                  </select>
                               </div>
-                              <div class="form-group col-md-12">
+                              <div class="form-group col-md-6">
+                                 <label class="form-label" for="status">Update Status: </label>
+                                 <select name="status" class="form-control">
+                                    <option value="">Pilih Status</option>
+                                    <option value="2">Setujui</option>
+                                    <option value="3">Tolak</option>
+                                 </select>
+                              </div>
+                              <div class="form-group col-md-6">
                                  <label class="form-label" for="keterangan">Keterangan:</label>
                                  {!! Form::text('keterangan', old('keterangan'), ['class' => 'form-control', 'placeholder' => 'Keterangan']) !!}
                               </div>
@@ -271,45 +230,22 @@
 
                            </div>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary next action-button float-end next3" value="Submit">Submit</button>
+                        <button type="submit" name="submit" class="btn btn-primary next action-button float-end next3" value="Submit">Update</button>
                         <button type="button" name="previous" class="btn  btn-dark previous action-button-previous float-end me-1" value="Previous">Previous</button>
                      </fieldset>
-                     <fieldset>
-                        <div class="form-card">
-                           <div class="row">
-                              <!-- <div class="col-7">
-                                 <h4 class="mb-4 text-left">Finish:</h4>
-                           </div>
-                           <div class="col-5">
-                                 <h2 class="steps">Step 4 - 4</h2>
-                           </div> -->
-                           </div>
-                           <h2 class="text-success text-center"><strong>SUCCESS !</strong></h2>
-                           <br>
-                           <div class="row justify-content-center">
-                              <div class="col-3"> <img src="{{asset('images/pages/img-success.png')}}" class="img-fluid" alt="fit-image"> </div>
-                           </div>
-                           <br><br>
-                           <div class="row justify-content-center">
-                              <div class="col-7 text-center">
-                                 <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                              </div>
-                           </div>
-                        </div>
-                     </fieldset>
                   </form>
-               </div>
-            </div>
+               </div>   
+            </div>  
          </div>
-      </div>
-   </div>
+        </div>
+   </div> 
 </x-app-layout>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         // Ketika nilai dropdown "Apakah merupakan warga RW04?" berubah
         $('#rt_rw_selection').on('change', function() {
@@ -426,4 +362,4 @@
       });
 
    });
-</script> 
+</script>  -->

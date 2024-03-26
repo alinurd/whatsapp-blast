@@ -50,7 +50,7 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
             'Jumlah Bansos Diterima',
             'Status Tempat Tinggal',
             'Pengeluaran Listrik',
-            'Pengeluaran Kontrakan',
+            'Pengeluaran Listrik&Kontrakan',
             'Jumlah Hutang',
             'Keperluan Hutang',
             'Kategori Mustahiq',
@@ -108,7 +108,9 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
  
     public function mustahikreport(Request $request){
         // Filter berdasarkan wilayah jika dipilih
-        $query = Mustahik::query();
+        $query = Mustahik::query()
+        ->where('status', '=', '2');
+        
         if ($request->filled('rt_rw')) {
             $rt_rw = $request->input('rt_rw');
             if ($rt_rw == 'lainnya') {
@@ -134,7 +136,8 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
  
         // return view('mustahik.report', compact('data'));
 
-        $query = Mustahik::query();
+        $query = Mustahik::query()
+        ->where('status', '=', '2');
 
         // Filter berdasarkan wilayah jika dipilih
         if ($request->has('rt_rw')) { 
@@ -143,7 +146,7 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
             // Jika "lainnya" dipilih, atur kondisi sesuai kebutuhan Anda
             if ($rt_rw == 'lainnya') { 
                 $query->whereNotNull('wilayah_lain');
-            } else {
+            } else {  
                 $query->where('rw_id', $rt_rw);
             }
         }

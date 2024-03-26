@@ -5,11 +5,11 @@ namespace App\DataTables;
 use App\Models\Mustahik;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;  
-use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Services\DataTable; 
 
-class MustahikDataTable extends DataTable
+class MustahikuserDataTable extends DataTable
 {
-     /**  
+     /** 
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
@@ -98,7 +98,7 @@ class MustahikDataTable extends DataTable
                 $q->where('country', 'like', "%{$keyword}%");
             });
         })
-        ->addColumn('action', 'mustahik.action')
+        ->addColumn('action', 'mustahikuser.action')
         ->rawColumns(['action','status']);
     }
 
@@ -111,7 +111,7 @@ class MustahikDataTable extends DataTable
     public function query()
     {
         $model = Mustahik::query()
-        ->where('status', '=', '2'); 
+        ->where('status', '=', '1');
         return $this->applyScopes($model);
     }
 
