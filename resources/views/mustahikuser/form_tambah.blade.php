@@ -22,7 +22,7 @@
                <form id="form-wizard1" class="text-center mt-3" method="POST" action="{{ route('mustahikuser.store') }}" enctype="multipart/form-data">
                      @csrf
                      <ul id="top-tab-list" class="p-0 row list-inline">
-                        <li class="col-lg-4 col-md-6 text-start mb-2 active" id="account">
+                        <li class="col-lg-4 col-md-12 text-start mb-2 active" id="account">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,7 +32,7 @@
                               <span>Biodata</span>
                            </a>
                         </li>
-                        <li id="personal" class="col-lg-4 col-md-6 mb-2 text-start">
+                        <li id="personal" class="col-lg-4 col-md-12 mb-2 text-start">
                            <a href="javascript:void();">
                               <div class="iq-icon me-3">
                                  <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                            
