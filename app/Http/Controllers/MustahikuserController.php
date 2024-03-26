@@ -102,7 +102,7 @@ class MustahikuserController extends Controller
         $mustahik->save();
 
         // Redirect back to the index page of mustahik with a success message
-        return redirect()->route('mustahikuser.create')->withSuccess(__('Mustahiq Berhasil diajukan.'));
+        return redirect()->route('landing-pages.index')->withSuccess(__('Mustahiq Berhasil diajukan.'));
     }
 
     
