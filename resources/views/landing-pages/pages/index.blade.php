@@ -1,4 +1,26 @@
 <x-app-layout layout="landing">
+    <style>
+        .toast {
+  z-index: 9999; /* Menjadikan elemen paling atas */
+  position: fixed; /* Memastikan elemen tetap di posisi yang sama saat digulir */
+  top: 50%; /* Menggeser elemen ke tengah vertikal */
+  left: 50%; /* Menggeser elemen ke tengah horizontal */
+  transform: translate(-50%, -50%); /* Menengahkan elemen */
+}
+    </style>
+     @if (session('success'))
+            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+                    <strong class="me-auto">Pengajuan Mustahiq</strong>
+                    <small class="text-muted text-success">Successfully</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                Pengajuan anda berhasil ditambahkan
+                </div>
+            </div>
+         @endif
     <div class="container mt-3">
         <div class="iq-navbar-header" style="height: 215px;">
             <div class="container-fluid iq-container">
@@ -14,12 +36,12 @@
                 </div>
             </div>
             <div class="iq-header-img">
-                <img src="{{asset('images/dashboard/top-header.png')}}" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header1.png')}}" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header2.png')}}" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header3.png')}}" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header4.png')}}" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header5.png')}}" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
+                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
             </div>
         </div>
         <div class="card m-2">
