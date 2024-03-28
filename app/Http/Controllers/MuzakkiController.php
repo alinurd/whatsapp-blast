@@ -78,7 +78,8 @@ class MuzakkiController extends Controller
         ]);
         $dUser = User::where('id', $user)->first();
 $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
- $no = '62' . $dUser->nomor_telp; 
+ $no = '6289528518495'; 
+//  $no = '62' . $dUser->nomor_telp; 
 
         $pesan = "Terima kasih @" . $dUser->nama_lengkap . " sudah membayar zakat pada tanggal " . $MuzakkiHeader->created_at . "\n\n"
         . " dibayarkan oleh: " . $dibayarkan->nama_lengkap . ". Code invoice #" . $MuzakkiHeader->code . "\n\n"
@@ -96,32 +97,35 @@ $payload = json_encode([
     ]
 ]);
 $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
- $this->sendWa($no,$n);
+$msg="tes massage"."Zis-Alhasanah #".$MuzakkiHeader->code;
+//  $this->sendMassage1($no,$msg);
+//  $this->sendMassage($no,$msg);
+//  $this->sendWa($no,$n);
  
         $key = 'b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f';
         $base_url = 'qymz4m.api.infobip.com';
 
-        $curl = curl_init();
+        // $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://' . $base_url . '/sms/2/text/advanced',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST', 
-            CURLOPT_POSTFIELDS => $payload, 
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: App $key",
-                'Content-Type: application/json',
-                'Accept: application/json'
-            ),
-        ));
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => 'https://' . $base_url . '/sms/2/text/advanced',
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => '',
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => 'POST', 
+        //     CURLOPT_POSTFIELDS => $payload, 
+        //     CURLOPT_HTTPHEADER => array(
+        //         "Authorization: App $key",
+        //         'Content-Type: application/json',
+        //         'Accept: application/json'
+        //     ),
+        // ));
 
-        $response = curl_exec($curl);
-         curl_close($curl);
+        // $response = curl_exec($curl);
+        //  curl_close($curl);
     }
  
 // dd($response);
