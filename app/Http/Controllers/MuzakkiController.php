@@ -14,7 +14,7 @@ use App\Models\MuzakkiHeader;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
-use Barryvdh\DomPDF\Facade\Pdf;
+ use PDF;
 
 class MuzakkiController extends Controller
 {
@@ -139,14 +139,32 @@ $msg="tes massage"."Zis-Alhasanah #".$MuzakkiHeader->code;
         return view('muzakki.print', compact('data'));
         // return view('invoice', compact('data'));
     }
-    public function cetakinvoice($code)
+    public function cetakinvoices($code)
     {
-        ini_set('memory_limit', '2G');
-        $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
-        $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
-        $pdf = Pdf::loadView('invoice', $data);
-        return $pdf->download('invoice.pdf');
+        $detail = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+        $header = MuzakkiHeader::where('code', $code)->with('user')->get();
+        // return view('muzakki.print', compact('data'));
+        return view('invoice', compact('header','detail'));
+        
+        
     }
+
+public function cetakinvoice($code)
+{
+    $detail = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+    $header = MuzakkiHeader::where('code', $code)->with('user')->get();
+    
+    // Render view to PDF
+    $pdf = PDF::loadView('invoice', compact('header','detail'));
+
+    // Save PDF to public folder
+    $pdf->save(public_path('invoice_'.$code.'.pdf'));
+
+    // Return view or response
+    // return view('invoice', compact('header','detail'));
+    return $pdf->stream('invoice_'.$code.'.pdf');
+}
+
     
     public function muzakkiCreate()
     {
