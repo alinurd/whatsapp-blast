@@ -81,55 +81,53 @@
                         <th>Satuan</th>
                     </tr>
                 </thead>
-                <tbody>
-    <?php 
-    $no = 0;
-    $totalLiter = 0;
-    $totalKg = 0;
-    $totalRupiah = 0;
-    ?>
+                <?php
+$no = 0;
+$totalLiter = 0;
+$totalKg = 0;
+$totalRupiah = 0;
+?>
 
-    @foreach ($detail as $item)
+@foreach($detail as $item)
+    <tr>
+        <td>{{ ++$no }}</td>
+        <td style="text-align: left;">{{ $item['user']['nama_lengkap'] }}</td>
+        <td>{{ $item['kategori']['nama_kategori'] }}</td>
+        <td>{{ $item['type'] }}</td>
+        <td style="text-align: right;">
+            
+        @if($item['satuan'] === 'Rupiah')
+        {{ number_format($item['jumlah_bayar'], 2) }}
+        @elseif($item['type'] === 'Beras')
+        {{ $item['jumlah_bayar'] }}</td>
+        @endif
+        
+        <td>{{ $item['satuan'] }}</td>
+    </tr>
+    @if($item['satuan'] === 'Liter')
+        <?php $totalLiter += (float) str_replace(',', '.', $item['jumlah_bayar']); ?>
+    @elseif($item['satuan'] === 'Kg')
+        <?php $totalKg += (float) str_replace(',', '.', $item['jumlah_bayar']); ?>
+    @elseif($item['satuan'] === 'Rupiah')
+        <?php $totalRupiah += (float) str_replace(',', '.', $item['jumlah_bayar']); ?>
+    @endif
+@endforeach
 
-    <tr>
-        <td>{{++$no}}</td>
-        <td style="text-align: left;">{{$item['user']['nama_lengkap']}}</td>
-        <td>{{$item['kategori']['nama_kategori']}}</td>
-        <td>{{$item['type']}}</td>
-        <td>{{ str_contains($item['jumlah_bayar'], ',') ? number_format((float) str_replace(',', '', $item['jumlah_bayar']), 2) : number_format($item['jumlah_bayar'], 2) }}</td>
-        <td>{{$item['satuan']}}</td>
-    </tr>
-
-    <?php 
-    if ($item['satuan'] === 'Liter') {
-        $totalLiter += str_contains($item['jumlah_bayar'], ',') ? (float) str_replace(',', '', $item['jumlah_bayar']) : $item['jumlah_bayar'];
-    } elseif ($item['satuan'] === 'Kg') {
-        $totalKg += str_contains($item['jumlah_bayar'], ',') ? (float) str_replace(',', '', $item['jumlah_bayar']) : $item['jumlah_bayar'];
-    } elseif ($item['satuan'] === 'Rupiah') {
-        $totalRupiah += str_contains($item['jumlah_bayar'], ',') ? (float) str_replace(',', '', $item['jumlah_bayar']) : $item['jumlah_bayar'];
-    } elseif ($item['satuan'] === 'Beras') {
-        $totalRupiah += (float) str_replace(',', '', $item['jumlah_bayar']);
-    }
-    ?>
-
-    @endforeach
-    
-    <tr>
-        <th colspan="4" style="text-align: center;">Total:</th>
-        <th style="text-align: right;">{{ number_format($totalLiter, 2) }}</th>
-        <th>Liter</th>
-    </tr>
-    <tr>
-        <th colspan="4"></th>
-        <th style="text-align: right;">{{ number_format($totalKg, 2) }}</th>
-        <th>Kilogram</th>
-    </tr>
-    <tr>
-        <th colspan="4"></th>
-        <th style="text-align: right;">{{ number_format($totalRupiah, 2) }}</th>
-        <th>Rupiah</th>
-    </tr>
-</tbody>
+<tr>
+     <th colspan="4" rowspan="4" style="text-align: right;">Total:</th>
+ </tr>
+<tr>
+     <th style="text-align: right;">{{$totalLiter }}</th>
+    <th>Liter</th>
+</tr>
+<tr>
+     <th style="text-align: right;">{{$totalKg}}</th>
+    <th>Kilogram</th>
+</tr>
+<tr>
+     <th style="text-align: right;">{{ number_format($totalRupiah, 2) }}</th>
+    <th>Rupiah</th>
+</tr>
 
 
 
