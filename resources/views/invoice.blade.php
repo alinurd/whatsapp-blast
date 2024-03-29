@@ -95,7 +95,7 @@
                         <td>{{$item['satuan']}}</td>
                     </tr>
                     @endforeach
-                    <!-- <tr>
+                    <tr>
                         <th colspan="4" rowspan="3" style="text-align: center;">Total:</th>
                         <th style="text-align: right;"><span id="ttlLiter" ></th>
                         <th>Liter</th>
@@ -107,7 +107,7 @@
                     <tr>
                          <th style="text-align: right;"><span id="ttlRupiah"></th>
                         <th>Rupiah</th>
-                    </tr> -->
+                    </tr>
                 </tbody>
             </table>
         </div>
