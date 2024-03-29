@@ -69,7 +69,7 @@
         </div>
         <div class="invoice-body">
             <p style="text-align: right;"> <i>Jakarta, {{$header[0]['created_at']}}</i></p> <br>
-            <p>Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: <br><b>John Doe</b></p>
+            <p>Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: <br><b><u>{{$data['header'][0]['user']['nama_lengkap']}}</u></b></p>
             <table class="invoice-table">
                 <thead>
                     <tr>
@@ -122,42 +122,48 @@
 </body>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var totalLiter = 0;
-        var totalKg = 0;
-        var totalRupiah = 0;
+   document.addEventListener('DOMContentLoaded', function() {
+      var totalBeras = 0;
+      var totalUang = 0;
+      var totalKg = 0;
 
-        @foreach($detail as $item)
-        @if($item['satuan'] === 'Liter')
-        totalLiter += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
-        @elseif($item['satuan'] === 'Kg')
+      @foreach($data['detail'] as $item)
+    @if($item['satuan'] === 'Liter')
+        totalBeras += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
+    @elseif($item['satuan'] === 'Rupiah')
+        totalUang += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
+    @elseif($item['satuan'] === 'Kg')
         totalKg += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
-        @elseif($item['satuan'] === 'Rupiah')
-        totalRupiah += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
-        @endif
-        @endforeach
+    @endif
+@endforeach
 
-        document.getElementById('ttlLiter').textContent = totalLiter.toLocaleString();
-        document.getElementById('ttlKg').textContent = totalKg.toLocaleString();
-        document.getElementById('ttlRupiah').textContent = formatRupiah(totalRupiah);
-    });
 
-    function formatRupiah(angka) {
-        var number_string = angka.toString().replace(/[^,\d]/g, ''),
-            split = number_string.split(','),
-            sisa = split[0].length % 3,
-            rupiah = split[0].substr(0, sisa),
-            ribuan = split[0].substr(sisa).match(/\d{1,3}/gi);
+      document.getElementById('ttlLiter').textContent = totalBeras.toLocaleString();
+      document.getElementById('ttlRupiah').textContent = formatRupiah(totalUang);
+      document.getElementById('ttlKg').textContent = totalKg.toLocaleString();
+   });
 
-        if (ribuan) {
-            separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
+   function formatRupiah(angka) {
+      var number_string = angka.toString().replace(/[^,\d]/g, ''),
+         split = number_string.split(','),
+         sisa = split[0].length % 3,
+         rupiah = split[0].substr(0, sisa),
+         ribuan = split[0].substr(sisa).match(/\d{1,3}/gi);
 
-        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-        return rupiah;
-    }
+      if (ribuan) {
+         separator = sisa ? '.' : '';
+         rupiah += separator + ribuan.join('.');
+      }
+
+      rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+      return rupiah;
+   }
+
+
+    
+
 
 </script>
+
 
 </html>
