@@ -80,7 +80,8 @@
                                     @if($mustahik->rw_id) 
                                     <div class="form-group col-md-6">
                                        <label class="form-label" for="rt_rw">Informasi Wilayah:</label>
-                                       <input type="text" name="rt_rw" id="rt_rw" class="form-control bg-light text-black" required readonly value="{{ old('rt_rw', $mustahik->rw_id) }}"></input>
+                                       <input type="hidden" name="rt_rw" id="rt_rw" class="form-control bg-light text-black" required readonly value="{{ old('rt_rw', $mustahik->rw_id) }}"></input>
+                                       <input type="text" name="rt" id="rt" class="form-control bg-light text-black" required readonly value="{{ old('rt', $mustahik->rw->rt) }}"></input>
                                     </div>
                                     @else
                                     <div class="form-group col-md-6">
