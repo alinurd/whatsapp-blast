@@ -55,7 +55,14 @@ class MustahikuserDataTable extends DataTable
         })
         ->editColumn('jumlah_beras_diterima', function($query) {
             if (!empty($query->jumlah_beras_diterima)) {
-                return $query->jumlah_beras_diterima;
+                return $query->jumlah_beras_diterima; 
+            } else {
+                return '-';
+            }
+        })
+        ->editColumn('code', function($query) {
+            if (!empty($query->code)) {
+                return $query->code; 
             } else {
                 return '-';
             }

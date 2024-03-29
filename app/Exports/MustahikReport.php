@@ -57,7 +57,6 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
             'Kategori Zakat Diterima',
             'Jumlah Uang Diterima',
             'Jumlah Beras Diterima',
-            'Satuan Beras',
             'Keterangan',
         ];  
     }
@@ -78,31 +77,46 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
             $informasi_wilayah = 'Tidak ada informasi';
         }
 
+        // Cek apakah alamat kosong atau tidak, jika kosong ganti dengan "-"
+        $alamat = !empty($mustahik->alamat) ? $mustahik->alamat : '-';
+        $keperluan_hutang = !empty($mustahik->keperluan_hutang) ? $mustahik->keperluan_hutang : '-';
+        $keterangan = !empty($mustahik->keterangan) ? $mustahik->keterangan : '-';
+
+        // Format jumlah rupiah
+        $jumlah_pendapatan = 'Rp' . number_format(floatval($mustahik->jumlah_pendapatan), 0, ',', '.');
+        $jumlah_bansos_diterima = 'Rp' . number_format(floatval($mustahik->jumlah_bansos_diterima), 0, ',', '.');
+        $jumlah_pengeluaran_listrik = 'Rp' . number_format(floatval($mustahik->pengeluaran_listrik), 0, ',', '.');
+        $jumlah_pengeluaran_kontrakan = 'Rp' . number_format(floatval($mustahik->pengeluaran_kontrakan), 0, ',', '.');
+        $jumlah_hutang = 'Rp' . number_format(floatval($mustahik->jumlah_hutang), 0, ',', '.');
+        $jumlah_uang_diterima = 'Rp' . number_format(floatval($mustahik->jumlah_uang_diterima), 0, ',', '.');
+
+        // Gabungkan jumlah beras diterima dengan satuan beras
+        $beras_dan_satuan = $mustahik->jumlah_beras_diterima . ' ' . $mustahik->satuan_beras;
+
         return [
             $this->row, // Nomor berurutan
             $informasi_wilayah,
             $mustahik->code,
             $mustahik->tanggal,
-            $mustahik->nama_lengkap,
+            $mustahik->nama_lengkap, 
             $mustahik->jenis_kelamin,
             $mustahik->nomor_telp,
             $mustahik->status_perkawinan,
-            $mustahik->alamat,
+            $alamat,
             $mustahik->pekerjaan,
-            $mustahik->jumlah_pendapatan,
+            $jumlah_pendapatan,
             $mustahik->jumlah_anak_dalam_tanggungan,
-            $mustahik->jumlah_bansos_diterima,
-            $mustahik->status_tempat_tinggal,
-            $mustahik->pengeluaran_listrik,
-            $mustahik->pengeluaran_kontrakan,
-            $mustahik->jumlah_hutang,
-            $mustahik->keperluan_hutang,
+            $jumlah_bansos_diterima,
+            $mustahik->status_tempat_tinggal, 
+            $jumlah_pengeluaran_listrik,
+            $jumlah_pengeluaran_kontrakan,
+            $jumlah_hutang,
+            $keperluan_hutang,
             $mustahik->kategori_mustahik,
             $mustahik->kategori->nama_kategori,
-            $mustahik->jumlah_uang_diterima,
-            $mustahik->jumlah_beras_diterima,
-            $mustahik->satuan_beras,
-            $mustahik->keterangan,
+            $jumlah_uang_diterima,
+            $beras_dan_satuan,
+            $keterangan,
         ];
     }
  

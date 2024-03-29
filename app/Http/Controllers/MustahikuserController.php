@@ -34,16 +34,16 @@ class MustahikuserController extends Controller
             'jenis_kelamin' => 'required|string|max:255',
             'no_phone' => 'required|string|max:255',
             'status_kawin' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255', 
-            'perkerjaan' => 'required|string|max:255', 
+            'alamat' => 'nullable|string|max:255', 
+            'pekerjaan' => 'required|string|max:255', 
             'jml_pendapatan' => 'required|array', 
-            'jml_bansos' => 'required|array',
+            'jml_bansos' => 'nullable|array',
             'jml_anak' => 'required|string|max:255',  
             'status_tinggal' => 'required|string|max:255',
             'pengeluaran_kontrakan' => 'nullable|array',
             'pengeluaran_listrik' => 'nullable|array', 
-            'jml_hutang' => 'required|array',
-            'keperluan_hutang' => 'required|string|max:255',
+            'jml_hutang' => 'nullable|array',
+            'keperluan_hutang' => 'nullable|string|max:255',
             'rt_rw' => 'nullable|string|max:255',   
             'nama_wilayah' => 'nullable|max:255', 
             'status' => 'string|max:255',  
@@ -72,7 +72,7 @@ class MustahikuserController extends Controller
         //     $x=0;
         //   }else{ 
         //     $x=$lastId->id; 
-        // }
+        // } 
  
         // $mustahik->code = $this->generateCodeById("MSQ", $x+1);
         $mustahik->nama_lengkap = $request->nama_lengkap;
@@ -80,7 +80,7 @@ class MustahikuserController extends Controller
         $mustahik->nomor_telp = $request->no_phone;
         $mustahik->status_perkawinan = $request->status_kawin;
         $mustahik->alamat = $request->alamat;  
-        $mustahik->pekerjaan = $request->perkerjaan;
+        $mustahik->pekerjaan = $request->pekerjaan;
         $mustahik->jumlah_pendapatan = $jumlah_pendapatan;
         $mustahik->jumlah_bansos_diterima = $jumlah_bansos;
         $mustahik->jumlah_anak_dalam_tanggungan = $request->jml_anak;
@@ -100,11 +100,10 @@ class MustahikuserController extends Controller
    
         // Save the mustahik
         $mustahik->save();
-
+ 
         // Redirect back to the index page of mustahik with a success message
         return redirect()->route('landing-pages.index')->withSuccess(__('Mustahiq Berhasil diajukan.'));
     }
-
     
     public function destroy($id)
     {

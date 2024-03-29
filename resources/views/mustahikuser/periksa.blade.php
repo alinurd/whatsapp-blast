@@ -5,7 +5,7 @@
             <div class="card">  
                <div class="card-header d-flex justify-content-between">
                   <div class="header-title"> 
-                     <h4 class="card-title">Periksa pengajuan mustahik - {{ $mustahik->nama_lengkap }}</h4>
+                     <h4 class="card-title">Approval Mustahiq - {{ $mustahik->nama_lengkap }}</h4>
                   </div> 
                   <div class="card-action"> 
                         <a href="{{ route('mustahikuser.index') }}" class="btn btn-sm btn-primary" role="button">Back</a>
@@ -56,39 +56,36 @@
                               <div class="col-7">
                                  <h4 class="mb-4">Biodata Mustahiq:</h4>
                               </div>
-                              <!-- <div class="col-5">
-                              <h2 class="steps">Step 1 - 4</h2>
-                           </div> -->
                            </div>
                            <div class="row">
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="nama_lengkap">Nama: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="nama_lengkap">Nama: </label>
                                  <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control bg-light text-black" required readonly value="{{ old('nama_lengkap', $mustahik->nama_lengkap) }}">
                               </div>
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="jenis_kelamin">Jenis Kelamin: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="jenis_kelamin">Jenis Kelamin: </label>
                                  <input type="text" name="jenis_kelamin" id="jenis_kelamin" class="form-control bg-light text-black" required readonly value="{{ old('jenis_kelamin', $mustahik->jenis_kelamin) }}">
                               </div> 
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="no_phone">No Handphone <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="no_phone">No Handphone </label>
                                  <input type="text" name="no_phone" id="no_phone" class="form-control bg-light text-black" required readonly value="{{ old('no_phone', $mustahik->nomor_telp) }}">
                               </div>
 
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="status_kawin">Status Perkawinan: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="status_kawin">Status Perkawinan: </label>
                                  <input type="text" name="status_kawin" id="status_kawin" class="form-control bg-light text-black" required readonly value="{{ old('status_kawin', $mustahik->status_perkawinan) }}">
                               </div>
 
                               @if($mustahik->rw_id || $mustahik->wilayah_lain)
                                     @if($mustahik->rw_id) 
                                     <div class="form-group col-md-6">
-                                       <label class="form-label" for="rt_rw">RT/RW:</label>
-                                       <input type="text" name="rt_rw" id="rt_rw" class="form-control bg-light text-black" required readonly value="{{ old('rt_rw', $mustahik->rw_id) }}">
+                                       <label class="form-label" for="rt_rw">Informasi Wilayah:</label>
+                                       <input type="text" name="rt_rw" id="rt_rw" class="form-control bg-light text-black" required readonly value="{{ old('rt_rw', $mustahik->rw_id) }}"></input>
                                     </div>
                                     @else
                                     <div class="form-group col-md-6">
-                                       <label class="form-label" for="nama_wilayah">Wilayah lainnya: </label>
-                                       <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control bg-light text-black" placeholder="Wilayah Lainnya">
+                                       <label class="form-label" for="nama_wilayah">Informasi Wilayah: </label>
+                                       <input type="text" name="nama_wilayah" id="nama_wilayah" class="form-control bg-light text-black" required readonly value="{{ old('nama_wilayah', $mustahik->wilayah_lain) }}">
                                     </div>
                                     @endif
                               @else
@@ -96,7 +93,7 @@
                               @endif
                                
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="alamat">Alamat: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="alamat">Alamat: </label>
                                  <input type="text" name="alamat" id="alamat" class="form-control bg-light text-black" required readonly value="{{ old('alamat', $mustahik->alamat) }}">
                               </div>
                            </div>
@@ -110,31 +107,28 @@
                               <div class="col-7">
                                  <h4 class="mb-4">Keuangan Mustahiq:</h4>
                               </div>
-                              <!-- <div class="col-5">
-                              <h2 class="steps">Step 2 - 4</h2>
-                           </div> -->
                            </div>
                            <div class="row"> 
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="perkerjaan">Pekerjaan: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="perkerjaan">Pekerjaan: </label>
                                  <input type="text" name="pekerjaan" id="pekerjaan" class="form-control bg-light text-black" required readonly value="{{ old('pekerjaan', $mustahik->pekerjaan) }}">
                               </div>
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="jml_pendapatan">Jumlah Pendapatan: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="jml_pendapatan">Jumlah Pendapatan: </label>
                                  <input type="text" name="jml_pendapatan[]" id="jml_pendapatan" class="form-control bg-light text-black" value="{{ $mustahik->jumlah_pendapatan }}" required readonly>
                               </div>
 
                               <div class="form-group col-md-6"> 
-                                 <label class="form-label" for="jml_anak">Jml Anak dlm Tanggungan: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="jml_anak">Jml Anak dlm Tanggungan: </label>
                                  <input type="text" name="jml_anak" id="jml_anak" class="form-control bg-light text-black" value="{{ $mustahik->jumlah_anak_dalam_tanggungan }}" required readonly>
                               </div> 
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="jml_bansos">Jumlah Bansos Diterima: </label>
                                  <input type="text" name="jml_bansos[]" id="jml_bansos" class="form-control bg-light text-black" value="{{ $mustahik->jumlah_bansos_diterima }}" required readonly>
                               </div>
                               
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="status_tinggal">Status Tempat Tinggal: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="status_tinggal">Status Tempat Tinggal: </label>
                                  <input type="text" name="status_tinggal" id="status_tinggal" class="form-control bg-light text-black" required readonly value="{{ $mustahik->status_tempat_tinggal }}">
                               </div>
 
@@ -151,11 +145,11 @@
                               @endif
 
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="jml_hutang">Jumlah Hutang: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="jml_hutang">Jumlah Hutang: </label>
                                  <input type="text" name="jml_hutang[]" id="jml_hutang" class="form-control  bg-light text-black" value="{{ $mustahik->jumlah_hutang }}" required readonly>
                               </div>
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="keperluan_hutang">Keperluan Hutang: <span class="text-danger">*</span></label>
+                                 <label class="form-label" for="keperluan_hutang">Keperluan Hutang: </label>
                                  <input type="text" name="keperluan_hutang" id="keperluan_hutang" class="form-control bg-light text-black" required readonly value="{{ old('keperluan_hutang', $mustahik->keperluan_hutang) }}">
                               </div>
 
@@ -171,9 +165,6 @@
                               <div class="col-7">
                                  <h4 class="mb-4">Approval Mustahiq:</h4>
                               </div>
-                              <!-- <div class="col-5">
-                                 <h2 class="steps">Step 3 - 4</h2>
-                           </div> -->
                            </div>
                            <div class="row">
 
@@ -198,24 +189,24 @@
                                  {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Pilih Kategori Zakat', 'id' => 'kategorix']) }}
                               </div>
                               <div class="form-group col-md-3">
-                                 <label class="form-label" for="jml_uang">Jumlah Uang: </label>
-                                 <input type="number" name="jml_uang[]" class="form-control" placeholder="Jumlah uang" value="{{ old('jml_uang')[0] ?? '' }}">
+                                 <label class="form-label" for="jml_uang">Jumlah Uang: <span class="text-danger">*</span></label>
+                                 <input type="number" name="jml_uang[]" id="jml_uang" class="form-control" placeholder="Jumlah uang" value="{{ old('jml_uang')[0] ?? '' }}">
                               </div>
                               <div class="form-group col-md-3">
-                                 <label class="form-label" for="jml_beras">Jumlah Beras: </label>
-                                 <input type="text" name="jml_beras[]" class="form-control" placeholder="Jumlah Beras" value="{{ old('jml_beras')[0] ?? '' }}">
+                                 <label class="form-label" for="jml_beras">Jumlah Beras: <span class="text-danger">*</span></label>
+                                 <input type="text" name="jml_beras[]" id="jml_beras" class="form-control" placeholder="Jumlah Beras" value="{{ old('jml_beras')[0] ?? '' }}">
                               </div>
                               <div class="form-group col-md-3">
-                                 <label class="form-label" for="satuan_beras">Satuan Beras: </label>
-                                 <select name="satuan_beras" class="form-control">
+                                 <label class="form-label" for="satuan_beras">Satuan Beras: <span class="text-danger">*</span></label>
+                                 <select name="satuan_beras" class="form-control" id="satuan_beras">
                                     <option value="">Pilih Satuan Beras</option>
                                     <option value="Kg">Kg</option>
                                     <option value="Liter">Liter</option>
                                  </select>
                               </div>
                               <div class="form-group col-md-6">
-                                 <label class="form-label" for="status">Update Status: </label>
-                                 <select name="status" class="form-control">
+                                 <label class="form-label" for="status">Update Status: <span class="text-danger">*</span></label>
+                                 <select name="status" class="form-control" id="status" >
                                     <option value="">Pilih Status</option>
                                     <option value="2">Setujui</option>
                                     <option value="3">Tolak</option>
@@ -245,116 +236,25 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
-<!-- <script>
+<script>
     $(document).ready(function() {
-        // Ketika nilai dropdown "Apakah merupakan warga RW04?" berubah
-        $('#rt_rw_selection').on('change', function() {
-            var selectedOption = $(this).val();
-            // Jika dipilih "Ya"
-            if (selectedOption === 'Ya') {
-                $('#rt_rw_dropdown').show(); // Tampilkan dropdown RT/RW
-                $('#wilayah_lainnya').hide(); // Sembunyikan form wilayah lainnya
-            }
-            // Jika dipilih "Tidak"
-            else if (selectedOption === 'Tidak') {
-                $('#rt_rw_dropdown').hide(); // Sembunyikan dropdown RT/RW
-                $('#wilayah_lainnya').show(); // Tampilkan form wilayah lainnya
-            }
-            // Jika belum dipilih
-            else {
-                $('#rt_rw_dropdown').show(); // Tampilkan dropdown RT/RW
-                $('#wilayah_lainnya').hide(); // Sembunyikan form wilayah lainnya
-            }
-        });
-
-        // Tampilkan dropdown RT/RW jika belum ada pilihan yang dipilih
-        if ($('#rt_rw_selection').val() === '') {
-            $('#rt_rw_dropdown').show();
-        }
-    });
-
-    $(document).ready(function() {
-        // Ketika nilai dropdown "Status Tempat Tinggal" berubah
-        $('#status_tinggal').on('change', function() {
-            var selectedOption = $(this).val();
-            // Sembunyikan semua section terlebih dahulu
-            $('#pengeluaran_listrik_section').hide();
-            $('#pengeluaran_kontrakan_section').hide();
-            
-            // Jika dipilih "Kontrakan"
-            if (selectedOption === 'Kontrakan') {
-                $('#pengeluaran_kontrakan_section').show(); // Tampilkan form Pengeluaran Listrik & Kontrakan
-            }
-            // Jika dipilih "Menumpang" atau "Milik Sendiri"
-            else if (selectedOption === 'Menumpang' || selectedOption === 'Milik Sendiri') {
-                $('#pengeluaran_listrik_section').show(); // Tampilkan form Pengeluaran Listrik
-            }
-            // Jika belum dipilih
-            else {
-                $('#pengeluaran_listrik_section').show(); // Tampilkan form Pengeluaran Listrik
-            }
-        });
-
-        // Tampilkan form Pengeluaran Listrik jika belum ada pilihan yang dipilih
-        if ($('#status_tinggal').val() === '') {
-            $('#pengeluaran_listrik_section').show();
-        }
-    });
-
-    $(document).ready(function() {
-      $('.next1').prop('disabled', true);
-      $('.next2').prop('disabled', true);
       $('.next3').prop('disabled', true);
-
-      $('input, select').on('input change', function() {
-         var namaLengkap = $('#nama_lengkap').val();
-         var jenisKelamin = $('#jenis_kelamin').val();
-         var noPhone = $('#no_phone').val();
-         var statusKawin = $('#status_kawin').val();
-         var rtRw = $('#rt_rw').val();
-         var namaWilayah = $('#nama_wilayah').val();
-         var alamat = $('#alamat').val();
-         if (namaLengkap !== '' &&
-            jenisKelamin !== '' &&
-            noPhone !== '' &&
-            statusKawin !== '' &&
-            alamat !== '' &&
-            (rtRw !== '' || namaWilayah !== '')) {
-            $('.next1').prop('disabled', false);
-         } else {
-            $('.next1').prop('disabled', true);
-         }
-      });
-
-
-      $('input, select').on('input change', function() {
-         var perkerjaan = $('#perkerjaan').val();
-         var jml_pendapatan = $('#jml_pendapatan').val();
-         var jml_anak = $('#jml_anak').val();
-         var status_tinggal = $('#status_tinggal').val();
-         var pengeluaran_listrik = $('#pengeluaran_listrik').val();
-         var pengeluaran_kontrakan = $('#pengeluaran_kontrakan').val(); // Corrected ID
-         var jml_hutang = $('#jml_hutang').val();
-         var keperluan_hutang = $('#keperluan_hutang').val();
-         if (perkerjaan !== '' &&
-            jml_pendapatan !== '' &&
-            jml_anak !== '' &&
-            status_tinggal !== '' &&
-            keperluan_hutang !== '' &&
-            jml_hutang !== '') {
-            $('.next2').prop('disabled', false);
-         } else {
-            $('.next2').prop('disabled', true);
-         }
-      });
 
       $('input, select').on('input change', function() {
          var kategori_mustahik = $('#kategori_mustahik').val();
          var tgl_terima_zakat = $('#tgl_terima_zakat').val();
          var kategorix = $('#kategorix').val();
+         var jml_uang = $('#jml_uang').val();
+         var jml_beras = $('#jml_beras').val();
+         var satuan_beras = $('#satuan_beras').val();
+         var status = $('#status').val();
          if (kategori_mustahik !== '' &&
             tgl_terima_zakat !== '' &&
-            kategorix !== '' ) {
+            kategorix !== '' &&
+            jml_uang !== '' &&
+            jml_beras !== '' &&
+            satuan_beras !== '' &&
+            status !== '') {
             $('.next3').prop('disabled', false);
          } else {
             $('.next3').prop('disabled', true);
@@ -362,4 +262,4 @@
       });
 
    });
-</script>  -->
+</script> 

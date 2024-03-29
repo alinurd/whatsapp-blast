@@ -31,6 +31,7 @@
                            <option value="15">RT.015/RW.004</option>
                            <option value="16">RT.016/RW.004</option>
                            <option value="17">RT.017/RW.004</option>
+                           <option value="18">RT.018/RW.004</option>
                            <option value="lainnya">lainnya</option>
                         </select> 
                         </div>
@@ -97,8 +98,12 @@
                            <td>{{ $detail->nama_lengkap }}</td>
                            <td>{{ $detail->kategori_mustahik }}</td>
                            <td>{{ $detail->kategori->nama_kategori }}</td>
-                           <td>{{ $detail->jumlah_uang_diterima }}</td>
+                           <td>Rp{{ number_format($detail->jumlah_uang_diterima, 0, ',', '.') }}</td>
+                           @if($detail->jumlah_beras_diterima == '0')
+                           <td>{{ $detail->jumlah_beras_diterima }}</td>
+                           @else 
                            <td>{{ $detail->jumlah_beras_diterima }} {{ $detail->satuan_beras }}</td>
+                           @endif
                         </tr>    
                         @endif
                         @endforeach 
