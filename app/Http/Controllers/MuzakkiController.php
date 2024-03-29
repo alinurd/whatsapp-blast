@@ -102,8 +102,8 @@ $payload = json_encode([
 ]);
 $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
 $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: " . $dibayarkan->nama_lengkap . ".\n";
-$msg .= "No. Invoice: #" . $MuzakkiHeader->code . " ";
-$msg .= "Lihat detail: <a href='https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code . "'>di sini</a>";
+$msg .= "No. Invoice: #" . $MuzakkiHeader->code . ".\n.\n.\n ";
+$msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code . "'";
 $this->cetakinvoice($MuzakkiHeader->code);
 
  $this->sendMassage1($no,$msg, $MuzakkiHeader->code);
