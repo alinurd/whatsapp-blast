@@ -60,6 +60,7 @@ Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-
 // Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
 Route::get('/',[HomeController::class, 'landing_index'])->name('uisheet');
  
+Route::get('showinvoice/{code}', [MustahikuserController::class, 'show'])->name('showinvoice');
 Route::get('mustahikuser/create', [MustahikuserController::class, 'create'])->name('mustahikuser.create');
 Route::post('mustahikuser/store', [MustahikuserController::class, 'store'])->name('mustahikuser.store');
 

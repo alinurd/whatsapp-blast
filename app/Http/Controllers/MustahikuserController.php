@@ -8,7 +8,9 @@ use App\Models\Mustahik;
 use App\Models\Kategori;
 use App\Helpers\AuthHelper;
 use App\Http\Requests\UserRequest;
- 
+use App\Models\Muzakki;
+use App\Models\MuzakkiHeader;
+
 class MustahikuserController extends Controller
 { 
     public function index(MustahikuserDataTable $dataTable)
@@ -229,6 +231,17 @@ class MustahikuserController extends Controller
     // Redirect ke halaman yang sesuai setelah update
     return redirect()->route('mustahikuser.index')->withSuccess(__('Mustahik successfully updated.'));
     }
+    public function show($code)
+    {  
+       // Find the category data by ID  
 
+       $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+       $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();    //    $ktg = Kategori::pluck('nama_kategori', 'id');
+
+       // Pass the category data to the form view
+    //    return view('muzzaki.trace', compact('data'));
+    return view('muzakki.trace', compact('data'));
+
+    }
 }
  
