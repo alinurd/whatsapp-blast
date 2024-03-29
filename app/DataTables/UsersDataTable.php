@@ -61,6 +61,9 @@ class UsersDataTable extends DataTable
                     $q->where('country', 'like', "%{$keyword}%");
                 });
             })
+            ->addColumn('role', function($query) {
+                return $query->role_name;
+            })
             ->addColumn('action', 'users.action')
             ->rawColumns(['action','status']);
     }
@@ -74,9 +77,10 @@ class UsersDataTable extends DataTable
     public function query()
     {
         return User::query()
-        ->where('user_type', '!=', 'pemberi')
-        ->with('userProfile');
-    }
+        ->join('roles as role', 'users.role', '=', 'role.id')
+        ->select('users.*', 'role.title as role_name',)
+        ->where('users.role', '!=', 'null');
+     }
 
     /**
      * Optional method if you want to use html builder.
@@ -107,6 +111,7 @@ class UsersDataTable extends DataTable
         return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
             ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Nama Lengkap'],
+            ['data' => 'role', 'name' => 'role', 'title' => 'Role', 'class' => 'text-center'],
             ['data' => 'jenis_kelamin', 'name' => 'jenis_kelamin', 'title' => 'Jenis Kelamin'],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'nomor_telp', 'name' => 'nomor_telp', 'title' => 'Nomor Telp'],
