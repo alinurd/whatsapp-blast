@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -192,6 +193,7 @@ return [
     */
 
     'aliases' => [
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
@@ -230,7 +232,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'AuthHelper' => App\Helpers\AuthHelper::class
+        'AuthHelper' => App\Helpers\AuthHelper::class,
+        
     ],
 
 ];

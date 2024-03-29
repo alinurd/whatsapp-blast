@@ -14,7 +14,7 @@ use App\Models\MuzakkiHeader;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
-use Barryvdh\DomPDF\Facade\Pdf;
+ use PDF;
 
 class MuzakkiController extends Controller
 {
@@ -78,7 +78,8 @@ class MuzakkiController extends Controller
         ]);
         $dUser = User::where('id', $user)->first();
 $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
- $no = '62' . $dUser->nomor_telp; 
+ $no = '6289528518495'; 
+//  $no = '62' . $dUser->nomor_telp; 
 
         $pesan = "Terima kasih @" . $dUser->nama_lengkap . " sudah membayar zakat pada tanggal " . $MuzakkiHeader->created_at . "\n\n"
         . " dibayarkan oleh: " . $dibayarkan->nama_lengkap . ". Code invoice #" . $MuzakkiHeader->code . "\n\n"
@@ -96,36 +97,19 @@ $payload = json_encode([
     ]
 ]);
 $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
- $this->sendWa($no,$n);
+$msg="Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu:".$dibayarkan->nama_lengkap." [No.Invoicw:#".$MuzakkiHeader->code."]" ." lihat detail: https://zis-alhasanah.com/showinvoice/".$MuzakkiHeader->code ;
+$this->cetakinvoice($MuzakkiHeader->code);
+
+ $this->sendMassage1($no,$msg, $MuzakkiHeader->code);
+//  $this->sendMassage($no,$msg);
+//  $this->sendWa($no,$n);
  
         $key = 'b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f';
         $base_url = 'qymz4m.api.infobip.com';
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://' . $base_url . '/sms/2/text/advanced',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST', 
-            CURLOPT_POSTFIELDS => $payload, 
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: App $key",
-                'Content-Type: application/json',
-                'Accept: application/json'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-         curl_close($curl);
+ 
     }
  
-// dd($response);
-    return redirect()->route('invoice', ['code' => $MuzakkiHeader->code]);
+    return redirect()->route('invoice', ['code' => $MuzakkiHeader->code])->withSuccess(__('Pembayaran berhasil & invoice telah terkirim kepada '.$dibayarkan->nama_lengkap));
 }
 
     public function invoice($code)
@@ -135,14 +119,32 @@ $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
         return view('muzakki.print', compact('data'));
         // return view('invoice', compact('data'));
     }
-    public function cetakinvoice($code)
+    public function cetakinvoices($code)
     {
-        ini_set('memory_limit', '2G');
-        $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
-        $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
-        $pdf = Pdf::loadView('invoice', $data);
-        return $pdf->download('invoice.pdf');
+        $detail = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+        $header = MuzakkiHeader::where('code', $code)->with('user')->get();
+        // return view('muzakki.print', compact('data'));
+        return view('invoice', compact('header','detail'));
+        
+        
     }
+
+public function cetakinvoice($code)
+{
+    $detail = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+    $header = MuzakkiHeader::where('code', $code)->with('user')->get();
+    
+    // Render view to PDF
+    $pdf = PDF::loadView('invoice', compact('header','detail'));
+
+    // // Save PDF to public folder
+    $pdf->save(public_path('invoice/invoice_'.$code.'.pdf'));
+
+    // Return view or response
+    // return view('invoice', compact('header','detail'));
+    return $pdf->stream('invoice_'.$code.'.pdf');
+}
+
     
     public function muzakkiCreate()
     {
