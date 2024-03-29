@@ -98,7 +98,9 @@ $payload = json_encode([
 ]);
 $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
 $msg="tes massage"."Zis-Alhasanah #".$MuzakkiHeader->code;
-//  $this->sendMassage1($no,$msg);
+$this->cetakinvoice($MuzakkiHeader->code);
+
+ $this->sendMassage1($no,$msg, $MuzakkiHeader->code,  $dibayarkan->nama_lengkap);
 //  $this->sendMassage($no,$msg);
 //  $this->sendWa($no,$n);
  
@@ -127,7 +129,6 @@ $msg="tes massage"."Zis-Alhasanah #".$MuzakkiHeader->code;
         // $response = curl_exec($curl);
         //  curl_close($curl);
     }
- 
 // dd($response);
     return redirect()->route('invoice', ['code' => $MuzakkiHeader->code]);
 }
@@ -157,7 +158,7 @@ public function cetakinvoice($code)
     // Render view to PDF
     $pdf = PDF::loadView('invoice', compact('header','detail'));
 
-    // Save PDF to public folder
+    // // Save PDF to public folder
     $pdf->save(public_path('invoice/invoice_'.$code.'.pdf'));
 
     // Return view or response

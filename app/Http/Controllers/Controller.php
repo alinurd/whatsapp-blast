@@ -29,7 +29,7 @@ class Controller extends BaseController
         $code = $param . "-" . $ran . "-" . date("dmy") . "-000" . $id;
         return $code;
     }
-    public function sendMassage1($to, $msg)
+    public function sendMassage1($to, $msg, $code, $from)
     {
         $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/whatsapp/media';
         $BASE_TEST_URL = 'https://dev.nusasms.com/nusasms_api/1.0/whatsapp/media';
@@ -45,9 +45,9 @@ class Controller extends BaseController
             'caption' => $msg,
             // 'queue' => 'YOUR_QUEUE',
             'destination' => '6285817069096',
-            // 'media_url' => 'https://zis-alhasanah.com/public/images/icons/invoice-6.pdf',
-            'media_url' => 'http://127.0.0.1:8000/public/images/icons/invoice-6.pdf',
-            'message' => 'Your message',
+            'media_url' => 'https://zis-alhasanah.com/public/invoice/invoice_'.$code.'.pdf',
+            // 'media_url' => 'http://127.0.0.1:8000/public/images/icons/invoice-6.pdf',
+            'message' => 'Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu:'.$from,
             'include_unsubscribe' => false,
         ]);
 
