@@ -107,6 +107,8 @@
         $totalKg += str_contains($item['jumlah_bayar'], ',') ? (float) str_replace(',', '', $item['jumlah_bayar']) : $item['jumlah_bayar'];
     } elseif ($item['satuan'] === 'Rupiah') {
         $totalRupiah += str_contains($item['jumlah_bayar'], ',') ? (float) str_replace(',', '', $item['jumlah_bayar']) : $item['jumlah_bayar'];
+    } elseif ($item['satuan'] === 'Beras') {
+        $totalRupiah += (float) str_replace(',', '', $item['jumlah_bayar']);
     }
     ?>
 
@@ -114,12 +116,12 @@
     
     <tr>
         <th colspan="4" style="text-align: center;">Total:</th>
-        <th style="text-align: right;">{{ $totalLiter }}</th>
+        <th style="text-align: right;">{{ number_format($totalLiter, 2) }}</th>
         <th>Liter</th>
     </tr>
     <tr>
         <th colspan="4"></th>
-        <th style="text-align: right;">{{ $totalKg}}</th>
+        <th style="text-align: right;">{{ number_format($totalKg, 2) }}</th>
         <th>Kilogram</th>
     </tr>
     <tr>
@@ -128,6 +130,7 @@
         <th>Rupiah</th>
     </tr>
 </tbody>
+
 
 
             </table>
