@@ -118,6 +118,7 @@
                                         </div>
                                         <span class="badge bg-primary"><b class="h4 text-white">Rp{{ number_format($sisaPemasukanMaal, 0) }}.-</b></span>
                                     </div>
+                                    <div></div>
                                 </div>
                             </div>
                         </div>
