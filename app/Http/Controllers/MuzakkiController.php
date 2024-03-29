@@ -80,9 +80,9 @@ class MuzakkiController extends Controller
 $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
 //  $no = '6289528518495'; 
 $no = $dUser->nomor_telp;
-if (substr($no, 0, 1) === '0') {
-    $no = '62' . substr($no, 1);
-}
+// if (substr($no, 0, 1) === '0') {
+//     $no = '62' . substr($no, 1);
+// }
 
         $pesan = "Terima kasih @" . $dUser->nama_lengkap . " sudah membayar zakat pada tanggal " . $MuzakkiHeader->created_at . "\n\n"
         . " dibayarkan oleh: " . $dibayarkan->nama_lengkap . ". Code invoice #" . $MuzakkiHeader->code . "\n\n"
