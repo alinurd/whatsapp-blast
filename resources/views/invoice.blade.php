@@ -69,7 +69,7 @@
         </div>
         <div class="invoice-body">
             <p style="text-align: right;"> <i>Jakarta, {{$header[0]['created_at']}}</i></p> <br>
-            <p>Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: <br><b><u>{{$data['header'][0]['user']['nama_lengkap']}}</u></b></p>
+            <p>Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: <br><b><u>{{$header[0]['user']['nama_lengkap']}}</u></b></p>
             <table class="invoice-table">
                 <thead>
                     <tr>
