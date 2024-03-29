@@ -141,7 +141,7 @@ class MustahikReport implements FromCollection, WithHeadings, WithMapping{
         $mustahikReport = new MustahikReport($filteredData);
 
         // Ekspor ke Excel
-        return Excel::download($mustahikReport, "mustahik-Report-" . date("Y") . ".xlsx");
+        return Excel::download($mustahikReport, "Mustahik-Report-" . date("Y") . ".xlsx");
     }
     
     public function index(Request $request) 

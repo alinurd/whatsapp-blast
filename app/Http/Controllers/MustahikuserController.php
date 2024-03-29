@@ -10,6 +10,7 @@ use App\Helpers\AuthHelper;
 use App\Http\Requests\UserRequest;
 use App\Models\Muzakki;
 use App\Models\MuzakkiHeader;
+use Illuminate\Support\Str;
 
 class MustahikuserController extends Controller
 { 
