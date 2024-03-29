@@ -127,7 +127,7 @@
       var totalUang = 0;
       var totalKg = 0;
 
-      @foreach($data['detail'] as $item)
+      @foreach($detail as $item)
     @if($item['satuan'] === 'Liter')
         totalBeras += parseFloat("{{ str_replace(',', '.', $item['jumlah_bayar']) }}");
     @elseif($item['satuan'] === 'Rupiah')
