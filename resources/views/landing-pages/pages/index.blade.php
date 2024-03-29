@@ -1,54 +1,39 @@
 <x-app-layout layout="landing">
     <style>
         .toast {
-  z-index: 9999; /* Menjadikan elemen paling atas */
-  position: fixed; /* Memastikan elemen tetap di posisi yang sama saat digulir */
-  top: 50%; /* Menggeser elemen ke tengah vertikal */
-  left: 50%; /* Menggeser elemen ke tengah horizontal */
-  transform: translate(-50%, -50%); /* Menengahkan elemen */
-}
+            z-index: 9999; /* Menjadikan elemen paling atas */
+            position: fixed; /* Memastikan elemen tetap di posisi yang sama saat digulir */
+            top: 50%; /* Menggeser elemen ke tengah vertikal */
+            left: 50%; /* Menggeser elemen ke tengah horizontal */
+            transform: translate(-50%, -50%); /* Menengahkan elemen */
+        }
     </style>
+
      @if (session('success'))
-            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
-                    <strong class="me-auto">Pengajuan Mustahiq</strong>
-                    <small class="text-muted text-success">Successfully</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                Pengajuan anda berhasil ditambahkan
-                </div>
+        <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+                <strong class="me-auto">Pengajuan Mustahiq</strong>
+                <small class="text-muted text-success">Successfully</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-         @endif
-    <div class="container mt-3">
-        <div class="iq-navbar-header" style="height: 215px;">
-            <!-- <div class="container-fluid iq-container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <div>
-                                <h3>Selamat datang di {{ env('APP_INISIAL') }}</h3>
-                                <p>sebagai media transfaransi pengelolaan zakat {{ env('APP_SUBNAME') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <div class="iq-header-img">
-                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{asset('images/dashboard/top-header.jpg')}}" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
+            <div class="toast-body">
+            Pengajuan anda berhasil ditambahkan
             </div>
         </div>
-        <div class="card m-2">
-            <div class="row">
+    @endif
+
+    <div class="container m-auto mt-4">
+        <div class="iq-navbar-header" style="height: 100px;">
+            <div>
+                <img src="{{asset('images/dashboard/header.jpg')}}" style="width: 60%;">
+            </div>
+        </div>
+
+        <div class="row">
                 <div class="col-md-6">
                     <div class="card border-bottom border-4 border-0 border-info">
-                        <div class="card bg-success mb-1">
+                        <div class="card mb-1" style="background: #118146;">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -59,7 +44,7 @@
                                     <div>
                                         <div class="badge m-3">
                                             <span class="h4 text-white">Uang:</span>
-                                            <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanFitrah, 0) }}.-</b></span>
+                                            <span class="badge bg-primary"><b class="h4 text-white">Rp{{ number_format($sisaPemasukanFitrah, 0) }}.-</b></span>
                                         </div>
                                         <h6 class="text-white">Beras: {{ number_format($totalSaldoBerasLFitrah, 1) }} Liter &amp; {{ number_format($totalSaldoBerasKgFitrah, 0) }} Kg</h6>
                                     </div>
@@ -71,7 +56,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card border-bottom border-4 border-0 border-info">
-                        <div class="card bg-success mb-1">
+                        <div class="card mb-1" style="background: #118146;">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -83,7 +68,7 @@
                                         <div class="badge m-3">
                                             <span class="h4 text-white">Uang:</span>
                                         </div>
-                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanFidyah, 0) }}.-</b></span>
+                                        <span class="badge bg-primary"><b class="h4 text-white">Rp{{ number_format($sisaPemasukanFidyah, 0) }}.-</b></span>
                                         <h6 class="text-white">Beras: {{ number_format($totalSaldoBerasKgFidyah, 1) }} Liter &amp; {{ number_format($totalSaldoBerasLFidyah, 0) }} Kg</h6>
                                     </div>
                                     <div></div>
@@ -92,11 +77,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+        </div>
+        <div class="row">
                 <div class="col-md-6">
                     <div class="card border-bottom border-4 border-0 border-info">
-                        <div class="card bg-success mb-1">
+                        <div class="card mb-1" style="background: #118146;">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -108,7 +93,7 @@
                                         <div class="badge m-3">
                                             <span class="h4 text-white">Uang:</span>
                                         </div>
-                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanMaal, 0) }}.-</b></span>
+                                        <span class="badge bg-primary"><b class="h4 text-white">Rp{{ number_format($sisaPemasukanMaal, 0) }}.-</b></span>
                                     </div>
                                     <div></div>
                                 </div>
@@ -118,7 +103,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card border-bottom border-4 border-0 border-info">
-                        <div class="card bg-success mb-1">
+                        <div class="card mb-1" style="background: #118146;">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -130,7 +115,7 @@
                                         <div class="badge m-3">
                                             <span class="h4 text-white">Uang:</span>
                                         </div>
-                                        <span class="badge bg-primary"><b class="h4 text-white">Rp.{{ number_format($sisaPemasukanInfaq, 0) }}.-</b></span>
+                                        <span class="badge bg-primary"><b class="h4 text-white">Rp{{ number_format($sisaPemasukanInfaq, 0) }}.-</b></span>
                                     </div>
                                     <div></div>
                                 </div>
@@ -138,28 +123,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-column">
-                            <div class="mb-3">
-                                <h4>Area Distribusi dan Jumlah Mustahiq</h4>
-                            </div>
-                            <div class="border rounded">
-                                <div id="extrachart"></div>
-                            </div>
-                        </div>
+        </div>
+
+        <div class="card mt-1">
+            <div class="card-body">
+                <div class="d-flex flex-column">
+                    <div class="mb-5">
+                        <h6 style="color: #118145;">Area Distribusi dan Jumlah Mustahiq</h6>
+                    </div>
+                    <div class="border rounded">
+                        <div id="extrachart"></div>
                     </div>
                 </div>
             </div>
-            <h3>
-            <span class="badge rounded-pill bg-success text-start"> Masjid Alhasanah <span class="badge rounded-pill bg-light text-dark m-3"> Taman Meruya III, Blok B13 No.1, Kembangan, Jakarta Barat | +6221 256 844 72</span></span>
-            </h3>
         </div>
-    </div>
-    </div>
+
+        <div class="card" style="width: 97%; margin: 30px auto;">
+            <div class="row">
+                <div class="col-md-3" style="background: #118146; border-radius: 50px 0 0 50px;">
+                    <a href="{{ route('uisheet') }}">
+                        <h6 class="text-white text-center mt-3">Masjid Al Hasanah</h6> 
+                    </a>
+                </div>
+                <div class="col-md-9 bg-light" style="border-radius: 0 50px 50px 0;">
+                    <p class="mt-3" style="color: #118146;">Taman Meruya Ilir, Blok B13 No.1, Kembangan, Jakarta Barat | +6221 256 844 72</p>
+                </div>
+            </div>
+        </div>
 
     </div>
-    </div>
+    
 
 </x-app-layout>
 
@@ -175,10 +168,10 @@
         '#5cb85c', '#4cae4c', '#449d44', '#398439', '#2e732e',
         '#256625', '#1b541b', '#104410', '#0a330a', '#032203',
         '#0a330a', '#104410', '#1b541b', '#256625', '#2e732e',
-        '#398439', '#449d44', '#5cb85c' 
+        '#398439', '#449d44', '#5cb85c', '#5cb85c'
     ];
 @endphp
-
+ 
 <script>
     $(document).ready(function() {
         let seriesData = [];

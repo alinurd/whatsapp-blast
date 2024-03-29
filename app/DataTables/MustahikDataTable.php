@@ -48,16 +48,16 @@ class MustahikDataTable extends DataTable
         })
         ->editColumn('jumlah_uang_diterima', function($query) {
             if (!empty($query->jumlah_uang_diterima)) {
-                return $query->jumlah_uang_diterima;
+                return 'Rp' . number_format($query->jumlah_uang_diterima, 0, ',', '.');
             } else {
-                return '-';
+                return 'Rp' . 0;
             }
         })
         ->editColumn('jumlah_beras_diterima', function($query) {
             if (!empty($query->jumlah_beras_diterima)) {
-                return $query->jumlah_beras_diterima;
+                return $query->jumlah_beras_diterima . ' ' . $query->satuan_beras; 
             } else {
-                return '-';
+                return $query->jumlah_beras_diterima;
             }
         })
         ->editColumn('userProfile.country', function($query) {

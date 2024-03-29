@@ -7,7 +7,7 @@
                     <div class="header-title">
                         <h4 class="card-title">Detail Mustahiq</h4>
                         <h5>#{{ $mustahik->code }}</h5>
-                         <i style="font-size: 11px;">Jakarta, <?= $mustahik->tanggal; ?></i>
+                         <i style="font-size: 11px;"><?= $mustahik->tanggal; ?></i>
                     </div>
                     <div class="card-action">
                         <a href="{{route('mustahik.index')}}" class="btn btn-sm btn-primary" role="button">Back</a>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Pendapatan:</h6>
-                                <p>{{ $mustahik->jumlah_pendapatan }}</p>
+                                <p>Rp{{ number_format($mustahik->jumlah_pendapatan, 0, ',', '.') }}</p>
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Anak dalam Tanggungan:</h6>
@@ -73,11 +73,7 @@
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Bansos Diterima:</h6>
-                                @if($mustahik->jumlah_bansos_diterima)
-                                    <p>{{ $mustahik->jumlah_bansos_diterima }}</p>
-                                @else 
-                                    <p>-</p>
-                                @endif
+                                <p>Rp{{ number_format($mustahik->jumlah_bansos_diterima, 0, ',', '.') }}</p>
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Status Tempat Tinggal:</h6>
@@ -86,23 +82,19 @@
                             @if($mustahik->status_tempat_tinggal === 'Kontrakan')
                             <div class="mt-2">
                                 <h6 class="mb-1">Pengeluaran Listrik & Kontrakan:</h6>
-                                <p>{{ $mustahik->pengeluaran_kontrakan }}</p>
+                                <p>Rp{{ number_format($mustahik->pengeluaran_kontrakan, 0, ',', '.') }}</p>
                             </div>
                             @else
                             <div class="mt-2">
                                 <h6 class="mb-1">Pengeluaran Listrik</h6>
-                                <p>{{ $mustahik->pengeluaran_listrik }}</p>
+                                <p>Rp{{ number_format($mustahik->pengeluaran_listrik, 0, ',', '.') }}</p>
                             </div>
                             @endif
                         </div>  
                         <div class="form-group col-md-4">
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Hutang:</h6>
-                                @if($mustahik->jumlah_hutang)
-                                    <p>{{ $mustahik->jumlah_hutang }}</p>
-                                @else 
-                                    <p>-</p>
-                                @endif
+                                <p>Rp{{ number_format($mustahik->jumlah_hutang, 0, ',', '.') }}</p>
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Keperluan Hutang:</h6>
@@ -126,18 +118,14 @@
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Uang Diterima:</h6>
-                                @if($mustahik->jumlah_uang_diterima)
-                                    <p>{{ $mustahik->jumlah_uang_diterima }}</p>
-                                @else 
-                                    <p>-</p>
-                                @endif
+                                <p>Rp{{ number_format($mustahik->jumlah_uang_diterima, 0, ',', '.') }}</p>
                             </div>
                             <div class="mt-2">
                                 <h6 class="mb-1">Jumlah Beras Diterima:</h6>
-                                @if($mustahik->jumlah_beras_diterima)
-                                    <p>{{ $mustahik->jumlah_beras_diterima }} <span>{{ $mustahik->satuan_beras }}</span></p>
+                                @if($mustahik->jumlah_beras_diterima == '0')
+                                    <p>{{ $mustahik->jumlah_beras_diterima }}</p>
                                 @else 
-                                    <p>-</p>
+                                    <p>{{ $mustahik->jumlah_beras_diterima }} <span>{{ $mustahik->satuan_beras }}</span></p>
                                 @endif
                             </div> 
                             <div class="mt-2">
@@ -149,7 +137,7 @@
                                 @endif
                             </div> 
                         </div>  
-                    </div> 
+                    </div>  
                 </div>
             </div>
          </div>

@@ -56,7 +56,7 @@ class MustahikController extends Controller
             'pengeluaran_kontrakan' => 'nullable|array',
             'pengeluaran_listrik' => 'nullable|array', 
             'jml_hutang' => 'required|array', 
-            'keperluan_hutang' => 'required|string|max:255',
+            'keperluan_hutang' => 'nullable|string|max:255',
             'kategori_mustahik' => 'required|string|max:255',
             'tgl_terima_zakat' => 'required|date',
             'kategori' => 'required|array', // Tambahkan validasi untuk input 'kategori'

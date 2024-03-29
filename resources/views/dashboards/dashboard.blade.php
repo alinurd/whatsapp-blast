@@ -46,7 +46,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Saldo Uang</p>
-                              <h4 class="counter" style="visibility: visible;">{{ number_format($totalSaldoUang) }} Rupiah</h4>
+                              <h4 class="counter" style="visibility: visible;">Rp{{ number_format($totalSaldoUang) }}</h4>
                            </div>
                         </div>
                      </div>
@@ -61,7 +61,7 @@
                            </div>
                            <div class="progress-detail">
                               <p  class="mb-2">Total Saldo Beras</p>
-                              <h4 class="counter">{{ $totalSaldoBerasKg }} KG | {{ $totalSaldoBerasL }} Liter</h4>
+                              <h4 class="counter">{{ $totalSaldoBerasKg }} Kg | {{ $totalSaldoBerasL }} Liter</h4>
                            </div>
                         </div>
                      </div>
@@ -72,9 +72,9 @@
             </div>
          </div>
       </div>
-      <div class="col-md-12 col-lg-8">
+      <!-- <div class="col-md-12 col-lg-8">
          <div class="row">
-            <!-- <div class="col-md-12">
+            <div class="col-md-12">
                <div class="card" data-aos="fade-up" data-aos-delay="800">
                   <div class="card-header d-flex justify-content-between flex-wrap">
                      <div class="header-title">
@@ -118,8 +118,8 @@
                      <div id="d-main" class="d-main"></div>
                   </div>
                </div>
-            </div> -->
-            <!-- <div class="col-md-12 col-lg-6">
+            </div>
+            <div class="col-md-12 col-lg-6">
                <div class="card" data-aos="fade-up" data-aos-delay="1000">
                   <div class="card-header d-flex justify-content-between flex-wrap">
                      <div class="header-title">
@@ -218,7 +218,7 @@
                               <tr>
                                  <th>COMPANIES</th>
                                  <th>CONTACTS</th>
-                                 <th>ORDER</th>
+                                 <th>ORDER</th> 
                                  <th>COMPLETION</th>
                               </tr>
                            </thead>
@@ -369,12 +369,12 @@
                      </div>
                   </div>
                </div>
-            </div> -->
+            </div>
          </div>
-      </div>
-      <div class="col-md-12 col-lg-4">
+      </div> -->
+      <!-- <div class="col-md-12 col-lg-4">
          <div class="row">
-            <!-- <div class="col-md-6 col-lg-12">
+            <div class="col-md-6 col-lg-12">
                <div class="card credit-card-widget" data-aos="fade-up" data-aos-delay="900">
                   <div class="card-header pb-4 border-0">
                      <div class="p-4 primary-gradient-card rounded border border-white">
@@ -454,7 +454,7 @@
                      </div>
                   </div>
                </div>
-               <!-- <div class="card" data-aos="fade-up" data-aos-delay="300">
+               <div class="card" data-aos="fade-up" data-aos-delay="300">
                   <div class="card-body d-flex justify-content-around text-center">
                      <div>
                         <h2 class="mb-2">750<small>K</small></h2>
@@ -466,9 +466,9 @@
                         <p class="mb-0 text-gray">New Customers</p>
                      </div>
                   </div>
-               </div> -->
-            </div> -->
-            <!-- <div class="col-md-12 col-lg-12">
+               </div>
+            </div>
+            <div class="col-md-12 col-lg-12">
                <div class="card" data-aos="fade-up" data-aos-delay="400">
                   <div class="card-header d-flex justify-content-between flex-wrap">
                      <div class="header-title">
@@ -519,8 +519,8 @@
                      </div>
                   </div>
                </div>
-            </div> -->
+            </div>
          </div>
-      </div>
+      </div>  -->
    </div>
 </x-app-layout>

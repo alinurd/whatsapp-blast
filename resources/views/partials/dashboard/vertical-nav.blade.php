@@ -54,9 +54,9 @@
         </a>
     </li>
     @endif
-    <li>
+    <!-- <li>
         <hr class="hr-horizontal">
-    </li>
+    </li> -->
     <li class="nav-item static-item"> 
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Transaksi</span>
@@ -102,7 +102,7 @@
                     <circle cx="18" cy="11.8999" r="1" fill="currentColor"></circle>
                 </svg>    
             </i>
-            <span class="item-name">Pengajuan Mustahiq</span>
+            <span class="item-name">Approval Mustahiq</span>
         </a>
     </li> 
     @endif
