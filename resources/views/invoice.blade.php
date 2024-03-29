@@ -96,17 +96,17 @@
         <td style="text-align: left;">{{$item['user']['nama_lengkap']}}</td>
         <td>{{$item['kategori']['nama_kategori']}}</td>
         <td>{{$item['type']}}</td>
-        <td>{{ number_format($item['jumlah_bayar'], 2) }}</td>
+        <td>{{ str_contains($item['jumlah_bayar'], ',') ? number_format((float) str_replace(',', '', $item['jumlah_bayar']), 2) : number_format($item['jumlah_bayar'], 2) }}</td>
         <td>{{$item['satuan']}}</td>
     </tr>
 
     <?php 
     if ($item['satuan'] === 'Liter') {
-        $totalLiter += $item['jumlah_bayar'];
+        $totalLiter += str_contains($item['jumlah_bayar'], ',') ? (float) str_replace(',', '', $item['jumlah_bayar']) : $item['jumlah_bayar'];
     } elseif ($item['satuan'] === 'Kg') {
-        $totalKg += $item['jumlah_bayar'];
+        $totalKg += str_contains($item['jumlah_bayar'], ',') ? (float) str_replace(',', '', $item['jumlah_bayar']) : $item['jumlah_bayar'];
     } elseif ($item['satuan'] === 'Rupiah') {
-        $totalRupiah += $item['jumlah_bayar'];
+        $totalRupiah += str_contains($item['jumlah_bayar'], ',') ? (float) str_replace(',', '', $item['jumlah_bayar']) : $item['jumlah_bayar'];
     }
     ?>
 
@@ -114,12 +114,12 @@
     
     <tr>
         <th colspan="4" style="text-align: center;">Total:</th>
-        <th style="text-align: right;">{{ number_format($totalLiter, 2) }}</th>
+        <th style="text-align: right;">{{ $totalLiter }}</th>
         <th>Liter</th>
     </tr>
     <tr>
         <th colspan="4"></th>
-        <th style="text-align: right;">{{ number_format($totalKg, 2) }}</th>
+        <th style="text-align: right;">{{ $totalKg}}</th>
         <th>Kilogram</th>
     </tr>
     <tr>
@@ -128,6 +128,7 @@
         <th>Rupiah</th>
     </tr>
 </tbody>
+
 
             </table>
         </div>
