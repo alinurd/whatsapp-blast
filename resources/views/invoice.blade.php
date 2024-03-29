@@ -115,9 +115,7 @@
             <i>Semoga Allah terima dan berikan sebaik-baik balasan.</i>
             <br><br><br> <br> 
             <span class="">
-                Panitia ZIS Masjid Al Hasanah
-                <br><br><br><br> 
-                --------------------------------------
+                <b>Panitia ZIS Masjid Al Hasanah</b>
             </span>
         </div>
      </div>
