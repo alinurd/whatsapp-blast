@@ -158,7 +158,7 @@ public function cetakinvoice($code)
     $pdf = PDF::loadView('invoice', compact('header','detail'));
 
     // Save PDF to public folder
-    $pdf->save(public_path('invoice_'.$code.'.pdf'));
+    $pdf->save(public_path('invoice/invoice_'.$code.'.pdf'));
 
     // Return view or response
     // return view('invoice', compact('header','detail'));

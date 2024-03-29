@@ -7,11 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
     <style>
+        @page {
+            size: 148mm 210mm;
+            margin: 0;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            
+           
         }
 
         .invoice {
@@ -22,7 +27,6 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
             background-image: url("{{asset('images/icons/watermak.png')}}");
-
         }
 
         .invoice-header {
