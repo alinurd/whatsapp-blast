@@ -79,8 +79,8 @@ class MuzakkiController extends Controller
         $dUser = User::where('id', $user)->first();
 $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
 //  $no = '6289528518495'; 
-$no = $dUser->nomor_telp;
-dd($no);
+$no = $dibayarkan->nomor_telp;
+// dd($no);
 // if (substr($no, 0, 1) === '0') {
 //     $no = '62' . substr($no, 1);
 // }
