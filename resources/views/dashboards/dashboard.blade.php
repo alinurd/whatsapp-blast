@@ -30,8 +30,10 @@
                               </svg>
                            </div>
                            <div class="progress-detail">
+                              <a  href="{{route('mustahik.index')}}" title="Lihat Mustahiq Detail">
                               <p  class="mb-2">Total Transaksi Mustahiq</p>
-                              <h4 class="counter">{{ $Transactionsmustahik }}</h4>
+                           </a>
+                           <h4 class="counter">{{ $Transactionsmustahik }}</h4>
                            </div>
                         </div>
                      </div>

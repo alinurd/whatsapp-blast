@@ -53,8 +53,10 @@ class UserController extends Controller
 
         storeMediaFile($user,$request->profile_image, 'profile_image');
 
-        // $user->assignRole('1');
- 
+        // Tentukan peran pengguna berdasarkan input dari formulir
+        $role = $request->input('role');
+        $user->assignRole($role);
+    
         // Save user Profile data...
         // $user->userProfile()->create($request->userProfile);
 
