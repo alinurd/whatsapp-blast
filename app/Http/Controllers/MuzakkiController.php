@@ -78,8 +78,11 @@ class MuzakkiController extends Controller
         ]);
         $dUser = User::where('id', $user)->first();
 $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
- $no = '6289528518495'; 
-//  $no = '62' . $dUser->nomor_telp; 
+//  $no = '6289528518495'; 
+$no = $dUser->nomor_telp;
+if (substr($no, 0, 1) === '0') {
+    $no = '62' . substr($no, 1);
+}
 
         $pesan = "Terima kasih @" . $dUser->nama_lengkap . " sudah membayar zakat pada tanggal " . $MuzakkiHeader->created_at . "\n\n"
         . " dibayarkan oleh: " . $dibayarkan->nama_lengkap . ". Code invoice #" . $MuzakkiHeader->code . "\n\n"
@@ -97,7 +100,9 @@ $payload = json_encode([
     ]
 ]);
 $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
-$msg="Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu:".$dibayarkan->nama_lengkap." [No.Invoicw:#".$MuzakkiHeader->code."]" ." lihat detail: https://zis-alhasanah.com/showinvoice/".$MuzakkiHeader->code ;
+$msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: " . $dibayarkan->nama_lengkap . ".\n";
+$msg .= "No. Invoice: #" . $MuzakkiHeader->code . " ";
+$msg .= "Lihat detail: <a href='https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code . "'>di sini</a>";
 $this->cetakinvoice($MuzakkiHeader->code);
 
  $this->sendMassage1($no,$msg, $MuzakkiHeader->code);
