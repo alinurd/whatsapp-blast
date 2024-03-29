@@ -116,6 +116,7 @@
             <br><br><br> <br> 
             <span class="">
                 <b>Panitia ZIS Masjid Al Hasanah</b>
+                <p>www.zis-alhasanah.com</p>
             </span>
         </div>
      </div>
