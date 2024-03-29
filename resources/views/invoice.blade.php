@@ -103,7 +103,7 @@
     <?php 
     if ($item['satuan'] === 'Liter') {
         $totalLiter += $item['jumlah_bayar'];
-    } elseif ($item['satuan'] === 'Kilogram') {
+    } elseif ($item['satuan'] === 'Kg') {
         $totalKg += $item['jumlah_bayar'];
     } elseif ($item['satuan'] === 'Rupiah') {
         $totalRupiah += $item['jumlah_bayar'];
