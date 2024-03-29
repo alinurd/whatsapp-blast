@@ -111,14 +111,12 @@
                 </tbody>
             </table>
         </div>
-         
-        <br><br>
         <div class="invoice-footer">
             <i>Semoga Allah terima dan berikan sebaik-baik balasan.</i>
             <br><br><br> <br> 
             <span class="">
                 Panitia ZIS Masjid Al Hasanah
-                <br><br><br><br><br>
+                <br><br><br><br> 
                 --------------------------------------
             </span>
         </div>
