@@ -1,7 +1,7 @@
 <form id="myForm" action="{{ route('muzakkiUserStore') }}" method="POST">
     @csrf
     <div class="form-group">
-        <label class="form-label">nama_lengkap</label>
+        <label class="form-label">nama lengkap</label>
         <input type="text" name="nama_lengkap" class="form-control" id="nama-lengkap" placeholder="Nama Lengkap" required>
     </div>
     <div class="form-group">
@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label class="form-label">nomor_telp</label>
-        <input type="number" name="nomor_telp" class="form-control" id="nomor-telp" placeholder="Nomor Telepon" required>
+        <input type="number" name="nomor_telp" class="form-control" id="nomor-telp" placeholder="62858xxxxxxxx" required>
     </div>
     <div class="form-group">
         <label class="form-label">alamat</label>

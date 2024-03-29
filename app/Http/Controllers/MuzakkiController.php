@@ -115,7 +115,7 @@ $this->cetakinvoice($MuzakkiHeader->code);
  
     }
  
-    return redirect()->route('invoice', ['code' => $MuzakkiHeader->code])->withSuccess(__('Pembayaran berhasil & invoice telah terkirim kepada '.$dibayarkan->nama_lengkap));
+    return redirect()->route('invoice', ['code' => $MuzakkiHeader->code])->withSuccess(__('Pembayaran berhasil dan  invoice telah terkirim kepada '.$dibayarkan->nama_lengkap));
 }
 
     public function invoice($code)
