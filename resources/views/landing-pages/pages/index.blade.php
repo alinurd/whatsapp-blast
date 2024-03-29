@@ -23,15 +23,15 @@
         </div>
     @endif
 
-    <div class="container m-auto ">
-    <div class="iq-navbar-header" style="height: 100px;">
+    <div class="container m-auto">
+    <div class="iq-navbar-header mb-4" style="height: 80px; margin-top: -30px;">
     <div class="row d-flex justify-content-between align-items-center">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div>
                 <img src="{{asset('images/dashboard/header.jpg')}}" style="width: 100%;">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="d-flex justify-content-end">
                 <a class="btn btn-secondary text-white btn-sm mr-2" href="{{route('mustahikuser.create')}}">
                     <svg width="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +101,7 @@
                     </div>
                 </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top: -2%;">
                 <div class="col-md-6">
                     <div class="card border-bottom border-4 border-0 border-info">
                         <div class="card mb-1" style="background: #118146;">
@@ -118,7 +118,6 @@
                                         </div>
                                         <span class="badge bg-primary"><b class="h4 text-white">Rp{{ number_format($sisaPemasukanMaal, 0) }}.-</b></span>
                                     </div>
-                                    <div></div>
                                 </div>
                             </div>
                         </div>
