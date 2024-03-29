@@ -42,10 +42,10 @@
                            <td>{{ $detail->type }}</td>
                            <td>{{ $detail->satuan }}</td>
                            <td>
-                           @if($item['satuan'] === 'Rupiah')
-        {{ number_format($item['jumlah_bayar'], 2) }}
-        @elseif($item['type'] === 'Beras')
-        {{ $item['jumlah_bayar'] }}
+                           @if($detail['satuan'] === 'Rupiah')
+        {{ number_format($detail['jumlah_bayar'], 2) }}
+        @elseif($detail['type'] === 'Beras')
+        {{ $detail['jumlah_bayar'] }}
         @endif
                            </td>
                         </tr>    
