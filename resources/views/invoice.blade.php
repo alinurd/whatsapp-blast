@@ -91,11 +91,11 @@
                         <td style="text-align: left;">{{$item['user']['nama_lengkap']}}</td>
                         <td>{{$item['kategori']['nama_kategori']}}</td>
                         <td>{{$item['type']}}</td>
-                        <td>{{$item['jumlah_bayar']}}</td>
+                        <td>{{ number_format($item['jumlah_bayar'], 2) }}</td>
                         <td>{{$item['satuan']}}</td>
                     </tr>
                     @endforeach
-                    <!-- <tr>
+                    <tr>
                         <th colspan="4" rowspan="3" style="text-align: center;">Total:</th>
                         <th style="text-align: right;"><span id="ttlLiter" ></th>
                         <th>Liter</th>
@@ -107,7 +107,7 @@
                     <tr>
                          <th style="text-align: right;"><span id="ttlRupiah"></th>
                         <th>Rupiah</th>
-                    </tr> -->
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -139,9 +139,9 @@
 @endforeach
 
 
-      document.getElementById('ttlLiter').textContent = totalBeras.toLocaleString();
+      document.getElementById('ttlLiter').textContent = totalBeras();
       document.getElementById('ttlRupiah').textContent = formatRupiah(totalUang);
-      document.getElementById('ttlKg').textContent = totalKg.toLocaleString();
+      document.getElementById('ttlKg').textContent = totalKg();
    });
 
    function formatRupiah(angka) {
