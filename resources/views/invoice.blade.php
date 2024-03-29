@@ -99,8 +99,8 @@ $totalRupiah = 0;
         @if($item['satuan'] === 'Rupiah')
         {{ number_format($item['jumlah_bayar'], 2) }}
         @elseif($item['type'] === 'Beras')
-        {{ $item['jumlah_bayar'] }}</td>
-        @endif
+        {{ $item['jumlah_bayar'] }}
+        @endif</td>
         
         <td>{{ $item['satuan'] }}</td>
     </tr>
