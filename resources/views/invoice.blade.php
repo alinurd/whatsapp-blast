@@ -82,33 +82,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 0; ?>
+    <?php 
+    $no = 0;
+    $totalLiter = 0;
+    $totalKg = 0;
+    $totalRupiah = 0;
+    ?>
 
-                    @foreach ($detail as $item)
+    @foreach ($detail as $item)
 
-                    <tr>
-                        <td>{{++$no}}</td>
-                        <td style="text-align: left;">{{$item['user']['nama_lengkap']}}</td>
-                        <td>{{$item['kategori']['nama_kategori']}}</td>
-                        <td>{{$item['type']}}</td>
-                        <td>{{ number_format($item['jumlah_bayar'], 2) }}</td>
-                        <td>{{$item['satuan']}}</td>
-                    </tr>
-                    @endforeach
-                    <tr>
-                        <th colspan="4" rowspan="3" style="text-align: center;">Total:</th>
-                        <th style="text-align: right;"><span id="ttlLiter" ></th>
-                        <th>Liter</th>
-                    </tr>
-                    <tr>
-                         <th style="text-align: right;"><span id="ttlKg"></th>
-                        <th>Kilogram</th>
-                    </tr>
-                    <tr>
-                         <th style="text-align: right;"><span id="ttlRupiah"></th>
-                        <th>Rupiah</th>
-                    </tr>
-                </tbody>
+    <tr>
+        <td>{{++$no}}</td>
+        <td style="text-align: left;">{{$item['user']['nama_lengkap']}}</td>
+        <td>{{$item['kategori']['nama_kategori']}}</td>
+        <td>{{$item['type']}}</td>
+        <td>{{ number_format($item['jumlah_bayar'], 2) }}</td>
+        <td>{{$item['satuan']}}</td>
+    </tr>
+
+    <?php 
+    if ($item['satuan'] === 'Liter') {
+        $totalLiter += $item['jumlah_bayar'];
+    } elseif ($item['satuan'] === 'Kilogram') {
+        $totalKg += $item['jumlah_bayar'];
+    } elseif ($item['satuan'] === 'Rupiah') {
+        $totalRupiah += $item['jumlah_bayar'];
+    }
+    ?>
+
+    @endforeach
+    
+    <tr>
+        <th colspan="4" style="text-align: center;">Total:</th>
+        <th style="text-align: right;">{{ number_format($totalLiter, 2) }}</th>
+        <th>Liter</th>
+    </tr>
+    <tr>
+        <th colspan="4"></th>
+        <th style="text-align: right;">{{ number_format($totalKg, 2) }}</th>
+        <th>Kilogram</th>
+    </tr>
+    <tr>
+        <th colspan="4"></th>
+        <th style="text-align: right;">{{ number_format($totalRupiah, 2) }}</th>
+        <th>Rupiah</th>
+    </tr>
+</tbody>
+
             </table>
         </div>
         <div class="invoice-footer">
@@ -121,7 +141,7 @@
         </div>
      </div>
 </body>
-
+<!-- 
 <script>
    document.addEventListener('DOMContentLoaded', function() {
       var totalBeras = 0;
@@ -165,6 +185,6 @@
 
 
 </script>
-
+ -->
 
 </html>
