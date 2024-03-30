@@ -20,6 +20,7 @@
                               <tr>
                                  <th class="text-center">No</th>
                                  <th scope="col">Nama</th>
+                                 <th class="text-center" scope="col">Jumlah Jiwa</th>
                                  <th class="text-center" scope="col">Kategori</th>
                                  <th class="text-center" scope="col">Type</th>
                                  <th class="text-center" scope="col">Jumlah</th>
@@ -34,6 +35,7 @@
                                  <td>
                                     <h6 class="mb-0">{{$item['user']['nama_lengkap']}}</h6>
                                  </td>
+                                 <td class="text-center">{{$item['jumlah_jiwa']}}</td>
                                  <td class="text-center">{{$item['kategori']['nama_kategori']}}</td>
                                  <td class="text-center">{{$item['type']}}</td>
                                  <td class="text-center">{{$item['jumlah_bayar']}}</td>
