@@ -57,8 +57,7 @@ class MuzakkiController extends Controller
         'type' => 'required|array',
         'satuan' => 'required|array',
         'jumlah' => 'required|array',
-        'jumlah_jiwa' => 'array',
-
+ 
     ]);
 
     $lastId = MuzakkiHeader::orderByDesc('id')->first();
@@ -68,13 +67,13 @@ class MuzakkiController extends Controller
         'user_id' => $validatedData['dibayarkan'],
         'code' => $this->generateCodeById("MZK", $x + 1),
     ]);
-
+// dd($request);
     foreach ($validatedData['user'] as $key => $user) {
         Muzakki::create([
             'code' =>  $MuzakkiHeader->code,
             'user_id' => $user,
             'jumlah_bayar' => $validatedData['jumlah'][$key],
-            'jumlah_jiwa' => $validatedData['jumlah_jiwa'][$key],
+            'jumlah_jiwa' => $request['jumlah_jiwa'][$key],
             'kategori_id' => $validatedData['kategori'][$key],
             'type' => $validatedData['type'][$key],
             'satuan' => $validatedData['satuan'][$key],
@@ -107,9 +106,9 @@ $n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
 $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: " . $dibayarkan->nama_lengkap . ".\n";
 $msg .= "No. Invoice: #" . $MuzakkiHeader->code . ".\n.\n.\n ";
 $msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code;
-$this->cetakinvoice($MuzakkiHeader->code);
+// $this->cetakinvoice($MuzakkiHeader->code);
 
- $this->sendMassage1($no,$msg, $MuzakkiHeader->code);
+//  $this->sendMassage1($no,$msg, $MuzakkiHeader->code);
 //  $this->sendMassage($no,$msg);
 //  $this->sendWa($no,$n);
  

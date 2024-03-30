@@ -75,8 +75,8 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>Jumlah Jiwa</th>
                         <th>Kategori</th>
+                        <th>Jumlah Jiwa</th>
                         <th>Type</th>
                         <th>Jumlah</th>
                         <th>Satuan</th>
@@ -93,8 +93,8 @@ $totalRupiah = 0;
     <tr>
         <td>{{ ++$no }}</td>
         <td style="text-align: left;">{{ $item['user']['nama_lengkap'] }}</td>
-        <td>{{ $item['jumlah_jiwa'] }}</td>
         <td>{{ $item['kategori']['nama_kategori'] }}</td>
+        <td>{{ $item['jumlah_jiwa'] }}</td>
         <td>{{ $item['type'] }}</td>
         <td style="text-align: right;">
             
