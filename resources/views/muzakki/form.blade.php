@@ -38,11 +38,12 @@
                </div>
                <div class="row">
                   <div class="form-group col-md-12">
-                     <table class="table" id="muzakkiTable">
+                  <table class="table" id="muzakkiTable">
                         <thead>
                            <th>No</th>
                            <th>Nama</th>
                            <th>Kategori</th>
+                           <th>Jumlah jiwa</th>
                            <th>Type Pembayaran</th>
                            <th>Satuan</th>
                            <th>Jumlah</th>
@@ -56,6 +57,11 @@
                               <td>
 
                                  {{ Form::select('kategori[]', $ktg, "", ['class' => 'form-control', 'placeholder' => 'Select Kategri', 'id' => 'kateg0']) }}
+
+                              </td>
+                              <td>
+
+                              <input type="number" name="jumlah_jiwa[]" id="jumlah_jiwa0" class="form-control">
 
                               </td>
                               <td>
@@ -80,7 +86,7 @@
                         </tbody>
                         <tr>
 
-                           <td colspan="4" rowspan="3" class="text-end"><strong>Total:</strong></td>
+                           <td colspan="5" rowspan="3" class="text-end"><strong>Total:</strong></td>
                            <td class="text-star" colspan="2"><span id="ttlLiter">0</span> <i>Liter</i></td>
                         </tr>
                         <td class="text-star" colspan="2"><span id="ttlKg">0</span> <i>Kilo Gram</i></td>
@@ -101,77 +107,79 @@
       {!! Form::close() !!}
    </div>
 </x-app-layout>
-
-
 <script>
-   document.getElementById('addRow').addEventListener('click', function() {
-      var tableBody = document.querySelector('#muzakkiTable tbody');
-      var rowCount = tableBody.rows.length;
-      var newRow = tableBody.insertRow(rowCount);
+    document.getElementById('addRow').addEventListener('click', function() {
+        var tableBody = document.querySelector('#muzakkiTable tbody');
+        var rowCount = tableBody.rows.length;
+        var newRow = tableBody.insertRow(rowCount);
 
-      var cellCount = tableBody.rows[0].cells.length;
-      for (var i = 0; i < cellCount; i++) {
-         var newCell = newRow.insertCell(i);
-         if (i == 0) {
-            newCell.textContent = rowCount + 1;
-         } else if (i == 2) {
-            newCell.innerHTML = '{!! Form::select('kategori[]', $ktg, "", ['class' => 'form-control']) !!}';
-         } else if (i == 3) {
-            newCell.innerHTML = '<input type="radio" name="type[' + rowCount + ']" value="Beras" id="Beras' + rowCount + '"><label for="Beras' + rowCount + '">Beras</label><input type="radio" name="type[' + rowCount + ']" value="Uang" id="Uang' + rowCount + '"><label for="Uang' + rowCount + '">Uang</label><input type="radio" name="type[' + rowCount + ']" value="Transfer" id="Transfer' + rowCount + '"><label for="Transfer' + rowCount + '">Transfer</label>';
-         } else if (i == 4) {
-            newCell.innerHTML = '<select name="satuan[' + rowCount + ']" id="satuan' + rowCount + '" class="form-control"><option value="Kg">Kg</option><option value="Liter">Liter</option><option value="Rupiah">Rupiah</option></select>';
-         } else if (i == 5) {
-            newCell.innerHTML = '<input type="text" name="jumlah[]" id="jumlah' + rowCount + '" class="form-control">';
-         } else {
-            
-            newCell.innerHTML = '{!! Form::select('user[]', $agt, "", ['class' => 'form-control']) !!}';
+        var cellCount = tableBody.rows[0].cells.length;
+        for (var i = 0; i < cellCount; i++) {
+            var newCell = newRow.insertCell(i);
+            if (i == 0) {
+                newCell.textContent = rowCount + 1;
+            } else if (i == 2) {
+                newCell.innerHTML = '{!! Form::select('kategori[]', $ktg, "", ['class' => 'form-control']) !!}';
+            } else if (i == 3) {
+                newCell.innerHTML = '<input type="number" name="jumlah_jiwa[]" id="jumlah_jiwa' + rowCount + '" class="form-control">';
+            } else if (i == 4) {
+                newCell.innerHTML = '<input type="radio" name="type[' + rowCount + ']" value="Beras" id="Beras' + rowCount + '"><label for="Beras' + rowCount + '">Beras</label><input type="radio" name="type[' + rowCount + ']" value="Uang" id="Uang' + rowCount + '"><label for="Uang' + rowCount + '">Uang</label><input type="radio" name="type[' + rowCount + ']" value="Transfer" id="Transfer' + rowCount + '"><label for="Transfer' + rowCount + '">Transfer</label>';
+            } else if (i == 5) {
+                newCell.innerHTML = '<select name="satuan[' + rowCount + ']" id="satuan' + rowCount + '" class="form-control"><option value="Kg">Kg</option><option value="Liter">Liter</option><option value="Rupiah">Rupiah</option></select>';
+
+            } else if (i == 6) {
+                newCell.innerHTML = '<input type="text" name="jumlah[]" id="jumlah' + rowCount + '" class="form-control">';
+            } else {
+                newCell.innerHTML = '{!! Form::select('user[]', $agt, "", ['class' => 'form-control']) !!}';
+            }
+        }
+
+        // Tambahkan event listener untuk input jumlah pada baris yang baru ditambahkan
+        newRow.querySelector('input[name^="jumlah[]"]').addEventListener('input', function() {
+            calculateTotal();
+        });
+    });
+
+    // Event listener untuk menghitung total ketika halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        calculateTotal();
+    });
+
+    // Fungsi untuk menghitung total
+    function calculateTotal() {
+        var totalLiter = 0;
+        var totalRupiah = 0;
+        var totalKg = 0;
+        var totalJiwa = 0;
+
+        var tableBody = document.querySelector('#muzakkiTable tbody');
+        var rows = tableBody.rows;
+        for (var i = 0; i < rows.length; i++) {
+            var satuanSelect = rows[i].querySelector('select[name="satuan[' + i + ']"]');
+            var jumlahInput = rows[i].querySelector('input[name="jumlah[]"]');
+             var type = satuanSelect.value;
+            var jumlah = parseFloat(jumlahInput.value.replace(',', '.')); // Replace koma dengan titik
+ 
+            if (isNaN(jumlah)) {
+                jumlah = 0;
+            }
+ 
+
+            if (type === 'Liter') {
+                totalLiter += jumlah;
+            } else if (type === 'Rupiah') {
+                totalRupiah += jumlah;
+            } else if (type === 'Kg') {
+                totalKg += jumlah;
+            }
+
          }
-      }
 
-      // Tambahkan event listener untuk input jumlah pada baris yang baru ditambahkan
-      newRow.querySelector('input[name^="jumlah"]').addEventListener('input', function() {
-         calculateTotal();
-      });
-   });
-
-   // Event listener untuk menghitung total ketika halaman dimuat
-   document.addEventListener('DOMContentLoaded', function() {
-      calculateTotal();
-   });
-
-   // Fungsi untuk menghitung total
-   function calculateTotal() {
-    var totalLiter = 0;
-    var totalRupiah = 0;
-    var totalKg = 0;
-
-    var tableBody = document.querySelector('#muzakkiTable tbody');
-    var rows = tableBody.rows;
-    for (var i = 0; i < rows.length; i++) {
-      var satuanSelect = rows[i].querySelector('select[name="satuan['+i+']"]');
-        var jumlahInput = rows[i].querySelector('input[name="jumlah[]"]');
-        var type = satuanSelect.value;
-        var jumlah = parseFloat(jumlahInput.value.replace(',', '.')); // Replace koma dengan titik
-
-        if (isNaN(jumlah)) {
-            jumlah = 0;
-        }
-
-        if (type === 'Liter') {
-            totalLiter += jumlah;
-        } else if (type === 'Rupiah') {
-            totalRupiah += jumlah;
-        } else if (type === 'Kg') {
-            totalKg += jumlah;
-        }
-    }
-
-    // Update total liter dan total rupiah di tabel
-    document.getElementById('ttlLiter').textContent = totalLiter.toLocaleString();
-    document.getElementById('ttlKg').textContent = totalKg.toLocaleString();
-    document.getElementById('ttlRupiah').textContent = totalRupiah.toLocaleString();
-}
-
+        // Update total liter, total rupiah, total kg, dan total jiwa di tabel
+        document.getElementById('ttlLiter').textContent = totalLiter.toLocaleString();
+        document.getElementById('ttlKg').textContent = totalKg.toLocaleString();
+        document.getElementById('ttlRupiah').textContent = totalRupiah.toLocaleString();
+     }
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

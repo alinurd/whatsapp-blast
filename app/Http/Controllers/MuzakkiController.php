@@ -57,6 +57,8 @@ class MuzakkiController extends Controller
         'type' => 'required|array',
         'satuan' => 'required|array',
         'jumlah' => 'required|array',
+        'jumlah_jiwa' => 'array',
+
     ]);
 
     $lastId = MuzakkiHeader::orderByDesc('id')->first();
@@ -72,6 +74,7 @@ class MuzakkiController extends Controller
             'code' =>  $MuzakkiHeader->code,
             'user_id' => $user,
             'jumlah_bayar' => $validatedData['jumlah'][$key],
+            'jumlah_jiwa' => $validatedData['jumlah_jiwa'][$key],
             'kategori_id' => $validatedData['kategori'][$key],
             'type' => $validatedData['type'][$key],
             'satuan' => $validatedData['satuan'][$key],
