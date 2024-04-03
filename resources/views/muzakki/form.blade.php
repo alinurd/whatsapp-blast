@@ -204,6 +204,32 @@ newRow.querySelector('input[name^="type[' + rowCount + ']"]').addEventListener('
 
     });
 
+
+    // Memilih elemen dengan id jumlah_jiwa0
+var jumlahJiwaElem = document.querySelector('#jumlah_jiwa0');
+
+// Menambahkan event listener untuk elemen jumlah_jiwa0
+jumlahJiwaElem.addEventListener('input', function() {
+    calculateSubtotalForRow(0);
+});
+
+// Memilih elemen dengan id jumlah0
+var jumlahElem = document.querySelector('#jumlah0');
+
+// Menambahkan event listener untuk elemen jumlah0
+jumlahElem.addEventListener('input', function() {
+    calculateSubtotalForRow(0);
+});
+
+// Memilih elemen dengan id satuan0
+var satuanElem = document.querySelector('#satuan0');
+
+// Menambahkan event listener untuk elemen satuan0
+satuanElem.addEventListener('change', function() {
+    calculateSubtotalForRow(0);
+});
+
+
     function calculateSubtotalForRow(rowCount) {
     var jumlahJiwa = parseFloat(document.querySelector('#jumlah_jiwa' + rowCount).value);
     var jumlah = parseFloat(document.querySelector('#jumlah' + rowCount).value.replace(',', '.')); // Replace koma dengan titik
@@ -226,6 +252,8 @@ newRow.querySelector('input[name^="type[' + rowCount + ']"]').addEventListener('
 
 
     function caclculateSubtotal() {
+      calculateTotal();
+
     var rows = document.querySelectorAll('#muzakkiTable tbody tr');
     var total = 0;
 
@@ -235,10 +263,7 @@ newRow.querySelector('input[name^="type[' + rowCount + ']"]').addEventListener('
         var satuanSelect = row.querySelector('#satuan' + index);
         var typeInput = row.querySelector('input[name^="type[' + index + ']"]:checked');
         var type = typeInput ? typeInput.value : '';
-        console.log(jumlah)
-        console.log(jumlahJiwa)
-        console.log(type)
-        console.log(satuanSelect.value)
+
 
         if (isNaN(jumlah)) {
             jumlah = 0;
