@@ -231,6 +231,7 @@ class MustahikuserController extends Controller
     // Redirect ke halaman yang sesuai setelah update
     return redirect()->route('mustahikuser.index')->withSuccess(__('Mustahik successfully updated.'));
     }
+    
     public function show($code)
     {  
        // Find the category data by ID  
