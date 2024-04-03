@@ -47,6 +47,7 @@
                            <th>Type Pembayaran</th>
                            <th>Satuan</th>
                            <th>Jumlah</th>
+                           <th>Subtotal</th>
                         </thead>
                         <tbody>
                            <tr>
@@ -65,12 +66,20 @@
 
                               </td>
                               <td>
-                                 <input type="radio" name="type[0]" value="Beras" id="Beras0">
-                                 <label for="Beras0">Beras</label>
-                                 <input type="radio" name="type[0]" value="Uang" id="Uang0">
-                                 <label for="Uang0">Uang</label>
-                                 <input type="radio" name="type[0]" value="Transfer" id="Transfer0">
-                                 <label for="Transfer0">Transfer</label>
+                                             <div class="form-check">
+                                             <input type="radio" name="type[0]" value="Beras" id="Beras0">
+                                             <labe class="form-check-label"l for="Beras0">Beras</labe>
+                                            </div>
+                                             <div class="form-check">
+                                             <input type="radio" name="type[0]" value="Uang" id="Uang0">
+                                             <label for="Uang0">Uang</label>
+                                            </div>
+                                             <div class="form-check">
+                                             <input type="radio" name="type[0]" value="Transfer" id="Transfer0">
+                                             <label for="Transfer0">Transfer</label>
+                                            </div>
+
+                                            
                               </td>
                               <td>
                                  <select name="satuan[0]" id="satuan0" class="form-control">
@@ -81,6 +90,10 @@
                               </td>
                               <td>
                                  <input type="text" name="jumlah[]" id="jumlah0" class="form-control">
+                              </td>
+                              <td>
+                              <span id="subtotal0"> </span>
+                              <span id="subtotaltext0"> </span>
                               </td>
                            </tr>
                         </tbody>
@@ -123,27 +136,124 @@
             } else if (i == 3) {
                 newCell.innerHTML = '<input type="number" name="jumlah_jiwa[]" id="jumlah_jiwa' + rowCount + '" class="form-control">';
             } else if (i == 4) {
-                newCell.innerHTML = '<input type="radio" name="type[' + rowCount + ']" value="Beras" id="Beras' + rowCount + '"><label for="Beras' + rowCount + '">Beras</label><input type="radio" name="type[' + rowCount + ']" value="Uang" id="Uang' + rowCount + '"><label for="Uang' + rowCount + '">Uang</label><input type="radio" name="type[' + rowCount + ']" value="Transfer" id="Transfer' + rowCount + '"><label for="Transfer' + rowCount + '">Transfer</label>';
+               newCell.innerHTML = `
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="type[${rowCount}]" value="Beras" id="Beras${rowCount}">
+        <label class="form-check-label" for="Beras${rowCount}">Beras</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="type[${rowCount}]" value="Uang" id="Uang${rowCount}">
+        <label class="form-check-label" for="Uang${rowCount}">Uang</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="type[${rowCount}]" value="Transfer" id="Transfer${rowCount}">
+        <label class="form-check-label" for="Transfer${rowCount}">Transfer</label>
+    </div>
+`;
+
+
+               
             } else if (i == 5) {
                 newCell.innerHTML = '<select name="satuan[' + rowCount + ']" id="satuan' + rowCount + '" class="form-control"><option value="Kg">Kg</option><option value="Liter">Liter</option><option value="Rupiah">Rupiah</option></select>';
 
             } else if (i == 6) {
                 newCell.innerHTML = '<input type="text" name="jumlah[]" id="jumlah' + rowCount + '" class="form-control">';
+            } else if (i == 7) {
+               newCell.innerHTML = '<span id="subtotal' + rowCount +'"> </span> <span id="subtotaltext' + rowCount +'"> </span>';
             } else {
                 newCell.innerHTML = '{!! Form::select('user[]', $agt, "", ['class' => 'form-control']) !!}';
             }
         }
 
+          // Tambahkan event listener untuk input jumlah pada baris yang baru ditambahkan
+       
+
+
+
+        
+
         // Tambahkan event listener untuk input jumlah pada baris yang baru ditambahkan
         newRow.querySelector('input[name^="jumlah[]"]').addEventListener('input', function() {
             calculateTotal();
+            caclculateSubtotal();
+
         });
+
+        newRow.querySelector('input[name^="jumlah_jiwa[]"]').addEventListener('input', function() {
+                calculateTotal();
+                caclculateSubtotal();
+            });
+
+            newRow.querySelector('select[name^="satuan[' + rowCount + ']"]').addEventListener('change', function() {
+    calculateTotal();
+    calculateSubtotalForRow(rowCount);
+});
+
+newRow.querySelector('input[name^="type[' + rowCount + ']"]').addEventListener('change', function() {
+    calculateTotal();
+    calculateSubtotalForRow(rowCount);
+});
+            
     });
 
     // Event listener untuk menghitung total ketika halaman dimuat
     document.addEventListener('DOMContentLoaded', function() {
         calculateTotal();
+        caclculateSubtotal();   
+         calculateSubtotalForRow(rowCount);
+
     });
+
+    function calculateSubtotalForRow(rowCount) {
+    var jumlahJiwa = parseFloat(document.querySelector('#jumlah_jiwa' + rowCount).value);
+    var jumlah = parseFloat(document.querySelector('#jumlah' + rowCount).value.replace(',', '.')); // Replace koma dengan titik
+    var satuanSelect = document.querySelector('#satuan' + rowCount);
+    var typeInput = document.querySelector('input[name="type[' + rowCount + ']"]:checked');
+    var type = typeInput ? typeInput.value : '';
+
+    if (isNaN(jumlah)) {
+        jumlah = 0;
+    }
+
+    var subtotal = jumlahJiwa * jumlah;
+    document.querySelector('#subtotal' + rowCount).textContent = subtotal.toLocaleString('id-ID');
+    document.querySelector('#subtotaltext' + rowCount).textContent = satuanSelect.value;
+
+    // Update total jika diperlukan
+    caclculateSubtotal();
+}
+
+
+
+    function caclculateSubtotal() {
+    var rows = document.querySelectorAll('#muzakkiTable tbody tr');
+    var total = 0;
+
+    rows.forEach(function(row, index) {
+        var jumlahJiwa = parseFloat(row.querySelector('#jumlah_jiwa' + index).value);
+        var jumlah = parseFloat(row.querySelector('#jumlah' + index).value.replace(',', '.')); // Replace koma dengan titik
+        var satuanSelect = row.querySelector('#satuan' + index);
+        var typeInput = row.querySelector('input[name^="type[' + index + ']"]:checked');
+        var type = typeInput ? typeInput.value : '';
+        console.log(jumlah)
+        console.log(jumlahJiwa)
+        console.log(type)
+        console.log(satuanSelect.value)
+
+        if (isNaN(jumlah)) {
+            jumlah = 0;
+        }
+
+        var subtotal = jumlahJiwa * jumlah;
+        total += subtotal;
+
+        row.querySelector('#subtotal' + index).textContent = subtotal.toLocaleString('id-ID');
+        row.querySelector('#subtotaltext' + index).textContent = satuanSelect.value;
+    });
+
+}
+
+
 
     // Fungsi untuk menghitung total
     function calculateTotal() {
