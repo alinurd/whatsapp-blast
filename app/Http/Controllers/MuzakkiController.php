@@ -14,7 +14,7 @@ use App\Models\MuzakkiHeader;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
- use PDF;
+use PDF;
 
 class MuzakkiController extends Controller
 {
@@ -46,79 +46,84 @@ class MuzakkiController extends Controller
     }
 
 
-    public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'dibayarkan' => 'required',
-        'user' => 'required|array',
-        'user.*' => 'exists:users,id',
-        'kategori' => 'required|array',
-        'kategori.*' => 'exists:kategori,id',
-        'type' => 'required|array',
-        'satuan' => 'required|array',
-        'jumlah' => 'required|array',
- 
-    ]);
+    public function editmuzzaki($code)
+    {
+        $agt = User::where("user_type", "pemberi")->where("status", "active")->get()->pluck('nama_lengkap', 'id');
+        $ktg = Kategori::pluck('nama_kategori', 'id');
 
-    $lastId = MuzakkiHeader::orderByDesc('id')->first();
-    $x = $lastId ? $lastId->id : 0;
-
-    $MuzakkiHeader = MuzakkiHeader::create([
-        'user_id' => $validatedData['dibayarkan'],
-        'code' => $this->generateCodeById("MZK", $x + 1),
-    ]);
-// dd($request);
-    foreach ($validatedData['user'] as $key => $user) {
-        Muzakki::create([
-            'code' =>  $MuzakkiHeader->code,
-            'user_id' => $user,
-            'jumlah_bayar' => $validatedData['jumlah'][$key],
-            'jumlah_jiwa' => $request['jumlah_jiwa'][$key],
-            'kategori_id' => $validatedData['kategori'][$key],
-            'type' => $validatedData['type'][$key],
-            'satuan' => $validatedData['satuan'][$key],
-        ]);
-        $dUser = User::where('id', $user)->first();
-$dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
-//  $no = '6289528518495'; 
-$no = $dibayarkan->nomor_telp;
-// dd($no);
-// if (substr($no, 0, 1) === '0') {
-//     $no = '62' . substr($no, 1);
-// }
-
-        $pesan = "Terima kasih @" . $dUser->nama_lengkap . " sudah membayar zakat pada tanggal " . $MuzakkiHeader->created_at . "\n\n"
-        . " dibayarkan oleh: " . $dibayarkan->nama_lengkap . ". Code invoice #" . $MuzakkiHeader->code . "\n\n"
-        . "Petugas input: " . Auth::user()->nama_lengkap;
-
-$payload = json_encode([
-    "messages" => [
-        [
-            "destinations" => [
-                ["to" => $no]
-            ],
-            "from" => "Zis-Alhasanah #".$MuzakkiHeader->code,
-            "text" => $pesan
-        ]
-    ]
-]);
-$n=[$dUser->nama_lengkap,$MuzakkiHeader->code];
-$msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: " . $dibayarkan->nama_lengkap . ".\n";
-$msg .= "No. Invoice: #" . $MuzakkiHeader->code . "\n\n\n ";
-$msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code;
-$this->cetakinvoice($MuzakkiHeader->code);
-
- $this->sendMassage1($no,$msg, $MuzakkiHeader->code);
-//  $this->sendMassage($no,$msg);
-//  $this->sendWa($no,$n);
- 
-        $key = 'b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f';
-        $base_url = 'qymz4m.api.infobip.com';
- 
+        return view('muzakki.formedit', compact('agt', 'ktg'));
     }
- 
-    return redirect()->route('invoice', ['code' => $MuzakkiHeader->code])->withSuccess(__('Pembayaran berhasil dan  invoice telah terkirim kepada '.$dibayarkan->nama_lengkap));
-}
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'dibayarkan' => 'required',
+            'user' => 'required|array',
+            'user.*' => 'exists:users,id',
+            'kategori' => 'required|array',
+            'kategori.*' => 'exists:kategori,id',
+            'type' => 'required|array',
+            'satuan' => 'required|array',
+            'jumlah' => 'required|array',
+
+        ]);
+
+        $lastId = MuzakkiHeader::orderByDesc('id')->first();
+        $x = $lastId ? $lastId->id : 0;
+
+        $MuzakkiHeader = MuzakkiHeader::create([
+            'user_id' => $validatedData['dibayarkan'],
+            'code' => $this->generateCodeById("MZK", $x + 1),
+        ]);
+        foreach ($validatedData['user'] as $key => $user) {
+            Muzakki::create([
+                'code' =>  $MuzakkiHeader->code,
+                'user_id' => $user,
+                'jumlah_bayar' => $validatedData['jumlah'][$key],
+                'jumlah_jiwa' => $request['jumlah_jiwa'][$key],
+                'kategori_id' => $validatedData['kategori'][$key],
+                'type' => $validatedData['type'][$key],
+                'satuan' => $validatedData['satuan'][$key],
+            ]);
+            $dUser = User::where('id', $user)->first();
+            $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
+            //  $no = '6289528518495'; 
+            $no = $dibayarkan->nomor_telp;
+            // dd($no);
+            // if (substr($no, 0, 1) === '0') {
+            //     $no = '62' . substr($no, 1);
+            // }
+
+            $pesan = "Terima kasih @" . $dUser->nama_lengkap . " sudah membayar zakat pada tanggal " . $MuzakkiHeader->created_at . "\n\n"
+                . " dibayarkan oleh: " . $dibayarkan->nama_lengkap . ". Code invoice #" . $MuzakkiHeader->code . "\n\n"
+                . "Petugas input: " . Auth::user()->nama_lengkap;
+
+            $payload = json_encode([
+                "messages" => [
+                    [
+                        "destinations" => [
+                            ["to" => $no]
+                        ],
+                        "from" => "Zis-Alhasanah #" . $MuzakkiHeader->code,
+                        "text" => $pesan
+                    ]
+                ]
+            ]);
+            $n = [$dUser->nama_lengkap, $MuzakkiHeader->code];
+            $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: " . $dibayarkan->nama_lengkap . ".\n";
+            $msg .= "No. Invoice: #" . $MuzakkiHeader->code . "\n\n\n ";
+            $msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code;
+            $this->cetakinvoice($MuzakkiHeader->code);
+
+            $this->sendMassage1($no, $msg, $MuzakkiHeader->code);
+            //  $this->sendMassage($no,$msg);
+            //  $this->sendWa($no,$n);
+
+            $key = 'b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f';
+            $base_url = 'qymz4m.api.infobip.com';
+        }
+
+        return redirect()->route('invoice', ['code' => $MuzakkiHeader->code])->withSuccess(__('Pembayaran berhasil dan  invoice telah terkirim kepada ' . $dibayarkan->nama_lengkap));
+    }
 
     public function invoice($code)
     {
@@ -132,28 +137,26 @@ $this->cetakinvoice($MuzakkiHeader->code);
         $detail = Muzakki::where('code', $code)->with('user', 'kategori')->get();
         $header = MuzakkiHeader::where('code', $code)->with('user')->get();
         // return view('muzakki.print', compact('data'));
-        return view('invoice', compact('header','detail'));
-        
-        
+        return view('invoice', compact('header', 'detail'));
     }
 
-public function cetakinvoice($code)
-{
-    $detail = Muzakki::where('code', $code)->with('user', 'kategori')->get();
-    $header = MuzakkiHeader::where('code', $code)->with('user')->get();
-    
-    // Render view to PDF
-    $pdf = PDF::loadView('invoice', compact('header','detail'));
+    public function cetakinvoice($code)
+    {
+        $detail = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+        $header = MuzakkiHeader::where('code', $code)->with('user')->get();
 
-    // // Save PDF to public folder
-    $pdf->save(public_path('invoice/invoice_'.$code.'.pdf'));
+        // Render view to PDF
+        $pdf = PDF::loadView('invoice', compact('header', 'detail'));
 
-    // Return view or response
-    // return view('invoice', compact('header','detail'));
-    return $pdf->stream('invoice_'.$code.'.pdf');
-}
+        // // Save PDF to public folder
+        $pdf->save(public_path('invoice/invoice_' . $code . '.pdf'));
 
-    
+        // Return view or response
+        // return view('invoice', compact('header','detail'));
+        return $pdf->stream('invoice_' . $code . '.pdf');
+    }
+
+
     public function muzakkiCreate()
     {
         $view = view('muzakki.form-user')->render();
