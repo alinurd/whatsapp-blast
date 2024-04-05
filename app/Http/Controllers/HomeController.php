@@ -275,8 +275,12 @@ class HomeController extends Controller
     /*
     * Landing Page Routs
     */
-    public function landing_index(Request $request)
+    public function landing_index(Request $request) 
     {
+        // Menghitung jumlah transaksi muzakki dan mustahik dari database
+        $Transactionsmuzakki = Muzakki::count(); 
+        $Transactionsmustahik = Mustahik::where('status', '2')->count();
+
         // Hitung total pemasukan untuk kategori Fitrah
         $totalPemasukanFitrah = Muzakki::where('kategori_id', 1)->sum('jumlah_bayar');
         // Hitung total pengeluaran untuk kategori Fitrah
@@ -291,19 +295,19 @@ class HomeController extends Controller
         // Hitung sisa pemasukan untuk kategori Maal
         $sisaPemasukanMaal = $totalPemasukanMaal - $totalPengeluaranMaal;
 
-        // Hitung total pemasukan untuk kategori Infaq
-        $totalPemasukanInfaq = Muzakki::where('kategori_id', 3)->sum('jumlah_bayar');
-        // Hitung total pengeluaran untuk kategori Infaq
-        $totalPengeluaranInfaq = Mustahik::where('kategori_id', 3)->sum('jumlah_uang_diterima'); 
-        // Hitung sisa pemasukan untuk kategori Infaq
-        $sisaPemasukanInfaq = $totalPemasukanInfaq - $totalPengeluaranInfaq;
-
         // Hitung total pemasukan untuk kategori Fidyah
-        $totalPemasukanFidyah = Muzakki::where('kategori_id', 4)->sum('jumlah_bayar');
+        $totalPemasukanFidyah = Muzakki::where('kategori_id', 3)->sum('jumlah_bayar');
         // Hitung total pengeluaran untuk kategori Fidyah
-        $totalPengeluaranFidyah = Mustahik::where('kategori_id', 4)->sum('jumlah_uang_diterima'); 
+        $totalPengeluaranFidyah = Mustahik::where('kategori_id', 3)->sum('jumlah_uang_diterima'); 
         // Hitung sisa pemasukan untuk kategori Fidyah
         $sisaPemasukanFidyah = $totalPemasukanFidyah - $totalPengeluaranFidyah;
+
+        // Hitung total pemasukan untuk kategori Infaq
+        $totalPemasukanInfaq = Muzakki::where('kategori_id', 4)->sum('jumlah_bayar');
+        // Hitung total pengeluaran untuk kategori Infaq
+        $totalPengeluaranInfaq = Mustahik::where('kategori_id', 4)->sum('jumlah_uang_diterima'); 
+        // Hitung sisa pemasukan untuk kategori Infaq
+        $sisaPemasukanInfaq = $totalPemasukanInfaq - $totalPengeluaranInfaq;
 
         // Menghitung total beras masuk dari model Muzakki untuk kategori Fitrah (dalam kilogram)
         $getMuzakkiKgFitrah = Muzakki::where('type', 'Beras')
@@ -321,7 +325,7 @@ class HomeController extends Controller
         $getMuzakkiKgFidyah = Muzakki::where('type', 'Beras')
         ->where('satuan', 'Kg')
         ->whereHas('kategori', function ($query) {
-            $query->where('kategori_id', 4);
+            $query->where('kategori_id', 3);
         })
         ->get();
         $totalBerasMuzakkiKgFidyah = 0;
@@ -345,7 +349,7 @@ class HomeController extends Controller
         $getMuzakkiLiterFidyah = Muzakki::where('type', 'Beras')
         ->where('satuan', 'Liter')
         ->whereHas('kategori', function ($query) {
-            $query->where('kategori_id', 4);
+            $query->where('kategori_id', 3);
         })
         ->get();
         $totalBerasMuzakkiLFidyah = 0;
@@ -360,7 +364,7 @@ class HomeController extends Controller
 
         // Menghitung total beras diterima oleh Mustahik untuk kategori Fidyah (dalam kilogram)
         $totalBerasMustahikKgFidyah = Mustahik::where('satuan_beras', 'Kg')
-        ->where('kategori_id', 4)
+        ->where('kategori_id', 3)
         ->sum('jumlah_beras_diterima');
 
         // Menghitung total beras diterima oleh Mustahik untuk kategori Fitrah (dalam liter)
@@ -370,7 +374,7 @@ class HomeController extends Controller
 
         // Menghitung total beras diterima oleh Mustahik untuk kategori Fidyah (dalam liter)
         $totalBerasMustahikLFidyah = Mustahik::where('satuan_beras', 'Liter')
-        ->where('kategori_id', 4)
+        ->where('kategori_id', 3)
         ->sum('jumlah_beras_diterima');
 
         // Menghitung total saldo beras (dalam kilogram dan liter) untuk kategori Fitrah
@@ -382,35 +386,35 @@ class HomeController extends Controller
         $totalSaldoBerasLFidyah = $totalBerasMuzakkiLFidyah - $totalBerasMustahikLFidyah;
 
         // Mendapatkan semua data RT dari tabel RW
-    $allRt = Rw::pluck('rt')->toArray();
+        $allRt = Rw::pluck('rt')->toArray();
 
-    // Inisialisasi array untuk menyimpan jumlah mustahiq untuk setiap RT
-    $rtData = [];
+        // Inisialisasi array untuk menyimpan jumlah mustahiq untuk setiap RT
+        $rtData = [];
 
-    // Menghitung jumlah mustahiq untuk setiap RT
-    foreach ($allRt as $rt) {
-        // Hitung jumlah mustahiq berdasarkan RT dari model Mustahik
-        $jumlahMustahiq = Mustahik::whereHas('rw', function ($query) use ($rt) {
-            $query->where('rt', $rt);
-        })->where('status', '2')->count();
-        // Masukkan jumlah mustahiq ke dalam array $rtData
-        $rtData[] = $jumlahMustahiq;
-    }
+        // Menghitung jumlah mustahiq untuk setiap RT
+        foreach ($allRt as $rt) {
+            // Hitung jumlah mustahiq berdasarkan RT dari model Mustahik
+            $jumlahMustahiq = Mustahik::whereHas('rw', function ($query) use ($rt) {
+                $query->where('rt', $rt);
+            })->where('status', '2')->count();
+            // Masukkan jumlah mustahiq ke dalam array $rtData
+            $rtData[] = $jumlahMustahiq;
+        }
 
-    // Mendapatkan label RT untuk digunakan dalam grafik
-    $rtLabels = $allRt;
+        // Mendapatkan label RT untuk digunakan dalam grafik
+        $rtLabels = $allRt;
 
-    // Menghitung jumlah mustahiq untuk wilayah lain dari tabel Mustahik
-    $jumlahMustahiqWilayahLain = Mustahik::whereNull('rw_id')->where('status', '2')->count();
+        // Menghitung jumlah mustahiq untuk wilayah lain dari tabel Mustahik
+        $jumlahMustahiqWilayahLain = Mustahik::whereNull('rw_id')->where('status', '2')->count();
 
-    // Menambahkan jumlah mustahiq wilayah lain ke dalam array $rtData
-    $rtData[] = $jumlahMustahiqWilayahLain;
-    
-    // Menambahkan label untuk wilayah lain
-    $rtLabels[] = 'Wilayah Lain';
-    
+        // Menambahkan jumlah mustahiq wilayah lain ke dalam array $rtData
+        $rtData[] = $jumlahMustahiqWilayahLain;
+        
+        // Menambahkan label untuk wilayah lain
+        $rtLabels[] = 'Wilayah Lain';
+        
         $assets = ['chart', 'animation'];
-        return view('landing-pages.pages.index', compact('rtLabels', 'rtData', 'assets', 'sisaPemasukanFitrah', 'sisaPemasukanMaal', 'sisaPemasukanInfaq', 'sisaPemasukanFidyah', 'totalSaldoBerasKgFitrah', 'totalSaldoBerasLFitrah', 'totalSaldoBerasKgFidyah', 'totalSaldoBerasLFidyah'));
+        return view('landing-pages.pages.index', compact('rtLabels', 'rtData', 'assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalPemasukanFitrah', 'totalBerasMuzakkiLFitrah', 'totalBerasMuzakkiKgFitrah', 'totalPemasukanFidyah', 'totalBerasMuzakkiLFidyah', 'totalBerasMuzakkiKgFidyah', 'totalPemasukanMaal', 'totalPemasukanInfaq', 'totalPengeluaranFitrah', 'totalBerasMustahikLFitrah', 'totalBerasMustahikKgFitrah', 'totalPengeluaranMaal', 'totalPengeluaranInfaq', 'totalPengeluaranFidyah', 'totalBerasMustahikLFidyah', 'totalBerasMustahikKgFidyah', 'sisaPemasukanFitrah', 'sisaPemasukanMaal', 'sisaPemasukanInfaq', 'sisaPemasukanFidyah', 'totalSaldoBerasKgFitrah', 'totalSaldoBerasLFitrah', 'totalSaldoBerasKgFidyah', 'totalSaldoBerasLFidyah'));
     } 
     
     public function landing_blog(Request $request)
