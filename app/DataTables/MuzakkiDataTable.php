@@ -24,12 +24,12 @@ class MuzakkiDataTable extends DataTable
             return ++$index;
         })
         
-        ->filterColumn('code', function($query, $keyword) {
+        ->filterColumn('muzakki_full_view.code', function($query, $keyword) {
             return $query->orWhereHas('code', function($q) use($keyword) {
                 $q->where('code', 'like', "%{$keyword}%");
             });
         })
-        ->filterColumn('nama_lengkap', function($query, $keyword) {
+        ->filterColumn('muzakki_full_view.nama_lengkap', function($query, $keyword) {
             return $query->orWhereHas('nama_lengkap', function($q) use($keyword) {
                 $q->where('nama_lengkap', 'like', "%{$keyword}%");
             });
