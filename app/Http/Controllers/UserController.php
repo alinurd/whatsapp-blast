@@ -69,7 +69,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show_($id)
     {
         $data = User::with('userProfile','roles')->findOrFail($id);
 
@@ -84,7 +84,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function show($id)
     {
         $data = User::with('userProfile','roles')->findOrFail($id);
 
@@ -132,10 +132,9 @@ class UserController extends Controller
         // $user->userProfile->fill($request->userProfile)->update();
 
         if(auth()->check()){
-            return redirect()->route('users.index')->withSuccess(__('message.msg_updated',['name' => __('message.user')]));
+            return redirect()->route('dashboard')->withSuccess(__('Update user berhasil'));
         }
         return redirect()->back()->withSuccess(__('message.msg_updated',['name' => 'My Profile']));
-
     }
 
     /**

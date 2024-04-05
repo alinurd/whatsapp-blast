@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Muzakki;
+use App\Models\Muzakkiview;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;  
 use Yajra\DataTables\Services\DataTable;
@@ -23,47 +23,19 @@ class MuzakkiDataTable extends DataTable
             static $index = 0;
             return ++$index;
         })
-        ->editColumn('userProfile.country', function($query) {
-            return $query->userProfile->country ?? '-';
-        })
-        ->editColumn('userProfile.company_name', function($query) {
-            return $query->userProfile->company_name ?? '-';
-        })
-        ->editColumn('status', function($query) {
-            $status = 'warning';
-            switch ($query->status) {
-                case 'active':
-                    $status = 'primary';
-                    break;
-                case 'inactive':
-                    $status = 'danger';
-                    break;
-                case 'banned':
-                    $status = 'dark';
-                    break;
-            }
-            return '<span class="text-capitalize badge bg-'.$status.'">'.$query->status.'</span>';
-        })
-        ->editColumn('created_at', function($query) {
-            return date('Y/m/d',strtotime($query->created_at));
-        })
-        ->filterColumn('full_name', function($query, $keyword) {
-            $sql = "CONCAT(users.first_name,' ',users.last_name)  like ?";
-            return $query->whereRaw($sql, ["%{$keyword}%"]);
-        })
-        ->filterColumn('userProfile.company_name', function($query, $keyword) {
-            return $query->orWhereHas('userProfile', function($q) use($keyword) {
-                $q->where('company_name', 'like', "%{$keyword}%");
+        
+        ->filterColumn('muzakki_full_view.code', function($query, $keyword) {
+            return $query->orWhereHas('code', function($q) use($keyword) {
+                $q->where('code', 'like', "%{$keyword}%");
             });
         })
-        ->filterColumn('userProfile.country', function($query, $keyword) {
-            return $query->orWhereHas('userProfile', function($q) use($keyword) {
-                $q->where('country', 'like', "%{$keyword}%");
+        ->filterColumn('muzakki_full_view.nama_lengkap', function($query, $keyword) {
+            return $query->orWhereHas('nama_lengkap', function($q) use($keyword) {
+                $q->where('nama_lengkap', 'like', "%{$keyword}%");
             });
         })
-        ->addColumn('action', 'muzakki.action')
-        ->rawColumns(['action','status']);
-    }
+        ->addColumn('action', 'muzakki.action');
+     }
 
     /**
      * Get query source of dataTable.
@@ -73,12 +45,7 @@ class MuzakkiDataTable extends DataTable
      */
     public function query()
     {
-        $model = Muzakki::query()
-        ->join('users as muzakki_user', 'muzakki.user_id', '=', 'muzakki_user.id')
-        ->join('kategori', 'muzakki.kategori_id', '=', 'kategori.id')
-        ->join('muzakki_header', 'muzakki.code', '=', 'muzakki_header.code')
-        ->join('users as header_user', 'muzakki_header.user_id', '=', 'header_user.id')
-        ->select('muzakki.*', 'muzakki_user.nama_lengkap as user_name', 'kategori.nama_kategori as kategori_name', 'header_user.nama_lengkap As dibayarkan');
+        $model = Muzakkiview::query();
 
         return $this->applyScopes($model);
     }
@@ -113,11 +80,10 @@ class MuzakkiDataTable extends DataTable
         return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
             ['data' => 'code', 'name' => 'id', 'title' => 'code', ], 
-            ['data' => 'dibayarkan', 'name' => 'dibayarkan', 'title' => 'Di Bayarkan'], 
-            ['data' => 'user_name', 'name' => 'user_name', 'title' => 'User'], 
-            ['data' => 'kategori_name', 'name' => 'kategori_name', 'title' => 'Kategori'], 
-            ['data' => 'type', 'name' => 'type', 'title' => 'Type Pembayaran'], 
-            ['data' => 'jumlah_bayar', 'name' => 'jumlah_bayar', 'title' => 'Jumlah'], 
+            ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Di Bayarkan'], 
+            ['data' => 'ttl_liter', 'name' => 'ttl_liter', 'title' => 'Total (Liter)'], 
+            ['data' => 'ttl_kg', 'name' => 'ttl_kg', 'title' => 'Total (Kg)'], 
+            ['data' => 'ttl_rupiah', 'name' => 'ttl_rupiah', 'title' => 'Total (Rp)'], 
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
