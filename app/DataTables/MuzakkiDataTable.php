@@ -24,9 +24,14 @@ class MuzakkiDataTable extends DataTable
             return ++$index;
         })
         
-        ->filterColumn('userProfile.company_name', function($query, $keyword) {
-            return $query->orWhereHas('userProfile', function($q) use($keyword) {
-                $q->where('company_name', 'like', "%{$keyword}%");
+        ->filterColumn('code', function($query, $keyword) {
+            return $query->orWhereHas('code', function($q) use($keyword) {
+                $q->where('code', 'like', "%{$keyword}%");
+            });
+        })
+        ->filterColumn('nama_lengkap', function($query, $keyword) {
+            return $query->orWhereHas('nama_lengkap', function($q) use($keyword) {
+                $q->where('nama_lengkap', 'like', "%{$keyword}%");
             });
         })
         ->addColumn('action', 'muzakki.action');
