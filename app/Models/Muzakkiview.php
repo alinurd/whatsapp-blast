@@ -16,6 +16,9 @@ class Muzakkiview extends Model
      */
     protected $table = 'muzakki_full_view';
 
-    
+    protected $fillable = [
+        'code',
+        'nama_lengkap', 
+    ];
 
 }  
