@@ -11,6 +11,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\Muzakki;
 use App\Models\MuzakkiHeader;
 use App\Models\MuzakkiHistory;
+use App\Models\TransHistory;
 use Illuminate\Support\Str;
 
 class MustahikuserController extends Controller
@@ -247,7 +248,7 @@ class MustahikuserController extends Controller
     }
     public function showdataupdate($code)
     {   
-        $data = MuzakkiHistory::where('code', $code)->with('user', 'kategori')->get();
+        $data = TransHistory::where('code', $code)->with('user', 'kategori')->get();
                 
         return view('muzakki.showdataupdate', compact('data'));
     }

@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
 use App\Models\Kategori;
 use App\Models\MuzakkiHeader;
-use App\Models\MuzakkiHistory;
+use App\Models\TransHistory;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -91,7 +91,7 @@ class MuzakkiController extends Controller
 
             $useHis = User::where('id', $user)->first();
             $kategHis = kategori::where('id', $validatedData['kategori'][$key])->first();
-            $history = new MuzakkiHistory();
+            $history = new TransHistory();
             $history->muzakki_id = $muzakki->id;
             $history->code = $MuzakkiHeader->code;
             $history->method = "Create";
@@ -166,7 +166,7 @@ class MuzakkiController extends Controller
             $muzakki->type = $validatedData['type'][$key];
             $muzakki->satuan = $validatedData['satuan'][$key];
             $muzakki->save();
-            $history = new MuzakkiHistory();
+            $history = new TransHistory();
             $history->muzakki_id = $muzakki->id;
             $history->code =$request->code;
             $history->method ="update";
