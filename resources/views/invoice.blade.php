@@ -31,7 +31,7 @@
 
         .invoice-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .invoice-body {
@@ -70,7 +70,7 @@
             <p style="text-align: right;"> <i>Jakarta, {{$header[0]['created_at']}}</i></p> 
         </div>
         <div class="invoice-body">
-             <p>Alhamdulillah, telah diterima penunaian zis/fidyah dari Bapak/ibu: <br><b><u>{{$header[0]['user']['nama_lengkap']}}</u></b></p>
+             <span>Alhamdulillah, telah diterima penunaian zis/fidyah dari Bapak/ibu: <br><b><u>{{$header[0]['user']['nama_lengkap']}}</u></b></span>
             <table class="invoice-table">
                 <thead>
                     <tr>
@@ -140,7 +140,7 @@ $totalRupiah = 0;
             <i>Semoga Allah terima dan berikan sebaik-baik balasan.</i>
             <br>
             <span class="">
-                <i>Lembaran ini merupakan bukti sah serah terima zakat.</i>
+<span style="font-size: 7px;"><b style="color:red">*</b><i>Lembaran ini merupakan bukti sah serah terima zakat.</i></span>
                 <p><b>Panitia ZIS Masjid Al Hasanah</b></p>
                 <p>www.zis-alhasanah.com</p>
             </span>
