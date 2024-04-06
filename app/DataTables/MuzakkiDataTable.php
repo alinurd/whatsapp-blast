@@ -24,16 +24,7 @@ class MuzakkiDataTable extends DataTable
             return ++$index;
         })
         
-        ->filterColumn('muzakki_full_view.code', function($query, $keyword) {
-            return $query->orWhereHas('code', function($q) use($keyword) {
-                $q->where('code', 'like', "%{$keyword}%");
-            });
-        })
-        ->filterColumn('muzakki_full_view.nama_lengkap', function($query, $keyword) {
-            return $query->orWhereHas('nama_lengkap', function($q) use($keyword) {
-                $q->where('nama_lengkap', 'like', "%{$keyword}%");
-            });
-        })
+      
         ->addColumn('action', 'muzakki.action');
      }
 
@@ -79,7 +70,7 @@ class MuzakkiDataTable extends DataTable
     {
         return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
-            ['data' => 'code', 'name' => 'id', 'title' => 'code', ], 
+            ['data' => 'code', 'name' => 'code', 'title' => 'code', ], 
             ['data' => 'nama_lengkap', 'name' => 'nama_lengkap', 'title' => 'Di Bayarkan'], 
             ['data' => 'ttl_liter', 'name' => 'ttl_liter', 'title' => 'Total (Liter)'], 
             ['data' => 'ttl_kg', 'name' => 'ttl_kg', 'title' => 'Total (Kg)'], 
