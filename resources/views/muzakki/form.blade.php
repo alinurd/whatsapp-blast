@@ -209,6 +209,8 @@ var jumlahJiwaElem = document.querySelector('#jumlah_jiwa0');
 // Menambahkan event listener untuk elemen jumlah_jiwa0
 jumlahJiwaElem.addEventListener('input', function() {
     calculateSubtotalForRow(0);
+    calculateTotal();
+
 });
 
 // Memilih elemen dengan id jumlah0
@@ -217,6 +219,8 @@ var jumlahElem = document.querySelector('#jumlah0');
 // Menambahkan event listener untuk elemen jumlah0
 jumlahElem.addEventListener('input', function() {
     calculateSubtotalForRow(0);
+    calculateTotal();
+
 });
 
 // Memilih elemen dengan id satuan0
@@ -225,6 +229,7 @@ var satuanElem = document.querySelector('#satuan0');
 // Menambahkan event listener untuk elemen satuan0
 satuanElem.addEventListener('change', function() {
     calculateSubtotalForRow(0);
+    calculateTotal();
 });
 
 
