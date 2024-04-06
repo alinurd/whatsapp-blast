@@ -205,7 +205,7 @@ class MuzakkiController extends Controller
         $msg = "Perubahan data muzzaki dilakukan oleh " . Auth::user()->nama_lengkap . ".\n";
 
         $msg .= "No. Invoice: #" . $request->code . "\n\n\n ";
-        $msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $request->code;
+        $msg .= "Lihat detail: https://zis-alhasanah.com/history/showdataupdate/" . $request->code;
  
         $this->sendMassage2($no, $msg, $request->code);
 
