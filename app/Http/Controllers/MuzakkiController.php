@@ -90,6 +90,7 @@ class MuzakkiController extends Controller
             ]);
 
             $useHis = User::where('id', $user)->first();
+            $kategHis = kategori::where('id', $validatedData['kategori'][$key])->first();
             $history = new MuzakkiHistory();
             $history->muzakki_id = $muzakki->id;
             $history->code = $MuzakkiHeader->code;
@@ -100,7 +101,7 @@ class MuzakkiController extends Controller
                 'user_id' => $useHis->nama_lengkap, // Nilai sebelumnya tidak ada (baru saja dibuat)
                 'jumlah_bayar' => $validatedData['jumlah'][$key],
                 'jumlah_jiwa' => $request['jumlah_jiwa'][$key],
-                'kategori_id' => $validatedData['kategori'][$key],
+                'kategori_id' => $kategHis->nama_kategori,
                 'type' => $validatedData['type'][$key],
                 'satuan' => $validatedData['satuan'][$key],
             ]);
