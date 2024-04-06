@@ -108,7 +108,7 @@ class Controller extends BaseController
 
         curl_close($curl);
 
-        dd($resp);
+        // dd($resp);
     }
     public function sendMassage($to, $msg)
     {

@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
 use App\Models\Kategori;
 use App\Models\MuzakkiHeader;
+use App\Models\MuzakkiHistory;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -131,9 +132,12 @@ class MuzakkiController extends Controller
         ]);
     
 
-
+     
         foreach ($request->id as $key => $id) {
-             $muzakki = Muzakki::find($id);
+            $muzakki = Muzakki::find($id);
+            $oldValues = $muzakki->getOriginal(); // Get the original values before update
+        
+            // Update the Muzakki record
             $muzakki->user_id = $validatedData['user'][$key];
             $muzakki->jumlah_bayar = $validatedData['jumlah'][$key];
             $muzakki->jumlah_jiwa = $request['jumlah_jiwa'][$key];
@@ -141,8 +145,41 @@ class MuzakkiController extends Controller
             $muzakki->type = $validatedData['type'][$key];
             $muzakki->satuan = $validatedData['satuan'][$key];
             $muzakki->save();
-        }              
-
+        
+            // Create a new MuzakkiHistory record to store the changes
+            $history = new MuzakkiHistory();
+            $history->muzakki_id = $muzakki->id;
+            $history->code =$request->code;
+             $history->changes = json_encode([
+                 'code_hst' =>$this->generateCodeById("HST", $x + 1),
+                'user_id' => [
+                    'before' => $oldValues['user_id'],
+                    'after' => $muzakki->user_id,
+                ],
+                'jumlah_bayar' => [
+                    'before' => $oldValues['jumlah_bayar'],
+                    'after' => $muzakki->jumlah_bayar,
+                ],
+                'jumlah_jiwa' => [
+                    'before' => $oldValues['jumlah_jiwa'],
+                    'after' => $muzakki->jumlah_jiwa,
+                ],
+                'kategori_id' => [
+                    'before' => $oldValues['kategori_id'],
+                    'after' => $muzakki->kategori_id,
+                ],
+                'type' => [
+                    'before' => $oldValues['type'],
+                    'after' => $muzakki->type,
+                ],
+                'satuan' => [
+                    'before' => $oldValues['satuan'],
+                    'after' => $muzakki->satuan,
+                ],
+            ]);
+            $history->save();
+        }
+        
     $no = '6285817069096';
         $msg = "Perubahan data muzzaki dilakukan oleh " . Auth::user()->nama_lengkap . ".\n";
 
