@@ -158,6 +158,9 @@ class MuzakkiReport implements FromCollection, WithHeadings, ShouldAutoSize{
 
         return view('muzakki.report', compact('data'));
     }
-    
+    public function exportMuzakkiReport()
+{
+    return Excel::download(new MuzakkiReportExport, 'Muzakki-Report.xlsx');
+}
 
 }
