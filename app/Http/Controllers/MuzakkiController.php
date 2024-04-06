@@ -88,7 +88,8 @@ class MuzakkiController extends Controller
                 'type' => $validatedData['type'][$key],
                 'satuan' => $validatedData['satuan'][$key],
             ]);
-        
+
+            $useHis = User::where('id', $user)->first();
             $history = new MuzakkiHistory();
             $history->muzakki_id = $muzakki->id;
             $history->code = $MuzakkiHeader->code;
@@ -96,12 +97,12 @@ class MuzakkiController extends Controller
             $history->user = Auth::user()->nama_lengkap;
             $history->changes = json_encode([
                 'code_hst' => $this->generateCodeById("HST", $x + 1),
-                'user_id' => null, // Nilai sebelumnya tidak ada (baru saja dibuat)
-                'jumlah_bayar' => null,
-                'jumlah_jiwa' => null,
-                'kategori_id' => null,
-                'type' => null,
-                'satuan' => null,
+                'user_id' => $useHis->nama_lengkap, // Nilai sebelumnya tidak ada (baru saja dibuat)
+                'jumlah_bayar' => $validatedData['jumlah'][$key],
+                'jumlah_jiwa' => $request['jumlah_jiwa'][$key],
+                'kategori_id' => $validatedData['kategori'][$key],
+                'type' => $validatedData['type'][$key],
+                'satuan' => $validatedData['satuan'][$key],
             ]);
             $history->save();
         
