@@ -52,8 +52,7 @@
                            <h6 class="mb-1">{{ $q->updated_at }}</h6>
                            <div class="d-inline-block w-100">
                               <p><strong>Changes {{ $q->method }}</strong></p>
-                              {{dd($q->changes)}}
-                              <table class="table table-bordered">
+                               <table class="table table-bordered">
                                  <thead>
                                     <tr>
                                        <th>Field</th>
