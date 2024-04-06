@@ -5,15 +5,14 @@
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
                   <h4 class="card-title">Report Muzakki</h4>
+                  
                </div>
-            </div>
-            <div class="card-body">
-               <div class="mb-3">
-                  <span class="btn btn-info">Cari</span>
-                  <a   href="{{route('muzakkireport')}}">
+               <a   href="{{route('muzakkireport')}}">
                      <span class="btn btn-primary float-end" id="export">Export to Excel</span>
                   </a>
-               </div>
+            </div>
+            <div class="card-body">
+              
                <div class="table-responsive">
                <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
                      <thead>
@@ -40,14 +39,8 @@
                            <td>{{ $detail->user->nama_lengkap }}</td>
                            <td>{{ $detail->kategori->nama_kategori }}</td>
                            <td>{{ $detail->type }}</td>
-                           <td>{{ $detail->satuan }}</td>
-                           <td>
-                           @if($detail['satuan'] === 'Rupiah')
-        {{ number_format($detail['jumlah_bayar'], 2) }}
-        @elseif($detail['type'] === 'Beras')
-        {{ $detail['jumlah_bayar'] }}
-        @endif
-                           </td>
+                           <td>{{ $detail->satuan }}</td> 
+                           <td>{{ $detail->jumlah_bayar }}</td> 
                         </tr>    
                         @endif
                         @endforeach 
