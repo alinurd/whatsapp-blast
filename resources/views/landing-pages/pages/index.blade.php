@@ -201,7 +201,7 @@
                                 </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-top: -2%;">
+                    <!-- <div class="row" style="margin-top: -2%;">
                         <div class="col-md-6">
                                 <div class="card border-bottom border-4 border-0 border-info">
                                     <div class="card mb-1" style="background: #118146;">
@@ -240,7 +240,7 @@
                                     </div>
                                 </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
