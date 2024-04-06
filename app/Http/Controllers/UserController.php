@@ -47,7 +47,7 @@ class UserController extends Controller
     {
         $request['password'] = bcrypt($request->password);
 
-        $request['username'] = $request->username ?? stristr($request->email, "@", true) . rand(100,1000);
+        $request['username'] = $request->email ?? stristr($request->email, "@", true) . rand(100,1000);
 
         $user = User::create($request->all());
 
