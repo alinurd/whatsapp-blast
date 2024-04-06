@@ -201,7 +201,7 @@ class MuzakkiController extends Controller
             $history->save();
         }
         
-    $no = '6285817069096';
+    $no = '62895620014242';
         $msg = "Perubahan data muzzaki dilakukan oleh " . Auth::user()->nama_lengkap . ".\n";
 
         $msg .= "No. Invoice: #" . $request->code . "\n\n\n ";
