@@ -245,15 +245,12 @@ class MustahikuserController extends Controller
 
     }
     public function showdataupdate($code)
-    {  
-
-       $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
-       $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();    //    $ktg = Kategori::pluck('nama_kategori', 'id');
-
-       // Pass the category data to the form view
-    //    return view('muzzaki.trace', compact('data'));
-    return view('muzakki.showdataupdate', compact('data'));
-
+    {
+        $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+        $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
+        
+        return view('muzakki.showdataupdate', compact('data'));
     }
+    
 }
  
