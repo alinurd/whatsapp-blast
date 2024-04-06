@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\UserRequest;
 use App\Models\Kategori;
 use App\Models\MuzakkiHeader;
+use App\Models\MuzakkiHistory;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -51,7 +52,10 @@ class MuzakkiController extends Controller
         $agt = User::where("user_type", "pemberi")->where("status", "active")->get()->pluck('nama_lengkap', 'id');
         $ktg = Kategori::pluck('nama_kategori', 'id');
 
-        return view('muzakki.formedit', compact('agt', 'ktg'));
+        $old['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
+        $old['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
+
+        return view('muzakki.formedit', compact('agt', 'ktg','old'));
     }
     public function store(Request $request)
     {
@@ -75,8 +79,8 @@ class MuzakkiController extends Controller
             'code' => $this->generateCodeById("MZK", $x + 1),
         ]);
         foreach ($validatedData['user'] as $key => $user) {
-            Muzakki::create([
-                'code' =>  $MuzakkiHeader->code,
+            $muzakki = Muzakki::create([
+                'code' => $MuzakkiHeader->code,
                 'user_id' => $user,
                 'jumlah_bayar' => $validatedData['jumlah'][$key],
                 'jumlah_jiwa' => $request['jumlah_jiwa'][$key],
@@ -84,45 +88,127 @@ class MuzakkiController extends Controller
                 'type' => $validatedData['type'][$key],
                 'satuan' => $validatedData['satuan'][$key],
             ]);
-            $dUser = User::where('id', $user)->first();
-            $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
-            //  $no = '6289528518495'; 
-            $no = $dibayarkan->nomor_telp;
-            // dd($no);
-            // if (substr($no, 0, 1) === '0') {
-            //     $no = '62' . substr($no, 1);
-            // }
-
-            $pesan = "Terima kasih @" . $dUser->nama_lengkap . " sudah membayar zakat pada tanggal " . $MuzakkiHeader->created_at . "\n\n"
-                . " dibayarkan oleh: " . $dibayarkan->nama_lengkap . ". Code invoice #" . $MuzakkiHeader->code . "\n\n"
-                . "Petugas input: " . Auth::user()->nama_lengkap;
-
-            $payload = json_encode([
-                "messages" => [
-                    [
-                        "destinations" => [
-                            ["to" => $no]
-                        ],
-                        "from" => "Zis-Alhasanah #" . $MuzakkiHeader->code,
-                        "text" => $pesan
-                    ]
-                ]
+        
+            $history = new MuzakkiHistory();
+            $history->muzakki_id = $muzakki->id;
+            $history->code = $MuzakkiHeader->code;
+            $history->method = "Create";
+            $history->user = Auth::user()->nama_lengkap;
+            $history->changes = json_encode([
+                'code_hst' => $this->generateCodeById("HST", $x + 1),
+                'user_id' => null, // Nilai sebelumnya tidak ada (baru saja dibuat)
+                'jumlah_bayar' => null,
+                'jumlah_jiwa' => null,
+                'kategori_id' => null,
+                'type' => null,
+                'satuan' => null,
             ]);
-            $n = [$dUser->nama_lengkap, $MuzakkiHeader->code];
-            $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: " . $dibayarkan->nama_lengkap . ".\n";
-            $msg .= "No. Invoice: #" . $MuzakkiHeader->code . "\n\n\n ";
-            $msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code;
-            $this->cetakinvoice($MuzakkiHeader->code);
-
-            $this->sendMassage1($no, $msg, $MuzakkiHeader->code);
-            //  $this->sendMassage($no,$msg);
-            //  $this->sendWa($no,$n);
-
-            $key = 'b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f';
-            $base_url = 'qymz4m.api.infobip.com';
+            $history->save();
+        
+            $x++; // Perbarui nilai x untuk kode berikutnya
         }
+        
+        $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
+        //  $no = '6289528518495'; 
+        $no = $dibayarkan->nomor_telp;  
+        $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: " . $dibayarkan->nama_lengkap . ".\n";
+        $msg .= "No. Invoice: #" . $MuzakkiHeader->code . "\n\n\n ";
+        $msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code;
+        $this->cetakinvoice($MuzakkiHeader->code);
 
+        $this->sendMassage1($no, $msg, $MuzakkiHeader->code);
+        //  $this->sendMassage($no,$msg);
+        //  $this->sendWa($no,$n);
+
+        $key = 'b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f';
+        $base_url = 'qymz4m.api.infobip.com';
         return redirect()->route('invoice', ['code' => $MuzakkiHeader->code])->withSuccess(__('Pembayaran berhasil dan  invoice telah terkirim kepada ' . $dibayarkan->nama_lengkap));
+    }
+
+    public function update(Request $request)
+    {
+        // dd($request);
+        $validatedData = $request->validate([
+            'dibayarkan' => 'required',
+            'user' => 'required|array',
+            'user' => 'required|array',
+            'user.*' => 'exists:users,id',
+            'kategori' => 'required|array',
+            'kategori.*' => 'exists:kategori,id',
+            'type' => 'required|array',
+            'satuan' => 'required|array',
+            'jumlah' => 'required|array',
+        ]);
+
+        $lastId = MuzakkiHeader::orderByDesc('id')->first();
+        $x = $lastId ? $lastId->id : 0;
+
+        $MuzakkiHeader = MuzakkiHeader::where('code', $request->code)
+        ->update([
+            'user_id' => $validatedData['dibayarkan'],
+        ]);
+    
+
+     
+        foreach ($request->id as $key => $id) {
+            $muzakki = Muzakki::find($id);
+            $oldValues = $muzakki->getOriginal(); // Get the original values before update
+            $oldUser = User::where('id', $oldValues['user_id'])->first();
+            $oldUserafter = User::where('id', $muzakki->user_id)->first();
+
+            // Update the Muzakki record
+            $muzakki->user_id = $validatedData['user'][$key];
+            $muzakki->jumlah_bayar = $validatedData['jumlah'][$key];
+            $muzakki->jumlah_jiwa = $request['jumlah_jiwa'][$key];
+            $muzakki->kategori_id = $validatedData['kategori'][$key];
+            $muzakki->type = $validatedData['type'][$key];
+            $muzakki->satuan = $validatedData['satuan'][$key];
+            $muzakki->save();
+            $history = new MuzakkiHistory();
+            $history->muzakki_id = $muzakki->id;
+            $history->code =$request->code;
+            $history->method ="update";
+            $history->user =Auth::user()->nama_lengkap;
+             $history->changes = json_encode([
+                 'code_hst' =>$this->generateCodeById("HST", $x + 1),
+                'user_id' => [
+                    'before' => $oldUser->nama_lengkap,
+                    'after' => $oldUserafter->nama_lengkap,
+                 ],
+                'jumlah_bayar' => [
+                    'before' => $oldValues['jumlah_bayar'],
+                    'after' => $muzakki->jumlah_bayar,
+                ],
+                'jumlah_jiwa' => [
+                    'before' => $oldValues['jumlah_jiwa'],
+                    'after' => $muzakki->jumlah_jiwa,
+                ],
+                'kategori_id' => [
+                    'before' => $oldValues['kategori_id'],
+                    'after' => $muzakki->kategori_id,
+                ],
+                'type' => [
+                    'before' => $oldValues['type'],
+                    'after' => $muzakki->type,
+                ],
+                'satuan' => [
+                    'before' => $oldValues['satuan'],
+                    'after' => $muzakki->satuan,
+                ],
+            ]);
+            $history->save();
+        }
+        
+    $no = '6285817069096';
+        $msg = "Perubahan data muzzaki dilakukan oleh " . Auth::user()->nama_lengkap . ".\n";
+
+        $msg .= "No. Invoice: #" . $request->code . "\n\n\n ";
+        $msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $request->code;
+ 
+        $this->sendMassage2($no, $msg, $request->code);
+
+        
+        return redirect()->route('invoice', ['code' => $request->code])->withSuccess(__('Pembayaran berhasil diupdate ' ));
     }
 
     public function invoice($code)

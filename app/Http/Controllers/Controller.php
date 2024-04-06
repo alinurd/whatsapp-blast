@@ -74,6 +74,42 @@ class Controller extends BaseController
 
         // dd($resp);
     }
+    public function sendMassage2($to, $msg, $code)
+    {
+        $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/whatsapp/message';
+         
+ 
+        $curl = curl_init();
+
+        $payload = json_encode([ 
+            'destination' => $to, 
+            'message' => $msg,
+            'include_unsubscribe' => false, 
+        ]);
+
+        curl_setopt_array($curl, [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $BASE_URL,
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => [
+                "APIKey: 33DF7E9D96A13B5DB75FB01BAB6DE458",
+                'Content-Type: application/json'
+            ],
+            CURLOPT_POSTFIELDS => $payload,
+        ]);
+
+        $resp = curl_exec($curl);
+
+        if (!$resp) {
+            die('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
+        } else {
+            echo $resp;
+        }
+
+        curl_close($curl);
+
+        // dd($resp);
+    }
     public function sendMassage($to, $msg)
     {
         $curl = curl_init();

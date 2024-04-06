@@ -1,18 +1,13 @@
 <x-app-layout :assets="$assets ?? []">
    <div>
-      <?php
-      $id = $id ?? null;
-      ?>
-      @if(isset($id))
-      {!! Form::model($data, ['route' => ['muzakki.update', $id], 'method' => 'patch' , 'enctype' => 'multipart/form-data']) !!}
-      @else
-      {!! Form::open(['route' => ['muzakki.store'], 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
-      @endif
-
+ 
+      
+      {!! Form::open(['route' => ['muzakki.update',$old['header'][0]->code], 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+ 
       <div class="card">
          <div class="card-header d-flex justify-content-between">
             <div class="header-title">
-               <h4 class="card-title">{{$id !== null ? 'Update' : 'New' }} Muzakki</h4> 
+               <h4 class="card-title">Update Muzakki</h4> 
             </div>
             <div class="card-action">
                <a href="#" class="mt-lg-0 mt-md-0 mt-3 btn btn-secondary btn-icon" data-bs-toggle="tooltip" data-modal-form="form" data-icon="person_add" data-size="small" data--href="{{ route('muzakkiCreate') }}" data-app-title="Add user muzakki" data-placement="top" title="New Muzakki">
@@ -25,13 +20,13 @@
                </a>
                <a href="{{route('muzakki.index')}}" class="btn  btn-primary" role="button">Back</a>
             </div>
-         </div>
+          </div>
          <div class="card-body">
             <div class="new-user-info">
                <div class="row">
                   <div class="form-group col-md-10">
                      <label class="form-label" for="fname">Di bayarkan oleh <span class="text-danger">*</span></label>
-                     {{ Form::select('dibayarkan', $agt, "", ['class' => 'form-control', 'placeholder' => 'Select User Role', 'id' => 'dibayarkan']) }}
+                     {{ Form::select('dibayarkan', $agt, $old['header'][0]->user_id, ['class' => 'form-control', 'placeholder' => 'Select User Role', 'id' => 'dibayarkan']) }}
                   </div>
                   <div class="form-group col-md-2">
                   </div>
@@ -47,9 +42,9 @@
                            <th>Type Pembayaran</th>
                            <th>Satuan</th>
                            <th>Jumlah</th>
-                           <th>Subtotal</th>
+                           <!-- <th>Subtotal</th> -->
                         </thead>
-                        <tbody>
+                        <!-- <tbody>
                            <tr>
                               <td>1</td>
                               <td>
@@ -96,7 +91,55 @@
                               <span id="subtotaltext0"> </span>
                               </td>
                            </tr>
-                        </tbody>
+                        </tbody> -->
+                        <tbody>
+    @foreach($old['detail'] as $index => $detail)
+    <tr>
+        <td>{{ $index + 1 }}</td>
+        <td>
+            <input type="hidden" name="id[]" value="{{$detail->id}}">
+            <input type="hidden" name="code" value="{{$detail->code}}">
+            {{ Form::select('user[]', $agt, $detail->user_id, ['class' => 'form-control', 'id' => 'user' . $index]) }}
+        </td>
+        <td>
+            {{ Form::select('kategori[]', $ktg, $detail->kategori_id, ['class' => 'form-control', 'placeholder' => 'Select Kategri', 'id' => 'kateg' . $index]) }}
+        </td>
+        <td>
+            <input type="number" name="jumlah_jiwa[]" id="jumlah_jiwa{{ $index }}" class="form-control" value="{{ $detail->jumlah_jiwa }}">
+        </td>
+
+
+        <td>
+            <div class="form-check">
+                <input type="radio" name="type[{{ $index }}]" value="Beras" id="Beras{{ $index }}" {{ $detail->type == 'Beras' ? 'checked' : '' }}>
+                <label class="form-check-label" for="Beras{{ $index }}">Beras</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="type[{{ $index }}]" value="Transfer" id="Transfer{{ $index }}" {{ $detail->type == 'Transfer' ? 'checked' : '' }}>
+                <label class="form-check-label" for="Transfer{{ $index }}">Transfer</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="type[{{ $index }}]" value="Rupiah" id="Rupiah{{ $index }}" {{ $detail->type == 'Rupiah' ? 'checked' : '' }}>
+                <label class="form-check-label" for="Rupiah{{ $index }}">Rupiah</label>
+            </div>
+        </td>
+        <td>
+            <select name="satuan[{{ $index }}]" id="satuan{{ $index }}" class="form-control">
+                <option value="Kg" {{ $detail->satuan == 'Kg' ? 'selected' : '' }}>Kg</option>
+                <option value="Liter" {{ $detail->satuan == 'Liter' ? 'selected' : '' }}>Liter</option>
+                <option value="Rupiah" {{ $detail->satuan == 'Rupiah' ? 'selected' : '' }}>Rupiah</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" name="jumlah[]" id="jumlah{{ $index }}" class="form-control" value="{{ $detail->jumlah_bayar }}">
+        </td>
+        <!-- <td>
+            <span id="subtotal{{ $index }}">Subtotal</span>
+        </td> -->
+    </tr>
+    @endforeach
+</tbody>
+
                         <tr>
 
                            <td colspan="5" rowspan="3" class="text-end"><strong>Total:</strong></td>
@@ -109,9 +152,9 @@
                         <td class="text-star" colspan="2"><span id="ttlRupiah">0</span> <i>Rupiah</i></td>
                         </tr>
                      </table>
-                     <span class="btn btn-info btn-sm float-end" id="addRow">Tambah Row</span>
+                     <!-- <span class="btn btn-info btn-sm float-end" id="addRow">Tambah Row</span> -->
                   </div>
-                  <button type="submit" class="btn btn-primary">{{$id !== null ? 'Update' : 'Add' }} Muzakki</button>
+                  <button type="submit" class="btn btn-primary">Update Muzakki</button>
                </div>
             </div>
          </div>
