@@ -61,6 +61,7 @@ Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-
 Route::get('/',[HomeController::class, 'landing_index'])->name('uisheet');
  
 Route::get('showinvoice/{code}', [MustahikuserController::class, 'show'])->name('showinvoice');
+Route::get('showdataupdate/{code}', [MustahikuserController::class, 'showdataupdate'])->name('showdataupdate');
 Route::get('mustahikuser/create', [MustahikuserController::class, 'create'])->name('mustahikuser.create');
 Route::post('mustahikuser/store', [MustahikuserController::class, 'store'])->name('mustahikuser.store');
 
@@ -82,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('cetakinvoice/{code}', [MuzakkiController::class, 'cetakinvoice'])->name('cetakinvoice');
     Route::get('editmuzzaki/{code}', [MuzakkiController::class, 'editmuzzaki'])->name('editmuzzaki');
     Route::get('muzakkiCreate', [MuzakkiController::class, 'muzakkiCreate'])->name('muzakkiCreate');
+    Route::post('muzakki/{muzakki}', [MuzakkiController::class, 'update'])->name('muzakki.update');
     Route::resource('muzakki', MuzakkiController::class);  
         
     Route::get('report/muzakkireport', [MuzakkiReport::class, 'muzakkireport'])->name('muzakkireport');
