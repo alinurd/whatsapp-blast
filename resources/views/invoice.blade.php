@@ -10,6 +10,7 @@
         @page {
             size: 148mm 210mm;
             margin: 0;
+            font-size: 9px;
         }
 
         body {
