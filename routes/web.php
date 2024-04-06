@@ -6,6 +6,7 @@ use App\Exports\ExportMuzakki;
 use App\Exports\ExportMustahik;
 use App\Exports\MuzakkiReport;
 use App\Exports\MustahikReport;
+use App\Exports\MuzakkiReportExport;
 use App\Exports\Report;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Security\RolePermission;
@@ -87,9 +88,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('muzakki/{muzakki}', [MuzakkiController::class, 'update'])->name('muzakki.update');
     Route::resource('muzakki', MuzakkiController::class);  
         
-    Route::get('report/muzakkireport', [MuzakkiReport::class, 'muzakkireport'])->name('muzakkireport');
+    // Route::get('report/muzakkireport', [MuzakkiReport::class, 'muzakkireport'])->name('muzakkireport');
+    Route::get('export-muzakki-report', [MuzakkiReport::class, 'exportMuzakkiReport'])->name('muzakkireport');
     Route::get('report/muzakki', [MuzakkiReport::class, 'index'])->name('muzakkireport.index');
+    Route::resource('muzakki', MuzakkiController::class);  
+    // Route::get('/export-muzakki-report', [MuzakkiReport::class, 'exportMuzakkiReport']);
 
+    Route::get('report/muzakkireportexport', [MuzakkiReportExport::class, 'MuzakkiReportExport'])->name('MuzakkiReportExport');
+ 
     Route::get('report/mustahikreport', [MustahikReport::class, 'mustahikreport'])->name('mustahikreport');
     Route::get('report/mustahik', [MustahikReport::class, 'index'])->name('mustahikreport.index');
 
