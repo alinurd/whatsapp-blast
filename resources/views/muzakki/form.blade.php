@@ -282,6 +282,19 @@ satuanElem.addEventListener('change', function() {
 }
 
 
+var satuanElem0 = document.querySelector('#satuan0');
+
+// Menambahkan event listener untuk elemen satuan0
+satuanElem0.addEventListener('change', function() {
+     calculateTotal();
+});
+
+
+var jumlahElem0 = document.querySelector('#jumlah0');
+jumlahElem0.addEventListener('input', function() {
+     calculateTotal();
+
+});
 
     // Fungsi untuk menghitung total
     function calculateTotal() {
