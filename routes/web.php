@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('report/muzakki', [MuzakkiReport::class, 'index'])->name('muzakkireport.index');
     Route::resource('muzakki', MuzakkiController::class);  
     // Route::get('/export-muzakki-report', [MuzakkiReport::class, 'exportMuzakkiReport']);
+    Route::delete('muzakki/destroy/{code}', [MuzakkiController::class, 'destroy'])->name('muzakki.destroy');
 
     Route::get('report/muzakkireportexport', [MuzakkiReportExport::class, 'MuzakkiReportExport'])->name('MuzakkiReportExport');
  
