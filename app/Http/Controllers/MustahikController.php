@@ -287,7 +287,7 @@ class MustahikController extends Controller
         } 
     
         // Update mustahik data from the request
-        $mustahik->code = $this->generateCodeById("MSQ", $x+1);
+        // $mustahik->code = $this->generateCodeById("MSQ", $x+1);
         $mustahik->nama_lengkap = $request->nama_lengkap;
         $mustahik->jenis_kelamin = $request->jenis_kelamin;
         $mustahik->nomor_telp = $request->no_phone;
@@ -319,11 +319,11 @@ class MustahikController extends Controller
         // Create history record
     $history = new TransHistory();
     $history->muzakki_id = $mustahik->id;
-    $history->code = $mustahik->code;
+    $history->code = $oldMustahik->code;
     $history->method = "update";
     $history->user = Auth::user()->nama_lengkap;
     $history->changes = json_encode([
-        'code' => $mustahik->code,
+        'code' => $oldMustahik->code,
         'nama_lengkap' => [
             'before' => $oldMustahik->nama_lengkap,
             'after' => $mustahik->nama_lengkap,
