@@ -10,6 +10,7 @@ use App\Helpers\AuthHelper;
 use App\Http\Requests\UserRequest;
 use App\Models\Muzakki;
 use App\Models\MuzakkiHeader;
+use App\Models\MuzakkiHistory;
 use Illuminate\Support\Str;
 
 class MustahikuserController extends Controller
@@ -245,10 +246,9 @@ class MustahikuserController extends Controller
 
     }
     public function showdataupdate($code)
-    {
-        $data['detail'] = Muzakki::where('code', $code)->with('user', 'kategori')->get();
-        $data['header'] = MuzakkiHeader::where('code', $code)->with('user')->get();
-        
+    {   
+        $data = MuzakkiHistory::where('code', $code)->with('user', 'kategori')->get();
+                
         return view('muzakki.showdataupdate', compact('data'));
     }
     

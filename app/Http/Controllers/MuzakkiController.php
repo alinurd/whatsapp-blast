@@ -79,8 +79,8 @@ class MuzakkiController extends Controller
             'code' => $this->generateCodeById("MZK", $x + 1),
         ]);
         foreach ($validatedData['user'] as $key => $user) {
-            Muzakki::create([
-                'code' =>  $MuzakkiHeader->code,
+            $muzakki = Muzakki::create([
+                'code' => $MuzakkiHeader->code,
                 'user_id' => $user,
                 'jumlah_bayar' => $validatedData['jumlah'][$key],
                 'jumlah_jiwa' => $request['jumlah_jiwa'][$key],
@@ -88,9 +88,26 @@ class MuzakkiController extends Controller
                 'type' => $validatedData['type'][$key],
                 'satuan' => $validatedData['satuan'][$key],
             ]);
-            $dUser = User::where('id', $user)->first();
-           
+        
+            $history = new MuzakkiHistory();
+            $history->muzakki_id = $muzakki->id;
+            $history->code = $MuzakkiHeader->code;
+            $history->method = "Create";
+            $history->user = Auth::user()->nama_lengkap;
+            $history->changes = json_encode([
+                'code_hst' => $this->generateCodeById("HST", $x + 1),
+                'user_id' => null, // Nilai sebelumnya tidak ada (baru saja dibuat)
+                'jumlah_bayar' => null,
+                'jumlah_jiwa' => null,
+                'kategori_id' => null,
+                'type' => null,
+                'satuan' => null,
+            ]);
+            $history->save();
+        
+            $x++; // Perbarui nilai x untuk kode berikutnya
         }
+        
         $dibayarkan = User::where('id', $validatedData['dibayarkan'])->first();
         //  $no = '6289528518495'; 
         $no = $dibayarkan->nomor_telp;  
@@ -136,7 +153,9 @@ class MuzakkiController extends Controller
         foreach ($request->id as $key => $id) {
             $muzakki = Muzakki::find($id);
             $oldValues = $muzakki->getOriginal(); // Get the original values before update
-        
+            $oldUser = User::where('id', $oldValues['user_id'])->first();
+            $oldUserafter = User::where('id', $muzakki->user_id)->first();
+
             // Update the Muzakki record
             $muzakki->user_id = $validatedData['user'][$key];
             $muzakki->jumlah_bayar = $validatedData['jumlah'][$key];
@@ -145,17 +164,17 @@ class MuzakkiController extends Controller
             $muzakki->type = $validatedData['type'][$key];
             $muzakki->satuan = $validatedData['satuan'][$key];
             $muzakki->save();
-        
-            // Create a new MuzakkiHistory record to store the changes
             $history = new MuzakkiHistory();
             $history->muzakki_id = $muzakki->id;
             $history->code =$request->code;
+            $history->method ="update";
+            $history->user =Auth::user()->nama_lengkap;
              $history->changes = json_encode([
                  'code_hst' =>$this->generateCodeById("HST", $x + 1),
                 'user_id' => [
-                    'before' => $oldValues['user_id'],
-                    'after' => $muzakki->user_id,
-                ],
+                    'before' => $oldUser->nama_lengkap,
+                    'after' => $oldUserafter->nama_lengkap,
+                 ],
                 'jumlah_bayar' => [
                     'before' => $oldValues['jumlah_bayar'],
                     'after' => $muzakki->jumlah_bayar,
