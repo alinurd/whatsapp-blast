@@ -66,10 +66,12 @@
                         </div>
                      </div>
                   </div>
+                  @if($m!=1)
                   <div class="form-group">
                      <label class="form-label">User Role: <span class="text-danger">*</span></label>
                      {{Form::select('role', $roles , old('role'), ['class' => 'form-control', 'placeholder' => 'Select User Role']); }}
                   </div>
+                  @endif
                </div>
             </div>
          </div>
