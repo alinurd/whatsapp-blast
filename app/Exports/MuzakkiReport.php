@@ -6,11 +6,12 @@ use App\Models\Muzakki;
 use App\Models\MuzakkiHeader;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Http\Request; 
-use Maatwebsite\Excel\Concerns\WithHeadings;
-
-class MuzakkiReport implements FromCollection, WithHeadings{
-    /**
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadings; 
+class MuzakkiReport implements FromCollection, WithHeadings, ShouldAutoSize{
+    /*
     * @return \Illuminate\Support\Collection
     */ 
     public function collection()
@@ -101,7 +102,7 @@ class MuzakkiReport implements FromCollection, WithHeadings{
             'Satuan' => 'Rupiah',
             'Jumlah' => $totalsRupiah,
         ];
-
+        
         $dataLiter[] = [
             'No' => '',
             'Code Invoice' => '',
@@ -112,8 +113,8 @@ class MuzakkiReport implements FromCollection, WithHeadings{
             'Type' => 'Total',
             'Satuan' => 'Liter',
             'Jumlah' => $totalsLiter,
-        ];
-
+      ];
+        
         $dataKg[] = [
             'No' => '',
             'Code Invoice' => '',
@@ -124,10 +125,12 @@ class MuzakkiReport implements FromCollection, WithHeadings{
             'Type' => 'Total',
             'Satuan' => 'Kg',
             'Jumlah' => $totalsKg,
-        ];
+      ];
+        
 
         return collect(array_merge($dataRupiah, $dataLiter, $dataKg));
     }
+
     public function headings(): array
     {
         return [
@@ -138,25 +141,23 @@ class MuzakkiReport implements FromCollection, WithHeadings{
             'Nama',
             'Kategori',
             'Type',
-            'Satuan', // Label tambahan untuk satuan Rupiah
-            'Jumlah', // Label tambahan untuk jumlah Rupiah 
+            'Satuan',
+            'Jumlah',
         ];
     }
-    
-    public function muzakkireport(){
-        return Excel::download(New MuzakkiReport, "Muzakki-Report-".date("Y").".xlsx");
 
-    }
-    
-    public function index() 
+    public function muzakkireport()
     {
-        
-        $data['detail'] = Muzakki::with('user','kategori' )->get();
-        $data['header'] = MuzakkiHeader::with('user' )->get();
- 
+        return Excel::download(new MuzakkiReport, "Muzakki-Report-" . date("Y") . ".xlsx");
+    }
+
+    public function index()
+    {
+        $data['detail'] = Muzakki::with('user', 'kategori')->get();
+        $data['header'] = MuzakkiHeader::with('user')->get();
+
         return view('muzakki.report', compact('data'));
     }
+    
 
 }
-
-
