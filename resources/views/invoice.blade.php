@@ -69,7 +69,7 @@
             <p style="text-align: right;"> <i>Jakarta, {{$header[0]['created_at']}}</i></p> 
         </div>
         <div class="invoice-body">
-             <p>Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: <br><b><u>{{$header[0]['user']['nama_lengkap']}}</u></b></p>
+             <p>Alhamdulillah, telah diterima penunaian zis/fidyah dari Bapak/ibu: <br><b><u>{{$header[0]['user']['nama_lengkap']}}</u></b></p>
             <table class="invoice-table">
                 <thead>
                     <tr>
@@ -137,9 +137,10 @@ $totalRupiah = 0;
         </div>
         <div class="invoice-footer">
             <i>Semoga Allah terima dan berikan sebaik-baik balasan.</i>
-            <br><br><br> <br> 
+            <br>
             <span class="">
-                <b>Panitia ZIS Masjid Al Hasanah</b>
+                <i>Lembaran ini merupakan bukti sah serah terima zakat.</i>
+                <p><b>Panitia ZIS Masjid Al Hasanah</b></p>
                 <p>www.zis-alhasanah.com</p>
             </span>
         </div>
