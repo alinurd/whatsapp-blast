@@ -84,6 +84,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function edit($id)
+    {
+        $data = User::with('userProfile','roles')->findOrFail($id);
+
+        $data['user_type'] = $data->roles->pluck('id')[0] ?? null;
+
+        $roles = Role::where('status',1)->get()->pluck('title', 'id');
+
+        $profileImage = getSingleMedia($data, 'profile_image');
+
+        return view('users.form', compact('data','id', 'roles', 'profileImage'));
+    }
     public function show($id)
     {
         $data = User::with('userProfile','roles')->findOrFail($id);
