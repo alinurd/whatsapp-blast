@@ -279,10 +279,10 @@ class MuzakkiController extends Controller
         // return view('muzakki.form', compact('agt'));
     }
 
-    public function destroy($id)
+    public function destroy($code)
     {
         // dd($id);
-        $kategori = Muzakki::findOrFail($id);
+        $kategori = Muzakki::where('code', $code);
         $status = 'errors';
         $message = __('global-message.delete_form', ['form' => __('muzakki')]);
 
