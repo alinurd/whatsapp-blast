@@ -32,7 +32,7 @@ class PesanController extends Controller
     //template
         public function template(templatePesanDataTable $dataTable)
         {
-            $pageTitle = trans('global-message.list_form_title', ['form' => trans('kategori')]);
+            $pageTitle = trans('global-message.list_form_title', ['form' => trans('Template Pesan')]);
             $auth_user = AuthHelper::authSession();
             $assets = ['data-table'];
             $headerAction = '<a href="' . route('template.create') . '" class="btn btn-sm btn-primary" role="button">Add template pesan</a>';
@@ -106,7 +106,7 @@ class PesanController extends Controller
    //target
    public function target(targetNomorDataTable $dataTable)
    {
-       $pageTitle = trans('global-message.list_form_title', ['form' => trans('kategori')]);
+       $pageTitle = trans('global-message.list_form_title', ['form' => trans('Nomor Target')]);
        $auth_user = AuthHelper::authSession();
        $assets = ['data-table'];
        $headerAction = '<a href="' . route('target.create') . '" class="btn btn-sm btn-primary" role="button">Add target pesan</a>';
