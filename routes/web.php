@@ -16,7 +16,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MuzakkiController;
 use App\Http\Controllers\MustahikController; 
-use App\Http\Controllers\MustahikuserController; 
+use App\Http\Controllers\MustahikuserController;
+use App\Http\Controllers\PesanController;
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,13 @@ Route::get('shop-detail',[HomeController::class, 'landing_shop_detail'])->name('
 Route::get('software',[HomeController::class, 'landing_software'])->name('landing-pages.software');
 Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-pages.startup');
 });
+
+//pesan
+Route::resource('pesan', PesanController::class);
+Route::get('/template-pesan',[PesanController::class, 'template'])->name('template.index');
+Route::get('/target',[PesanController::class, 'target'])->name('target.index');
+Route::get('/push',[PesanController::class, 'push'])->name('push.index');
+
 
 //UI Pages Routs
 // Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
