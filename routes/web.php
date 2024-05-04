@@ -73,6 +73,7 @@ Route::get('/target-pesan',[PesanController::class, 'target'])->name('target.ind
 Route::get('/target-pesan-create',[PesanController::class, 'targetCreate'])->name('target.create');
 Route::post('/target-pesan',[PesanController::class, 'targetStore'])->name('target.store');
 Route::get('/target-pesan/{id}',[PesanController::class, 'targetEdit'])->name('target.edit');
+Route::get('/target-pulih/{id}',[PesanController::class, 'targetPulih'])->name('target.open');
 Route::post('target-pesan/{id}', [PesanController::class, 'targetUpdate'])->name('target.update');
 Route::delete('target-pesan/{id}', [PesanController::class, 'targetDelete'])->name('target.delete');
 

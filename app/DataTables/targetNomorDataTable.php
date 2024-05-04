@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Kategori;
+use App\Models\Target;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
@@ -23,7 +24,17 @@ class targetNomorDataTable extends DataTable
             static $index = 0;
             return ++$index;
         })
-        ->addColumn('action', 'kategori.action')
+        ->addColumn('status', function($query) {
+            if($query->status==0){
+                $t="Ready to Push";
+                $b="primary";
+            }else{
+                $t="Pusher";
+                $b="primary";
+            }
+            return $t;
+        })
+        ->addColumn('action', 'pesan.target.action')
         ->rawColumns(['action']);
     }
 
@@ -35,7 +46,7 @@ class targetNomorDataTable extends DataTable
      */
     public function query()
     {
-        $model = Kategori::query();
+        $model = Target::query();
         return $this->applyScopes($model);
     }
 
@@ -67,7 +78,9 @@ class targetNomorDataTable extends DataTable
     {
         return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
-            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Nama Kategori', 'class' => 'text-center'],
+            ['data' => 'nomor', 'name' => 'nomor', 'title' => 'Nomor Target', 'class' => 'text-center'],
+            ['data' => 'push', 'name' => 'push', 'title' => 'Jumlah Push', 'class' => 'text-center'],
+            ['data' => 'status', 'name' => 'status', 'title' => 'Status', 'class' => 'text-center'],
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

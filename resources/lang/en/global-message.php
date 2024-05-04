@@ -19,4 +19,5 @@ return [
     'save' => 'Save',
     'update' => 'Update',
     'cancel'=>'Cancel',
+    'pulihkan' => ':form is successfully recovered',
 ];

@@ -104,7 +104,7 @@ class PesanController extends Controller
 
 
    //target
-   public function target(templatePesanDataTable $dataTable)
+   public function target(targetNomorDataTable $dataTable)
    {
        $pageTitle = trans('global-message.list_form_title', ['form' => trans('kategori')]);
        $auth_user = AuthHelper::authSession();
@@ -163,14 +163,37 @@ class PesanController extends Controller
 
    public function targetDelete($id)
    {
-       $kategori = template::findOrFail($id);
+       $kategori = target::findOrFail($id);
        $status = 'errors';
-       $message = __('global-message.delete_form', ['form' => "template"]);
+       $message = __('global-message.delete_form', ['form' => "Nomor Target"]);
 
        if ($kategori != '') {
            $kategori->delete();
            $status = 'success';
-           $message = __('global-message.delete_form', ['form' => "template"]);
+           $message = __('global-message.delete_form', ['form' => "Nomor Target"]);
+       }
+
+       if (request()->ajax()) {
+           return response()->json(['status' => true, 'message' => $message, 'datatable_reload' => 'dataTable_wrapper']);
+       }
+
+       return redirect()->back()->with($status, $message);
+   }
+   
+   public function targetPulih($id)
+   {
+      
+    $tm = target::where('id', $id)
+           ->update([
+               'status' => 0,
+           ]);
+
+       $status = 'errors';
+       $message = __('global-message.pulihkan', ['form' => "Nomor Target"]);
+
+       if ($tm != '') {
+            $status = 'success';
+           $message = __('global-message.pulihkan', ['form' => "Nomor Target"]);
        }
 
        if (request()->ajax()) {
