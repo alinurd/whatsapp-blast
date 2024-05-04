@@ -65,11 +65,12 @@ Route::get('/template-pesan',[PesanController::class, 'template'])->name('templa
 Route::get('/template-pesan-create',[PesanController::class, 'templateCreate'])->name('template.create');
 Route::post('/template-pesan',[PesanController::class, 'templateStore'])->name('template.store');
 Route::get('/template-pesan/{id}',[PesanController::class, 'templateEdit'])->name('template.edit');
- 
+Route::post('template-pesan/{id}', [PesanController::class, 'templateUpdate'])->name('template.update');
+Route::delete('template-pesan/{id}', [PesanController::class, 'templateDelete'])->name('template.delete');
+
 
 Route::get('/target',[PesanController::class, 'target'])->name('target.index');
 Route::get('/push',[PesanController::class, 'push'])->name('push.index');
-
 
 //UI Pages Routs
 // Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
