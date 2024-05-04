@@ -123,17 +123,25 @@ class PesanController extends Controller
    {
        $auth = Auth::user()->username;
        $tmp = new Target();
-
-        $tmp->nomor = $request->nomor;
-        $tmp->push = $request->push;
-        $tmp->status = $request->status;
-        $tmp->created_by  = $auth;
-
+   
+       $validatedData = $request->validate([
+           'nomor' => 'required|digits_between:12,16|regex:/^62\d{10,14}$/|numeric',
+       ], [
+           'nomor.required' => 'Nomor target harus diisi.',
+           'nomor.digits_between' => 'Panjang nomor target harus antara 12 dan 16 digit.',
+           'nomor.regex' => 'Format nomor target tidak valid. Harus dimulai dengan 62 dan berisi 12 hingga 16 digit angka.',
+           'nomor.numeric' => 'Nomor target harus berupa angka.'
+       ]);
+   
+       $tmp->nomor = $request->nomor;
+       $tmp->push = 0;
+       $tmp->status = 0;
+       $tmp->created_by  = $auth;
+   
        $tmp->save();
-
-       // Redirect back to the index page of categories with a success message
-       return redirect()->route('template.index')->withSuccess(__('Nnomor Target added successfully.'));
+       return redirect()->route('target.index')->withSuccess(__('Nomor Target berhasil ditambahkan.'));
    }
+   
 
    public function targetEdit($id)
    {
