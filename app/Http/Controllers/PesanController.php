@@ -54,6 +54,14 @@ class PesanController extends Controller
         $k = Kategori::pluck('nama_kategori', 'id');
         return view('pesan.template.form', compact('k'));
     }
+    public function templateEdit($id)
+    {
+        $old = template::where("id", $id)->get();
+
+
+        $k = Kategori::pluck('nama_kategori', 'id');
+        return view('pesan.template.edit', compact('k','old'));
+    }
 
     /**
      * Store a newly created resource in storage.

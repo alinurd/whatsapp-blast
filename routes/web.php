@@ -64,7 +64,8 @@ Route::resource('pesan', PesanController::class);
 Route::get('/template-pesan',[PesanController::class, 'template'])->name('template.index');
 Route::get('/template-pesan-create',[PesanController::class, 'templateCreate'])->name('template.create');
 Route::post('/template-pesan',[PesanController::class, 'templateStore'])->name('template.store');
-
+Route::get('/template-pesan/{id}',[PesanController::class, 'templateEdit'])->name('template.edit');
+ 
 
 Route::get('/target',[PesanController::class, 'target'])->name('target.index');
 Route::get('/push',[PesanController::class, 'push'])->name('push.index');

@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Kategori;
 use App\Models\Template;
+use App\Models\TemplateView;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
@@ -24,7 +25,7 @@ class templatePesanDataTable extends DataTable
             static $index = 0;
             return ++$index;
         })
-        ->addColumn('action', 'kategori.action')
+        ->addColumn('action', 'pesan.template.action')
         ->rawColumns(['action']);
     }
 
@@ -36,12 +37,8 @@ class templatePesanDataTable extends DataTable
      */
     public function query()
     {
-        $q = Template::query()
-    ->join('kategori', 'templates.kategori', '=', 'kategori.id')
-    ->select('templates.*', 'kategori.kategori_nama')
-    ->get();
-    dd($q);
-        return $this->applyScopes($q);
+        $model = TemplateView::query();
+        return $this->applyScopes($model);
     }
 
     /**
@@ -72,9 +69,10 @@ class templatePesanDataTable extends DataTable
     {
         return [
             ['data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'title' => 'No.', 'class' => 'text-center'],
-            ['data' => 'kategori_nama ', 'name' => 'kategori_nama ', 'title' => 'Kategori', 'class' => 'text-center'],
-            ['data' => 'nama', 'name' => 'nama', 'title' => 'Nama Template', 'class' => 'text-center'],
+            ['data' => 'nama_kategori', 'name' => 'nama_kategori', 'title' => 'Kategori', 'class' => 'text-center'],
+            ['data' => 'nama_template', 'name' => 'nama_template', 'title' => 'Nama Template', 'class' => 'text-center'],
             ['data' => 'created_by', 'name' => 'created_by', 'title' => 'Created By', 'class' => 'text-center'],
+            // ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created at', 'class' => 'text-center'],
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
