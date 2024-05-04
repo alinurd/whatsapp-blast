@@ -60,7 +60,7 @@ Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-
 
 //pesan
 Route::resource('pesan', PesanController::class);
-
+//template
 Route::get('/template-pesan',[PesanController::class, 'template'])->name('template.index');
 Route::get('/template-pesan-create',[PesanController::class, 'templateCreate'])->name('template.create');
 Route::post('/template-pesan',[PesanController::class, 'templateStore'])->name('template.store');
@@ -68,8 +68,15 @@ Route::get('/template-pesan/{id}',[PesanController::class, 'templateEdit'])->nam
 Route::post('template-pesan/{id}', [PesanController::class, 'templateUpdate'])->name('template.update');
 Route::delete('template-pesan/{id}', [PesanController::class, 'templateDelete'])->name('template.delete');
 
+//target
+Route::get('/target-pesan',[PesanController::class, 'target'])->name('target.index');
+Route::get('/target-pesan-create',[PesanController::class, 'targetCreate'])->name('target.create');
+Route::post('/target-pesan',[PesanController::class, 'targetStore'])->name('target.store');
+Route::get('/target-pesan/{id}',[PesanController::class, 'targetEdit'])->name('target.edit');
+Route::post('target-pesan/{id}', [PesanController::class, 'targetUpdate'])->name('target.update');
+Route::delete('target-pesan/{id}', [PesanController::class, 'targetDelete'])->name('target.delete');
 
-Route::get('/target',[PesanController::class, 'target'])->name('target.index');
+//push
 Route::get('/push',[PesanController::class, 'push'])->name('push.index');
 
 //UI Pages Routs
