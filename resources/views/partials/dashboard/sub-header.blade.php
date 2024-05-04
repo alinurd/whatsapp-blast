@@ -6,8 +6,8 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <div>
-                     <h1>Salam, {{ auth()->user()->nama_lengkap}}!</h1>
-                         <p>Awali dengan basmalah, semoga Allah mudahkan menunaikan amanah.</p>
+                     <h1>Selamat datang, {{ auth()->user()->nama_lengkap}}!</h1>
+                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                     <!-- <div>
                         <a href="" class="btn btn-link btn-soft-light">
