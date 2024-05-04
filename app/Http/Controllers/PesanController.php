@@ -145,20 +145,27 @@ class PesanController extends Controller
 
    public function targetEdit($id)
    {
-       $old = template::where("id", $id)->get();
-       $k = Kategori::pluck('nama_kategori', 'id');
-       return view('pesan.target.edit', compact('k', 'old'));
+       $old = target::where("id", $id)->get();
+        return view('pesan.target.edit', compact('old'));
    }
 
    public function targetUpdate(Request $request, $id)
    {
-       $tm = template::where('id', $id)
+    $validatedData = $request->validate([
+        'nomor' => 'required|digits_between:12,16|regex:/^62\d{10,14}$/|numeric',
+    ], [
+        'nomor.required' => 'Nomor target harus diisi.',
+        'nomor.digits_between' => 'Panjang nomor target harus antara 12 dan 16 digit.',
+        'nomor.regex' => 'Format nomor target tidak valid. Harus dimulai dengan 62 dan berisi 12 hingga 16 digit angka.',
+        'nomor.numeric' => 'Nomor target harus berupa angka.'
+    ]);
+
+       $tm = target::where('id', $id)
            ->update([
-               'nama' => $request['nama'],
-               'Kategori' => $request['Kategori'],
-               'pesan' => $request['pesan'],
+               'nomor' => $request['nomor'],
+               'status' =>0,
            ]);
-       return redirect()->route('template.index')->withSuccess(__('Update template successfully.'));
+       return redirect()->route('target.index')->withSuccess(__('Update Nomor Target successfully.'));
    }
 
    public function targetDelete($id)
