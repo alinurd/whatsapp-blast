@@ -16,7 +16,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MuzakkiController;
 use App\Http\Controllers\MustahikController; 
-use App\Http\Controllers\MustahikuserController; 
+use App\Http\Controllers\MustahikuserController;
+use App\Http\Controllers\PesanController;
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,28 @@ Route::get('shop-detail',[HomeController::class, 'landing_shop_detail'])->name('
 Route::get('software',[HomeController::class, 'landing_software'])->name('landing-pages.software');
 Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-pages.startup');
 });
+
+//pesan
+Route::resource('pesan', PesanController::class);
+//template
+Route::get('/template-pesan',[PesanController::class, 'template'])->name('template.index');
+Route::get('/template-pesan-create',[PesanController::class, 'templateCreate'])->name('template.create');
+Route::post('/template-pesan',[PesanController::class, 'templateStore'])->name('template.store');
+Route::get('/template-pesan/{id}',[PesanController::class, 'templateEdit'])->name('template.edit');
+Route::post('template-pesan/{id}', [PesanController::class, 'templateUpdate'])->name('template.update');
+Route::delete('template-pesan/{id}', [PesanController::class, 'templateDelete'])->name('template.delete');
+
+//target
+Route::get('/target-pesan',[PesanController::class, 'target'])->name('target.index');
+Route::get('/target-pesan-create',[PesanController::class, 'targetCreate'])->name('target.create');
+Route::post('/target-pesan',[PesanController::class, 'targetStore'])->name('target.store');
+Route::get('/target-pesan/{id}',[PesanController::class, 'targetEdit'])->name('target.edit');
+Route::get('/target-pulih/{id}',[PesanController::class, 'targetPulih'])->name('target.open');
+Route::post('target-pesan/{id}', [PesanController::class, 'targetUpdate'])->name('target.update');
+Route::delete('target-pesan/{id}', [PesanController::class, 'targetDelete'])->name('target.delete');
+
+//push
+Route::get('/push',[PesanController::class, 'push'])->name('push.index');
 
 //UI Pages Routs
 // Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');

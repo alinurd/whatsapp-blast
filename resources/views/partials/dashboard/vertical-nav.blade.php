@@ -80,7 +80,7 @@
     @if(Auth::user()->role ==2 || Auth::user()->role ==1 )
 
     <li class="nav-item">
-        <a class="nav-link {{activeRoute(route('muzakki.index'))}}" href="{{route('muzakki.index')}}">
+        <a class="nav-link {{activeRoute(route('template.index'))}}" href="{{route('template.index')}}">
             <i class="icon">
                 <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M18.8088 9.021C18.3573 9.021 17.7592 9.011 17.0146 9.011C15.1987 9.011 13.7055 7.508 13.7055 5.675V2.459C13.7055 2.206 13.5036 2 13.253 2H7.96363C5.49517 2 3.5 4.026 3.5 6.509V17.284C3.5 19.889 5.59022 22 8.16958 22H16.0463C18.5058 22 20.5 19.987 20.5 17.502V9.471C20.5 9.217 20.299 9.012 20.0475 9.013C19.6247 9.016 19.1177 9.021 18.8088 9.021Z" fill="currentColor"></path>
@@ -92,7 +92,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{activeRoute(route('muzakki.index'))}}" href="{{route('muzakki.index')}}">
+        <a class="nav-link {{activeRoute(route('target.index'))}}" href="{{route('target.index')}}">
             <i class="icon">
                 <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.9488 14.54C8.49884 14.54 5.58789 15.1038 5.58789 17.2795C5.58789 19.4562 8.51765 20.0001 11.9488 20.0001C15.3988 20.0001 18.3098 19.4364 18.3098 17.2606C18.3098 15.084 15.38 14.54 11.9488 14.54Z" fill="currentColor"></path>
@@ -107,7 +107,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{activeRoute(route('muzakki.index'))}}" href="{{route('muzakki.index')}}">
+        <a class="nav-link {{activeRoute(route('push.index'))}}" href="{{route('push.index')}}">
             <i class="icon">
                 <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M22 15.94C22 18.73 19.76 20.99 16.97 21H16.96H7.05C4.27 21 2 18.75 2 15.96V15.95C2 15.95 2.006 11.524 2.014 9.298C2.015 8.88 2.495 8.646 2.822 8.906C5.198 10.791 9.447 14.228 9.5 14.273C10.21 14.842 11.11 15.163 12.03 15.163C12.95 15.163 13.85 14.842 14.56 14.262C14.613 14.227 18.767 10.893 21.179 8.977C21.507 8.716 21.989 8.95 21.99 9.367C22 11.576 22 15.94 22 15.94Z" fill="currentColor"></path>
