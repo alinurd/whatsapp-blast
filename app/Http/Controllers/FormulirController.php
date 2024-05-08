@@ -222,11 +222,19 @@ class FormulirController extends Controller
                     $jawaban->save();
                 }
             } else {
+                $jawaban = $request->val;
+
+                if ($request->hasFile($request->$val)) {
+                    $file = $request->file($request->$val);
+                    $name = time() . '.' . $file->getClientOriginalName();
+                    $file->storeAs('public/upload/', $name);
+                    $jawaban = $name;
+                }
                 $jawaban = new FormulirJawaban();
                 $jawaban->parent_id = $request->parentId;
                 $jawaban->formulir_id = $key;
                 $jawaban->variabel = $val;
-                $jawaban->jawaban = $request->val;
+                $jawaban->jawaban = $jawaban;
                 $jawaban->uuid = $uniqueInteger;
                 $jawaban->save();
             }
