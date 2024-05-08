@@ -35,7 +35,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto navbar-list mb-2 mb-lg-0">
-      @if(Auth::user()->role ==2 || Auth::user()->role ==1 )
+      <!-- @if(Auth::user()->role ==2 || Auth::user()->role ==1 )
 
       <li class="nav-item me-3">
         <a class="btn btn-primary btn-sm d-flex align-items-center" aria-current="page" href="{{route('muzakki.index')}}" target="" style="top: 4px;">
@@ -52,7 +52,7 @@
             Mustahiq
         </a>
         </li>
-        @endif
+        @endif -->
        
         <li class="nav-item dropdown">
           <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
