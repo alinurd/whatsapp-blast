@@ -14,6 +14,7 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\FormulirController;
 use App\Http\Controllers\MuzakkiController;
 use App\Http\Controllers\MustahikController; 
 use App\Http\Controllers\MustahikuserController; 
@@ -67,6 +68,10 @@ Route::get('showinvoice/{code}', [MustahikuserController::class, 'show'])->name(
 Route::get('mustahikuser/create', [MustahikuserController::class, 'create'])->name('mustahikuser.create');
 Route::post('mustahikuser/store', [MustahikuserController::class, 'store'])->name('mustahikuser.store');
 
+Route::get('create_formulir', [FormulirController::class, 'create_formulir'])->name('formulir.create_formulir'); 
+Route::post('template_formulir', [FormulirController::class, 'template_formulir'])->name('formulir.template_formulir'); 
+Route::post('store_formulir', [FormulirController::class, 'store_formulir'])->name('formulir.store_formulir'); 
+
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module
     Route::get('/role-permission',[RolePermission::class, 'index'])->name('role.permission.list');
@@ -79,6 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Users Module 
     Route::resource('users', UserController::class);   
     Route::resource('kategori', KategoriController::class); 
+    Route::resource('formulir', FormulirController::class); 
     
     Route::get('invoice/{code}', [MuzakkiController::class, 'invoice'])->name('invoice');
     Route::post('muzakkiUserStore', [MuzakkiController::class, 'muzakkiUserStore'])->name('muzakkiUserStore');
