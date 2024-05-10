@@ -9,7 +9,7 @@ class Template extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nama ',
+        'nama',
         'kategori',
         'pesan',
         'created_by '
