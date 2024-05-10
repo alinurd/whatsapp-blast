@@ -19,6 +19,7 @@ use App\Http\Controllers\MuzakkiController;
 use App\Http\Controllers\MustahikController; 
 use App\Http\Controllers\MustahikuserController;
 use App\Http\Controllers\PesanController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,9 @@ Route::get('shop-detail',[HomeController::class, 'landing_shop_detail'])->name('
 Route::get('software',[HomeController::class, 'landing_software'])->name('landing-pages.software');
 Route::get('startup',[HomeController::class, 'landing_startup'])->name('landing-pages.startup');
 });
+
+//product
+Route::resource('product', ProductController::class); 
 
 //pesan
 Route::resource('pesan', PesanController::class);
