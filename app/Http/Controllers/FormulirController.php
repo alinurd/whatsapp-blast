@@ -11,6 +11,9 @@ use App\Models\FormulirOption;
 use App\Models\FormulirParent;
 use App\Models\FormulirJawaban;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FormulirExport;
 
 class FormulirController extends Controller
 {
@@ -139,13 +142,14 @@ class FormulirController extends Controller
         $parentId = $parent->id;
 
         if (!empty($request->nama_field)) {
-            Formulir::whereIn('id', $request->old_form_id)->get()->each(function ($formulir) {
-                $formulir->option()->delete(); // Delete related models
-                $formulir->delete(); // Delete the Formulir model
-            });
+            // Formulir::whereIn('id', $request->old_form_id)->get()->each(function ($formulir) {
+            //     $formulir->option()->delete(); // Delete related models
+            //     $formulir->delete(); // Delete the Formulir model
+            // });
         }
         foreach ($request->nama_field as $key => $val) {
-            $formulir = new Formulir();
+            // $formulir = new Formulir();
+            $formulir = Formulir::find($request->old_form_id[$key]);
             $formulir->formulir_parent = $parentId;
             $formulir->formulir_kategori = $request->kategori;
             $formulir->formulir_nama = $val;
@@ -207,7 +211,7 @@ class FormulirController extends Controller
     public function store_formulir(Request $request)
     {
         $uniqueInteger = time() + random_int(1, 1000);
-        
+        // dd($request->all());
         foreach ($request->variabel as $key => $val) {
             if (is_array($request->$val)) {
                 foreach ($request->$val as $key2 => $val2) {
@@ -222,24 +226,67 @@ class FormulirController extends Controller
                     $jawaban->save();
                 }
             } else {
-                $jawaban = $request->val;
+                $jawabanFile = $request->$val;
 
-                if ($request->hasFile($request->$val)) {
-                    $file = $request->file($request->$val);
-                    $name = time() . '.' . $file->getClientOriginalName();
-                    $file->storeAs('public/upload/', $name);
-                    $jawaban = $name;
+                if ($request->hasFile($val) || $request->hasFile($request->variabel_change[$key])) {
+                    // Define the directory path
+                    $directory = 'public/upload';
+                    // Check if directory exists, create if not
+                    if (!Storage::exists($directory)) {
+                        // Create the directory
+                        Storage::makeDirectory($directory);
+                        // Set directory permissions (e.g., 755)
+                        Storage::setVisibility($directory, 'public');
+                    }
+                    $file = $request->file($request->variabel_change[$key] ?? $val);
+                    $name = time() . '_' . $file->getClientOriginalName();
+                    $file->storeAs('public/upload', $name);
+                    $jawabanFile = $name;
                 }
                 $jawaban = new FormulirJawaban();
                 $jawaban->parent_id = $request->parentId;
                 $jawaban->formulir_id = $key;
                 $jawaban->variabel = $val;
-                $jawaban->jawaban = $jawaban;
+                $jawaban->jawaban = $jawabanFile;
                 $jawaban->uuid = $uniqueInteger;
                 $jawaban->save();
             }
         }
 
-        return redirect('/')->withSuccess(__('Formulir answered successfully.'));
+        return back();
+        // return redirect('/')->withSuccess(__('Formulir answered successfully.'));
+    }
+
+    public function report(Request $request)
+    {
+        $jawaban = FormulirJawaban::with(['formulir' => function($q) {
+            $q->with('parent');
+        }])
+            ->orderBy('id')
+            ->get();
+
+        $formOption = FormulirOption::get()->keyBy('id');
+        $formulirOption = $formOption->map(function($q) {
+            return $q->option_soal;
+        })->toArray();
+
+        return view('formulir.report', compact('jawaban', 'formulirOption'));
+    }
+    
+    public function reportExcel(Request $request)
+    {
+        $jawaban = FormulirJawaban::with(['formulir' => function($q) {
+            $q->with('parent');
+        }])
+            ->orderBy('id')
+            ->get();
+
+        $formOption = FormulirOption::get()->keyBy('id');
+        $formulirOption = $formOption->map(function($q) {
+            return $q->option_soal;
+        })->toArray();
+
+        $namaFile = 'Data_Pengajuan.xlsx';
+        return Excel::download(new FormulirExport($jawaban, $formulirOption), $namaFile);
     }
 }

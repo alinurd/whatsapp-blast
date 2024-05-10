@@ -1,6 +1,8 @@
 <x-app-layout :assets="$assets ?? []">
    <div>
-      {!! Form::open(['route' => ['formulir.update', $formulir->id], 'method' => 'patch', 'enctype' => 'multipart/form-data']) !!}
+      <form action="{{ route('formulir.update', $formulir->id) }}" method="POST" enctype="multipart/form-data">
+         @csrf
+         @method('PUT')
       <div class="row">   
          <div class="col-xl-9 col-lg-12"> 
             <div class="card">  
@@ -140,7 +142,7 @@
             </div>  
          </div>
         </div>
-      {!! Form::close() !!}
+      </form>
    </div> 
 </x-app-layout>
 

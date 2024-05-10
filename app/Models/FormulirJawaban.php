@@ -13,4 +13,14 @@ class FormulirJawaban extends Model
     {
         return $this->where('is_checkbox', 1)->orderBy('id');
     }
+
+    public function formulir()
+    {
+        return $this->belongsTo(Formulir::class, 'formulir_id', 'id')->withDefault();
+    }
+
+    public function option()
+    {
+        $this->belongsTo(FormulirOption::class, 'checkbox_id', 'id');
+    }
 }
