@@ -130,7 +130,7 @@
                                             </div>
                                             <div class="card-footer mt-5">
                                                 <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel">Lihat Detail</a>
-                                                <a href="#" class="card-link">Ajukan Sekarang</a>
+                                                <a href="{{route('formulir.create_formulir')}}" class="card-link">Ajukan Sekarang</a>
                                             </div>
                                             </div>
                                         </div>
