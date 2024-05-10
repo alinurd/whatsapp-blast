@@ -23,4 +23,9 @@ class Formulir extends Model
     {
         return $this->hasMany(FormulirJawaban::class, 'formulir_id')->where('is_checkbox', 1)->orderBy('id');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(FormulirParent::class, 'formulir_parent')->withDefault();
+    }
 }
