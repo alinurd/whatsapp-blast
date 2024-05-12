@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('formulir_jawabans', function (Blueprint $table) {
             $table->id();
             $table->integer('formulir_id');
+            $table->integer('product_id');
+            $table->integer('kategori_id');
             $table->integer('parent_id')->nullable();
             $table->string('variabel');
             $table->text('jawaban')->nullable();
