@@ -3748,7 +3748,7 @@ textarea.form-control-lg {
   padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
   font-size: var(--bs-nav-link-font-size);
   font-weight: var(--bs-nav-link-font-weight);
-  color: #118146;
+  color: #090E74;
   transition: all 300ms ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3757,7 +3757,7 @@ textarea.form-control-lg {
   }
 }
 .nav-link:hover, .nav-link:focus {
-  color: var(--bs-nav-link-hover-color);
+  color: #127E18;
 }
 .nav-link.disabled {
   color: var(--bs-nav-link-disabled-color);
@@ -3916,7 +3916,8 @@ textarea.form-control-lg {
 }
 .navbar-nav .show > .nav-link,
 .navbar-nav .nav-link.active {
-  color: var(--bs-navbar-active-color);
+  color: #118146;
+  font-weight: bold;
 }
 .navbar-nav .dropdown-menu {
   position: static;
@@ -13117,7 +13118,7 @@ thead, tbody, tfoot, tr, td, th {
   border-radius: 0.25rem;
 }
 .nav-tabs .nav-link.active {
-  box-shadow: 0 0.125rem 0.25rem rgba(58, 87, 232, 0.3);
+  box-shadow: 0 0.125rem 0.25rem rgba(18,126,24, 0);
 }
 
 .nav-pills {
