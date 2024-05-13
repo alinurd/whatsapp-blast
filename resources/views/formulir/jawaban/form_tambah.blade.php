@@ -1,11 +1,11 @@
 <x-app-layout layout="landing">
    <div class="container mt-3 ">
-      <!-- @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-               {{ session('success') }}
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-         @endif -->
+      @if (session('success'))
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+      @endif
 
       <div class="card-body">
          {!! Form::open(['route' => ['formulir.store_formulir'], 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
@@ -43,8 +43,8 @@
                         @endphp
                         <div class="row">
                            <div class="form-group col-md-12">
-                              <label class="form-label" for="Kategori">Pilih Product: <span class="text-danger">*</span></label>
-                              {!! Form::select('kategori', $kategoris ,old('kategori'), ['class' => 'form-select', 'required', 'placeholder' => 'Pilih product', 'id' => 'kategori']) !!}
+                              <label class="form-label" for="Kategori">Pilih Kategori: <span class="text-danger">*</span></label>
+                              {!! Form::select('kategori', $kategoris ,old('kategori'), ['class' => 'form-select', 'required', 'placeholder' => 'Pilih kategori', 'id' => 'kategori']) !!}
 
                            </div>
                         </div>

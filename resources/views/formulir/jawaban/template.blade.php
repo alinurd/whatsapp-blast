@@ -1,3 +1,12 @@
+
+<div class="row">
+    <div class="form-group col-md-12">
+        <label class="form-label" for="product">Pilih Product: <span class="text-danger">*</span></label>
+        {!! Form::select('product', $products ,old('product'), ['class' => 'form-select', 'required', 'placeholder' => 'Pilih product', 'id' => 'product']) !!}
+
+    </div>
+</div>
+
 <div style="border: 2px solid black; padding:20px">
     <h3 class="text-center">{{ $formulir->nama }}</h3>
     <br>
