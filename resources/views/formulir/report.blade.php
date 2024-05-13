@@ -8,7 +8,20 @@
                   <h4 class="card-title">Data Pengajuan</h4>
                </div>
                 <div class="card-action">
-                    <a href="{{ route('formulir.reportExcel') }}" class="btn btn-sm btn-success" role="button" target="_blank">Export Excel</a>
+                    
+                    <form action="{{ route('formulir.reportExcel') }}" method="GET" target="_blank">
+                        <div class="input-group">
+                            <!-- <input type="text" name="filter" autocomplete="off" value="{{ request()->filter }}" class="form-control" placeholder="Masukan nama/nomor/periode/tahun"> -->
+                            {!! Form::select('kategori', $kategoris ,old('kategori'), ['class' => 'form-select', 'required', 'placeholder' => 'Pilih kategori', 'id' => 'kategori']) !!}
+
+                            <div class="input-group-append ms-2">
+                                <button type="submit" class="btn btn-success" type="button">
+                                Export Excel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- <a href="{{ route('formulir.reportExcel') }}" class="btn btn-sm btn-success" role="button" target="_blank">Export Excel</a> -->
                 </div>
             </div>
             <div class="card-body px-0">
@@ -27,7 +40,7 @@
                             <td>{{ $jwb->variabel }}</td>
                             <td>
                                 @if ($jwb->formulir->formulir_tipe == 'file')
-                                    <a href="{{ asset('upload/'.$jwb->jawaban) }}" target="_blank" rel="noopener noreferrer">{{ $jwb->jawaban }}</a>
+                                    <a href="{{ asset('storage/upload/'.$jwb->jawaban) }}" target="_blank" rel="noopener noreferrer">{{ $jwb->jawaban }}</a>
                                 @else
                                     {{ $jwb->jawaban != 1 ? $jwb->jawaban : $formulirOption[$jwb->checkbox_id] }}
                                 @endif

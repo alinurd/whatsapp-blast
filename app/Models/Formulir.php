@@ -28,4 +28,10 @@ class Formulir extends Model
     {
         return $this->belongsTo(FormulirParent::class, 'formulir_parent')->withDefault();
     }
+    
+    public function jawabanAll()
+    {
+        return $this->hasMany(FormulirJawaban::class, 'formulir_id')->orderBy('id');
+    }
+    
 }

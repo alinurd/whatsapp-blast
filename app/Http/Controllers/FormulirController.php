@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Formulir;
 use App\Models\Kategori;
+use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\DataTables\FormulirDataTable;
 use App\Helpers\AuthHelper;
@@ -50,7 +51,11 @@ class FormulirController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $form = FormulirParent::where('kategori_id', $request->kategori)->first();
+        if ($form) {
+            return redirect()->route('formulir.index')->withErrors(__('Form template kategori ini sudah ada !!.'));
+        }
+
         $request->validate([
             'kategori'      => 'required',
             'nama_formulir' => 'required',
@@ -174,9 +179,13 @@ class FormulirController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Formulir $formulir)
+    public function destroy($id)
     {
-        //
+        $formulir = FormulirParent::findOrFail($id);
+        $formulir->formulir()->delete();
+        $formulir->delete();
+        
+        return redirect()->route('formulir.index')->withSuccess(__('Formulir deleted successfully.'));
     }
 
     public function create_formulir()
@@ -203,7 +212,13 @@ class FormulirController extends Controller
             $html = '<div class="text-center text-danger">Template formulir belum tersedia !!</div>';
             return response()->json($html);
         }
-        $html = view('formulir.jawaban.template', compact('formulir'))->render();
+
+        $products = Product::where('kategori_id', $request->kategori)->get()->keyBy('id');
+        $products = $products->map(function($q) {
+            return $q->nama_product;
+        })->toArray();
+
+        $html = view('formulir.jawaban.template', compact('formulir', 'products'))->render();
 
         return response()->json($html);
     }
@@ -211,13 +226,15 @@ class FormulirController extends Controller
     public function store_formulir(Request $request)
     {
         $uniqueInteger = time() + random_int(1, 1000);
-        // dd($request->all());
+        
         foreach ($request->variabel as $key => $val) {
             if (is_array($request->$val)) {
                 foreach ($request->$val as $key2 => $val2) {
                     $jawaban = new FormulirJawaban();
                     $jawaban->parent_id = $request->parentId;
                     $jawaban->formulir_id = $key;
+                    $jawaban->kategori_id = $request->kategori;
+                    $jawaban->product_id = $request->product;
                     $jawaban->variabel = $val;
                     $jawaban->jawaban = 1;
                     $jawaban->is_checkbox = 1;
@@ -246,6 +263,8 @@ class FormulirController extends Controller
                 $jawaban = new FormulirJawaban();
                 $jawaban->parent_id = $request->parentId;
                 $jawaban->formulir_id = $key;
+                $jawaban->kategori_id = $request->kategori;
+                $jawaban->product_id = $request->product;
                 $jawaban->variabel = $val;
                 $jawaban->jawaban = $jawabanFile;
                 $jawaban->uuid = $uniqueInteger;
@@ -253,8 +272,7 @@ class FormulirController extends Controller
             }
         }
 
-        return back();
-        // return redirect('/')->withSuccess(__('Formulir answered successfully.'));
+        return back()->withSuccess(__('Formulir pengajuan berhasil disimpan'));
     }
 
     public function report(Request $request)
@@ -269,8 +287,13 @@ class FormulirController extends Controller
         $formulirOption = $formOption->map(function($q) {
             return $q->option_soal;
         })->toArray();
+        
+        $kategoris = Kategori::get()->keyBy('id');
+        $kategoris = $kategoris->map(function($q) {
+            return $q->nama_kategori;
+        })->toArray();
 
-        return view('formulir.report', compact('jawaban', 'formulirOption'));
+        return view('formulir.report', compact('jawaban', 'formulirOption', 'kategoris'));
     }
     
     public function reportExcel(Request $request)
@@ -278,15 +301,51 @@ class FormulirController extends Controller
         $jawaban = FormulirJawaban::with(['formulir' => function($q) {
             $q->with('parent');
         }])
+            ->where('kategori_id', $request->kategori)
             ->orderBy('id')
             ->get();
+
+        $formulir = Formulir::with(['jawabanAll', 'parent'])
+            ->where('formulir_kategori', $request->kategori)->orderBy('id')->get();
 
         $formOption = FormulirOption::get()->keyBy('id');
         $formulirOption = $formOption->map(function($q) {
             return $q->option_soal;
         })->toArray();
 
-        $namaFile = 'Data_Pengajuan.xlsx';
-        return Excel::download(new FormulirExport($jawaban, $formulirOption), $namaFile);
+        $formAll = $formulir->count();
+        $formCheckbox = $formulir->where('is_checkbox', 1)->count();
+        $formCount = $formCheckbox ? ($formAll - $formCheckbox ) + 1 : $formAll;
+
+        $jwbFilter = $jawaban->map(function($q) use ($formulirOption) {
+            $jwb = $q->jawaban != 1 ? $q->jawaban : $formulirOption[$q->checkbox_id];
+            return [
+                $q->variabel => $jwb,
+            ];
+        })->chunk($formCount)->map(function ($chunk) {
+            return $chunk->reduce(function ($carry, $item) {
+                return array_merge($carry, $item);
+            }, []);
+        });
+
+        
+
+// dd($jawaban, $jwbFilter, $formulir);
+
+        // $formulir = FormulirParent::with(['formulir' => function($q) {
+        //     $q->orderBy('id');
+        // }])
+        //     ->where('kategori_id', 1)->get();
+
+// dd($formulir);
+        $namaFile = 'Data_Pengajuan_'. date('d-m-Y') .'.xlsx';
+        return Excel::download(new FormulirExport($jawaban, $formulirOption, $formulir, $jwbFilter), $namaFile);
+        
+        // return view('formulir.excel', [
+        //     'jawaban' => $jawaban,
+        //     'formulirOption' => $formulirOption,
+        //     'formulir' => $formulir,
+        //     'jwbFilter' => $jwbFilter,
+        // ]);
     }
 }

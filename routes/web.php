@@ -111,8 +111,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Users Module 
     Route::resource('users', UserController::class);   
     Route::resource('kategori', KategoriController::class); 
-    Route::resource('formulir', FormulirController::class)->except('update'); 
+    Route::resource('formulir', FormulirController::class)->except(['update', 'destroy']); 
     Route::put('formulir/{id}/update', [FormulirController::class, 'update'])->name('formulir.update');
+    Route::delete('formulir/{id}', [FormulirController::class, 'destroy'])->name('formulir.destroy');
     Route::get('formulir_report', [FormulirController::class, 'report'])->name('formulir.report');
     Route::get('formulir_report_excel', [FormulirController::class, 'reportExcel'])->name('formulir.reportExcel');
     
