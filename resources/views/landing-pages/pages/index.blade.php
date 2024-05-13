@@ -1,8 +1,8 @@
 <x-app-layout layout="landing">
     <div class="bd-example">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
-                <a class="navbar-brand" href="#" style="font-weight: bold;">Wa Blast</a>
+                <a class="navbar-brand" href="#" style="font-weight: bold;"><img src="{{ asset('images/logo.png') }}" style="width: 160px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbar-1" aria-controls="navbar-1" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -11,25 +11,25 @@
                 <div class="collapse navbar-collapse" id="navbar-1">
                     <ul class="navbar-nav ms-auto p-2 mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="#" style="font-weight: bold;">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#product">Product</a>
+                            <a class="nav-link" href="#product">Produk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#about">Tentang Kami</a>
+                            <a class="nav-link" href="#about">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#kontak">Kontak</a>
+                            <a class="nav-link" href="#kontak">Kontak</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn bg-secondary btn-sm text-white" href="{{ route('login') }}">
+                        <!-- <li class="nav-item">
+                            <a class="btn bg-secondary btn-sm" href="{{ route('login') }}">
                                 <svg width="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M16.08 22H7.91C4.38 22 2 19.729 2 16.34V7.67C2 4.28 4.38 2 7.91 2H16.08C19.62 2 22 4.28 22 7.67V16.34C22 19.729 19.62 22 16.08 22ZM14.27 11.25H7.92C7.5 11.25 7.17 11.59 7.17 12C7.17 12.42 7.5 12.75 7.92 12.75H14.27L11.79 15.22C11.65 15.36 11.57 15.56 11.57 15.75C11.57 15.939 11.65 16.13 11.79 16.28C12.08 16.57 12.56 16.57 12.85 16.28L16.62 12.53C16.9 12.25 16.9 11.75 16.62 11.47L12.85 7.72C12.56 7.43 12.08 7.43 11.79 7.72C11.5 8.02 11.5 8.49 11.79 8.79L14.27 11.25Z" fill="currentColor"></path>
                                 </svg>
                                 Login
                             </a>
-                        </li>
+                        </li> -->
 
                         <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -60,24 +60,24 @@
             <div class="carousel-inner">
                 <div class="carousel-item">
                     <img src="{{ asset('images/gambar1.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="550" alt="Placeholder: First slide">
-                    <div class="carousel-caption d-none d-md-block">
+                    <!-- <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Some representative placeholder content for the first slide.</p>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="carousel-item active">
-                <img src="{{ asset('images/gambar2.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="550" alt="Placeholder: First slide">
-                    <div class="carousel-caption d-none d-md-block">
+                    <img src="{{ asset('images/gambar2.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="550" alt="Placeholder: First slide">
+                    <!-- <div class="carousel-caption d-none d-md-block">
                         <h5>Second slide label</h5>
                         <p>Some representative placeholder content for the second slide.</p>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="carousel-item">
-                <img src="{{ asset('images/gambar3.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="550" alt="Placeholder: First slide">
-                    <div class="carousel-caption d-none d-md-block">
+                    <img src="{{ asset('images/gambar3.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="550" alt="Placeholder: First slide">
+                    <!-- <div class="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -90,51 +90,70 @@
             </button>
         </div>
     </div>
-    <div id="product" class="bg-secondary features-card" style="margin-top: 0;">
+    <div id="product" class="features-card page-bg" style="margin-top: 0;">
         <div class="container">
             <div class="row mx-2 mx-sm-0">
                 <div class="col-lg-12"></div>
                 <div class="col-lg-12 top-feature">
                     <div class="text-center">
-                        <h2 class="mb-3 text-white notch-feature-txt">Product</h2>
-                        <p class="mb-5 text-white pb-5">It is a long established fact that a reader will be distracted
-                            by
-                            the readable content of a page when looking at its layout. </p>
+                        <h3 class="mb-3 notch-feature-txt" style="color: #090E74;">Produk</h3>
+                        <p class="mb-5 pb-5 text-black">It is a long established fact that a reader will be distracted
+                            by the readable content of a page when looking at its layout. </p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-9 m-auto">
+                <div class="col-12 m-auto">
                     <nav class="m-auto">
-                        <div class="bg-secondary nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                            <button class="nav-link active text-white mr-2" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Kartu Kredit </button>
-                            <button class="nav-link text-white" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">KTA</button>
-                            <button class="nav-link text-white" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Asuransi</button>
-                            <button class="nav-link text-white" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Pinjaman</button>
+                        <div class="page-bg nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                            <button class="nav-link active mr-2" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Bank Maypada </button>
+                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">DBS</button>
+                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Digibank</button>
+                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Cimbniaga</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
 
                         <div class="tab-pane fade show active mt-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="card">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img class="bd-placeholder-img" width="100%" height="250" src="{{ asset('images/gambar1.jpg') }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect>
-                                            </div>
-                                            <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">digibank Visa Travel Signature</h5>
-                                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                            </div>
-                                            <div class="card-footer mt-5">
-                                                <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel">Lihat Detail</a>
-                                                <a href="{{route('formulir.create_formulir')}}" class="card-link">Ajukan Sekarang</a>
-                                            </div>
-                                            </div>
+                                        <div class="card-body">
+                                            <img class="bd-placeholder-img pb-3" width="100%" height="200" src="{{ asset('images/gambar1.jpg') }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect>
+                                            <h6 class="card-title">digibank Visa Travel Signature</h6>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                         </div>
-                                    </div> 
+                                        <div class="card-footer">
+                                            <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel" style="color: #127E18;">Lihat Detail</a>
+                                            <a href="{{route('formulir.create_formulir')}}" class="card-link">Ajukan Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <img class="bd-placeholder-img pb-3" width="100%" height="200" src="{{ asset('images/gambar1.jpg') }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect>
+                                            <h6 class="card-title">digibank Visa Travel Signature</h6>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel" style="color: #127E18;">Lihat Detail</a>
+                                            <a href="{{route('formulir.create_formulir')}}" class="card-link">Ajukan Sekarang</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <img class="bd-placeholder-img pb-3" width="100%" height="200" src="{{ asset('images/gambar1.jpg') }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect>
+                                            <h6 class="card-title">digibank Visa Travel Signature</h6>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel" style="color: #127E18;">Lihat Detail</a>
+                                            <a href="{{route('formulir.create_formulir')}}" class="card-link">Ajukan Sekarang</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -181,17 +200,20 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <img src="{{ asset('images/landing-pages/images/home-1/aboutus.webp') }}" alt=""
-                        class="img-fluid ">
+                        class="img-fluid">
                 </div>
                 <div class="col-md-6">
-                    <p class="mb-2 text-secondary text-uppercase">
-                        about us
-                    </p>
-                    <h2 class="text-secondary mb-4">What they say <br> <span class="text-primary">Tentang Kami</span></h2>
-                    <p class="mb-5">It is a long established fact that a reader will be distracted by the readable
-                        content
-                        of a page when looking at its layout. </p>
-                    <a hrer="javascript" class="btn btn-primary">Get Started</a>
+                    <h3 class="mb-5"><span style="color: #090E74;">Tentang Kami</span></h3>
+                    <p class="text-black">Berdiri pada tahun 2002 (Berdasarkan akte no.2 Notaris Sarinah Sihombing), SH.SK.MEN.KEH.R.I 
+                        Tgl 14-08-2002 No.C/1005,HT,03,02-2002, dan surat kemenhukam No.AHU-0933521 AH.01.02 Tahun 2015 yang bertempat 
+                        di gedung Sentra Salemba Mas JL.Salemba Raya No.34-36 Blok.Y Jakarta Pusat, phn 021-3928711 fax.3928712. 
+                        Dan Bergerak dalam bidang jasa, Khususnya tenaga outsourcing serta pedagang nasional dan Internasional. 
+                        Selain itu PT.Pesona Putra Perkasa mempunyai pengalaman, pengetahuan serta keahlian dalam mencari, melatih, 
+                        mengarahkan, dan menempatkan serta mengelola tenaga kerja Marketing yang berkualitas untuk para pelanggan/nasabah, 
+                        Hal ini terbukti dengan adanya performance atau penghargaan yang di dapat PT.Pesona Putra Perkasa sebagai <span style="font-weight: bold; color: black;">The Best Sales 
+                        Agency Personal Loan ANZ Bank</span>, Serta The Best Sales Agency Personal Loan DBS Bank, Mayapada Bank, CTBC Bank, dan Best Sales Agency 
+                        Credit Card CIMB Niaga. </p>
+                    <!-- <a hrer="javascript" class="btn btn-primary">Get Started</a> -->
                 </div>
             </div>
         </div>
@@ -200,9 +222,8 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
-                    <h3 class="text-secondary mb-4 fast-afrd-txt">Frequently Asked Questions<br> 
-                    <span class="text-primary">(FAQ)</span></h3>
-                    <p class="mb-5">Pertanyaan Seputar Wa Blast</p>
+                    <h3 class="mb-4 fast-afrd-txt" style="color: #127E18;">FAQ<br> 
+                    <span style="color: #090E74;">Pertanyaan seputar kami</span></h3>
                 </div>
                 <div class="col-lg-7">
                 <div class="bd-example">
@@ -250,36 +271,27 @@
         </div>
     </div>
 
-    <footer class="bg-secondary inner-box" id="kontak">
+    <footer class="inner-box" id="kontak" style="background: #090E74;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <h5 class="mb-4 text-white">Company</h5>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                    <li class="mb-3">2798 Meadow Lane, Napa, California- 94559</li>
-                    <li class="mb-3">(808) 555-0111</li>
+                    <li class="mb-3 list-unstyled">gedung Sentra Salemba Mas JL.Salemba Raya No.34-36 Blok.Y Jakarta Pusat</li>
+                    <li class="mb-3 pb-5 list-unstyled">(021) 3928711</li>
                 </div>
-                <div class="col-lg-3">
-                    <h5 class="mb-4 text-white">Company</h5>
-                    <ul class="m-0 ps-3">
-                        <li class="mb-3">Products</li>
+                <div class="col-lg-4">
+                    <h5 class="mb-4 text-white ps-5">Link</h5>
+                    <ul class="m-0 ps-5 list-unstyled">
+                        <li class="mb-3">Produk</li>
                         <li class="mb-3">Tentang Kami</li>
                         <li class="mb-3">Kontak Kami</li>
                         <li>FAQ</li>
                     </ul>
                 </div>
-                <div class="col-lg-3">
-                    <h5 class="mb-4 text-white">Link Lainnya</h5>
-                    <ul class="m-0 ps-3">
-                        <li class="mb-3">Link</li>
-                        <li class="mb-3">Link</li>
-                        <li class="mb-3">Link</li>
-                        <li>Link</li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 pb-5">
+                <div class="col-lg-4">
                     <h5 class="mb-4 text-white">Get In touch</h5>
-                        <p>Email us at:</p>
+                        <p>Email:</p>
                         <a href="#" class="text-decoration-underline text-white">support@wablast.com</a>
                         <ul class="list-unstyled p-0 m-0 d-flex mt-4">
                             <li>
@@ -297,7 +309,7 @@
                         </ul>
                 </div>
                 <hr>
-                <div class="col-md-12 text-center">
+                <div class="col-md-12 text-center" style="height: 10px;">
                     <p class="mt-4">©<script>document.write(new Date().getFullYear())</script> Wa Blast, All Rights Reserved.</p>
                 </div>
             </div>
