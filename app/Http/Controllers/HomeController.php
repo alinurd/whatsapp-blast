@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Muzakki;
 use App\Models\Mustahik;
+use App\Models\Kategori; 
+use App\Models\Product;
 use App\Models\Rw;
 use App\Models\MuzakkiHeader;
 
@@ -273,149 +275,19 @@ class HomeController extends Controller
     }
 
     /*
-    * Landing Page Routs
+    * Landing Page Routs 
     */
     public function landing_index(Request $request) 
     {
-        // Menghitung jumlah transaksi muzakki dan mustahik dari database
-        $Transactionsmuzakki = Muzakki::count(); 
-        $Transactionsmustahik = Mustahik::where('status', '2')->count();
-
-        // Hitung total pemasukan untuk kategori Fitrah
-        $totalPemasukanFitrah = Muzakki::where('kategori_id', 1)->sum('jumlah_bayar');
-        // Hitung total pengeluaran untuk kategori Fitrah
-        $totalPengeluaranFitrah = Mustahik::where('kategori_id', 1)->sum('jumlah_uang_diterima'); 
-        // Hitung sisa pemasukan untuk kategori Fitrah
-        $sisaPemasukanFitrah = $totalPemasukanFitrah - $totalPengeluaranFitrah;
-
-        // Hitung total pemasukan untuk kategori Maal
-        $totalPemasukanMaal = Muzakki::where('kategori_id', 2)->sum('jumlah_bayar');
-        // Hitung total pengeluaran untuk kategori Maal
-        $totalPengeluaranMaal = Mustahik::where('kategori_id', 2)->sum('jumlah_uang_diterima'); 
-        // Hitung sisa pemasukan untuk kategori Maal
-        $sisaPemasukanMaal = $totalPemasukanMaal - $totalPengeluaranMaal;
-
-        // Hitung total pemasukan untuk kategori Fidyah
-        $totalPemasukanFidyah = Muzakki::where('kategori_id', 3)->sum('jumlah_bayar');
-        // Hitung total pengeluaran untuk kategori Fidyah
-        $totalPengeluaranFidyah = Mustahik::where('kategori_id', 3)->sum('jumlah_uang_diterima'); 
-        // Hitung sisa pemasukan untuk kategori Fidyah
-        $sisaPemasukanFidyah = $totalPemasukanFidyah - $totalPengeluaranFidyah;
-
-        // Hitung total pemasukan untuk kategori Infaq
-        $totalPemasukanInfaq = Muzakki::where('kategori_id', 4)->sum('jumlah_bayar');
-        // Hitung total pengeluaran untuk kategori Infaq
-        $totalPengeluaranInfaq = Mustahik::where('kategori_id', 4)->sum('jumlah_uang_diterima'); 
-        // Hitung sisa pemasukan untuk kategori Infaq
-        $sisaPemasukanInfaq = $totalPemasukanInfaq - $totalPengeluaranInfaq;
-
-        // Menghitung total beras masuk dari model Muzakki untuk kategori Fitrah (dalam kilogram)
-        $getMuzakkiKgFitrah = Muzakki::where('type', 'Beras')
-        ->where('satuan', 'Kg')
-        ->whereHas('kategori', function ($query) {
-            $query->where('kategori_id', 1);
-        })
-        ->get();
-        $totalBerasMuzakkiKgFitrah = 0;
-        foreach ($getMuzakkiKgFitrah as $q) {
-        $totalBerasMuzakkiKgFitrah += (float) str_replace(',', '.', $q->jumlah_bayar);
-        }
-
-        // Menghitung total beras masuk dari model Muzakki untuk kategori Fidyah (dalam kilogram)
-        $getMuzakkiKgFidyah = Muzakki::where('type', 'Beras')
-        ->where('satuan', 'Kg')
-        ->whereHas('kategori', function ($query) {
-            $query->where('kategori_id', 3);
-        })
-        ->get();
-        $totalBerasMuzakkiKgFidyah = 0;
-        foreach ($getMuzakkiKgFidyah as $q) {
-        $totalBerasMuzakkiKgFidyah += (float) str_replace(',', '.', $q->jumlah_bayar);
-        }
-
-        // Menghitung total beras masuk dari model Muzakki untuk kategori Fitrah (dalam liter)
-        $getMuzakkiLiterFitrah = Muzakki::where('type', 'Beras')
-        ->where('satuan', 'Liter')
-        ->whereHas('kategori', function ($query) {
-            $query->where('kategori_id', 1);
-        })
-        ->get();
-        $totalBerasMuzakkiLFitrah = 0;
-        foreach ($getMuzakkiLiterFitrah as $q) {
-        $totalBerasMuzakkiLFitrah += (float) str_replace(',', '.', $q->jumlah_bayar);
-        }
-
-        // Menghitung total beras masuk dari model Muzakki untuk kategori Fidyah (dalam liter)
-        $getMuzakkiLiterFidyah = Muzakki::where('type', 'Beras')
-        ->where('satuan', 'Liter')
-        ->whereHas('kategori', function ($query) {
-            $query->where('kategori_id', 3);
-        })
-        ->get();
-        $totalBerasMuzakkiLFidyah = 0;
-        foreach ($getMuzakkiLiterFidyah as $q) {
-        $totalBerasMuzakkiLFidyah += (float) str_replace(',', '.', $q->jumlah_bayar);
-        }
-
-        // Menghitung total beras diterima oleh Mustahik untuk kategori Fitrah (dalam kilogram)
-        $totalBerasMustahikKgFitrah = Mustahik::where('satuan_beras', 'Kg')
-        ->where('kategori_id', 1)
-        ->sum('jumlah_beras_diterima');
-
-        // Menghitung total beras diterima oleh Mustahik untuk kategori Fidyah (dalam kilogram)
-        $totalBerasMustahikKgFidyah = Mustahik::where('satuan_beras', 'Kg')
-        ->where('kategori_id', 3)
-        ->sum('jumlah_beras_diterima');
-
-        // Menghitung total beras diterima oleh Mustahik untuk kategori Fitrah (dalam liter)
-        $totalBerasMustahikLFitrah = Mustahik::where('satuan_beras', 'Liter')
-        ->where('kategori_id', 1)
-        ->sum('jumlah_beras_diterima');
-
-        // Menghitung total beras diterima oleh Mustahik untuk kategori Fidyah (dalam liter)
-        $totalBerasMustahikLFidyah = Mustahik::where('satuan_beras', 'Liter')
-        ->where('kategori_id', 3)
-        ->sum('jumlah_beras_diterima');
-
-        // Menghitung total saldo beras (dalam kilogram dan liter) untuk kategori Fitrah
-        $totalSaldoBerasKgFitrah = $totalBerasMuzakkiKgFitrah - $totalBerasMustahikKgFitrah;
-        $totalSaldoBerasLFitrah = $totalBerasMuzakkiLFitrah - $totalBerasMustahikLFitrah;
-
-        // Menghitung total saldo beras (dalam kilogram dan liter) untuk kategori Fidyah
-        $totalSaldoBerasKgFidyah = $totalBerasMuzakkiKgFidyah - $totalBerasMustahikKgFidyah;
-        $totalSaldoBerasLFidyah = $totalBerasMuzakkiLFidyah - $totalBerasMustahikLFidyah;
-
-        // Mendapatkan semua data RT dari tabel RW
-        $allRt = Rw::pluck('rt')->toArray();
-
-        // Inisialisasi array untuk menyimpan jumlah mustahiq untuk setiap RT
-        $rtData = [];
-
-        // Menghitung jumlah mustahiq untuk setiap RT
-        foreach ($allRt as $rt) {
-            // Hitung jumlah mustahiq berdasarkan RT dari model Mustahik
-            $jumlahMustahiq = Mustahik::whereHas('rw', function ($query) use ($rt) {
-                $query->where('rt', $rt);
-            })->where('status', '2')->count();
-            // Masukkan jumlah mustahiq ke dalam array $rtData
-            $rtData[] = $jumlahMustahiq;
-        }
-
-        // Mendapatkan label RT untuk digunakan dalam grafik
-        $rtLabels = $allRt;
-
-        // Menghitung jumlah mustahiq untuk wilayah lain dari tabel Mustahik
-        $jumlahMustahiqWilayahLain = Mustahik::whereNull('rw_id')->where('status', '2')->count();
-
-        // Menambahkan jumlah mustahiq wilayah lain ke dalam array $rtData
-        $rtData[] = $jumlahMustahiqWilayahLain;
-        
-        // Menambahkan label untuk wilayah lain
-        $rtLabels[] = 'Wilayah Lain';
-        
-        $assets = ['chart', 'animation'];
-        return view('landing-pages.pages.index', compact('rtLabels', 'rtData', 'assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalPemasukanFitrah', 'totalBerasMuzakkiLFitrah', 'totalBerasMuzakkiKgFitrah', 'totalPemasukanFidyah', 'totalBerasMuzakkiLFidyah', 'totalBerasMuzakkiKgFidyah', 'totalPemasukanMaal', 'totalPemasukanInfaq', 'totalPengeluaranFitrah', 'totalBerasMustahikLFitrah', 'totalBerasMustahikKgFitrah', 'totalPengeluaranMaal', 'totalPengeluaranInfaq', 'totalPengeluaranFidyah', 'totalBerasMustahikLFidyah', 'totalBerasMustahikKgFidyah', 'sisaPemasukanFitrah', 'sisaPemasukanMaal', 'sisaPemasukanInfaq', 'sisaPemasukanFidyah', 'totalSaldoBerasKgFitrah', 'totalSaldoBerasLFitrah', 'totalSaldoBerasKgFidyah', 'totalSaldoBerasLFidyah'));
-    } 
+        $categories = Kategori::all();
+        $products = Product::all()->map(function($product) {
+            $product->gambar_url = $product->gambar ? asset('storage/' . $product->gambar) : asset('images/no-image.jpg');
+            return $product;
+        });
+    
+        // Kirim data ke view
+        return view('landing-pages.pages.index', compact('categories', 'products'));
+    }    
     
     public function landing_blog(Request $request)
     {
