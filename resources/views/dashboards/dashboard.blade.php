@@ -12,11 +12,11 @@
                                  <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
                               </svg> 
                            </div>
-                           <div class="progress-detail">
+                           <div class="progress-detail"> 
                               <a  href="{{route('muzakki.index')}}" title="Lihat Muzakki Detail">
-                              <p  class="mb-2">Total Transaksi Muzakki</p>
+                              <p  class="mb-2">Jumlah Pengajuan</p>
                            </a>
-                           <h4 class="counter" style="visibility: visible;" title="Invocie:{{ $TransactionsmuzakkiH }} | Muzakki:{{ $Transactionsmuzakki }}">{{ $TransactionsmuzakkiH }}/{{ $Transactionsmuzakki}}</h4>
+                           <!-- <h4 class="counter" style="visibility: visible;" title="Invocie:{{ $TransactionsmuzakkiH }} | Muzakki:{{ $Transactionsmuzakki }}">{{ $TransactionsmuzakkiH }}/{{ $Transactionsmuzakki}}</h4> -->
                            </div>
                         </div>
                      </div>
@@ -31,9 +31,9 @@
                            </div>
                            <div class="progress-detail">
                               <a  href="{{route('mustahik.index')}}" title="Lihat Mustahiq Detail">
-                              <p  class="mb-2">Total Transaksi Mustahiq</p>
+                              <p  class="mb-2">Jumlah nomor target</p>
                            </a>
-                           <h4 class="counter">{{ $Transactionsmustahik }}</h4>
+                           <!-- <h4 class="counter">{{ $Transactionsmustahik }}</h4> -->
                            </div>
                         </div>
                      </div>
@@ -47,23 +47,8 @@
                               </svg>
                            </div>
                            <div class="progress-detail">
-                              <p  class="mb-2">Total Saldo Uang</p>
-                              <h4 class="counter" style="visibility: visible;">Rp{{ number_format($totalSaldoUang) }}</h4>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-                  <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
-                     <div class="card-body">
-                        <div class="progress-widget">
-                           <div id="circle-progress-04" class="circle-progress-01 circle-progress circle-progress-info text-center" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
-                              <svg class="card-slie-arrow " width="24px" height="24px" viewBox="0 0 24 24">
-                                 <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                              </svg>
-                           </div>
-                           <div class="progress-detail">
-                              <p  class="mb-2">Total Saldo Beras</p>
-                              <h4 class="counter">{{ $totalSaldoBerasKg }} Kg | {{ $totalSaldoBerasL }} Liter</h4>
+                              <p  class="mb-2">Limit kredit</p>
+                              <!-- <h4 class="counter" style="visibility: visible;">Rp{{ number_format($totalSaldoUang) }}</h4> -->
                            </div>
                         </div>
                      </div>
