@@ -20,13 +20,19 @@ class PesanController extends Controller
     {
         //
     }
+
     public function push(templatePesanDataTable $dataTable)
     {
-        $pageTitle = trans('global-message.list_form_title', ['form' => trans('kategori')]);
-        $auth_user = AuthHelper::authSession();
-        $assets = ['data-table'];
-        $headerAction = '<a href="' . route('kategori.create') . '" class="btn btn-sm btn-primary" role="button">Add Kategori</a>';
-        return $dataTable->render('global.datatable', compact('pageTitle', 'auth_user', 'assets', 'headerAction'));
+       
+        $nomor= target::all();
+         return view('pesan.push.index', compact('nomor'));
+    }
+    
+    public function pushStore(Request $request)
+    {
+        return redirect()->route('push.index')->withErrors(__('Pesan tidak terkirim, redit tidak tersedia. '));
+
+       
     }
 
     //template

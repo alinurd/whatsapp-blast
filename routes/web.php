@@ -84,6 +84,7 @@ Route::delete('target-pesan/{id}', [PesanController::class, 'targetDelete'])->na
 
 //push
 Route::get('/push',[PesanController::class, 'push'])->name('push.index');
+Route::post('push', [PesanController::class, 'pushStore'])->name('push.store');
 
 //UI Pages Routs
 // Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
