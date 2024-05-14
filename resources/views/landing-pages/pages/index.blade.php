@@ -59,21 +59,21 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item">
-                    <img src="{{ asset('images/gambar1.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="550" alt="Placeholder: First slide">
+                    <img src="{{ asset('images/gambar1.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="580" alt="Placeholder: First slide">
                     <!-- <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Some representative placeholder content for the first slide.</p>
                     </div> -->
                 </div>
                 <div class="carousel-item active">
-                    <img src="{{ asset('images/gambar2.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="550" alt="Placeholder: First slide">
+                    <img src="{{ asset('images/gambar2.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="580" alt="Placeholder: First slide">
                     <!-- <div class="carousel-caption d-none d-md-block">
                         <h5>Second slide label</h5>
                         <p>Some representative placeholder content for the second slide.</p>
                     </div> -->
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ asset('images/gambar3.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="550" alt="Placeholder: First slide">
+                    <img src="{{ asset('images/gambar3.jpg') }}" class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="580" alt="Placeholder: First slide">
                     <!-- <div class="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
@@ -104,93 +104,69 @@
             </div>
             <div class="row">
                 <div class="col-12 m-auto">
-                    <nav class="m-auto">
-                        <div class="page-bg nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                            <button class="nav-link active mr-2" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Bank Maypada </button>
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">DBS</button>
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Digibank</button>
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Cimbniaga</button>
-                        </div>
-                    </nav>
-                    <div class="tab-content" id="nav-tabContent">
-
-                        <div class="tab-pane fade show active mt-4" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <img class="bd-placeholder-img pb-3" width="100%" height="200" src="{{ asset('images/gambar1.jpg') }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect>
-                                            <h6 class="card-title">digibank Visa Travel Signature</h6>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel" style="color: #127E18;">Lihat Detail</a>
-                                            <a href="{{route('formulir.create_formulir')}}" class="card-link">Ajukan Sekarang</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <img class="bd-placeholder-img pb-3" width="100%" height="200" src="{{ asset('images/gambar1.jpg') }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect>
-                                            <h6 class="card-title">digibank Visa Travel Signature</h6>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel" style="color: #127E18;">Lihat Detail</a>
-                                            <a href="{{route('formulir.create_formulir')}}" class="card-link">Ajukan Sekarang</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <img class="bd-placeholder-img pb-3" width="100%" height="200" src="{{ asset('images/gambar1.jpg') }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect>
-                                            <h6 class="card-title">digibank Visa Travel Signature</h6>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel" style="color: #127E18;">Lihat Detail</a>
-                                            <a href="{{route('formulir.create_formulir')}}" class="card-link">Ajukan Sekarang</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="detailmodel" tabindex="-1" aria-labelledby="detailmodelLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg" style="max-width: 800px;">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="detailmodelLabel">Detail digibank Visa Travel Signature</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body p-3">
-                                    <!-- Konten detail model bisa ditambahkan di sini -->
-                                    <div class="card">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img class="bd-placeholder-img" width="100%" height="250" src="{{ asset('images/gambar1.jpg') }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect>
-                                            </div>
-                                            <div class="col-md-8">
-                                            <div class="card-body">
-                                                <h5 class="card-title">digibank Visa Travel Signature</h5>
-                                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="button" class="btn btn-primary">Ajukan Sekarang</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
+                <nav class="m-auto">
+                    <div class="page-bg nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                        @foreach($categories as $category)
+                            <button class="nav-link @if($loop->first) active @endif mr-2" id="nav-{{ $category->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ $category->id }}" type="button" role="tab" aria-controls="nav-{{ $category->id }}" aria-selected="true">{{ $category->nama_kategori }}</button>
+                        @endforeach
                     </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                    @foreach($categories as $category)
+                        <div class="tab-pane fade @if($loop->first) show active @endif mt-4" id="nav-{{ $category->id }}" role="tabpanel" aria-labelledby="nav-{{ $category->id }}-tab">
+                            <div class="row">
+                                @foreach($products->where('kategori_id', $category->id) as $product)
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <img class="bd-placeholder-img pb-2" width="100%" height="250" src="{{ $product->gambar_url }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                                <span class="badge rounded-pill bg-primary">{{ $product->jenis_produk }}</span>
+                                                <h6 class="card-title mt-1">{{ $product->nama_product }}</h6>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a href="#" class="card-link" data-bs-toggle="modal" data-bs-target="#detailmodel-{{ $product->id }}" style="color: #127E18;">Lihat Detail</a>
+                                                <a href="{{ route('formulir.create_formulir') }}" class="card-link" style="color: #127E18;">Ajukan Sekarang</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            @foreach($products->where('kategori_id', $category->id) as $product)
+                                <div class="modal fade" id="detailmodel-{{ $product->id }}" tabindex="-1" aria-labelledby="detailmodelLabel-{{ $product->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" style="max-width: 800px;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="detailmodelLabel-{{ $product->id }}"> <span class="badge rounded-pill bg-primary">{{ $product->jenis_produk }}</span> {{ $product->nama_product }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body p-3">
+                                                <div class="card">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-4 pb-3">
+                                                            <img class="bd-placeholder-img" width="100%" height="200" src="{{ $product->gambar_url }}" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="card-body">
+                                                                <h6 class="card-title">{{ $product->nama_product }}</h6>
+                                                                <p class="card-text">{{ $product->desk_detail }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                <button type="button" class="btn btn-primary">Ajukan Sekarang</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
                 </div>
             </div>
         </div>
@@ -276,7 +252,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h5 class="mb-4 text-white">Company</h5>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    <p> PT.Pesona Putra Perkasa sebagai The Best Sales Agency Personal Loan ANZ Bank, Serta The Best Sales Agency Personal Loan DBS Bank, Mayapada Bank, CTBC Bank, dan Best Sales Agency Credit Card CIMB Niaga.</p>
                     <li class="mb-3 list-unstyled">gedung Sentra Salemba Mas JL.Salemba Raya No.34-36 Blok.Y Jakarta Pusat</li>
                     <li class="mb-3 pb-5 list-unstyled">(021) 3928711</li>
                 </div>

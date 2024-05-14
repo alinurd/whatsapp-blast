@@ -19,13 +19,25 @@
                               <label class="form-label" for="fname">Kategori: <span class="text-danger">*</span></label>
                               {{ Form::select('kategori', $kategori, "", ['class' => 'form-control', 'placeholder' => 'Select Kategori', 'id' => 'kategori']) }}
                            </div>
+                           <div class="form-group col-md-12">
+                                 <label class="form-label" for="jenis_product">Jenis Product: <span class="text-danger">*</span></label>
+                                 <select name="jenis_product" class="form-control" required>
+                                    <option value="">Pilih Jenis product</option>
+                                    <option value="KTA">KTA</option>
+                                    <option value="Kartu_Kredit">Kartu Kredit</option>
+                                 </select>
+                              </div>
                            <div class="form-group col-md-12"> 
-                              <label class="form-label" for="nama_product">Nama product: <span class="text-danger">*</span></label>
-                              {!! Form::text('nama_product', old('nama_product'), ['class' => 'form-control', 'required', 'placeholder' => 'Nama product']) !!}
+                              <label class="form-label" for="nama_product">Nama Product: <span class="text-danger">*</span></label>
+                              {!! Form::text('nama_product', old('nama_product'), ['class' => 'form-control', 'required', 'placeholder' => 'Nama Product']) !!}
                            </div> 
                            <div class="form-group col-md-12">
                               <label class="form-label" for="desk_detail">Detail Product: <span class="text-danger">*</span></label>
                               {!! Form::textArea('desk_detail', old('desk_detail'), ['class' => 'form-control', 'required', 'placeholder' => 'Detail Product']) !!}
+                           </div>
+                           <div class="form-group col-md-12">
+                              <label class="form-label" for="gambar">Gambar: <span class="text-danger">*</span></label>
+                              {!! Form::file('gambar', ['class' => 'form-control', 'required']) !!}
                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Add product</button>
