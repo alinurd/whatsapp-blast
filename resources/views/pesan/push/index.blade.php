@@ -9,7 +9,10 @@
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
                             <h4 class="card-title mb-0">Push Pesan</h4>
-                        </div>
+                            <div class="form-group col-md-12">
+                           <label class="form-label" for="fname">Kategori : <span class="text-danger">*</span></label>
+                           {{ Form::select('tenplate', $t, "", ['class' => 'form-control', 'placeholder' => 'Select tenplate Pesan', 'id' => 'Kategori']) }}
+                        </div>                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

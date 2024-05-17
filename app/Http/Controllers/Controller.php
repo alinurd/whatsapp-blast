@@ -29,6 +29,7 @@ class Controller extends BaseController
         $code = $param . "-" . $ran . "-" . date("dmy") . "-000" . $id;
         return $code;
     }
+    
     public function sendMassage1($to, $msg, $code)
     {
         $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/whatsapp/media';
