@@ -4,9 +4,15 @@
 @include('partials.dashboard._body_sidebar')
 <main class="main-content">
     <div class="position-relative">
-        @include('partials.dashboard._body_header')
+    @include('partials.dashboard._body_header')
+
+    @if(auth()->user()->role == 1)
+        @include('partials.dashboard.sub-header-admin')
+    @else
         @include('partials.dashboard.sub-header')
-    </div>
+    @endif
+</div>
+
 
     <div class="conatiner-fluid content-inner mt-n5 py-0">
         {{ $slot }}
