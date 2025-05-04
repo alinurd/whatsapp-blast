@@ -151,13 +151,15 @@
                      data-bs-toggle="modal" data-bs-target="#statusModal" data-status="ABORTED">
                      <span class="bg-warning  rounded text-white px-2 py-1 fw-bold">A</span>
                      <span class="px-2">ABORTED</span>
-                  </button>
-                  <button class="btn d-flex align-items-center gap-2 px-3 py-2 btn-light">
-                     <span class="fw-semibold">Sinkron</span>
-                  </button>
+                  </button> 
                </div>
             </div>
          </div>
+
+
+         <!-- Data Respon -->
+         @include('dashboards.data-respon')
+         <!-- End Data Respon -->
       </div>
    </div>
 
