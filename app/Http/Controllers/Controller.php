@@ -75,7 +75,7 @@ class Controller extends BaseController
 
         // dd($resp);
     }
-    public function sendMassage2($to, $msg, $code)
+    public function sendMassage2($to, $msg, $code="")
     {
         $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/whatsapp/message';
          
