@@ -34,23 +34,18 @@ class PesanController extends Controller
     {
          
         
-        // foreach($request['pushnomor'] as $q){
-        //     $p=Target::where('id', $q)->first();
-        //     $t=Template::where('id', $request['tenplate'])->first();
-        //     $no = $p->nomor;  
-        //     $msg=$t->pesan;
-        //     $this->sendMassage1($no, $msg, $MuzakkiHeader->code);
+        foreach($request['pushnomor'] as $q){
+            $p=Target::where('id', $q)->first();
+            $t=Template::where('id', $request['tenplate'])->first();
+            $no = $p->nomor;  
+            $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: ";
 
-        // }
-        //  $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: " . $dibayarkan->nama_lengkap . ".\n";
-        // $msg .= "No. Invoice: #" . $MuzakkiHeader->code . "\n\n\n ";
-        // $msg .= "Lihat detail: https://zis-alhasanah.com/showinvoice/" . $MuzakkiHeader->code;
-        // $this->cetakinvoice($MuzakkiHeader->code);
+            $this->sendMassage2($no,$msg); 
 
-        //  $this->sendMassage($no,$msg);
-        //  $this->sendWa($no,$n);
 
-        $key = 'b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f';
+        }
+ 
+ 
         return redirect()->route('push.index')->withErrors(__('Pesan tidak terkirim, kredit tidak tersedia. '));
 
        

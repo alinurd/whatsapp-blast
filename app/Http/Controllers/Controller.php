@@ -111,65 +111,9 @@ class Controller extends BaseController
 
         // dd($resp);
     }
-    public function sendMassage($to, $msg)
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://app.saungwa.com/api/create-message',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array(
-                'appkey' => 'a7862033-3af9-47c6-8c85-16d6822b8cad',
-                'authkey' => 'CTak6Ul0XiukabnGasbqPCnVzzxs7ThcafHDJZf3S350f7k9Zy',
-                'to' => $to,
-                'message' => $msg,
-                'sandbox' => 'false'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
-    }
     
-    protected function sendWax($no, $nama)
-    {
-        $response = Http::withHeaders([
-            'Authorization' => 'App b42be3006183b810feb31c0cc4162822-997e6839-9163-4293-b012-8e9834e6264f',
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-        ])->post('https://qymz4m.api.infobip.com/whatsapp/1/message/template', [
-            'messages' => [
-                [
-                    'from' => '447860099299',
-                    'to' => $no,
-                    'messageId' => '9fefd9d6-781f-4de6-ab86-cb68502110b6',
-                    'content' => [
-                        'templateName' => 'order_confirmation',
-                        'templateData' => [
-                            'body' => [
-                                'placeholders' => $nama
-                            ]
-                        ],
-                        'language' => 'en'
-                    ]
-                ]
-            ]
-        ]);
-
-        if ($response->successful()) {
-            echo $response->body();
-        } else {
-            echo 'Unexpected HTTP status: ' . $response->status() . ' ' . $response->body();
-        }
-    }
+    
+   
 
    
 }
