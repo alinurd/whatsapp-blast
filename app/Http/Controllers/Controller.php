@@ -12,6 +12,8 @@ use Infobip\Api\WhatsAppApi;
 use Infobip\Model\WhatsAppTextContent;
 use Infobip\Model\WhatsAppTextMessage;
 use Illuminate\Support\Facades\Http;
+use App\Models\Logmsg;
+use Illuminate\Support\Facades\Log;
 
 class Controller extends BaseController
 {
@@ -29,7 +31,7 @@ class Controller extends BaseController
         $code = $param . "-" . $ran . "-" . date("dmy") . "-000" . $id;
         return $code;
     }
-    
+
     public function sendMassage1($to, $msg, $code)
     {
         $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/whatsapp/media';
@@ -46,7 +48,7 @@ class Controller extends BaseController
             'caption' => $msg,
             // 'queue' => 'YOUR_QUEUE',
             'destination' => $to,
-            'media_url' => 'https://zis-alhasanah.com/public/invoice/invoice_'.$code.'.pdf',
+            'media_url' => 'https://zis-alhasanah.com/public/invoice/invoice_' . $code . '.pdf',
             // 'media_url' => 'http://127.0.0.1:8000/public/images/icons/invoice-6.pdf',
             // 'message' => 'Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu:'.$from,
             'include_unsubscribe' => false,
@@ -70,22 +72,18 @@ class Controller extends BaseController
         } else {
             echo $resp;
         }
-
-        curl_close($curl);
-
-        // dd($resp);
     }
-    public function sendMassage2($to, $msg, $code="")
+
+    public function sendMassage2($to, $msg, $code = "")
     {
         $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/whatsapp/message';
-         
- 
+
         $curl = curl_init();
 
-        $payload = json_encode([ 
-            'destination' => $to, 
+        $payload = json_encode([
+            'destination' => $to,
             'message' => $msg,
-            'include_unsubscribe' => false, 
+            'include_unsubscribe' => false,
         ]);
 
         curl_setopt_array($curl, [
@@ -93,7 +91,7 @@ class Controller extends BaseController
             CURLOPT_URL => $BASE_URL,
             CURLOPT_POST => true,
             CURLOPT_HTTPHEADER => [
-                "APIKey: 33DF7E9D96A13B5DB75FB01BAB6DE458",
+                "APIKey: " . env('NUSASMS_API_KEY'),
                 'Content-Type: application/json'
             ],
             CURLOPT_POSTFIELDS => $payload,
@@ -102,18 +100,97 @@ class Controller extends BaseController
         $resp = curl_exec($curl);
 
         if (!$resp) {
-            die('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
-        } else {
-            echo $resp;
+            Log::error('Gagal kirim ke ' . $to . ': ' . curl_error($curl));
+            curl_close($curl);
+            return null;
         }
 
         curl_close($curl);
 
-        // dd($resp);
-    }
-    
-    
-   
+        $r = json_decode($resp);
 
-   
+        if (isset($r->data)) {
+            $p = $r->data;
+
+            // Simpan ke database
+            $kategori = new Logmsg();
+            $kategori->ref_no = $p->ref_no ?? null;
+            $kategori->sender = $p->sender ?? null;
+            $kategori->queue = $p->queue ?? null;
+            $kategori->destination = $p->destination ?? null;
+            $kategori->message = $p->message ?? null;
+            $kategori->save();
+
+            return $p;
+        }
+
+        return null;
+    }
+ 
+    public function getBalance()
+    {
+        $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/balance';
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $BASE_URL,
+            CURLOPT_HTTPHEADER => array(
+                "APIKey: 33DF7E9D96A13B5DB75FB01BAB6DE458",
+                'Accept: application/json',
+                'Content-Type: application/json'
+            ),
+            CURLOPT_RETURNTRANSFER => 1,
+            // CURLOPT_SSL_VERIFYPEER => 0,    // Skip SSL Verification
+        ));
+
+        $resp = curl_exec($curl);
+        return $resp;
+    }
+
+
+    public function getStsApi($ref)
+{
+    $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/whatsapp/status';
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $BASE_URL . '/' . $ref,
+        CURLOPT_HTTPHEADER => array(
+            "APIKey: 33DF7E9D96A13B5DB75FB01BAB6DE458",
+            'Content-Type:application/json'
+        ),
+        CURLOPT_RETURNTRANSFER => 1,
+    ));
+
+    $resp = curl_exec($curl);
+    curl_close($curl);
+
+    $r = json_decode($resp);
+
+    if (isset($r->data)) {
+        $p = $r->data;
+
+        // Cari data berdasarkan ref_no
+        $log = Logmsg::where('ref_no', $p->ref_no)->first();
+
+        if ($log) {
+            $log->sender = $p->sender ?? null;
+            $log->destination = $p->destination ?? null;
+            $log->sent_date = $p->sent_date ?? null;
+            $log->read_date = $p->read_date ?? null;
+            $log->delivered_date = $p->delivered_date ?? null;
+            $log->status = $p->status ?? null;
+            $log->message = $p->message ?? null;
+            $log->caption = $p->caption ?? null;
+            $log->media_url = $p->media_url ?? null;
+            $log->save(); // Gunakan save() bukan update()
+        }
+
+        return $p;
+    }
+
+    return null;
+}
+
+
+
 }

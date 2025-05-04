@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('role', RoleController::class);
     
     // Dashboard Routes
+    Route::get('/getsts', [HomeController::class, 'getsts'])->name('getsts');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     
     // Users Module 

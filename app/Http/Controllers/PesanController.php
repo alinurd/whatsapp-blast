@@ -29,27 +29,33 @@ class PesanController extends Controller
 
          return view('pesan.push.index', compact('nomor', 't'));
     }
-    
     public function pushStore(Request $request)
-    {
-         
-        
-        foreach($request['pushnomor'] as $q){
-            $p=Target::where('id', $q)->first();
-            $t=Template::where('id', $request['tenplate'])->first();
-            $no = $p->nomor;  
-            $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: ";
+{
+    $berhasil = [];
 
-            $this->sendMassage2($no,$msg); 
+    foreach ($request['pushnomor'] as $q) {
+        $p = Target::where('id', $q)->first();
+        $t = Template::where('id', $request['tenplate'])->first();
+        $no = $p->nomor;
+        $msg = "Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu: ";
 
+        $send = $this->sendMassage2($no, $msg);
 
+        // Jika pengiriman berhasil (ada ref_no), simpan ke list
+        if ($send && isset($send->ref_no)) {
+            $berhasil[] = $no;
         }
- 
- 
-        return redirect()->route('push.index')->withErrors(__('Pesan tidak terkirim, kredit tidak tersedia. '));
-
-       
     }
+
+    // Hitung jumlah pengiriman sukses
+    $jumlah = count($berhasil);
+
+    // Kembalikan info ke view
+    return redirect()->route('push.index')
+        ->with('success', "Berhasil mengirim ke {$jumlah} nomor.")
+        ->with('nomor_terkirim', $berhasil);
+}
+
 
     //template
         public function template(templatePesanDataTable $dataTable)

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Muzakki;
 use App\Models\Mustahik;
-use App\Models\Kategori; 
+use App\Models\Kategori;
+use App\Models\LogMsg;
 use App\Models\Product;
 use App\Models\Rw;
 use App\Models\MuzakkiHeader;
@@ -18,23 +19,53 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
+        
         $view="dashboard";
         if(auth()->user()->role == 1){
             $view="dashboard-admin";
         }
 
+        $b=$this->getBalance();
+        $k=json_decode($b); 
+        $ttl=10;
         $data['ttlPengajuan']=100;
         $data['ttlNomor']=1000;
         $data['ttlCampaign']=10;
         $data['lainnya']=100;
         $server['start'] = "2025-05-04";
-$server['exp'] = "2025-06-04";
-        $kredit['total']=3000;
-        $kredit['exp']="03 Apr 2024";
-        $kredit['terpakai']=100;
+        $server['exp'] = "2025-06-04";
+        $kredit['total']=$ttl;
+        $kredit['exp']=$k->data->wa_expired_date; 
+        $kredit['terpakai']=$ttl-$k->data->wa_balance;
         $assets = ['chart', 'animation'];
         return view('dashboards.'.$view, compact('assets', 'data','kredit','server'));
     }
+    
+    public function getSts()
+{
+    $log = LogMsg::all();
+    $berhasil = [];
+    $detail_berhasil = [];
+
+    foreach ($log as $l) {
+        $send = $this->getStsApi($l->ref_no);
+
+        if ($send && isset($send->ref_no) && $send->status === 'D') {
+            // Simpan hanya data yang status-nya berhasil (D)
+            $berhasil[] = $send->destination;
+            $detail_berhasil[] = $send; // Simpan seluruh object response
+        }
+    }
+
+    $jumlah = count($berhasil);
+
+    dd([
+        'total_berhasil' => $jumlah,
+        'nomor_berhasil' => $berhasil,
+        'data_berhasil' => $detail_berhasil, // semua detail response
+    ]);
+}
+
 
     /* 
      * Menu Style Routs
