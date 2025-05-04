@@ -17,47 +17,23 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // Menghitung jumlah transaksi muzakki dan mustahik dari database
-        $Transactionsmuzakki = Muzakki::count(); 
-        $TransactionsmuzakkiH = MuzakkiHeader::count();
-        $Transactionsmustahik = Mustahik::where('status', '2')->count();
 
-        // Menghitung jumlah transaksi muzakki dan mustahik dari database
-        $totalTransactionsmuzakki = Muzakki::where('type', 'Uang')->orWhere('type', 'Transfer')->sum('jumlah_bayar');
-        $totalTransactionsmustahik = Mustahik::sum('jumlah_uang_diterima');
- 
-        // Menghitung total saldo uang
-        $totalSaldoUang = $totalTransactionsmuzakki - $totalTransactionsmustahik;
-        
-        // Menghitung total beras yang masuk dari model Muzakki
-        $getMuzakkiKg = Muzakki::where('type', 'Beras')->where('satuan', 'Kg')->get();
-        $totalBerasMuzakkiKg = 0;
-        foreach ($getMuzakkiKg as $q) {
-            $totalBerasMuzakkiKg += (float) str_replace(',', '.', $q->jumlah_bayar);
+        $view="dashboard";
+        if(auth()->user()->role == 1){
+            $view="dashboard-admin";
         }
 
-        $getMuzakkiLiter = Muzakki::where('type', 'Beras')->where('satuan', 'Liter')->get();
-        $totalBerasMuzakkiL = 0;
-        foreach ($getMuzakkiLiter as $q) {
-            $totalBerasMuzakkiL += (float) str_replace(',', '.', $q->jumlah_bayar);
-        }
-
-        $getMustahikKg = Mustahik::where('satuan_beras', 'Kg')->get();
-        $totalBerasMustahikKg = 0;
-        foreach ($getMustahikKg as $q) {
-            $totalBerasMustahikKg += (float) str_replace(',', '.', $q->jumlah_beras_diterima);
-        } 
-        $getMustahiL = Mustahik::where('satuan_beras', 'Liter')->get();
-        $totalBerasMustahikL = 0;
-        foreach ($getMustahiL as $q) {
-            $totalBerasMustahikL += (float) str_replace(',', '.', $q->jumlah_beras_diterima);
-        } 
-        
-        $totalSaldoBerasKg = $totalBerasMuzakkiKg - $totalBerasMustahikKg;
-        $totalSaldoBerasL = $totalBerasMuzakkiL - $totalBerasMustahikL;
-     
+        $data['ttlPengajuan']=100;
+        $data['ttlNomor']=1000;
+        $data['ttlCampaign']=10;
+        $data['lainnya']=100;
+        $server['start'] = "2025-05-04";
+$server['exp'] = "2025-06-04";
+        $kredit['total']=3000;
+        $kredit['exp']="03 Apr 2024";
+        $kredit['terpakai']=100;
         $assets = ['chart', 'animation'];
-        return view('dashboards.dashboard', compact('assets', 'Transactionsmuzakki', 'Transactionsmustahik', 'totalSaldoUang', 'totalSaldoBerasKg','totalSaldoBerasL', 'TransactionsmuzakkiH'));
+        return view('dashboards.'.$view, compact('assets', 'data','kredit','server'));
     }
 
     /* 
