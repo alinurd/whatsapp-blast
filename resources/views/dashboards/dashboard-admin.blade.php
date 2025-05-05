@@ -127,38 +127,101 @@
                      data-bs-toggle="modal" data-bs-target="#statusModal" data-status="SENT">
                      <span class="bg-primary  rounded text-white px-2 py-1 fw-bold">S</span>
                      <span class="px-2">SENT</span>
+                     <span class="position-absolute  start-50 translate-middle badge rounded-pill bg-primary"> 
+                        {{$sts['S']}} </span>
+
+
                   </button>
 
                   <button class="btn d-flex align-items-center" style="background-color:#4caf50; color:white;"
                      data-bs-toggle="modal" data-bs-target="#statusModal" data-status="DELIVERED">
                      <span class="bg-success  rounded text-white px-2 py-1 fw-bold">D</span>
                      <span class="px-2">DELIVERED</span>
+                     <span class="position-absolute  start-50 translate-middle badge rounded-pill bg-success"> {{$sts['D']}} </span>
                   </button>
+
 
                   <button class="btn d-flex align-items-center" style="background-color:#2e7d32; color:white;"
                      data-bs-toggle="modal" data-bs-target="#statusModal" data-status="READ">
                      <span class="bg-success  rounded text-white px-2 py-1 fw-bold">R</span>
                      <span class="px-2">READ</span>
+                     <span class="position-absolute  start-50 translate-middle badge rounded-pill bg-success"> {{$sts['R']}} </span>
+
                   </button>
 
                   <button class="btn d-flex align-items-center" style="background-color:#e53935; color:white;"
                      data-bs-toggle="modal" data-bs-target="#statusModal" data-status="FAILED">
                      <span class="bg-danger  rounded text-white px-2 py-1 fw-bold">F</span>
                      <span class="px-2">FAILED</span>
+                     <span class="position-absolute  start-50 translate-middle badge rounded-pill bg-danger"> {{$sts['F']}} </span>
                   </button>
 
                   <button class="btn d-flex align-items-center" style="background-color:#fb8c00; color:white;"
                      data-bs-toggle="modal" data-bs-target="#statusModal" data-status="ABORTED">
                      <span class="bg-warning  rounded text-white px-2 py-1 fw-bold">A</span>
                      <span class="px-2">ABORTED</span>
-                  </button> 
+                     <span class="position-absolute  start-50 translate-middle badge rounded-pill bg-warning"> {{$sts['A']}} </span>
+
+                  </button>
                </div>
             </div>
          </div>
 
 
          <!-- Data Respon -->
-         @include('dashboards.data-respon')
+         <div class="card">
+            <div class="card-header d-blox text-end">
+               <div class="header-title t">
+                  <span class="btn btn-primary">Export</span>
+                  <span class="btn btn-info">Refresh Data</span>
+               </div>
+            </div>
+            <div class="card-body">
+               <div class="table-responsive">
+                  <table id="datatable" class="table table-striped" data-toggle="data-table">
+                     <thead>
+                        <tr>
+                           <th>DESTINATION</th>
+                           <th>REF NO</th>
+                           <th>STATUS</th>
+                           <th>SEND</th>
+                           <th>DELIVERED</th>
+                           <th>READ</th>
+                           <th>FAILED</th>
+                           <th>ABORTED</th> 
+                        </tr>
+                     </thead>
+                     <tbody>
+                        @foreach($Callback as $item)
+                        <tr>
+                           <td>{{ $item->destination }}</td>
+                           <td>{{ $item->ref_no }}</td>
+                           <td>{{ $item->status ?? 'new' }}</td>
+                           <td class="text-primary">{{ $item->sent_date }}</td>
+                           <td class="text-success">{{ $item->delivered_date }}</td>
+                           <td class="text-success fw-bold">{{ $item->read_date ?? '-' }}</td>
+                           <td class="text-danger">{{ $item->status == 'F' ? 'FAILED' : '-' }}</td>
+                           <td class="text-warning">{{ $item->status == 'A' ? 'ABORTED' : '-' }}</td> 
+                        </tr>
+                        @endforeach
+                     </tbody>
+                     <tfoot>
+                     <tr>
+                           <th>DESTINATION</th>
+                           <th>REF NO</th>
+                           <th>STATUS</th>
+                           <th>SEND</th>
+                           <th>DELIVERED</th>
+                           <th>READ</th>
+                           <th>FAILED</th>
+                           <th>ABORTED</th>
+                         </tr>
+                     </tfoot>
+                  </table>
+
+               </div>
+            </div>
+         </div>
          <!-- End Data Respon -->
       </div>
    </div>
@@ -185,5 +248,5 @@
          document.getElementById("countdown").innerHTML =
             days + "d : " + hours + "h : " + minutes + "m : " + seconds + "s";
       }, 1000);
-   </script> 
+   </script>
 </x-app-layout>

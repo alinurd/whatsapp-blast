@@ -24,8 +24,25 @@ class HomeController extends Controller
         if(auth()->user()->role == 1){
             $view="dashboard-admin";
         }
+        $Callback = LogMsg::all();
 
-        $b=$this->getBalance();
+         $sts = [
+            'D' => 0, // Delivered
+            'S' => 0, // Sent
+            'A' => 0, // Aborted
+            'F' => 0, // Failed
+            'R' => 0, // Read
+        ];
+    
+        // Loop untuk menghitung jumlah per status
+        foreach ($Callback as $log) {
+            if (isset($sts[$log->status])) {
+                $sts[$log->status]++;
+            }
+        }
+    
+        // Menampilkan jumlah per status
+         $b=$this->getBalance();
         $k=json_decode($b); 
         $ttl=10;
         $data['ttlPengajuan']=100;
@@ -37,8 +54,8 @@ class HomeController extends Controller
         $kredit['total']=$ttl;
         $kredit['exp']=$k->data->wa_expired_date; 
         $kredit['terpakai']=$ttl-$k->data->wa_balance;
-        $assets = ['chart', 'animation'];
-        return view('dashboards.'.$view, compact('assets', 'data','kredit','server'));
+        $assets = ['chart', 'animation']; 
+        return view('dashboards.'.$view, compact('assets', 'data','kredit','server', 'Callback','sts'));
     }
     
     public function getSts()
