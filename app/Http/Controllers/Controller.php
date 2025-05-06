@@ -186,6 +186,8 @@ class Controller extends BaseController
     return null;
 }
 public function getListCampaign($t, $i){
+    if($t->campaign_list){
+        
     $l = collect(explode(',', $t->campaign_list))
         ->map(function ($item) use ($i) {
             return trim(explode(':', $item)[$i]); 
@@ -195,6 +197,7 @@ public function getListCampaign($t, $i){
         ->values()
         ->toArray(); 
     return $l;
+} 
 }
 
 

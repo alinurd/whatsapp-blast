@@ -31,7 +31,7 @@ class targetNomorDataTable extends DataTable
     {
         $query = \DB::table('targets as t')
             ->leftJoin('mapping_nomor as m', 'm.nomor_id', '=', 't.id')
-            ->leftJoin('campign as c', 'c.id', '=', 'm.campign_id')
+            ->leftJoin('campign as c', 'c.kode', '=', 'm.campign_id')
             ->selectRaw('
                 t.id ,
                 t.nomor,
