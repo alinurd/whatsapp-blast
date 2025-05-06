@@ -14,6 +14,7 @@ use App\Models\Campaign;
 use App\Models\MapNomorCampaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class PesanController extends Controller
 {
@@ -301,14 +302,7 @@ class PesanController extends Controller
         $target = MapNomorCampaign::where('target_id', $id)->first();
         $c = Campaign::pluck('nama', 'kode');
 
-        $selectedCampaign = collect(explode(',', $target->campaign_list))
-            ->map(function ($item) {
-                return trim(explode(':', $item)[1]);
-            })
-            ->filter()
-            ->unique()
-            ->values()
-            ->toArray(); 
+        $selectedCampaign = $this->getListCampaign($target, 1);
 
         return view('pesan.target.edit', [
             'old' => $target,  
@@ -320,41 +314,35 @@ class PesanController extends Controller
     public function targetUpdate(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nomor' => 'required|digits_between:12,16|regex:/^62\d{10,14}$/|numeric|exists:target,nomor',
+            'nomor' => [
+                'required',
+                'digits_between:12,16',
+                'regex:/^62\d{10,14}$/',
+                'numeric',
+                Rule::unique('targets', 'nomor')->ignore($id),
+            ],
             'nama' => 'required|string',
-            'kode' => 'required|string|exists:campign,kode',
         ]);
+        
+        $target = MapNomorCampaign::where('target_id', $id)->first();
 
-        $mapping = MappingNomor::findOrFail($id);
-        $nomorId = $mapping->nomor_id;
-
+        // $mapping = MappingNomor::findOrFail($id);
+        $nomorId = $target->target_id;
+ 
         // Ambil campaign_id dari kode
-        $campaignId = Campaign::where('kode', $request->kode)->value('id');
-
-        // Tambahan validasi jika kode tidak ditemukan di database
-        if (!$campaignId) {
-            return redirect()->back()
-                ->withErrors(['kode' => 'Campaign tidak ditemukan.'])
-                ->withInput();
+        foreach ($request->kode as $kode) { 
+            $exists = MappingNomor::where('nomor_id', $nomorId)
+                ->where('campign_id', $kode)
+                ->exists();
+        
+            if (!$exists) {
+                 $mapping = new MappingNomor();
+                $mapping->nomor_id = $nomorId;
+                $mapping->campign_id = $kode;
+                $mapping->save();
+            }
         }
-
-        // Cek apakah kombinasi sudah ada di data lain
-        $exists = MappingNomor::where('nomor_id', $nomorId)
-            ->where('campign_id', $campaignId)
-            ->where('id', '!=', $id)
-            ->exists();
-
-        if ($exists) {
-            return redirect()->back()
-                ->withErrors(['kode' => 'Kombinasi Nomor dan Campaign sudah digunakan di mapping lain.'])
-                ->withInput();
-        }
-
-        // Simpan update mapping campaign
-        $mapping->campign_id = $campaignId;
-        $mapping->save();
-
-        // Update target
+        
         Target::where('id', $nomorId)->update([
             'nama' => $request->nama,
             'nomor' => $request->nomor,

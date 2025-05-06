@@ -185,6 +185,18 @@ class Controller extends BaseController
 
     return null;
 }
+public function getListCampaign($t, $i){
+    $l = collect(explode(',', $t->campaign_list))
+        ->map(function ($item) use ($i) {
+            return trim(explode(':', $item)[$i]); 
+        })
+        ->filter()
+        ->unique()
+        ->values()
+        ->toArray(); 
+    return $l;
+}
+
 
 
 

@@ -15,8 +15,7 @@ class MappingNomor extends Model
 
     protected $fillable = [
         'nomor_id',
-        'campign_id',
-        'created_by'
+        'campign_id', 
     ];
 
     public function campaign()
