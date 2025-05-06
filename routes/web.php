@@ -20,6 +20,7 @@ use App\Http\Controllers\MustahikController;
 use App\Http\Controllers\MustahikuserController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TemplatePesanController;
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -66,12 +67,12 @@ Route::resource('product', ProductController::class);
 //pesan
 Route::resource('pesan', PesanController::class);
 //template
-Route::get('/template-pesan',[PesanController::class, 'template'])->name('template.index');
-Route::get('/template-pesan-create',[PesanController::class, 'templateCreate'])->name('template.create');
-Route::post('/template-pesan',[PesanController::class, 'templateStore'])->name('template.store');
-Route::get('/template-pesan/{id}',[PesanController::class, 'templateEdit'])->name('template.edit');
-Route::post('template-pesan/{id}', [PesanController::class, 'templateUpdate'])->name('template.update');
-Route::delete('template-pesan/{id}', [PesanController::class, 'templateDelete'])->name('template.delete');
+Route::get('/template-pesan',[TemplatePesanController::class, 'template'])->name('template.index');
+Route::get('/template-pesan-create',[TemplatePesanController::class, 'templateCreate'])->name('template.create');
+Route::post('/template-pesan',[TemplatePesanController::class, 'templateStore'])->name('template.store');
+Route::get('/template-pesan/{id}',[TemplatePesanController::class, 'templateEdit'])->name('template.edit');
+Route::post('template-pesan/{id}', [TemplatePesanController::class, 'templateUpdate'])->name('template.update');
+Route::delete('template-pesan/{id}', [TemplatePesanController::class, 'templateDelete'])->name('template.delete');
 
 //campaign
 Route::get('/campaign-pesan',[PesanController::class, 'campaign'])->name('campaign.index');
