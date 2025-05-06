@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Target extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
-        'nomor ',
-        'push ',
+        'nama',
+        'nomor',
+        'ket',
+        'push',
         'status',
         'created_by '
     ];

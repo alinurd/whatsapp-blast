@@ -73,7 +73,15 @@ Route::get('/template-pesan/{id}',[PesanController::class, 'templateEdit'])->nam
 Route::post('template-pesan/{id}', [PesanController::class, 'templateUpdate'])->name('template.update');
 Route::delete('template-pesan/{id}', [PesanController::class, 'templateDelete'])->name('template.delete');
 
-//target
+//campaign
+Route::get('/campaign-pesan',[PesanController::class, 'campaign'])->name('campaign.index');
+Route::get('/campaign-pesan-create',[PesanController::class, 'campaignCreate'])->name('campaign.create');
+Route::post('/campaign-pesan',[PesanController::class, 'campaignStore'])->name('campaign.store');
+Route::get('/campaign-pesan/{id}',[PesanController::class, 'campaignEdit'])->name('campaign.edit'); 
+Route::post('campaign-pesan/{id}', [PesanController::class, 'campaignUpdate'])->name('campaign.update'); 
+Route::delete('campaign-pesan/{id}', [PesanController::class, 'campaignDelete'])->name('campaign.delete');
+ 
+//target 
 Route::get('/target-pesan',[PesanController::class, 'target'])->name('target.index');
 Route::get('/target-pesan-create',[PesanController::class, 'targetCreate'])->name('target.create');
 Route::post('/target-pesan',[PesanController::class, 'targetStore'])->name('target.store');
