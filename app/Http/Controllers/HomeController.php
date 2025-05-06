@@ -24,7 +24,8 @@ class HomeController extends Controller
         if(auth()->user()->role == 1){
             $view="dashboard-admin";
         }
-        $Callback = LogMsg::all();
+        $Callback = LogMsg::with('callBackStatus')->get();
+
 
          $sts = [
             'D' => 0, // Delivered
@@ -33,11 +34,14 @@ class HomeController extends Controller
             'F' => 0, // Failed
             'R' => 0, // Read
         ];
-    
+   
+
         // Loop untuk menghitung jumlah per status
-        foreach ($Callback as $log) {
+        foreach ($Callback as $lp) {
+         foreach ($lp->callBackStatus as $log) {
             if (isset($sts[$log->status])) {
                 $sts[$log->status]++;
+            }
             }
         }
     

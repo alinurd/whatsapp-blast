@@ -18,4 +18,10 @@ class Responapi extends Model
          'err_code',
     ];
 
+    
+    public function logMessages()
+    {
+        return $this->hasMany(LogMsg::class, 'ref_no', 'ref_no');
+    }
+    
 }

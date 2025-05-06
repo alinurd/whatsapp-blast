@@ -33,4 +33,10 @@ class LogMsg extends Model
         'media_url',
     ];
     
+
+    public function callBackStatus()
+    {
+        return $this->hasMany(Responapi::class, 'ref_no', 'ref_no');
+    }
+    
 }
