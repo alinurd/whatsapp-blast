@@ -18,20 +18,13 @@ use Illuminate\Validation\Rule;
 
 class PesanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     public function push(templatePesanDataTable $dataTable)
     {
 
         $nomor = target::where('status', 0)->get();
         $template = Template::pluck('nama', 'id');
-        $campaign = Campaign::pluck('data', 'id');
+        $campaign = Campaign::pluck('nama', 'id');
 
         return view('pesan.push.index', compact('nomor', 'template', 'campaign'));
     }

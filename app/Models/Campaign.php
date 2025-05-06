@@ -17,8 +17,8 @@ class Campaign extends Model
         'created_by'
     ];
 
-    // public function nomor()
-    // {
-    //     return $this->hasMany(MappingNomor::class, 'nomor_campain');
-    // }
+    public function nomor()
+    {
+        return $this->hasMany(MappingNomor::class, 'nomor_campain');
+    }
 }
