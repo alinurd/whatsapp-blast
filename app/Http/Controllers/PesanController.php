@@ -11,6 +11,7 @@ use App\Models\Target;
 use App\Models\MappingNomor;
 use App\Models\Template;
 use App\Models\Campaign;
+use App\Models\MapNomorCampaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -295,30 +296,31 @@ class PesanController extends Controller
     }
     
     public function targetEdit($id)
-    {
-        $mapping = MappingNomor::findOrFail($id);
-
-        // Ambil data dari tabel targets berdasarkan nomor_id
-        $target = Target::findOrFail($mapping->nomor_id);
-
-        // Ambil daftar campaign
+    { 
+        
+        $target = MapNomorCampaign::where('target_id', $id)->first();
         $c = Campaign::pluck('nama', 'kode');
 
-        // Tentukan campaign yang terpilih dari mapping
-        $selectedCampaign = $mapping->campign_id;
+        $selectedCampaign = collect(explode(',', $target->campaign_list))
+            ->map(function ($item) {
+                return trim(explode(':', $item)[1]);
+            })
+            ->filter()
+            ->unique()
+            ->values()
+            ->toArray(); 
 
         return view('pesan.target.edit', [
-            'old' => $target, // ini data target
+            'old' => $target,  
             'c' => $c,
             'selectedCampaign' => $selectedCampaign,
-            'mappingId' => $mapping->id // untuk kebutuhan update
-        ]);
+         ]);
     }
 
     public function targetUpdate(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nomor' => 'required|digits_between:12,16|regex:/^62\d{10,14}$/|numeric',
+            'nomor' => 'required|digits_between:12,16|regex:/^62\d{10,14}$/|numeric|exists:target,nomor',
             'nama' => 'required|string',
             'kode' => 'required|string|exists:campign,kode',
         ]);
