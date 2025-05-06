@@ -39,11 +39,13 @@ class PesanController extends Controller
          
         $targets = $request['pushnomor'];
  
+        if($request['campaign']){
         foreach ($c['nomor'] as $n) {
             $tc = Target::where('id', $n->nomor_id)->first();
             if($tc->status ==0){
                     $targets[]=$tc->nomor;
                 } 
+        }
         }
 
         if (!$t) {
