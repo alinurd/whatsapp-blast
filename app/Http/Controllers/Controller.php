@@ -40,17 +40,13 @@ class Controller extends BaseController
         $curl = curl_init();
 
         $media_path = public_path('images/icons/header.jpg');
-        // $media_url = url('/public/images/icons/header.jpg');
-        $media_url = asset('images/icons/header.jpg');
+
         $curl = curl_init();
 
         $payload = json_encode([
             'caption' => $msg,
-            // 'queue' => 'YOUR_QUEUE',
             'destination' => $to,
-            'media_url' => 'https://zis-alhasanah.com/public/invoice/invoice_' . $code . '.pdf',
-            // 'media_url' => 'http://127.0.0.1:8000/public/images/icons/invoice-6.pdf',
-            // 'message' => 'Alhamdulillah, telah diterima penunaikan zis/fidyah dari Bapak/ibu:'.$from,
+            'media_url' => 'https://zis-alhasanah.com/public/invoice/invoice_' . $code . '.pdf', 
             'include_unsubscribe' => false,
         ]);
 
@@ -129,12 +125,12 @@ class Controller extends BaseController
  
     public function getBalance()
     {
-        $BASE_URL = 'https://api.nusasms.com/nusasms_api/1.0/balance';
+        $BASE_URL = env('NUSASMS_API').'/1.0/balance';
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $BASE_URL,
             CURLOPT_HTTPHEADER => array(
-                "APIKey: 33DF7E9D96A13B5DB75FB01BAB6DE458",
+                "APIKey: " . env('NUSASMS_API_KEY'),
                 'Accept: application/json',
                 'Content-Type: application/json'
             ),
@@ -169,8 +165,7 @@ class Controller extends BaseController
     if (isset($r->data)) {
         $p = $r->data;
 
-        // Cari data berdasarkan ref_no
-        $log = Logmsg::where('ref_no', $p->ref_no)->first();
+         $log = Logmsg::where('ref_no', $p->ref_no)->first();
 
         if ($log) {
             $log->sender = $p->sender ?? null;

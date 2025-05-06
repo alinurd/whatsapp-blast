@@ -12,7 +12,10 @@ class Responapi extends Model
     protected $table = 'responapis';
 
     protected $fillable = [
-         'data',
+         'ref_no',
+         'status',
+         'sent_date',
+         'err_code',
     ];
 
 }

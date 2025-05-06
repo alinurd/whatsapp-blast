@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Route::apiResource('webhook', RespondapiController::class); 
-Route::post('/webhook', [RespondapiController::class, 'store']);
+Route::get('/callback', [RespondapiController::class, 'store']);

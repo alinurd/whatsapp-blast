@@ -8,50 +8,29 @@ use Illuminate\Http\Request;
 
 class RespondapiController extends Controller
 {
-    public function index()
-    {
-        return response()->json(Responapi::all());
-    }
 
     public function store(Request $request)
-{
-     $p = new Responapi();
-    $p->data = json_encode($request->all());
-    $p->save();
- 
-
-    return response()->json(['status' => 'success']);
-}
-
-    public function show($id)
     {
-        $Responapi = Responapi::find($id);
-        if (!$Responapi) {
-            return response()->json(['message' => 'Responapi tidak ditemukan'], 404);
+        $p = new Responapi(); 
+        $p->ref_no = $request->ref_no;
+        $p->status = $request->status;
+        $p->sent_date = $request->sent_date;
+        $p->err_code = $request->err_code;
+    
+        if ($p->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil disimpan',
+                'data' => $request->ref_no.'-'.$request->err_code
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan data'
+            ], 500); 
         }
-        return response()->json($Responapi);
     }
+    
 
-    public function update(Request $request, $id)
-    {
-        $Responapi = Responapi::find($id);
-        if (!$Responapi) {
-            return response()->json(['message' => 'Responapi tidak ditemukan'], 404);
-        }
-
-        $Responapi->update($request->all());
-
-        return response()->json($Responapi);
-    }
-
-    public function destroy($id)
-    {
-        $Responapi = Responapi::find($id);
-        if (!$Responapi) {
-            return response()->json(['message' => 'Responapi tidak ditemukan'], 404);
-        }
-
-        $Responapi->delete();
-        return response()->json(['message' => 'Responapi berhasil dihapus']);
-    }
+  
 }
