@@ -8,6 +8,7 @@ use App\Exports\MuzakkiReport;
 use App\Exports\MustahikReport;
 use App\Exports\MuzakkiReportExport;
 use App\Exports\Report;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\MustahikController;
 use App\Http\Controllers\MustahikuserController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TargetController;
 use App\Http\Controllers\TemplatePesanController;
 use Illuminate\Support\Facades\Artisan;
 // Packages
@@ -75,21 +77,21 @@ Route::post('template-pesan/{id}', [TemplatePesanController::class, 'templateUpd
 Route::delete('template-pesan/{id}', [TemplatePesanController::class, 'templateDelete'])->name('template.delete');
 
 //campaign
-Route::get('/campaign-pesan',[PesanController::class, 'campaign'])->name('campaign.index');
-Route::get('/campaign-pesan-create',[PesanController::class, 'campaignCreate'])->name('campaign.create');
-Route::post('/campaign-pesan',[PesanController::class, 'campaignStore'])->name('campaign.store');
-Route::get('/campaign-pesan/{id}',[PesanController::class, 'campaignEdit'])->name('campaign.edit'); 
-Route::post('campaign-pesan/{id}', [PesanController::class, 'campaignUpdate'])->name('campaign.update'); 
-Route::delete('campaign-pesan/{id}', [PesanController::class, 'campaignDelete'])->name('campaign.delete');
+Route::get('/campaign-pesan',[CampaignController::class, 'campaign'])->name('campaign.index');
+Route::get('/campaign-pesan-create',[CampaignController::class, 'campaignCreate'])->name('campaign.create');
+Route::post('/campaign-pesan',[CampaignController::class, 'campaignStore'])->name('campaign.store');
+Route::get('/campaign-pesan/{id}',[CampaignController::class, 'campaignEdit'])->name('campaign.edit'); 
+Route::post('campaign-pesan/{id}', [CampaignController::class, 'campaignUpdate'])->name('campaign.update'); 
+Route::delete('campaign-pesan/{id}', [CampaignController::class, 'campaignDelete'])->name('campaign.delete');
 
 //target
-Route::get('/target-pesan',[PesanController::class, 'target'])->name('target.index');
-Route::get('/target-pesan-create',[PesanController::class, 'targetCreate'])->name('target.create');
-Route::post('/target-pesan',[PesanController::class, 'targetStore'])->name('target.store');
-Route::get('/target-pesan/{id}',[PesanController::class, 'targetEdit'])->name('target.edit');
-Route::get('/target-pulih/{id}',[PesanController::class, 'targetPulih'])->name('target.open');
-Route::post('target-pesan/{id}', [PesanController::class, 'targetUpdate'])->name('target.update');
-Route::delete('target-pesan/{id}', [PesanController::class, 'targetDelete'])->name('target.delete');
+Route::get('/target-pesan',[TargetController::class, 'target'])->name('target.index');
+Route::get('/target-pesan-create',[TargetController::class, 'targetCreate'])->name('target.create');
+Route::post('/target-pesan',[TargetController::class, 'targetStore'])->name('target.store');
+Route::get('/target-pesan/{id}',[TargetController::class, 'targetEdit'])->name('target.edit');
+Route::get('/target-pulih/{id}',[TargetController::class, 'targetPulih'])->name('target.open');
+Route::post('target-pesan/{id}', [TargetController::class, 'targetUpdate'])->name('target.update');
+Route::delete('target-pesan/{id}', [TargetController::class, 'targetDelete'])->name('target.delete');
 
 //push
 Route::get('/push',[PesanController::class, 'push'])->name('push.index');

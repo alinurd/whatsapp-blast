@@ -17,7 +17,11 @@
                      <div class="row">
                         <div class="form-group col-md-12">
                               <label class="form-label" for="fname">Campaign: <span class="text-danger">*</span></label>
-                              {{ Form::select('kode', $c, "", ['class' => 'form-control', 'placeholder' => 'Select campaign', 'id' => 'fname']) }}
+                               
+                              {!! Form::select('kode[]', $c, $selectedCampaign ?? [], [
+                           'class' => 'form-control',
+                           'multiple' => 'multiple'
+                           ]) !!}
                         </div>
                         <div class="form-group col-md-12">
                            <label class="form-label" for="nama">Nama Target: <span class="text-danger">*</span></label>
