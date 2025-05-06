@@ -8,7 +8,7 @@ use App\Helpers\AuthHelper;
 use App\Models\Kategori;
 use App\Models\Target;
 use App\Models\Template;
-use App\Models\campaign;
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
