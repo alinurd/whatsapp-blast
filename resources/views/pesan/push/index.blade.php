@@ -8,11 +8,18 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title mb-0">Push Pesan</h4>
-                            <div class="form-group col-md-12">
-                           <label class="form-label" for="fname">Kategori : <span class="text-danger">*</span></label>
-                           {{ Form::select('tenplate', $t, "", ['class' => 'form-control', 'placeholder' => 'Select tenplate Pesan', 'id' => 'Kategori']) }}
-                        </div>                        </div>
+                            <h4 class="card-title mb-3">Push Pesan</h4>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="fname">Template Pesan : <span class="text-danger">*</span></label>
+                                    {{ Form::select('template', $template, "", ['class' => 'form-control', 'placeholder' => '- Pilih Template', 'id' => 'Kategori']) }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="fname">Campaign : </label>
+                                    {{ Form::select('campaign', $campaign, "", ['class' => 'form-control', 'placeholder' => '- Select Campaign -', 'id' => 'Kategori']) }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -68,11 +75,11 @@
 </x-app-layout>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-         var checkboxes = document.querySelectorAll('input[name="pushnomor[]"]');
+        var checkboxes = document.querySelectorAll('input[name="pushnomor[]"]');
 
         var idSet = 1;
- 
-        checkboxes.forEach(function(checkbox) { 
+
+        checkboxes.forEach(function(checkbox) {
             if (idSet[checkbox.value]) {
                 checkbox.checked = true;
             } else {
@@ -80,4 +87,4 @@
             }
         });
     });
-</script> 
+</script>

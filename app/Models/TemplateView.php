@@ -14,13 +14,7 @@ class TemplateView extends Model
      *
      * @var array
      */
-    protected $table = 'template_view';
-
-    protected $fillable = [
-        'nama_template',
-        'nama_kategori', 
-        'creted_by', 
-        'creted_at', 
-    ];
+    protected $table = 'view_templates_kategori';
+ 
 
 }  
