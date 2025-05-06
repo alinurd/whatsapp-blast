@@ -14,11 +14,14 @@ class RespondapiController extends Controller
     }
 
     public function store(Request $request)
-    {
-       
+{
+     $p = new Responapi();
+    $p->data = json_encode($request->all());
+    $p->save();
+ 
 
-        dd($request);
-    }
+    return response()->json(['status' => 'success']);
+}
 
     public function show($id)
     {

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Responapi extends Model
 {
     use HasFactory;
+
+    protected $table = 'responapis';
+
+    protected $fillable = [
+         'data',
+    ];
+
 }
