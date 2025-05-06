@@ -12,7 +12,7 @@ use Infobip\Api\WhatsAppApi;
 use Infobip\Model\WhatsAppTextContent;
 use Infobip\Model\WhatsAppTextMessage;
 use Illuminate\Support\Facades\Http;
-use App\Models\Logmsg;
+use App\Models\LogMsg;
 use Illuminate\Support\Facades\Log;
 
 class Controller extends BaseController
@@ -109,7 +109,7 @@ class Controller extends BaseController
             $p = $r->data;
 
             // Simpan ke database
-            $kategori = new Logmsg();
+            $kategori = new LogMsg();
             $kategori->ref_no = $p->ref_no ?? null;
             $kategori->sender = $p->sender ?? null;
             $kategori->queue = $p->queue ?? null;
@@ -165,7 +165,7 @@ class Controller extends BaseController
     if (isset($r->data)) {
         $p = $r->data;
 
-         $log = Logmsg::where('ref_no', $p->ref_no)->first();
+         $log = LogMsg::where('ref_no', $p->ref_no)->first();
 
         if ($log) {
             $log->sender = $p->sender ?? null;
