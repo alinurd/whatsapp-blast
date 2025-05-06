@@ -92,6 +92,9 @@ Route::get('/target-pesan/{id}',[TargetController::class, 'targetEdit'])->name('
 Route::get('/target-pulih/{id}',[TargetController::class, 'targetPulih'])->name('target.open');
 Route::post('target-pesan/{id}', [TargetController::class, 'targetUpdate'])->name('target.update');
 Route::delete('target-pesan/{id}', [TargetController::class, 'targetDelete'])->name('target.delete');
+Route::get('/target-import', [TargetController::class, 'import'])->name('import.target');
+Route::post('/import-target', [TargetController::class, 'importProsess'])->name('import.prosess');
+// web.php
 
 //push
 Route::get('/push',[PesanController::class, 'push'])->name('push.index');

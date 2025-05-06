@@ -1,34 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\DataTables\templatePesanDataTable;
+ use Maatwebsite\Excel\Facades\Excel;
+ 
 use App\DataTables\targetNomorDataTable;
-use App\DataTables\campaignNomorDataTable;
-use App\Helpers\AuthHelper;
-use App\Models\Kategori;
-use App\Models\Target;
+ use App\Helpers\AuthHelper;
+ use App\Models\Target;
 use App\Models\MappingNomor;
-use App\Models\Template;
-use App\Models\Campaign;
+ use App\Models\Campaign;
 use App\Models\MapNomorCampaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Imports\NomorTargetImport as GlobalNomorTargetImport;
 
 class TargetController extends Controller
 {
-
-   
  
-    
    //target 
    public function target(targetNomorDataTable $dataTable)
    {
        $pageTitle = trans('global-message.list_form_title', ['form' => trans('Nomor Target')]);
        $auth_user = AuthHelper::authSession();
        $assets = ['data-table'];
-       $headerAction = '<a href="' . route('target.create') . '" class="btn btn-sm btn-primary" role="button">Add target pesan</a>';
+       $headerAction = '<a href="' . route('target.create') . '" class="btn btn-sm btn-primary" role="button">Add target pesan</a> | <a href="' . route('import.target') . '" class="btn btn-sm btn-danger" role="button">Import Nomor Target</a>';
        return $dataTable->render('global.datatable', compact('pageTitle', 'auth_user', 'assets', 'headerAction'));
    }
 
@@ -187,5 +182,25 @@ class TargetController extends Controller
 
         return redirect()->back()->with($status, $message);
     }
-    //end target
+
+    
+public function import()
+{
+    $assets = ['data-table'];
+
+    return view('pesan.target.import', compact('assets'));
+}
+    
+public function importProsess(Request $request)
+{
+    $request->validate([
+        'file' => 'required|file|mimes:xlsx,xls,csv',
+    ]);
+
+    Excel::import(new GlobalNomorTargetImport, $request->file('file'));
+
+    return redirect()->back()->with('success', 'Import berhasil!');
+}
+
+
 }
