@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
+use App\DataTables\templatePesanDataTable;
+use App\Helpers\AuthHelper;
 use App\Models\Kategori; 
 use App\Models\Template; 
 use Illuminate\Http\Request;
@@ -68,5 +70,14 @@ class TemplatePesanController extends Controller
         }
 
         return redirect()->back()->with($status, $message);
+    }
+
+    public function template(templatePesanDataTable $dataTable)
+    {
+        $pageTitle = trans('global-message.list_form_title', ['form' => trans('Template Pesan')]);
+        $auth_user = AuthHelper::authSession();
+        $assets = ['data-table'];
+        $headerAction = '<a href="' . route('template.create') . '" class="btn btn-sm btn-primary" role="button">Add template pesan</a>';
+        return $dataTable->render('global.datatable', compact('pageTitle', 'auth_user', 'assets', 'headerAction'));
     }
 }
