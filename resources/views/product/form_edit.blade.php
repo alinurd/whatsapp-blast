@@ -25,14 +25,6 @@
                            </select>
                         </div>
                         <div class="form-group col-md-12">
-                           <label class="form-label" for="jenis_product">Jenis Produk: <span class="text-danger">*</span></label>
-                           <select name="jenis_product" class="form-control" id="jenis_product">
-                              <option value="">Pilih Jenis Produk</option>
-                              <option value="KTA" {{ $product->jenis_produk == 'KTA' ? 'selected' : '' }}>KTA</option>
-                              <option value="Kartu kredit" {{ $product->jenis_produk == 'Kartu_kredit' ? 'selected' : '' }}>Kartu Kredit</option>
-                           </select>
-                        </div>
-                        <div class="form-group col-md-12">
                            <label class="form-label" for="nama_product">Nama Produk: <span class="text-danger">*</span></label>
                            {!! Form::text('nama_product', old('nama_product', $product->nama_product), ['class' => 'form-control', 'required', 'placeholder' => 'Nama Produk']) !!}
                         </div>
@@ -41,10 +33,17 @@
                            {!! Form::textarea('desk_detail', old('desk_detail', $product->desk_detail), ['class' => 'form-control', 'required', 'placeholder' => 'Detail Produk']) !!}
                         </div>
                         <div class="form-group col-md-12">
-                           <label class="form-label" for="gambar">Gambar: <span class="text-danger">*</span></label>
+                           <label class="form-label" for="gambar">Gambar:</label>
                            <div class="mb-3">
                               @if($product->gambar)
                                  <img src="{{ asset('storage/' . $product->gambar) }}" alt="Gambar Produk" class="img-thumbnail" style="max-height: 100px;">
+
+                                 <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" name="hapus_gambar" id="hapus_gambar" value="1">
+                                    <label class="form-check-label" for="hapus_gambar">
+                                       Hapus gambar
+                                    </label>
+                                 </div>
                               @else
                                  <img src="{{ asset('images/no-image.jpg') }}" alt="No Image Available" class="img-thumbnail" style="max-height: 100px;">
                               @endif

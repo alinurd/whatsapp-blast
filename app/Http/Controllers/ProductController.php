@@ -41,10 +41,9 @@ class ProductController extends Controller
     // Validate the request data 
     $validatedData = $request->validate([  
         'kategori' => 'required|string|max:255',
-        'jenis_product' => 'required|string|max:255',
         'nama_product' => 'required|string|max:255',
         'desk_detail' => 'required|string|max:255',
-        'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);  
 
     // Create a new product instance
@@ -52,7 +51,6 @@ class ProductController extends Controller
 
     // Fill the product data from the request
     $product->kategori_id = $request->kategori;
-    $product->jenis_produk = $request->jenis_product;
     $product->nama_product = $request->nama_product;
     $product->desk_detail = $request->desk_detail;
 
@@ -62,6 +60,9 @@ class ProductController extends Controller
         $filename = time() . '_' . $file->getClientOriginalName();
         $path = $file->storeAs('uploads/products', $filename, 'public');
         $product->gambar = $path;
+    } else {
+        // Default value if no image uploaded
+        $product->gambar = null; // atau bisa juga 'uploads/products/default.png'
     }
 
     // Save the product
@@ -89,7 +90,6 @@ class ProductController extends Controller
         // Validasi input produk jika diperlukan
         $request->validate([
             'kategori' => 'required',
-            'jenis_product' => 'required|string',
             'nama_product' => 'required|string|max:255',
             'desk_detail' => 'required|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -103,17 +103,22 @@ class ProductController extends Controller
 
         // Lakukan pemrosesan update produk
         $product->kategori_id = $request->kategori;
-        $product->jenis_produk = $jenisProduk;
         $product->nama_product = $request->nama_product;
         $product->desk_detail = $request->desk_detail;
 
-        // Periksa apakah ada gambar baru yang diunggah
+        // Periksa apakah user mencentang "hapus gambar"
+        if ($request->filled('hapus_gambar') && $product->gambar) {
+            Storage::disk('public')->delete($product->gambar);
+            $product->gambar = null;
+        }
+
+        // Jika ada file baru, upload seperti biasa (akan menimpa yang lama jika belum dihapus di atas)
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
+            // Jika gambar lama masih ada dan belum dihapus, hapus dulu
             if ($product->gambar) {
-                Storage::delete($product->gambar);
+                Storage::disk('public')->delete($product->gambar);
             }
-            // Handle the image upload
+
             $file = $request->file('gambar');
             $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs($storagePath, $filename, 'public');

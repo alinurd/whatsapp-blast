@@ -28,7 +28,7 @@
                      </div>
                      <div class="row">
                         <div class="form-group col-md-12">
-                           <label class="form-label" for="pesan">Nama template: <span class="text-danger">*</span></label>
+                           <label class="form-label" for="pesan">Isi template: <span class="text-danger">*</span></label>
                            {!! Form::textArea('pesan', old('pesan'), ['class' => 'form-control', 'required', 'placeholder' => 'Nama template']) !!}
                         </div>
                      </div>
